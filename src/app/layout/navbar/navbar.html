@@ -1,0 +1,34 @@
+<header id="header" class="header d-flex align-items-center fixed-top">
+
+  <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+    <a routerLink="/" class="logo d-flex align-items-center me-auto"
+       (click)="closeMobileMenu()">
+      <img src="assets/img/logo.png" alt="Logo">
+    </a>
+
+    <nav id="navmenu" class="navmenu">
+        <ul>
+            <li>
+                <a href="/#hero" (click)="closeMobileMenu()">Inicio</a>
+            </li>
+            <li>
+            <a routerLink="/explorar" routerLinkActive="active"
+                (click)="closeMobileMenu()">Explorar</a>
+            </li>
+            <li>        
+            <a routerLink="/eventos" routerLinkActive="active"
+                (click)="closeMobileMenu()">Eventos</a>
+            </li>
+        </ul>
+
+        <i class="mobile-nav-toggle d-xl-none bi"
+            [class.bi-list]="!mobileMenuOpen"
+            [class.bi-x]="mobileMenuOpen"
+            (click)="toggleMobileMenu()">
+        </i>
+    </nav>
+
+    <a class="cta-btn d-none d-sm-block" href="#buy-tickets">Comprar Tickets</a>
+  </div>
+</header>
