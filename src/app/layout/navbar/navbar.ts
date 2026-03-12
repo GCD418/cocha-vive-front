@@ -13,13 +13,13 @@ export class Navbar {
   mobileMenuOpen = false;
   isScrolled = false;
 
+  ngOnInit() {
+    document.body.classList.add('scrolled');
+  }
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    if (window.scrollY > 50) {
-      document.body.classList.add('scrolled');
-    } else {
-      document.body.classList.remove('scrolled');
-    }
+    document.body.classList.add('scrolled');
   }
 
   toggleMobileMenu() {

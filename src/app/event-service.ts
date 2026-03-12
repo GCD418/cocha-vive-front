@@ -17,4 +17,8 @@ export class EventService {
   getEventById(id: number): Observable<EventModel> {
     return this.httpClient.get<EventModel>(`${this.baseUrl}/${id}`);
   }
+
+  createEvent(event: any): Observable<any> {
+  return this.httpClient.post(`${this.baseUrl}`, event);
+}
 }

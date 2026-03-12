@@ -1,0 +1,13 @@
+.tag-pill {
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 60%);
+  background-color: transparent;
+  color: var(--default-color);
+}
+
+.tag-pill.selected {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  border-color: var(--accent-color);
+}
