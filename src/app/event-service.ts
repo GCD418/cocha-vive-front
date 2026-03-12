@@ -10,7 +10,11 @@ export class EventService {
   private baseUrl = 'http://localhost:8080/api/events';
   constructor(private httpClient: HttpClient) { }
 
-  getVideogames(): Observable<EventModel[]> {
+  getEvents(): Observable<EventModel[]> {
     return this.httpClient.get<EventModel[]>(`${this.baseUrl}`);
+  }
+
+  getEventById(id: number): Observable<EventModel> {
+    return this.httpClient.get<EventModel>(`${this.baseUrl}/${id}`);
   }
 }

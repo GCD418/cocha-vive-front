@@ -22,8 +22,12 @@ export class EventList {
   }
 
   private getEvents() {
-    this.eventService.getVideogames().subscribe(data => {
+    this.eventService.getEvents().subscribe(data => {
       this.events = data;
     });
+  }
+
+  eventDetails(id: number){
+    this.router.navigate(['/event-details', id]);
   }
 }

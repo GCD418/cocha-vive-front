@@ -23,7 +23,7 @@
                         <td>{{event.shortDescription}}</td>
                         <td style="text-align: end;">{{event.cost}}</td>
                         <td class="text-center">
-                            <button class="btn btn-info" style="margin-left: 10px;"> View </button>
+                            <button (click) = "eventDetails(event.id)" class="btn btn-info" style="margin-left: 10px;"> View </button>
                         </td>
                     </tr>
                 </tbody>
