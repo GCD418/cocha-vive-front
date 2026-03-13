@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { CategoryDTO } from '../event-model';
 
 @Component({
   selector: 'app-event-create',
@@ -12,23 +13,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventCreate implements OnInit {
 
-
+  categories: CategoryDTO[] = []; 
   successMessage = false;
-
-  availableTags: string[] = [
-    'música', 'danza', 'teatro', 'folklore', 'arte', 'cultura',
-    'familia', 'gratuito', 'religioso', 'gastronómico', 'deportivo',
-    'educativo', 'infantil', 'contemporáneo', 'tradicional'
-  ];
 
   form = {
     title: '',
     shortDescription: '',
     description: '',
     cost: 0,
+    peopleCapacity: 0,
+    shortPlaceDescription: '',
     costType: 'gratuito',
     categoryId: null as number | null,
     tags: [] as string[],
+    tagInput: '',
     photoLinks: [] as string[],
     startDate: '',
     startTime: '',
@@ -39,20 +37,28 @@ export class EventCreate implements OnInit {
   constructor(private eventService: EventService, private router: Router) {}
 
   ngOnInit(): void {
-
+    this.eventService.getCategories().subscribe(data => {
+    this.categories = data;
+    });
   }
 
-  toggleTag(tag: string): void {
-    const index = this.form.tags.indexOf(tag);
-    if (index === -1) {
+  addTag(): void {
+    const tag = this.form.tagInput.trim();
+    if (tag && !this.form.tags.includes(tag) && this.form.tags.length < 10) {
       this.form.tags.push(tag);
-    } else {
-      this.form.tags.splice(index, 1);
+      this.form.tagInput = '';
     }
   }
 
-  isTagSelected(tag: string): boolean {
-    return this.form.tags.includes(tag);
+  removeTag(tag: string): void {
+    this.form.tags = this.form.tags.filter(t => t !== tag);
+  }
+
+  onTagKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.addTag();
+    }
   }
 
   onSubmit(): void {
@@ -62,19 +68,22 @@ export class EventCreate implements OnInit {
       description: this.form.description,
       cost: this.form.costType === 'gratuito' ? 0 : this.form.cost,
       categoryId: this.form.categoryId,
+      organizedByUserId: 1,
+      latitude: 0.0,
+      longitude: 0.0,
+      shortPlaceDescription: '',
+      peopleCapacity: this.form.peopleCapacity,
+      dateStart: `${this.form.startDate}T${this.form.startTime}:00`,
+      dateEnd: `${this.form.endDate}T${this.form.endTime}:00`,
       tags: this.form.tags,
-      photoLinks: this.form.photoLinks,
-      startDate: this.form.startDate,
-      startTime: this.form.startTime,
-      endDate: this.form.endDate,
-      endTime: this.form.endTime,
+      photoLinks: [],
     };
 
     this.eventService.createEvent(payload).subscribe({
       next: () => {
         this.successMessage = true;
         setTimeout(() => {
-          this.router.navigate(['/eventos']);
+          this.router.navigate(['/events']);
         }, 4000);
       },
       error: (err) => {

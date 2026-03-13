@@ -44,8 +44,9 @@
               <label class="form-label fw-semibold">Categoría <span class="text-danger">*</span></label>
               <select class="form-select" [(ngModel)]="form.categoryId" name="categoryId">
                 <option [ngValue]="null" disabled>Selecciona una categoría</option>
-
-
+                <option *ngFor="let cat of categories" [ngValue]="cat.id">
+                    {{ cat.name }}
+                </option>
               </select>
             </div>
 
@@ -119,9 +120,9 @@
                   <label class="form-check-label" for="gratuito">Gratuito</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="costType"
-                            id="depago" value="depago" [(ngModel)]="form.costType">
-                    <label class="form-check-label" for="depago">De pago</label>
+                  <input class="form-check-input" type="radio" name="costType"
+                         id="depago" [value]="" [(ngModel)]="form.cost">
+                  <label class="form-check-label" for="depago">De pago</label>
                 </div>
               </div>
             </div>
@@ -132,27 +133,54 @@
                      placeholder="Ej: 50"
                      [(ngModel)]="form.cost" name="cost">
             </div>
+
+            <div class="mb-3">
+            <label class="form-label fw-semibold">Descripción del lugar</label>
+            <input type="text" class="form-control"
+                    placeholder="Ej: Teatro Achá, sala principal"
+                    [(ngModel)]="form.shortPlaceDescription" name="shortPlaceDescription">
+            </div>
+
+            <div class="mb-3">
+            <label class="form-label fw-semibold">
+                Capacidad de personas
+                <span class="text-muted fw-normal" style="font-size: 13px;">(opcional)</span>
+            </label>
+            <input type="number" class="form-control" min="1"
+                    placeholder="Ej: 200"
+                    [(ngModel)]="form.peopleCapacity" name="peopleCapacity">
+            </div>
           </div>
         </div>
 
         <!-- Sección: Etiquetas -->
         <div class="card border mb-4" style="background-color: var(--surface-color);">
-          <div class="card-body p-4">
+        <div class="card-body p-4">
             <h5 class="fw-bold mb-3">
-              <i class="bi bi-tags me-2" style="color: var(--accent-color);"></i>
-              Etiquetas
+            <i class="bi bi-tags me-2" style="color: var(--accent-color);"></i>
+            Etiquetas
             </h5>
-            <p class="form-text mb-3">Selecciona las etiquetas que describen tu evento.</p>
+            <p class="form-text mb-3">Agrega palabras clave para ayudar a clasificar tu evento (máx. 10).</p>
 
-            <div class="d-flex flex-wrap gap-2">
-                <span *ngFor="let tag of availableTags"
-                    class="badge rounded-pill px-3 py-2 fw-normal tag-pill"
-                    [class.selected]="isTagSelected(tag)"
-                    (click)="toggleTag(tag)">
-                {{ tag }}
-                </span>
+            <div class="input-group mb-3">
+            <input type="text" class="form-control"
+                    placeholder="Escribe una etiqueta y presiona Enter"
+                    [(ngModel)]="form.tagInput" name="tagInput"
+                    (keydown)="onTagKeydown($event)">
+            <button class="btn btn-warning btn-outline-secondary btn-sm" type="button" (click)="addTag()">
+                <i class="bi bi-plus-circle me-1"></i> Agregar
+            </button>
             </div>
-          </div>
+
+            <div class="d-flex flex-wrap gap-2" *ngIf="form.tags.length > 0">
+            <span *ngFor="let tag of form.tags"
+                    class="badge rounded-pill px-3 py-2 fw-semibold"
+                    style="background-color: var(--accent-color); color: var(--contrast-color); font-size: 13px;">
+                {{ tag }}
+                <i class="bi bi-x ms-1" style="cursor: pointer;" (click)="removeTag(tag)"></i>
+            </span>
+            </div>
+        </div>
         </div>
 
         <!-- Sección: Fotos -->
