@@ -19,7 +19,7 @@ export class UpcomingEventsListComponent implements OnInit {
   }
 
   private getEvents() {
-    this.eventService.getEvents().subscribe(data => {
+    this.eventService.getUpcomingEvents().subscribe(data => {
       this.events = data;
     });
   }
