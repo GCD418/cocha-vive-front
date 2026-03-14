@@ -21,9 +21,9 @@ export class UpcomingEventComponent implements OnInit {
   constructor(private eventService: EventService) {}
 
   ngOnInit(): void {
-    this.eventService.getEvents().subscribe({
+    this.eventService.getUpcomingEvents().subscribe({
       next: (data) => {
-        console.log('✅ Próximos Eventos cargados:', data);
+        console.log('✅ Próximos Eventos ordenados recibidos:', data);
         this.events = data;
         this.loading = false;
         
