@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UpcomingEventComponent } from './upcoming';
+import { FeaturedEventComponent } from './featured-event';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { EventService } from '../event-service'; 
@@ -11,13 +11,13 @@ class MockEventService {
   }
 }
 
-describe('UpcomingEventComponent', () => {
-  let component: UpcomingEventComponent;
-  let fixture: ComponentFixture<UpcomingEventComponent>;
+describe('FeaturedEventComponent', () => {
+  let component: FeaturedEventComponent;
+  let fixture: ComponentFixture<FeaturedEventComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UpcomingEventComponent],
+      imports: [FeaturedEventComponent],
       providers: [
         // Le decimos a Angular que cuando el componente pida EventService, use el Mock
         { provide: EventService, useClass: MockEventService },
@@ -29,7 +29,7 @@ describe('UpcomingEventComponent', () => {
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(UpcomingEventComponent);
+    fixture = TestBed.createComponent(FeaturedEventComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
