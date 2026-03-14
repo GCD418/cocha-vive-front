@@ -1,0 +1,42 @@
+<section id="categories" class="schedule section py-5">
+  
+  <div class="container section-title">
+    <h2>Categorías</h2>
+    <p>Explora eventos culturales según tus intereses</p>
+  </div>
+
+  <div class="container text-center" *ngIf="loading">
+    <p>⏳ Cargando categorías...</p>
+  </div>
+  <div class="container text-center text-danger" *ngIf="errorLoading">
+    <p>❌ Hubo un error al cargar las categorías desde la base de datos.</p>
+  </div>
+
+  <div class="container" *ngIf="!loading && categories.length > 0">
+    <div class="row justify-content-center">
+      
+      <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch" *ngFor="let category of categories">
+        
+        <div class="card custom-card w-100 text-center border-0 shadow-sm p-4">
+          
+          <div class="d-flex justify-content-center mb-3">
+            <img [src]="category.identifyingIcon" [alt]="category.name" class="category-icon" *ngIf="category.identifyingIcon">
+          </div>
+          
+          <p class="category-desc mb-4">{{ category.description }}</p>
+          
+          <div class="mt-auto">
+            <ul class="nav nav-tabs border-0 justify-content-center">
+              <li class="nav-item">
+                 <a class="nav-link" [routerLink]="['/']">{{ category.name }}</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>

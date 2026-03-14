@@ -1,0 +1,49 @@
+/* ============================= */
+/* Category Custom Cards         */
+/* ============================= */
+
+.custom-card {
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.1) !important;
+}
+
+.category-icon {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.custom-card:hover .category-icon {
+  transform: scale(1.1);
+}
+
+.category-desc {
+  /* Usa el mismo color grisáceo que TheEvent usa para los textos secundarios */
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+/* ============================= */
+/* Ajuste al botón Schedule      */
+/* ============================= */
+
+/* Reducimos el padding exagerado del main.css para que encaje en la tarjeta */
+#categories .nav-tabs a {
+  padding: 10px 40px !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Le agregamos el efecto hover que lo pinta del color de acento (rosa/rojo) */
+#categories .nav-tabs a:hover {
+  background-color: var(--accent-color) !important;
+  color: var(--contrast-color) !important;
+}
