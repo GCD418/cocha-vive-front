@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EventService } from '../event-service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { EventModel } from '../event-model';
 
 @Component({
   selector: 'app-event-list',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css',
 })
