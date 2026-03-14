@@ -1,7 +1,7 @@
 <div class="min-vh-100">
   <div class="container pt-5 mt-5 pb-5">
 
-    <!-- Mensaje de éxito -->
+    <!-- Mensajes -->
     <div *ngIf="successMessage"
          class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
       <div class="toast show align-items-center text-bg-success border-0" role="alert">
@@ -9,6 +9,19 @@
           <div class="toast-body d-flex align-items-center gap-2">
             <i class="bi bi-check-circle-fill"></i>
             <span>¡Evento creado exitosamente!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage"
+      class="position-fixed bottom-0 end-0 p-3"
+      style="z-index: 9999;">
+      <div class="toast show align-items-center text-bg-danger border-0" role="alert">
+        <div class="d-flex">
+          <div class="toast-body d-flex align-items-center gap-2">
+            <i class="bi bi-exclamation-circle-fill"></i>
+            <span>Por favor completa todos los campos obligatorios.</span>
           </div>
         </div>
       </div>
@@ -122,22 +135,24 @@
               <div class="d-flex gap-4">
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="costType"
-                         id="gratuito" [value]="0" [(ngModel)]="form.cost">
+                         id="gratuito" value="gratuito" [(ngModel)]="form.costType">
                   <label class="form-check-label" for="gratuito">Gratuito</label>
                 </div>
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="costType"
-                         id="depago" [value]="" [(ngModel)]="form.cost">
+                         id="depago" value="depago" [(ngModel)]="form.costType">
                   <label class="form-check-label" for="depago">De pago</label>
                 </div>
               </div>
             </div>
 
-            <div class="mb-3" *ngIf="form.cost !== 0">
+            <div class="mb-3" *ngIf="form.costType === 'depago'">
               <label class="form-label fw-semibold">Costo (Bs.) <span class="text-danger">*</span></label>
               <input type="number" class="form-control" min="1"
                      placeholder="Ej: 50"
-                     [(ngModel)]="form.cost" name="cost">
+                     [(ngModel)]="form.cost" name="cost"
+                     [class.is-invalid]="errorMessage && form.costType === 'depago' && form.cost <= 0">
+              <div class="invalid-feedback">Debe ser mayor a 0.</div>
             </div>
 
             <div class="mb-3">
@@ -154,7 +169,9 @@
             </label>
             <input type="number" class="form-control" min="1"
                     placeholder="Ej: 200"
-                    [(ngModel)]="form.peopleCapacity" name="peopleCapacity">
+                    [(ngModel)]="form.peopleCapacity" name="peopleCapacity"
+                    [class.is-invalid]="errorMessage && form.peopleCapacity <= 0">
+            <div class="invalid-feedback">Debe ser mayor a 0.</div>
             </div>
           </div>
         </div>

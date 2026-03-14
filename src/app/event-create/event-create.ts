@@ -15,6 +15,7 @@ export class EventCreate implements OnInit {
 
   categories: CategoryDTO[] = []; 
   successMessage = false;
+  errorMessage = false;
 
   form = {
     title: '',
@@ -62,6 +63,23 @@ export class EventCreate implements OnInit {
   }
 
   onSubmit(): void {
+    if (
+      !this.form.title ||
+      !this.form.shortDescription ||
+      !this.form.description ||
+      !this.form.categoryId ||      
+      !this.form.startDate ||
+      !this.form.startTime ||
+      !this.form.endDate ||
+      !this.form.endTime ||
+      (this.form.costType === 'depago' && this.form.cost <= 0) ||
+      this.form.peopleCapacity <= 0
+    ) {
+      this.errorMessage = true;
+      setTimeout(() => this.errorMessage = false, 4000);
+      return;
+    }
+
     const payload = {
       title: this.form.title,
       shortDescription: this.form.shortDescription,
