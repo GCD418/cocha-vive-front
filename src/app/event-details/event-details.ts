@@ -28,7 +28,7 @@ export class EventDetails implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/eventos']);
+    this.router.navigate(['/events']);
   }
 
 }
