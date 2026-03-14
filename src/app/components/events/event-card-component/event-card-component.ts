@@ -6,7 +6,7 @@ import { EventModel } from '../../../event-model';
   selector: 'app-event-card-component',
   imports: [CommonModule],
   templateUrl: './event-card-component.html',
-  styleUrl: './event-card-component.css',
+  styleUrl: './event-card-component.scss',
 })
 export class EventCardComponent {
   @Input({required: true}) event!: EventModel;
