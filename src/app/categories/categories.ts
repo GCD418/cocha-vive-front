@@ -14,16 +14,22 @@ import { Category } from '../models/category.model';
 export class Categories implements OnInit {
 
   categories: Category[] = [];
+  loading = true;
+  errorLoading = false;
 
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
     this.categoryService.getCategories().subscribe({
       next: (data) => {
+        console.log('✅ Categorías recibidas:', data); // <-- Revisa esto en la consola (F12)
         this.categories = data;
+        this.loading = false;
       },
       error: (err) => {
-        console.error("Error loading categories", err);
+        console.error("❌ Error al cargar categorías:", err);
+        this.loading = false;
+        this.errorLoading = true;
       }
     });
   }
