@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HeroComponent } from '../../layout/hero/hero';
 import { Categories } from '../../categories/categories';
+import { UpcomingEventComponent } from '../../upcoming-event/upcoming';
 
 @Component({
   selector: 'app-home',
