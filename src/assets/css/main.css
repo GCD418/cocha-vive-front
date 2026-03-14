@@ -222,7 +222,7 @@ h6 {
 # Global Header
 --------------------------------------------------------------*/
 .header {
-  --background-color: rgba(0, 0, 0, 0);
+  --background-color: rgba(1, 8, 33, 0.82);
   --heading-color: #ffffff;
   color: var(--default-color);
   background-color: var(--background-color);
@@ -869,14 +869,14 @@ section,
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-  width: 100%;
-  min-height: 100vh;
   position: relative;
-  padding: 100px 0 0 0;
+  background-image: url("/assets/img/hero-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 
 .hero img {
@@ -888,18 +888,22 @@ section,
   object-fit: cover;
   z-index: 1;
 }
-
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0); 
+}
 .hero:before {
   content: "";
-  background: color-mix(in srgb, var(--background-color), transparent 30%);
+  background: color-mix(in srgb, var(--background-color), transparent 60%);
   position: absolute;
   inset: 0;
   z-index: 2;
 }
-
 .hero .container {
   position: relative;
   z-index: 3;
+  color: white;
 }
 
 .hero h2 {
@@ -913,9 +917,9 @@ section,
 }
 
 .hero p {
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  color: color-mix(in srgb, var(--default-color), transparent 0%);
   margin: 10px 0 0 0;
-  font-size: 24px;
+  font-size: 30px;
 }
 
 @media (max-width: 768px) {
@@ -1680,11 +1684,4 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 30%);
   font-size: 15px;
   margin-bottom: 10px;
-}
-
-/*--------------------------------------------------------------
-# Starter Section Section
---------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
 }

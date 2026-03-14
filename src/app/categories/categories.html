@@ -1,0 +1,37 @@
+<section id="categories" class="categories section">
+
+  <div class="container section-title">
+    <h2>Explora por Categoría</h2>
+    <p>Encuentra eventos según tus intereses culturales</p>
+  </div>
+
+  <div class="container">
+
+    <div class="row justify-content-center">
+
+      <div
+        class="col-lg-3 col-md-6 col-sm-6 d-flex"
+        *ngFor="let category of categories"
+      >
+
+        <div class="category-card text-center w-100" routerLink="/">
+
+          <div class="icon">
+            <img [src]="category.identifyingIcon" alt="{{category.name}}">
+          </div>
+
+          <h3>{{ category.name }}</h3>
+
+          <p>
+            {{ category.description }}
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

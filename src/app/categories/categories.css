@@ -1,0 +1,59 @@
+.category-card{
+  border-radius: 12px;
+  padding: 35px 25px;
+  margin-bottom: 25px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Hover */
+
+.category-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* Gradiente de colores de oscuro a claro */
+
+.col-lg-3:nth-child(1) .category-card{
+  background: #d97b6a;
+}
+
+.col-lg-3:nth-child(2) .category-card{
+  background: #e6a774;
+}
+
+.col-lg-3:nth-child(3) .category-card{
+  background: #d8d7c7;
+}
+
+.col-lg-3:nth-child(4) .category-card{
+  background: #e8dfd6;
+}
+
+/* Icono */
+
+.category-card .icon img{
+  width: 55px;
+  margin-bottom: 15px;
+}
+
+/* Título */
+
+.category-card h3{
+  font-size: 22px;
+  font-weight: 600;
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Descripción */
+
+.category-card p{
+  font-size: 14px;
+  color: #000000;
+}
+
