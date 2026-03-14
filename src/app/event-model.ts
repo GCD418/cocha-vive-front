@@ -17,8 +17,8 @@ export interface EventModel {
     shortDescription: string;
     description: string;
     cost: number;
-    category: string;
-    organizedByUser: number;
+    category: CategoryDTO;
+    organizedByUser: UserDTO;
     tags: string[];
     photoLinks: string[];
     eventStatus: boolean;
@@ -27,4 +27,6 @@ export interface EventModel {
     updatedAt?: string;
     isActive: boolean;
     modifiedByUserId?: number;
+    dateStart: string;
+    dateEnd: string; 
 }
