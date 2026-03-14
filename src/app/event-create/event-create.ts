@@ -81,10 +81,11 @@ export class EventCreate implements OnInit {
 
     this.eventService.createEvent(payload).subscribe({
       next: () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         this.successMessage = true;
         setTimeout(() => {
           this.router.navigate(['/events']);
-        }, 4000);
+        }, 2000);
       },
       error: (err) => {
         console.error('Error al crear evento', err);
