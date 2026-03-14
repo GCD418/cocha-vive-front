@@ -5,7 +5,7 @@ import { Categories } from '../../categories/categories';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeroComponent, Categories],
+  imports: [HeroComponent, Categories, UpcomingEventComponent],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
