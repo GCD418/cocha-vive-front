@@ -11,23 +11,43 @@
 
       <div class="col-lg-8">
 
-        <div *ngIf="event.photoLinks && event.photoLinks.length > 0; else noPhotos" id="eventPhotosCarousel" class="carousel slide rounded mb-4" data-bs-ride="carousel" style="border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%); overflow: hidden; height: 300px; background-color: var(--surface-color);">
-          <div class="carousel-inner h-100">
-            @for (image of event.photoLinks; track $index) {
-              <div class="carousel-item h-100" [class.active]="$index === 0">
-                <img [src]="image" class="d-block w-100 h-100" style="object-fit: cover;" alt="Foto del evento">
-              </div>
-            }
+        <ng-container *ngIf="event.photoLinks && event.photoLinks.length > 0; else noPhotos">
+          <div id="eventPhotosCarousel" class="carousel slide rounded mb-4" data-bs-ride="carousel" style="border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%); overflow: hidden; height: 300px; background-color: var(--surface-color);">
+            <div class="carousel-inner h-100">
+              @for (image of event.photoLinks; track $index) {
+                <div class="carousel-item h-100" [class.active]="$index === 0">
+                  <div class="w-100 h-100" style="overflow: hidden;">
+                    <img [src]="image" class="d-block w-100 h-100" style="object-fit: cover; cursor: pointer; transition: transform 0.3s ease-in-out;" alt="Foto del evento" data-bs-toggle="modal" [attr.data-bs-target]="'#imageModal' + $index" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                  </div>
+                </div>
+              }
+            </div>
+            <button *ngIf="event.photoLinks.length > 1" class="carousel-control-prev" type="button" data-bs-target="#eventPhotosCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button *ngIf="event.photoLinks.length > 1" class="carousel-control-next" type="button" data-bs-target="#eventPhotosCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Siguiente</span>
+            </button>
           </div>
-          <button *ngIf="event.photoLinks.length > 1" class="carousel-control-prev" type="button" data-bs-target="#eventPhotosCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-          </button>
-          <button *ngIf="event.photoLinks.length > 1" class="carousel-control-next" type="button" data-bs-target="#eventPhotosCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Siguiente</span>
-          </button>
-        </div>
+
+          <!-- Modals for Fullscreen Images -->
+          @for (image of event.photoLinks; track $index) {
+            <div class="modal fade" [id]="'imageModal' + $index" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content bg-transparent border-0">
+                  <div class="modal-header border-0 pb-0 justify-content-end">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(1) grayscale(100%) brightness(200%);"></button>
+                  </div>
+                  <div class="modal-body text-center p-0">
+                    <img [src]="image" class="img-fluid rounded shadow-lg" alt="Foto extendida" style="max-height: 85vh; object-fit: contain;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </ng-container>
         <ng-template #noPhotos>
           <div class="rounded mb-4 d-flex align-items-center justify-content-center section"
                style="height: 300px; background-color: var(--surface-color); border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);">
