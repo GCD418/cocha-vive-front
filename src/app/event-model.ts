@@ -19,6 +19,9 @@ export interface EventModel {
     cost: number;
     category: CategoryDTO;
     organizedByUser: UserDTO;
+    latitude: number;
+    longitude: number;
+    shortPlaceDescription: string;
     tags: string[];
     photoLinks: string[];
     eventStatus: boolean;

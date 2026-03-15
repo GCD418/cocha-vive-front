@@ -31,4 +31,8 @@ export class EventService {
   getCategories(): Observable<CategoryDTO[]> {
   return this.httpClient.get<CategoryDTO[]>(`${this.categoriesUrl}`);
   }
+
+  getUpcomingEvents(): Observable<EventModel[]> {
+    return this.httpClient.get<EventModel[]>(`${this.baseUrl}/upcoming`);
+  }
 }
