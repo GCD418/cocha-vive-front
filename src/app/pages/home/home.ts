@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { HeroComponent } from '../../layout/hero/hero';
-import { Categories } from '../../categories/categories';
-import { FeaturedEventComponent } from '../../featured-event/featured-event';
+import { CategoriesCard } from '../../components/categories/categories-card/categories-card';
+import { FeaturedEventComponent } from '../../components/events/featured-event/featured-event';
 import { UpcomingEventsListComponent } from '../../components/events/upcoming-events-list-component/upcoming-events-list-component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeroComponent, Categories, FeaturedEventComponent, UpcomingEventsListComponent],
+  imports: [HeroComponent, CategoriesCard, FeaturedEventComponent, UpcomingEventsListComponent],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

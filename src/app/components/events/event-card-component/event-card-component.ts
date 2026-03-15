@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, input } from '@angular/core';
-import { EventModel } from '../../../event-model';
+import { EventModel } from '../../../models/event-model/event-model';
 
 @Component({
   selector: 'app-event-card-component',

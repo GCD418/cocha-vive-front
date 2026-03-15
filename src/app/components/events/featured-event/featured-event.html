@@ -1,0 +1,68 @@
+<section id="upcoming-events" class="speakers section py-5">
+
+  <div class="container section-title">
+    <h2>Eventos Destacados<br></h2>
+  </div>
+
+  <div class="container">
+    
+    @if (loading) {
+      <div class="text-center"><p>⏳ Cargando próximos eventos...</p></div>
+    }
+
+    @if (errorLoading) {
+      <div class="text-center text-danger"><p>❌ Hubo un error al cargar los eventos.</p></div>
+    }
+    
+    @if (!loading && !errorLoading) {
+      
+      <div class="row gy-4">
+        
+        @for (event of events | slice:0:4; track event.id; let i = $index) {
+          <div class="col-lg-4 col-md-6">
+            <div class="member h-100">
+              <img [src]="event.photoLinks && event.photoLinks.length > 0 ? event.photoLinks[0] : 'assets/img/no-image.jpg'" 
+                   class="img-fluid event-img" 
+                   [alt]="event.title">
+              
+              <div class="member-info">
+                <div class="member-info-content w-100">
+                  
+                  <div class="text-center">
+                    <span class="badge category-badge mb-2">{{ event.category.name }}</span>
+                    <h4><a [routerLink]="['/evento', event.id]" class="text-white">{{ event.title }}</a></h4>
+                  </div>
+                  
+                  <span class="short-desc d-block text-white-50 mb-3 text-start">{{ event.shortDescription }}</span>
+                  
+                  <div class="event-meta d-flex flex-column align-items-center text-center gap-2 border-top border-secondary pt-3">
+                    
+                    <div class="cost">
+                      @if (event.cost === 0) {
+                        <span class="badge bg-success fw-bold px-3 py-2">¡Gratis!</span>
+                      } @else {
+                        <span class="badge bg-primary fw-bold px-3 py-2">{{ event.cost / 100 }} Bs.</span>
+                      }
+                    </div>
+
+                    <div class="dates text-light mt-1" style="font-size: 0.85rem;">
+                      <i class="bi bi-calendar-event me-1"></i> 
+                      {{ event.dateStart | date:'dd/MM/yyyy' }} - {{ event.dateEnd | date:'dd/MM/yyyy' }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        } @empty {
+          <div class="text-center text-warning fw-bold">
+            <p>⚠️ No hay eventos programados.</p>
+          </div>
+        }
+
+      </div>
+    }
+
+  </div>
+
+</section>

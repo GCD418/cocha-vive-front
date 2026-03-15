@@ -1,9 +1,9 @@
-import { EventService } from '../event-service';
+import { EventService } from '../../../services/event-service/event-service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { CategoryDTO } from '../event-model';
+import { CategoryDTO } from '../../../models/event-model/event-model';
 
 @Component({
   selector: 'app-event-create',
@@ -85,7 +85,7 @@ export class EventCreate implements OnInit {
       title: this.form.title,
       shortDescription: this.form.shortDescription,
       description: this.form.description,
-      cost: this.form.costType === 'gratuito' ? 0 : this.form.cost,
+      cost: this.form.costType === 'gratuito' ? 0 : Math.round(this.form.cost * 100),
       categoryId: this.form.categoryId,
       organizedByUserId: 1,
       latitude: 0.0,

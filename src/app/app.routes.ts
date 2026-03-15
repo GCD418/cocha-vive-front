@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { EventList } from './event-list/event-list';
-import { EventDetails } from './event-details/event-details';
-import { EventCreate } from './event-create/event-create';
+import { EventList } from './components/events/event-list/event-list';
+import { EventDetails } from './components/events/event-details/event-details';
+import { EventCreate } from './components/events/event-create/event-create';
 import { HomeComponent } from './pages/home/home';
 
 export const routes: Routes = [
