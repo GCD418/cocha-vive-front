@@ -31,4 +31,8 @@ export class EventService {
   getUpcomingEvents(): Observable<EventModel[]> {
     return this.httpClient.get<EventModel[]>(`${this.baseUrl}/upcoming`);
   }
+
+  getFeaturedEvents(): Observable<EventModel[]> {
+    return this.httpClient.get<EventModel[]>(`${this.baseUrl}/featured`);
+  }
 }

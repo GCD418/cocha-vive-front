@@ -21,7 +21,7 @@ export class FeaturedEventComponent implements OnInit {
   constructor(private eventService: EventService) {}
 
   ngOnInit(): void {
-    this.eventService.getUpcomingEvents().subscribe({
+    this.eventService.getFeaturedEvents().subscribe({
       next: (data) => {
         console.log('✅ Eventos Destacados recibidos:', data);
         this.events = data;
