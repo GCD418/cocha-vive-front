@@ -213,20 +213,15 @@
               <i class="bi bi-images me-2" style="color: var(--accent-color);"></i>
               Fotos del Evento
             </h5>
-            <p class="form-text">La carga de fotos estará disponible próximamente.</p>
-            <div class="rounded d-flex align-items-center justify-content-center"
-                 style="height: 120px;
-                        border: 2px dashed color-mix(in srgb, var(--default-color), transparent 70%);
-                        color: color-mix(in srgb, var(--default-color), transparent 50%);">
-              <span><i class="bi bi-cloud-upload fs-4"></i> Próximamente</span>
-            </div>
+            <p class="form-text">Selecciona imágenes para mostrar tu evento. La primera será la portada</p>
+            <input type="file" id="images" class="form-control" (change)="onFilesSelected($event)" accept="image/*" multiple>
           </div>
         </div>
 
         <!-- Botones -->
         <div class="d-flex justify-content-end gap-3 mt-2">
           <button class="btn btn-outline-secondary" (click)="goBack()">Cancelar</button>
-          <button class="btn btn-danger px-4" (click)="onSubmit()">
+          <button class="btn btn-danger px-4" (click)="onSubmit()" [disabled]="selectedFiles.length === 0">
             <i class="bi bi-send me-1"></i> Publicar Evento
           </button>
         </div>
