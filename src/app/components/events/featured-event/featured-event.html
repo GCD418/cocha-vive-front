@@ -29,7 +29,7 @@
                 <div class="member-info-content w-100">
                   
                   <div class="text-center">
-                    <span class="badge category-badge mb-2">{{ event.category?.name }}</span>
+                    <span class="badge category-badge mb-2">{{ event.category.name }}</span>
                     <h4><a [routerLink]="['/evento', event.id]" class="text-white">{{ event.title }}</a></h4>
                   </div>
                   
@@ -41,7 +41,7 @@
                       @if (event.cost === 0) {
                         <span class="badge bg-success fw-bold px-3 py-2">¡Gratis!</span>
                       } @else {
-                        <span class="badge bg-primary fw-bold px-3 py-2">{{ event.cost }} Bs.</span>
+                        <span class="badge bg-primary fw-bold px-3 py-2">{{ event.cost / 100 }} Bs.</span>
                       }
                     </div>
 

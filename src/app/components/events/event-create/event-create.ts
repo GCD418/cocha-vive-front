@@ -85,7 +85,7 @@ export class EventCreate implements OnInit {
       title: this.form.title,
       shortDescription: this.form.shortDescription,
       description: this.form.description,
-      cost: this.form.costType === 'gratuito' ? 0 : this.form.cost,
+      cost: this.form.costType === 'gratuito' ? 0 : Math.round(this.form.cost * 100),
       categoryId: this.form.categoryId,
       organizedByUserId: 1,
       latitude: 0.0,
