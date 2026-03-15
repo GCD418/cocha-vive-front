@@ -1,0 +1,57 @@
+<section id="categories" class="schedule section py-5">
+  
+  <div class="container section-title">
+    <h2>Categorías</h2>
+    <p>Explora eventos culturales según tus intereses</p>
+  </div>
+
+  @if (loading) {
+    <div class="container text-center">
+      <p style="color: black;">⏳ Cargando categorías...</p>
+    </div>
+  }
+
+  @if (errorLoading) {
+    <div class="container text-center text-danger">
+      <p>❌ Hubo un error al cargar las categorías.</p>
+    </div>
+  }
+
+  @if (!loading && !errorLoading) {
+    <div class="container">
+      <div class="row justify-content-center">
+        
+        @for (category of categories; track category.id) {
+          <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
+            
+            <div class="card custom-card w-100 text-center border-0 shadow-sm p-4">
+              
+              <div class="d-flex justify-content-center mb-3">
+                @if (category.identifyingIcon) {
+                  <img [src]="category.identifyingIcon" [alt]="category.name" class="category-icon">
+                }
+              </div>
+              
+              <p class="category-desc mb-4">{{ category.description }}</p>
+              
+              <div class="mt-auto">
+                <ul class="nav nav-tabs border-0 justify-content-center">
+                  <li class="nav-item">
+                     <a class="nav-link" [routerLink]="['/']">{{ category.name }}</a>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+
+          </div>
+        } @empty {
+          <div class="container text-center text-warning">
+            <p>⚠️ No se encontraron categorías disponibles.</p>
+          </div>
+        }
+
+      </div>
+    </div>
+  }
+</section>

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EventService } from '../event-service';
+import { EventService } from '../../../services/event-service/event-service';
 import { Router, RouterLink } from '@angular/router';
-import { EventModel } from '../event-model';
+import { EventModel } from '../../../models/event-model/event-model';
 
 @Component({
   selector: 'app-event-list',
