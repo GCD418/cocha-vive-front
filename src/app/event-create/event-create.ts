@@ -16,6 +16,7 @@ export class EventCreate implements OnInit {
   categories: CategoryDTO[] = []; 
   successMessage = false;
   errorMessage = false;
+  selectedFiles: File[] = [];
 
   form = {
     title: '',
@@ -94,10 +95,9 @@ export class EventCreate implements OnInit {
       dateStart: `${this.form.startDate}T${this.form.startTime}:00`,
       dateEnd: `${this.form.endDate}T${this.form.endTime}:00`,
       tags: this.form.tags,
-      photoLinks: [],
     };
 
-    this.eventService.createEvent(payload).subscribe({
+    this.eventService.createEvent(payload, this.selectedFiles).subscribe({
       next: () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         this.successMessage = true;
@@ -115,4 +115,11 @@ export class EventCreate implements OnInit {
     this.router.navigate(['/events']);
   }
 
+  onFilesSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let fileList: FileList | null = input.files;
+    if (fileList) {
+      this.selectedFiles = Array.from(fileList);
+    }
+  }
 }

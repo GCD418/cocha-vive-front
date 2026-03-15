@@ -20,8 +20,11 @@ export class EventService {
     return this.httpClient.get<EventModel>(`${this.baseUrl}/${id}`);
   }
 
-  createEvent(event: any): Observable<any> {
-  return this.httpClient.post(`${this.baseUrl}`, event);
+  createEvent(event: any, files: File[]): Observable<any> {
+    const formData = new FormData();
+    formData.append('event', new Blob([JSON.stringify(event)], { type: 'application/json' }));
+    files.forEach(file => formData.append('images', file));
+    return this.httpClient.post(`${this.baseUrl}`, formData);
   }
 
   getCategories(): Observable<CategoryDTO[]> {
