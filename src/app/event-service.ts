@@ -21,7 +21,8 @@ export class EventService {
   }
 
   createEvent(event: any): Observable<any> {
-  return this.httpClient.post(`${this.baseUrl}`, event);
+    const formData = new FormData();
+    return this.httpClient.post(`${this.baseUrl}`, event);
   }
 
   getCategories(): Observable<CategoryDTO[]> {

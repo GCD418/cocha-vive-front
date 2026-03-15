@@ -95,7 +95,7 @@ export class EventCreate implements OnInit {
       dateStart: `${this.form.startDate}T${this.form.startTime}:00`,
       dateEnd: `${this.form.endDate}T${this.form.endTime}:00`,
       tags: this.form.tags,
-      photoLinks: this.selectedFiles,
+      photoLinks: [],
     };
 
     this.eventService.createEvent(payload).subscribe({
