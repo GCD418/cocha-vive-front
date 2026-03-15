@@ -1,0 +1,49 @@
+$brand-color: #f82249; 
+
+.event-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+  }
+
+  .image-wrapper {
+    height: 220px;
+    overflow: hidden;
+
+    .card-img-top {
+      height: 100%;
+      width: 100%;
+      object-fit: cover; 
+    }
+  }
+
+  .category-badge {
+    background-color: #198754; 
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .price-badge {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .event-details {
+    color: #666;
+    font-size: 0.95rem;
+
+    .event-icon {
+      color: $brand-color;
+      font-size: 1.1rem;
+    }
+  }
+}
