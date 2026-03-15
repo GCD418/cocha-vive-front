@@ -6,13 +6,13 @@ import { EventService } from '../event-service';
 import * as AOS from 'aos';
 
 @Component({
-  selector: 'app-upcoming-event',
+  selector: 'app-featured-event',
   standalone: true,
   imports: [CommonModule, RouterLink],
-  templateUrl: './upcoming-event.html',
-  styleUrl: './upcoming-event.css'
+  templateUrl: './featured-event.html',
+  styleUrl: './featured-event.css'
 })
-export class UpcomingEventComponent implements OnInit {
+export class FeaturedEventComponent implements OnInit {
 
   events: EventModel[] = [];
   loading = true;
@@ -21,9 +21,9 @@ export class UpcomingEventComponent implements OnInit {
   constructor(private eventService: EventService) {}
 
   ngOnInit(): void {
-    this.eventService.getEvents().subscribe({
+    this.eventService.getUpcomingEvents().subscribe({
       next: (data) => {
-        console.log('✅ Próximos Eventos cargados:', data);
+        console.log('✅ Eventos Destacados recibidos:', data);
         this.events = data;
         this.loading = false;
         
@@ -32,7 +32,7 @@ export class UpcomingEventComponent implements OnInit {
         }, 100);
       },
       error: (err) => {
-        console.error('❌ Error al cargar próximos eventos:', err);
+        console.error('❌ Error al cargar eventos destacados:', err);
         this.loading = false;
         this.errorLoading = true;
       }
