@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { DatePipe, SlicePipe } from '@angular/common';
 import { EventModel } from '../event-model'; 
 import { EventService } from '../event-service'; 
 import * as AOS from 'aos';
@@ -8,7 +8,7 @@ import * as AOS from 'aos';
 @Component({
   selector: 'app-featured-event',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [RouterLink, DatePipe, SlicePipe],
   templateUrl: './featured-event.html',
   styleUrl: './featured-event.css'
 })
