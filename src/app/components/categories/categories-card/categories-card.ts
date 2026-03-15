@@ -5,13 +5,13 @@ import { CategoryService } from '../../../services/category-services/category.se
 import { Category } from '../../../models/category-model/category.model';
 
 @Component({
-  selector: 'app-categories',
+  selector: 'app-categories-card',
   standalone: true,
   imports: [CommonModule, RouterLink],
-  templateUrl: './categories.html',
-  styleUrl: './categories.css'
+  templateUrl: './categories-card.html',
+  styleUrl: './categories-card.css'
 })
-export class Categories implements OnInit {
+export class CategoriesCard implements OnInit {
 
   categories: Category[] = [];
   loading = true;
