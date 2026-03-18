@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FeaturedEventComponent } from './featured-event';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { EventService } from '../../../services/event-service/event-service'; 
+import { EventService } from '../../../services/event-service/event.service'; 
 
 // Simulamos el EventService para que las pruebas no hagan peticiones reales al backend
 class MockEventService {

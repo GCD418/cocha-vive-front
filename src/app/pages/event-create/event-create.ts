@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { CategoryDTO } from '../../models/event-model/event-model';
-import { EventService } from '../../services/event-service/event-service';
+import { EventService } from '../../services/event-service/event.service';
 
 @Component({
   selector: 'app-event-create',
