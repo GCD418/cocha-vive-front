@@ -22,7 +22,7 @@
             <tr>
               <td>{{ event.title }}</td>
               <td>{{ event.shortDescription }}</td>
-              <td style="text-align: end;">{{ event.cost ? (event.cost / 100) : 'Gratis' }}</td>
+              <td style="text-align: end;">{{ event.cost | price }}</td>
               <td class="text-center">
                 <button (click)="eventDetails(event.id)" class="btn btn-info" style="margin-left: 10px;"> 
                   View 
