@@ -1,9 +1,9 @@
-import { EventService } from '../../../services/event-service/event-service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { CategoryDTO } from '../../../models/event-model/event-model';
+import { CategoryDTO } from '../../models/event-model/event-model';
+import { EventService } from '../../services/event-service/event-service';
 
 @Component({
   selector: 'app-event-create',
