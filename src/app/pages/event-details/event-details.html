@@ -143,7 +143,7 @@
               <div>
                 <p class="mb-0" style="font-size: 13px; color: color-mix(in srgb, var(--default-color), transparent 40%);">Costo</p>
                 <p class="mb-0 fw-semibold">
-                  {{ event.cost === 0 ? 'Gratuito' : 'Bs. ' + event.cost }}
+                  {{ event.cost | price }}
                 </p>
               </div>
             </div>

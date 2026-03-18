@@ -4,11 +4,12 @@ import { DatePipe, SlicePipe } from '@angular/common';
 import { EventModel } from '../../../models/event-model'; 
 import { EventService } from '../../../services/event-service/event.service'; 
 import * as AOS from 'aos';
+import { PricePipe } from '../../../shared/pipes/price.pipe';
 
 @Component({
   selector: 'app-featured-event',
   standalone: true,
-  imports: [RouterLink, DatePipe, SlicePipe],
+  imports: [RouterLink, DatePipe, SlicePipe, PricePipe],
   templateUrl: './featured-event.html',
   styleUrl: './featured-event.css'
 })

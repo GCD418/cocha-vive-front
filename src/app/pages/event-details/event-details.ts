@@ -4,10 +4,11 @@ import { EventModel } from '../../models/event-model';
 import { EventService } from '../../services/event-service/event.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnInit } from '@angular/core';
+import { PricePipe } from '../../shared/pipes/price.pipe';
 
 @Component({
   selector: 'app-event-details',
-  imports: [CommonModule],
+  imports: [CommonModule, PricePipe],
   templateUrl: './event-details.html',
   styleUrl: './event-details.css',
 })

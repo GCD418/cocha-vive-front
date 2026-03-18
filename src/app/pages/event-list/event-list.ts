@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { EventService } from '../../services/event-service/event.service';
 import { Router, RouterLink } from '@angular/router';
 import { EventModel } from '../../models/event-model';
+import { PricePipe } from '../../shared/pipes/price.pipe';
 
 @Component({
   selector: 'app-event-list',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, PricePipe],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css',
 })
