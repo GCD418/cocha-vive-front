@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { EventModel } from '../../models/event-model/event-model';
+import { EventModel } from '../../models/event-model';
 import { EventService } from '../../services/event-service/event.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnInit } from '@angular/core';

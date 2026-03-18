@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CategoryService } from '../../../services/category-services/category.service';
-import { Category } from '../../../models/category-model/category.model';
+import { Category } from '../../../models/category.model';
 
 @Component({
   selector: 'app-categories-card',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DatePipe, SlicePipe } from '@angular/common';
-import { EventModel } from '../../../models/event-model/event-model'; 
+import { EventModel } from '../../../models/event-model'; 
 import { EventService } from '../../../services/event-service/event.service'; 
 import * as AOS from 'aos';
 
