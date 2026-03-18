@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { EventList } from './components/events/event-list/event-list';
-import { EventDetails } from './components/events/event-details/event-details';
-import { EventCreate } from './components/events/event-create/event-create';
+import { EventList } from './pages/event-list/event-list';
 import { HomeComponent } from './pages/home/home';
+import { EventCreate } from './pages/event-create/event-create';
+import { EventDetails } from './pages/event-details/event-details';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
