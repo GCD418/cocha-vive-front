@@ -38,11 +38,7 @@
                   <div class="event-meta d-flex flex-column align-items-center text-center gap-2 border-top border-secondary pt-3">
                     
                     <div class="cost">
-                      @if (event.cost === 0) {
-                        <span class="badge bg-success fw-bold px-3 py-2">¡Gratis!</span>
-                      } @else {
-                        <span class="badge bg-primary fw-bold px-3 py-2">{{ event.cost / 100 }} Bs.</span>
-                      }
+                      <span class="badge bg-primary fw-bold px-3 py-2">{{ event.cost | price }}</span>
                     </div>
 
                     <div class="dates text-light mt-1" style="font-size: 0.85rem;">
