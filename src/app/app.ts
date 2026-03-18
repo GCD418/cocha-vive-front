@@ -6,7 +6,7 @@ import { EventDetails } from './pages/event-details/event-details';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterModule, Navbar, EventList, EventDetails],
+  imports: [RouterOutlet, RouterModule, Navbar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
