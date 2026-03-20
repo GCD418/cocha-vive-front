@@ -37,41 +37,48 @@ export class CategoryEventsComponent implements OnInit {
   }
 
   loadData(): void {
-    this.loading = true;
-    this.errorLoading = false;
-    this.currentPage = 1;
+  this.loading = true;
+  this.errorLoading = false;
+  this.currentPage = 1;
 
-    this.categoryService.getCategoryByName(this.categoryName).subscribe({
-      next: (categoryData) => {
-        this.categoryDetails = categoryData;
-        
-        if (this.categoryDetails && this.categoryDetails.id) {
-          this.eventService.getEventsByCategory(this.categoryDetails.id).subscribe({
-            next: (eventsData) => {
-              this.events = eventsData;
-              this.loading = false;
-              setTimeout(() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }, 100);
-            },
-            error: (err) => {
-              console.error('❌ Error al cargar los eventos:', err);
-              this.errorLoading = true;
-              this.loading = false;
-            }
-          });
-        } else {
-          this.errorLoading = true;
-          this.loading = false;
-        }
-      },
-      error: (err) => {
-        console.error('❌ Error al cargar la categoría:', err);
+  this.categoryService.getCategoryByName(this.categoryName).subscribe({
+    next: (categoryData) => {
+      this.categoryDetails = categoryData;
+      
+      if (this.categoryDetails && this.categoryDetails.id) {
+        this.eventService.getEventsByCategory(this.categoryDetails.id).subscribe({
+          next: (eventsData) => {
+            // 👇 ORDENAR POR FECHA (De menor a mayor)
+            this.events = eventsData.sort((a, b) => {
+              const dateA = new Date(a.dateStart).getTime();
+              const dateB = new Date(b.dateStart).getTime();
+              return dateA - dateB; // Menor a mayor (Ascendente)
+            });
+
+            this.loading = false;
+            
+            setTimeout(() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 100);
+          },
+          error: (err) => {
+            console.error('❌ Error al cargar los eventos:', err);
+            this.errorLoading = true;
+            this.loading = false;
+          }
+        });
+      } else {
         this.errorLoading = true;
         this.loading = false;
       }
-    });
-  }
+    },
+    error: (err) => {
+      console.error('❌ Error al cargar la categoría:', err);
+      this.errorLoading = true;
+      this.loading = false;
+    }
+  });
+}
 
   get paginatedEvents(): EventModel[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
