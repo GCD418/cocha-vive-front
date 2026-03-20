@@ -22,8 +22,8 @@
 
       <div class="row g-4">
         @for (event of paginatedEvents; track event.id) {
-          <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch">
-            <app-event-card-component [event]="event"></app-event-card-component>
+          <div class="col-12 col-md-6 col-lg-4 d-flex">
+            <app-event-card-component [event]="event" class="w-100"></app-event-card-component>
           </div>
         }
       </div>
