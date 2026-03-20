@@ -3,6 +3,7 @@ import { EventList } from './pages/event-list/event-list';
 import { HomeComponent } from './pages/home/home';
 import { EventCreate } from './pages/event-create/event-create';
 import { EventDetails } from './pages/event-details/event-details';
+import { CategoryEventsComponent } from './pages/category-events/category-events';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -10,5 +11,5 @@ export const routes: Routes = [
     { path: 'events', component: EventList },
     { path: 'events/create', component: EventCreate },
     { path: 'event-details/:id', component: EventDetails },
-
+    { path: 'category-events/:name', component: CategoryEventsComponent },
 ];

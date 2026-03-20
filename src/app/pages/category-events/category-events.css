@@ -1,0 +1,56 @@
+.category-events-page {
+  padding-top: 100px; 
+  background-color: #ffffff;
+}
+
+.category-info-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.category-icon-box {
+  width: 75px;
+  height: 75px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.category-icon-box img {
+  max-width: 100%;
+  height: auto;
+}
+
+.title-main {
+  color: #0e1b4d;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.description-sub {
+  color: #555;
+  margin: 5px 0 0 0;
+  font-size: 1.1rem;
+}
+
+.count-container {
+  background: #fff5f6;
+  border-left: 4px solid #f82249;
+  padding: 12px 20px;
+  margin-bottom: 35px;
+  border-radius: 4px;
+}
+
+.events-badge {
+  color: #f82249;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
