@@ -48,11 +48,10 @@ export class CategoryEventsComponent implements OnInit {
       if (this.categoryDetails && this.categoryDetails.id) {
         this.eventService.getEventsByCategory(this.categoryDetails.id).subscribe({
           next: (eventsData) => {
-            // 👇 ORDENAR POR FECHA (De menor a mayor)
             this.events = eventsData.sort((a, b) => {
               const dateA = new Date(a.dateStart).getTime();
               const dateB = new Date(b.dateStart).getTime();
-              return dateA - dateB; // Menor a mayor (Ascendente)
+              return dateA - dateB;
             });
 
             this.loading = false;

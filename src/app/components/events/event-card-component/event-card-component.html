@@ -1,4 +1,6 @@
-<div class="card h-100 border-0 shadow-sm event-card">
+<div class="card h-100 border-0 shadow-sm event-card" 
+     [routerLink]="['/event-details', event.id]" 
+     style="cursor: pointer;">
   
   <div class="position-relative image-wrapper">
     <img 
@@ -21,12 +23,21 @@
     <ul class="list-unstyled event-details mb-0">
       <li class="mb-2 d-flex align-items-center">
         <i class="bi bi-calendar3 event-icon me-2"></i>
-        <span>{{ event.dateStart | date:'dd MMM yyyy' }}</span>
+        <span>
+          {{ event.dateStart | date:'dd MMM' }}
+          @if (event.dateEnd && (event.dateEnd | date:'ddMMyy') !== (event.dateStart | date:'ddMMyy')) {
+            - {{ event.dateEnd | date:'dd MMM yyyy' }}
+          } @else {
+            {{ event.dateStart | date:'yyyy' }}
+          }
+        </span>
       </li>
+      
       <li class="mb-2 d-flex align-items-center">
         <i class="bi bi-clock event-icon me-2"></i>
         <span>{{ event.dateStart | date:'HH:mm' }}</span>
       </li>
+
       <li class="d-flex align-items-center">
         <i class="bi bi-geo-alt event-icon me-2"></i>
         <span class="text-truncate" [title]="event.shortPlaceDescription">
@@ -35,5 +46,4 @@
       </li>
     </ul>
   </div>
-  
 </div>
