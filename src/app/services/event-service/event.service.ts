@@ -38,4 +38,8 @@ export class EventService {
   getFeaturedEvents(): Observable<EventModel[]> {
     return this.httpClient.get<EventModel[]>(`${this.baseUrl}/featured`);
   }
+  
+  getEventsByCategory(categoryId: number): Observable<EventModel[]> {
+    return this.httpClient.get<EventModel[]>(`${this.baseUrl}/category/${categoryId}`);
+  }
 }
