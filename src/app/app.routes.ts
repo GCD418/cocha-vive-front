@@ -10,7 +10,12 @@ export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'events', component: EventList },
-    { path: 'events/create', component: EventCreate, canActivate: [authGuard] },
+        {
+            path: 'events/create',
+            component: EventCreate,
+            canActivate: [authGuard],
+            data: { roles: ['ROLE_ADMIN', 'ROLE_USER'] },
+        },
     { path: 'event-details/:id', component: EventDetails },
     { path: 'category-events/:name', component: CategoryEventsComponent },
 ];
