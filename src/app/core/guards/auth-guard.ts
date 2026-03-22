@@ -13,7 +13,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     const payloadBase64 = token.split('.')[1];
     const decodedPayload = JSON.parse(atob(payloadBase64));
 
-    const requiresOnboarding = decodedPayload.requires_onboarding;
+    const requiresOnboarding = decodedPayload.requiresOnboarding;
 
     if (requiresOnboarding && state.url !== '/onboarding') {
       return router.createUrlTree(['/onboarding']);
