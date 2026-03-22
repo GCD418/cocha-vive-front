@@ -6,10 +6,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   imports: [GoogleSigninButtonModule],
-  templateUrl: './login.html',
-  styleUrl: './login.css',
+  templateUrl: './login-component.html',
+  styleUrl: './login-component.css',
 })
-export class Login implements OnInit {
+export class LoginComponent implements OnInit {
   private socialAuthService = inject(SocialAuthService);
   private authService = inject(AuthService);
   private router = inject(Router);
