@@ -4,12 +4,13 @@ import { HomeComponent } from './pages/home/home';
 import { EventCreate } from './pages/event-create/event-create';
 import { EventDetails } from './pages/event-details/event-details';
 import { CategoryEventsComponent } from './pages/category-events/category-events';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'events', component: EventList },
-    { path: 'events/create', component: EventCreate },
+    { path: 'events/create', component: EventCreate, canActivate: [authGuard] },
     { path: 'event-details/:id', component: EventDetails },
     { path: 'category-events/:name', component: CategoryEventsComponent },
 ];
