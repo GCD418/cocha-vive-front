@@ -1,0 +1,13 @@
+<section class="forbidden-page">
+  <h1>Acceso denegado (403)</h1>
+  <p>No tienes permisos para ingresar a esta sección.</p>
+
+  @if (attemptedUrl) {
+    <p class="forbidden-page__path">Ruta solicitada: {{ attemptedUrl }}</p>
+  }
+
+  <div class="forbidden-page__actions">
+    <a routerLink="/home">Ir al inicio</a>
+    <a routerLink="/events">Ver eventos</a>
+  </div>
+</section>

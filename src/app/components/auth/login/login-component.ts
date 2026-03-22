@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
             if (response.requiresOnboarding) {
               this.router.navigate(['/onboarding']);
             } else {
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/home']);
             }
           },
           error: (err) => {

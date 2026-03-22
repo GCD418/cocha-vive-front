@@ -63,7 +63,9 @@ export const authGuard: CanActivateFn = (route, state) => {
       const hasRequiredRole = requiredRoles.some((role) => userRoles.includes(role));
 
       if (!hasRequiredRole) {
-        return router.createUrlTree(['/home']);
+        return router.createUrlTree(['/forbidden'], {
+          queryParams: { from: state.url },
+        });
       }
     }
 
