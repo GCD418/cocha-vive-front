@@ -1,0 +1,206 @@
+<div class="min-vh-100">
+    @if (successMessage) {
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+            <div class="toast show align-items-center text-bg-success border-0" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body d-flex align-items-center gap-2">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>¡Evento creado exitosamente!'</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (errorMessage) {
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+            <div class="toast show align-items-center text-bg-danger border-0" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body d-flex align-items-center gap-2">
+                        <i class="bi bi-exclamation-circle-fill"></i>
+                        <span>Por favor completa todos los campos obligatorios.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="card border mb-4" style="background-color: var(--surface-color);">
+        <div class="card-body p-4">
+            <h5 class="fw-bold mb-4">
+                <i class="bi bi-info-circle me-2" style="color: var(--accent-color);"></i>
+                Información General del Evento
+            </h5>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Nombre del evento <span class="text-danger">*</span></label>
+                <input type="text" class="form-control"
+                        placeholder="Ej: Festival de Danza Contemporánea"
+                        [(ngModel)]="form.title" name="title">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Categoría <span class="text-danger">*</span></label>
+                <select class="form-select" [(ngModel)]="form.categoryId" name="categoryId">
+                    <option [ngValue]="null" disabled>Selecciona una categoría</option>
+                    @for (cat of categories; track cat.id) {
+                        <option [ngValue]="cat.id">{{ cat.name }}</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Descripción corta <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" maxlength="120"
+                        placeholder="Resumen breve del evento (máx. 120 caracteres)"
+                        [(ngModel)]="form.shortDescription" name="shortDescription">
+                <div class="form-text text-end">{{ form.shortDescription.length }}/120</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Descripción detallada <span class="text-danger">*</span></label>
+                <textarea class="form-control" rows="5"
+                            placeholder="Describe el evento, artistas participantes, programación, etc."
+                            [(ngModel)]="form.description" name="description"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border mb-4" style="background-color: var(--surface-color);">
+        <div class="card-body p-4">
+            <h5 class="fw-bold mb-4">
+                <i class="bi bi-calendar-event me-2" style="color: var(--accent-color);"></i>
+                Fecha y Horario
+            </h5>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Fecha de inicio <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control"
+                            [(ngModel)]="form.startDate" name="startDate">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">
+                        Fecha de finalización
+                        <span class="text-muted fw-normal" style="font-size: 13px;">(opcional)</span>
+                    </label>
+                    <input type="date" class="form-control"
+                            [(ngModel)]="form.endDate" name="endDate">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Hora de inicio <span class="text-danger">*</span></label>
+                    <input type="time" class="form-control"
+                            [(ngModel)]="form.startTime" name="startTime">
+                </div>
+                    <div class="col-md-6">
+                    <label class="form-label fw-semibold">Hora de finalización</label>
+                    <input type="time" class="form-control"
+                            [(ngModel)]="form.endTime" name="endTime">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border mb-4" style="background-color: var(--surface-color);">
+        <div class="card-body p-4">
+            <h5 class="fw-bold mb-4">
+                <i class="bi bi-ticket-perforated me-2" style="color: var(--accent-color);"></i>
+                Detalles del Evento
+            </h5>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Tipo de evento <span class="text-danger">*</span></label>
+                <div class="d-flex gap-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="costType"
+                            id="gratuito" value="gratuito" [(ngModel)]="form.costType">
+                        <label class="form-check-label" for="gratuito">Gratuito</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="costType"
+                            id="depago" value="depago" [(ngModel)]="form.costType">
+                        <label class="form-check-label" for="depago">De pago</label>
+                    </div>
+                </div>
+            </div>
+
+            @if (form.costType === 'depago') {
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Costo (Bs.) <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" min="1"
+                            placeholder="Ej: 50"
+                            [(ngModel)]="form.cost" name="cost"
+                            [class.is-invalid]="errorMessage && form.cost <= 0">
+                    <div class="invalid-feedback">Debe ser mayor a 0.</div>
+                </div>
+            }
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Descripción del lugar</label>
+                <input type="text" class="form-control"
+                    placeholder="Ej: Teatro Achá, sala principal"
+                    [(ngModel)]="form.shortPlaceDescription" name="shortPlaceDescription">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                Capacidad de personas
+                <span class="text-muted fw-normal" style="font-size: 13px;">(opcional)</span>
+                </label>
+                <input type="number" class="form-control" min="1"
+                    placeholder="Ej: 200"
+                    [(ngModel)]="form.peopleCapacity" name="peopleCapacity">
+            </div>
+        </div>
+    </div>
+
+    <div class="card border mb-4" style="background-color: var(--surface-color);">
+        <div class="card-body p-4">
+            <h5 class="fw-bold mb-3">
+                <i class="bi bi-tags me-2" style="color: var(--accent-color);"></i>
+                Etiquetas
+            </h5>
+            <p class="form-text mb-3">Agrega palabras clave para ayudar a clasificar tu evento (máx. 10).</p>
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control"
+                    placeholder="Escribe una etiqueta y presiona Enter"
+                    [(ngModel)]="form.tagInput" name="tagInput"
+                    (keydown)="onTagKeydown($event)">
+                <button class="btn btn-warning btn-outline-secondary btn-sm" type="button" (click)="addTag()">
+                    <i class="bi bi-plus-circle me-1"></i> Agregar
+                </button>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+                @for (tag of form.tags; track tag) {
+                <span class="badge rounded-pill px-3 py-2 fw-semibold"
+                        style="background-color: var(--accent-color); color: var(--contrast-color); font-size: 13px;">
+                    {{ tag }}
+                    <i class="bi bi-x ms-1" style="cursor: pointer;" (click)="removeTag(tag)"></i>
+                </span>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="card border mb-4" style="background-color: var(--surface-color);">
+        <div class="card-body p-4">
+            <h5 class="fw-bold mb-2">
+                <i class="bi bi-images me-2" style="color: var(--accent-color);"></i>
+                Fotos del Evento
+            </h5>
+                <p class="form-text">Selecciona imágenes para mostrar tu evento. La primera será la portada.</p>
+            <input type="file" id="images" class="form-control"
+                    (change)="onFilesSelected($event)" accept="image/*" multiple>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-3 mt-2">
+        <button class="btn btn-outline-secondary" type="button" (click)="onCancel()">Cancelar</button>
+        <button class="btn btn-danger px-4" type="button" (click)="onSubmit()">
+        <i class="bi bi-send me-1"></i>'Publicar Evento'
+        </button>
+    </div>
+
+</div>
