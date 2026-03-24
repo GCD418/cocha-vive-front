@@ -15,7 +15,7 @@ export const routes: Routes = [
         path: 'events/create',
         component: EventCreate,
         canActivate: [authGuard],
-        data: { roles: ['ROLE_ADMIN'] },
+        data: { roles: ['ROLE_PUBLISHER'] },
     },
     { path: 'event-details/:id', component: EventDetails },
     { path: 'category-events/:name', component: CategoryEventsComponent },
