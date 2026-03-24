@@ -14,6 +14,7 @@ export class EventCreate{
   constructor(private router: Router) {}
 
   onFormResult(result: EventFormResult): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     if (result.success) {
       setTimeout(() => this.router.navigate(['/events']), 2000);
     } else {
