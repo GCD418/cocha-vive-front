@@ -22,8 +22,9 @@ export class EventList {
   currentUser: CurrentUser | null = null;
   loading = true;
   selectedEvent: EventModel | null = null;
+  showSuccessToast = false;
 
-   private editModal: any;
+  private editModal: any;
 
   constructor(private eventService : EventService,
               private authService: AuthService,
@@ -87,8 +88,13 @@ export class EventList {
     }
     this.selectedEvent = null;
 
-    if (result.success && this.currentUser) {
-      this.loadMyEvents(this.currentUser.id);
+    if (result.success) {
+      this.showSuccessToast = true;
+      setTimeout(() => { this.showSuccessToast = false; }, 500);
+ 
+      if (this.currentUser) {
+        this.loadMyEvents(this.currentUser.id);
+      }
     }
   }
 
