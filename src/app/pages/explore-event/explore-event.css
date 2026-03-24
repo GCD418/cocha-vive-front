@@ -1,0 +1,31 @@
+.explore-sidebar {
+  width: 280px;
+  min-width: 280px;
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+ 
+.explore-main {
+  flex: 1;
+  min-width: 0;
+  padding: 40px 32px 60px;
+}
+ 
+@media (max-width: 900px) {
+  .explore-layout {
+    flex-direction: column;
+  }
+ 
+  .explore-sidebar {
+    width: 100%;
+    min-width: unset;
+    position: static;
+    height: auto;
+  }
+ 
+  .explore-main {
+    padding: 24px 16px 48px;
+  }
+}
