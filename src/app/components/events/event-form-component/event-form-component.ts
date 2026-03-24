@@ -6,7 +6,7 @@ import { EventService } from '../../../services/event-service/event.service';
 
 export interface EventFormResult {
   success: boolean;
-  mode: 'create';
+  mode: 'create' | 'edit';
 }
 
 @Component({
@@ -16,7 +16,9 @@ export interface EventFormResult {
   templateUrl: './event-form-component.html',
   styleUrl: './event-form-component.css',
 })
-export class EventFormComponent implements OnInit {
+export class EventFormComponent implements OnInit, OnChanges {
+
+  @Input() eventToEdit: EventModel | null = null;
  
   @Output() formResult = new EventEmitter<EventFormResult>();
  
@@ -24,6 +26,7 @@ export class EventFormComponent implements OnInit {
   successMessage = false;
   errorMessage = false;
   selectedFiles: File[] = [];
+  isEditMode = false;
  
   form = {
     title: '',
@@ -51,7 +54,15 @@ export class EventFormComponent implements OnInit {
     });
   }
  
-
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['eventToEdit'] && this.eventToEdit) {
+      this.isEditMode = true;
+      this.populateForm(this.eventToEdit);
+    } else if (changes['eventToEdit'] && !this.eventToEdit) {
+      this.isEditMode = false;
+      this.resetForm();
+    }
+  }
  
   private populateForm(event: EventModel): void {
     const dateStart = new Date(event.dateStart);
@@ -173,19 +184,34 @@ export class EventFormComponent implements OnInit {
     }
  
     const payload = this.buildPayload();
- 
-    this.eventService.createEvent(payload, this.selectedFiles).subscribe({
-      next: () => {
-        this.successMessage = true;
-        setTimeout(() => {
-          this.successMessage = false;
-          this.formResult.emit({ success: true, mode: 'create' });
-        }, 2000);
-      },
-      error: (err) => {
-        console.error('Error al crear evento', err);
-      },
-    });
+
+    if (this.isEditMode && this.eventToEdit) {
+      this.eventService.updateEvent(this.eventToEdit.id, payload, this.selectedFiles).subscribe({
+        next: () => {
+          this.successMessage = true;
+          setTimeout(() => {
+            this.successMessage = false;
+            this.formResult.emit({ success: true, mode: 'edit' });
+          }, 2000);
+        },
+        error: (err) => {
+          console.error('Error al actualizar evento', err);
+        },
+      });
+    } else {
+      this.eventService.createEvent(payload, this.selectedFiles).subscribe({
+        next: () => {
+          this.successMessage = true;
+          setTimeout(() => {
+            this.successMessage = false;
+            this.formResult.emit({ success: true, mode: 'create' });
+          }, 2000);
+        },
+        error: (err) => {
+          console.error('Error al crear evento', err);
+        },
+      });
+    }
   }
  
   onCancel(): void {
