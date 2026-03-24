@@ -187,26 +187,76 @@
     <div class="card border mb-4" style="background-color: var(--surface-color);">
         <div class="card-body p-4">
             <h5 class="fw-bold mb-2">
-                <i class="bi bi-images me-2" style="color: var(--accent-color);"></i>
-                Fotos del Evento
+            <i class="bi bi-images me-2" style="color: var(--accent-color);"></i>
+            Fotos del Evento
             </h5>
-            @if (isEditMode && form.photoLinks.length > 0) {
-                <p class="form-text mb-2">Fotos actuales:</p>
+
+            @if (isEditMode) {
+            @if (existingPhotos.length > 0) {
+                <p class="form-text mt-2 mb-2">
+                Arrastra para reordenar · La primera es la portada ·
+                <span style="color: var(--accent-color);">✕ para eliminar</span>
+                </p>
                 <div class="d-flex flex-wrap gap-2 mb-3">
-                @for (photo of form.photoLinks; track photo) {
-                    <img [src]="photo" alt="Foto del evento"
-                        style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #dee2e6;">
+                @for (photo of existingPhotos; track photo; let i = $index) {
+                    <div class="photo-thumb"
+                        [class.dragging]="dragIndex === i"
+                        [class.drag-over]="dragOver === i"
+                        draggable="true"
+                        (dragstart)="onDragStart(i)"
+                        (dragover)="onDragOver($event, i)"
+                        (drop)="onDrop($event, i)"
+                        (dragend)="onDragEnd()">
+                    <img [src]="photo" alt="Foto existente">
+                    @if (i === 0) {
+                        <span class="cover-badge">Portada</span>
+                    }
+                    <button class="remove-btn" type="button"
+                            (click)="removeExistingPhoto(i)" title="Eliminar foto">
+                        <i class="bi bi-x"></i>
+                    </button>
+                    </div>
                 }
                 </div>
-                <p class="form-text">Selecciona nuevas imágenes solo si deseas reemplazar las actuales.</p>
             } @else {
-                <p class="form-text">Selecciona imágenes para mostrar tu evento. La primera será la portada.</p>
+                <p class="form-text text-warning mb-2">
+                <i class="bi bi-exclamation-triangle me-1"></i>
+                Este evento no tiene fotos aún.
+                </p>
+            }
+            } @else {
+            <p class="form-text mt-2 mb-2">La primera foto será la portada.</p>
             }
 
-            <input type="file" id="images" class="form-control"
-                    (change)="onFilesSelected($event)" accept="image/*" multiple>
+            @if (newFiles.length > 0) {
+            <p class="form-text mb-2">{{ isEditMode ? 'Nuevas fotos a subir:' : 'Vista previa:' }}</p>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+                @for (file of newFiles; track file.previewUrl; let i = $index) {
+                <div class="photo-thumb new-thumb">
+                    <img [src]="file.previewUrl" [alt]="file.file.name">
+                    @if (i === 0 && !isEditMode) {
+                    <span class="cover-badge">Portada</span>
+                    }
+                    <button class="remove-btn" type="button"
+                            (click)="removeNewFile(i)" title="Quitar">
+                    <i class="bi bi-x"></i>
+                    </button>
+                </div>
+                }
+            </div>
+            }
+
+            <label class="form-label fw-semibold">
+            {{ isEditMode ? 'Agregar nuevas fotos' : 'Seleccionar fotos' }}
+            </label>
+            <input type="file" class="form-control"
+                (change)="onFilesSelected($event)" accept="image/*" multiple>
+            @if (isEditMode) {
+            <div class="form-text">Las nuevas fotos se agregarán después de las existentes.</div>
+            }
         </div>
     </div>
+        
 
     <div class="d-flex justify-content-end gap-3 mt-2">
         <button class="btn btn-outline-secondary" type="button" (click)="onCancel()">Cancelar</button>

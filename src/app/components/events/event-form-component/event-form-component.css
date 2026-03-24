@@ -1,0 +1,76 @@
+.photo-thumb {
+  position: relative;
+  width: 80px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #dee2e6;
+  cursor: grab;
+  transition: border-color 0.2s, transform 0.2s, opacity 0.2s;
+}
+ 
+.photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+ 
+.photo-thumb.new-thumb {
+  cursor: default;
+  border-color: #a8d5a2;
+  border-style: dashed;
+}
+ 
+.photo-thumb.dragging {
+  opacity: 0.4;
+  transform: scale(0.95);
+  border-color: var(--accent-color);
+}
+ 
+.photo-thumb.drag-over {
+  border-color: var(--accent-color);
+  border-style: dashed;
+  transform: scale(1.05);
+}
+ 
+.remove-btn {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+  padding: 0;
+}
+ 
+.photo-thumb:hover .remove-btn {
+  opacity: 1;
+}
+ 
+.cover-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(248, 34, 73, 0.85);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+  padding: 2px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+ 

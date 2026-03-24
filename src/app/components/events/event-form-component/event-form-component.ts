@@ -27,6 +27,12 @@ export class EventFormComponent implements OnInit, OnChanges {
   errorMessage = false;
   selectedFiles: File[] = [];
   isEditMode = false;
+
+  existingPhotos: string[] = [];
+  newFiles: { file: File; previewUrl: string }[] = [];
+
+  dragIndex: number | null = null;
+  dragOver: number | null = null;
  
   form = {
     title: '',
@@ -86,7 +92,8 @@ export class EventFormComponent implements OnInit, OnChanges {
       endTime: this.toTimeInput(dateEnd),
     };
 
-    this.selectedFiles = [];
+    this.existingPhotos = [...(event.photoLinks || [])];
+    this.newFiles = [];
   }
  
   private toDateInput(date: Date): string {
@@ -115,7 +122,8 @@ export class EventFormComponent implements OnInit, OnChanges {
       endDate: '',
       endTime: '',
     };
-    this.selectedFiles = [];
+    this.existingPhotos = [];
+    this.newFiles = [];
   }
  
   addTag(): void {
@@ -136,13 +144,63 @@ export class EventFormComponent implements OnInit, OnChanges {
       this.addTag();
     }
   }
+
+  removeExistingPhoto(index: number): void {
+    this.existingPhotos.splice(index, 1);
+  }
+ 
+  onDragStart(index: number): void {
+    this.dragIndex = index;
+  }
+ 
+  onDragOver(event: DragEvent, index: number): void {
+    event.preventDefault();
+    this.dragOver = index;
+  }
+ 
+  onDrop(event: DragEvent, dropIndex: number): void {
+    event.preventDefault();
+    if (this.dragIndex === null || this.dragIndex === dropIndex) {
+      this.dragIndex = null;
+      this.dragOver = null;
+      return;
+    }
+
+    const moved = this.existingPhotos.splice(this.dragIndex, 1)[0];
+    this.existingPhotos.splice(dropIndex, 0, moved);
+ 
+    this.dragIndex = null;
+    this.dragOver = null;
+  }
+ 
+  onDragEnd(): void {
+    this.dragIndex = null;
+    this.dragOver = null;
+  }
  
   onFilesSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    if (input.files) {
-      this.selectedFiles = Array.from(input.files);
-    }
+    if (!input.files) return;
+ 
+    Array.from(input.files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.newFiles.push({
+          file,
+          previewUrl: e.target?.result as string
+        });
+      };
+      reader.readAsDataURL(file);
+    });
+ 
+    input.value = '';
   }
+ 
+  removeNewFile(index: number): void {
+    this.newFiles.splice(index, 1);
+  }
+
+
  
   private isFormValid(): boolean {
     return !!(
@@ -173,6 +231,7 @@ export class EventFormComponent implements OnInit, OnChanges {
       dateStart: `${this.form.startDate}T${this.form.startTime}:00`,
       dateEnd: `${this.form.endDate}T${this.form.endTime}:00`,
       tags: this.form.tags,
+      photoLinks: this.existingPhotos,
     };
   }
  
