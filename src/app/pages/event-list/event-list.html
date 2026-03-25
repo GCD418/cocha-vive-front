@@ -16,7 +16,10 @@
       }
 
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0"> Events List </h2>
+        <h2 class="mb-0"> Mis Eventos </h2>
+        <button class="btn btn-primary" [routerLink]="['/events/create']">
+          <i class="bi bi-plus-circle me-1"></i> Crear Evento
+        </button>
       </div>
 
       <table class="table table-striped table-hover table-bordered align-middle">
