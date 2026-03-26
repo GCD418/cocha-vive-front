@@ -1,35 +1,37 @@
 .explore-layout {
   display: flex;
-  height: calc(100vh - 80px);
+  min-height: calc(100vh - 80px);
   margin-top: 80px;
 }
 
 .explore-sidebar {
   width: 280px;
   min-width: 280px;
-  height: 100%;
-  overflow: hidden;
+  height: calc(100vh - 80px);
+  overflow-y: auto; 
+  position: sticky; 
+  top: 80px; 
 }
- 
+
 .explore-main {
   flex: 1;
   min-width: 0;
-  overflow-y: auto;
   padding: 40px 32px 60px;
 }
- 
+
 @media (max-width: 900px) {
   .explore-layout {
     flex-direction: column;
   }
- 
+
   .explore-sidebar {
     width: 100%;
     min-width: unset;
-    position: static;
+    position: static; 
     height: auto;
+    overflow-y: visible;
   }
- 
+
   .explore-main {
     padding: 24px 16px 48px;
   }
