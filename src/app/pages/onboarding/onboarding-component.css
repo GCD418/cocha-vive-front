@@ -1,0 +1,99 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f6f7fd; 
+  padding: 100px 20px 40px; 
+}
+
+.onboarding-wrapper {
+  background: var(--surface-color, #ffffff);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+  width: 100%;
+  max-width: 500px;
+  font-family: var(--default-font);
+}
+
+.onboarding-wrapper h2 {
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.onboarding-wrapper p {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 0.95rem;
+}
+
+.field {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.field input {
+  padding: 12px 15px;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--default-color);
+  background-color: var(--surface-color, #ffffff);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-family: var(--default-font);
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color), transparent 85%);
+}
+
+.field input::placeholder {
+  color: color-mix(in srgb, var(--default-color), transparent 60%);
+}
+
+.field small {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+}
+
+.btn-save {
+  width: 100%;
+  background: var(--accent-color);
+  color: var(--contrast-color, #ffffff);
+  border: none;
+  padding: 14px;
+  border-radius: 50px; 
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, opacity 0.3s;
+  margin-top: 10px;
+  font-family: var(--heading-font);
+}
+
+.btn-save:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  transform: translateY(-2px); 
+}
+
+.btn-save:disabled {
+  background: color-mix(in srgb, var(--default-color), transparent 70%);
+  cursor: not-allowed;
+  opacity: 0.8;
+}

@@ -51,10 +51,11 @@ export const authGuard: CanActivateFn = (route, state) => {
     const userRoles = normalizeRoles(decodedPayload.roles);
     const requiredRoles = (route.data?.['roles'] as string[] | undefined) ?? [];
 
-    if (requiresOnboarding && state.url !== '/onboarding') {
+if (requiresOnboarding && state.url !== '/onboarding') {
       return router.createUrlTree(['/onboarding']);
     }
 
+    // --- COMENTA ESTO TEMPORALMENTE PARA PODER ENTRAR A LA FUERZA ---
     if (!requiresOnboarding && state.url === '/onboarding') {
       return router.createUrlTree(['/home']);
     }

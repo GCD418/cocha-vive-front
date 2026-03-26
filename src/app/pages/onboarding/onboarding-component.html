@@ -1,0 +1,44 @@
+<div class="onboarding-wrapper">
+  
+  @if (!isSuccess) {
+    <h2>Completa tu perfil</h2>
+    <p>Ingresa tus datos de identidad para continuar.</p>
+
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+      <div class="field">
+        <label for="dn">Carnet de Identidad (CI) *</label>
+        <input 
+          type="text" 
+          id="dn" 
+          name="documentNumber" 
+          [(ngModel)]="onboardingData.documentNumber" 
+          required
+          placeholder="Ej: 8347210">
+      </div>
+
+      <div class="field">
+        <label for="ext">Complemento (Opcional)</label>
+        <input 
+          type="text" 
+          id="ext" 
+          name="documentExtension" 
+          [(ngModel)]="onboardingData.documentExtension" 
+          placeholder="Ej: 1H, LP, SC...">
+        <small>Solo si tu carnet tiene un código adicional al número.</small>
+      </div>
+
+      <button type="submit" [disabled]="!form.valid" class="btn-save">
+        Guardar y Continuar
+      </button>
+    </form>
+
+  } @else {
+    <div class="success-message">
+      <div class="check-icon"><i class="bi bi-check-lg"></i></div>
+      <h2>¡Perfil Actualizado!</h2>
+      <p>Tus datos se han guardado correctamente.</p>
+      <button class="btn-save mt-3" routerLink="/home">Ir al Inicio</button>
+    </div>
+  }
+
+</div>

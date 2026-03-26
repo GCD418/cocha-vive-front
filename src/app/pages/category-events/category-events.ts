@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../../services/category-services/category.service';
 import { EventService } from '../../services/event-service/event.service';
 import { EventModel } from '../../models/event-model'; 
@@ -9,7 +9,7 @@ import { EventCardComponent } from '../../components/events/event-card-component
 @Component({
   selector: 'app-category-events',
   standalone: true,
-  imports: [CommonModule, RouterLink, EventCardComponent], 
+  imports: [CommonModule, EventCardComponent], 
   templateUrl: './category-events.html',
   styleUrl: './category-events.css'
 })

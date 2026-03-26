@@ -1,5 +1,4 @@
 <header id="header" class="header d-flex align-items-center fixed-top">
-
   <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
     <a routerLink="/" class="logo d-flex align-items-center me-auto"
@@ -29,6 +28,23 @@
         </i>
     </nav>
 
-    <a class="cta-btn d-none d-sm-block" [routerLink]="['/events/create']">Publicar Evento</a>
+    <div class="d-flex align-items-center ms-auto">
+      @if (currentUser) {
+        <div class="d-flex align-items-center">
+          <span class="d-none d-md-block me-4 text-white fw-bold">{{ currentUser.names }}</span>
+          
+          <button class="cta-btn border-0" (click)="logout()">Cerrar Sesión</button>
+        </div>
+      } @else {
+        <button class="cta-btn border-0" (click)="openLoginModal()">
+          Iniciar Sesión
+        </button>
+      }
+    </div>
+
   </div>
 </header>
+
+@if (showLoginModal) {
+  <app-login-modal (closeModal)="closeLoginModal()"></app-login-modal>
+}

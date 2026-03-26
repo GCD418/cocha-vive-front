@@ -54,4 +54,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('cocha_vive_token');
   }
+  updateOnboarding(data: { documentNumber: string; documentExtension: string }): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/users/complete-profile`, data);
+  }
 }

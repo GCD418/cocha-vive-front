@@ -1,0 +1,16 @@
+<div class="modal-overlay" (click)="close()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    
+    <button class="close-btn" (click)="close()">&times;</button>
+    
+    <div class="modal-header">
+      <h2>Iniciar Sesión</h2>
+      <p>Bienvenido a Cocha Vive</p>
+    </div>
+
+    <div class="google-btn-container">
+      <asl-google-signin-button type="standard" size="large"></asl-google-signin-button>
+    </div>
+    
+  </div>
+</div>

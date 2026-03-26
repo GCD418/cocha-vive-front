@@ -8,7 +8,7 @@ import { LoginComponent } from '../../components/auth/login/login-component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeroComponent, CategoriesCard, FeaturedEventComponent, UpcomingEventsListComponent, LoginComponent],
+  imports: [HeroComponent, CategoriesCard, FeaturedEventComponent, UpcomingEventsListComponent],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
