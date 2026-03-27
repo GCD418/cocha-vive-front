@@ -1,0 +1,52 @@
+.nav-user-btn {
+  color: var(--nav-color);
+  font-family: var(--nav-font);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0 2px;
+}
+
+.nav-user-btn:hover,
+.nav-user-btn:focus {
+  color: var(--nav-hover-color);
+  box-shadow: none;
+}
+    
+.nav-user-initials {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--heading-font);
+}
+
+.nav-user-dropdown {
+  right: 0 !important;
+  left: auto !important;
+  min-width: 240px;
+}
+
+.nav-user-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-color);
+  flex-shrink: 0;
+}
+
+.nav-user-avatar-fallback {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 85%);
+  color: var(--accent-color);
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--heading-font);
+}
