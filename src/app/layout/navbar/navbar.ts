@@ -1,8 +1,15 @@
 import { CommonModule } from '@angular/common';
+<<<<<<< HEAD
 import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { AuthService, CurrentUser } from '../../services/auth/auth.service';
 import { LoginModalComponent } from '../../components/auth/login-modal/login-modal';
+=======
+import { Component, HostListener, OnInit } from '@angular/core';
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { AuthService, CurrentUser } from '../../services/auth/auth.service';
+
+>>>>>>> master
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +19,7 @@ import { LoginModalComponent } from '../../components/auth/login-modal/login-mod
   styleUrl: './navbar.css',
 })
 export class Navbar implements OnInit {
+<<<<<<< HEAD
   mobileMenuOpen = false;
   userDropdownOpen = false; 
   showLoginModal = false; 
@@ -25,13 +33,31 @@ export class Navbar implements OnInit {
   }
 
   checkUserSession() {
+=======
+
+  mobileMenuOpen = false;
+  currentUser: CurrentUser | null = null;
+  userDropdownOpen = false;
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit() {
+    document.body.classList.add('scrolled');
+    this.loadCurrentUser();
+  }
+
+  private loadCurrentUser(): void {
+>>>>>>> master
     if (this.authService.isLoggedIn()) {
       this.authService.getCurrentUser().subscribe({
         next: (user) => { this.currentUser = user; },
         error: () => { this.currentUser = null; }
       });
+<<<<<<< HEAD
     } else {
       this.currentUser = null;
+=======
+>>>>>>> master
     }
   }
 
@@ -61,6 +87,7 @@ export class Navbar implements OnInit {
     this.userDropdownOpen = false;
   }
 
+<<<<<<< HEAD
   openLoginModal() {
     this.showLoginModal = true;
     this.closeMobileMenu();
@@ -72,6 +99,9 @@ export class Navbar implements OnInit {
   }
 
   logout() {
+=======
+  logout(): void {
+>>>>>>> master
     this.authService.logout();
     this.currentUser = null;
     this.userDropdownOpen = false;
