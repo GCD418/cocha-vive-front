@@ -16,6 +16,7 @@ export class OnboardingComponent {
   private router = inject(Router);
 
   isSuccess: boolean = false;
+  isError: boolean = false;
 
   onboardingData = {
     documentNumber: '', 
@@ -23,6 +24,7 @@ export class OnboardingComponent {
   };
 
   onSubmit() {
+    this.isError = false;
     const payload = {
       documentNumber: this.onboardingData.documentNumber.trim(),
       documentExtension: this.onboardingData.documentExtension?.trim() || ''
@@ -38,8 +40,11 @@ export class OnboardingComponent {
       },
       error: (err) => {
         console.error('Error en onboarding:', err);
-        alert('Hubo un error. Verifica los datos e intenta de nuevo.');
+        this.isError = true; 
       }
     });
+  }
+  retry() {
+    this.isError = false;
   }
 }
