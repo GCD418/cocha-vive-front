@@ -56,9 +56,9 @@ if (requiresOnboarding && state.url !== '/onboarding') {
     }
 
     // --- COMENTA ESTO TEMPORALMENTE PARA PODER ENTRAR A LA FUERZA ---
-   // if (!requiresOnboarding && state.url === '/onboarding') {
-   //   return router.createUrlTree(['/home']);
-    //}
+    if (!requiresOnboarding && state.url === '/onboarding') {
+      return router.createUrlTree(['/home']);
+    }
 
     if (requiredRoles.length > 0) {
       const hasRequiredRole = requiredRoles.some((role) => userRoles.includes(role));
