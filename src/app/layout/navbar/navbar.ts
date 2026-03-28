@@ -7,17 +7,15 @@ import { LoginModalComponent } from '../../components/auth/login-modal/login-mod
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, LoginModalComponent ],
+  imports: [RouterLink, RouterLinkActive, CommonModule, LoginModalComponent],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
 export class Navbar implements OnInit {
   mobileMenuOpen = false;
-  isScrolled = false;
-
-  showLoginModal = false;
+  userDropdownOpen = false; 
+  showLoginModal = false; 
   currentUser: CurrentUser | null = null;
-  
   private authService = inject(AuthService);
   private router = inject(Router);
 
@@ -28,12 +26,39 @@ export class Navbar implements OnInit {
 
   checkUserSession() {
     if (this.authService.isLoggedIn()) {
-      this.authService.getCurrentUser().subscribe(user => {
-        this.currentUser = user;
+      this.authService.getCurrentUser().subscribe({
+        next: (user) => { this.currentUser = user; },
+        error: () => { this.currentUser = null; }
       });
     } else {
       this.currentUser = null;
     }
+  }
+
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  get displayName(): string {
+    if (!this.currentUser) return '';
+    return `${this.currentUser.names} ${this.currentUser.firstLastName}`;
+  }
+
+  get initials(): string {
+    if (!this.currentUser) return '';
+    const first = this.currentUser.names?.charAt(0) ?? '';
+    const last = this.currentUser.firstLastName?.charAt(0) ?? '';
+    return (first + last).toUpperCase();
+  }
+
+  toggleUserDropdown(event: Event): void {
+    event.stopPropagation();
+    this.userDropdownOpen = !this.userDropdownOpen;
+  }
+
+  @HostListener('document:click')
+  onDocumentClick(): void {
+    this.userDropdownOpen = false;
   }
 
   openLoginModal() {
@@ -43,12 +68,13 @@ export class Navbar implements OnInit {
 
   closeLoginModal() {
     this.showLoginModal = false;
-    this.checkUserSession();
+    this.checkUserSession(); 
   }
 
   logout() {
     this.authService.logout();
     this.currentUser = null;
+    this.userDropdownOpen = false;
     this.router.navigate(['/home']);
   }
 
@@ -62,7 +88,7 @@ export class Navbar implements OnInit {
     if (this.mobileMenuOpen) {
       document.body.classList.add('mobile-nav-active');
     } else {
-        document.body.classList.remove('mobile-nav-active');
+      document.body.classList.remove('mobile-nav-active');
     }
   }
 
