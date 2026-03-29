@@ -21,11 +21,18 @@ export class EventService {
   }
 
   createEvent(event: any, files: File[]): Observable<any> {
-    const formData = new FormData();
-    formData.append('event', new Blob([JSON.stringify(event)], { type: 'application/json' }));
-    files.forEach(file => formData.append('images', file));
-    return this.httpClient.post(`${this.baseUrl}`, formData);
-  }
+  const formData = new FormData();
+
+  formData.append('event', new Blob(
+    [JSON.stringify(event)],
+    { type: 'application/json' }
+  ));
+
+  files.forEach(file => {
+    formData.append('images', file);
+  });
+  return this.httpClient.post(`${this.baseUrl}`, formData);
+}
 
   updateEvent(id: number, event: any, files: File[]): Observable<any> {
     const formData = new FormData();

@@ -22,8 +22,6 @@ export class LoginModalComponent implements OnInit {
       if (googleUser && googleUser.idToken) {
         this.authService.verifyGoogleToken(googleUser.idToken).subscribe({
           next: (response) => {
-            // AGREGAMOS ESTO PARA VER QUÉ MANDA EL BACKEND
-            console.log('Respuesta del backend al hacer login:', response);
             this.close(); 
             if (response.requiresOnboarding) {
               this.router.navigate(['/onboarding']);
