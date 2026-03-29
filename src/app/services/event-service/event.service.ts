@@ -56,4 +56,8 @@ export class EventService {
   getEventsByCategory(categoryId: number): Observable<EventModel[]> {
     return this.httpClient.get<EventModel[]>(`${this.baseUrl}/category/${categoryId}`);
   }
+  
+  cancelEvent(id: number): Observable<void> {
+    return this.httpClient.patch<void>(`${this.baseUrl}/${id}/cancel`, {});
+  }
 }

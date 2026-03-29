@@ -16,17 +16,18 @@ declare const bootstrap: any;
   templateUrl: './event-list.html',
   styleUrl: './event-list.css',
 })
-export class EventList {
+export class EventList implements OnInit {
 
   events: EventModel[] = [];
   currentUser: CurrentUser | null = null;
   loading = true;
   selectedEvent: EventModel | null = null;
   showSuccessToast = false;
+  cancellingId: number | null = null;
 
   private editModal: any;
 
-  constructor(private eventService : EventService,
+  constructor(private eventService: EventService,
               private authService: AuthService,
               private router: Router) { }
 
@@ -67,22 +68,20 @@ export class EventList {
     });
   }
 
-  eventDetails(id: number){
+  eventDetails(id: number): void {
     this.router.navigate(['/event-details', id]);
   }
 
   openEditModal(event: EventModel): void {
     this.selectedEvent = event;
-
     const modalEl = document.getElementById('editEventModal');
-    
     if (modalEl) {
       this.editModal = new bootstrap.Modal(modalEl);
       this.editModal.show();
     }
   }
 
-   onEditFormResult(result: EventFormResult): void {
+  onEditFormResult(result: EventFormResult): void {
     if (this.editModal) {
       this.editModal.hide();
     }
@@ -91,12 +90,25 @@ export class EventList {
     if (result.success) {
       this.showSuccessToast = true;
       setTimeout(() => { this.showSuccessToast = false; }, 500);
- 
+
       if (this.currentUser) {
         this.loadMyEvents(this.currentUser.id);
       }
     }
   }
 
+  cancelEvent(id: number): void {
+    this.cancellingId = id;
+    this.eventService.cancelEvent(id).subscribe({
+      next: () => {
+        this.events = this.events.filter(e => e.id !== id);
+        this.cancellingId = null;
+      },
+      error: (err) => {
+        console.error('Error al cancelar el evento', err);
+        this.cancellingId = null;
+      }
+    });
+  }
 
 }
