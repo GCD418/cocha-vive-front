@@ -47,10 +47,10 @@
                           class="btn btn-warning btn-sm">
                     <i class="bi bi-pencil me-1"></i> Editar
                   </button>
-                  <button (click)="cancelEvent(event.id)"
-                          class="btn-cancel-event btn-sm"
+                  <button (click)="openCancelModal(event.id)"
+                          class="btn btn-danger btn-sm"
                           [disabled]="cancellingId === event.id">
-                    <i class="bi bi-trash"></i>
+                    <i class="bi bi-trash me-1"></i>
                     {{ cancellingId === event.id ? 'Cancelando...' : 'Cancelar' }}
                   </button>
                 </div>
@@ -94,3 +94,14 @@
     </div>
   </div>
 </div>
+
+@if (pendingCancelId !== null) {                  
+  <app-confirm-modal
+    title="¿Cancelar evento?"
+    message="El evento será cancelado y dejará de ser visible. ¿Estás seguro?"
+    confirmText="Sí, cancelar"
+    [loading]="cancellingId !== null"
+    (confirmed)="onCancelConfirmed()"
+    (cancelled)="onCancelDismissed()">
+  </app-confirm-modal>
+}
