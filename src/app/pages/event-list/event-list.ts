@@ -100,26 +100,27 @@ export class EventList implements OnInit {
   }
 
   openCancelModal(id: number): void {      
-    this.pendingCancelId = id;
-  }
+  this.pendingCancelId = id;
+}
 
-  onCancelConfirmed(): void {              
-    if (this.pendingCancelId === null) return;
-    this.cancellingId = this.pendingCancelId;
+onCancelConfirmed(): void {              
+  if (this.pendingCancelId === null) return;
 
-    this.eventService.cancelEvent(this.pendingCancelId).subscribe({
-      next: () => {
-        this.events = this.events.filter(e => e.id !== this.pendingCancelId);
-        this.cancellingId = null;
-        this.pendingCancelId = null;
-      },
-      error: (err) => {
-        console.error('Error al cancelar el evento', err);
-        this.cancellingId = null;
-        this.pendingCancelId = null;
-      }
-    });
-  }
+  this.cancellingId = this.pendingCancelId;
+
+  this.eventService.cancelEvent(this.pendingCancelId).subscribe({
+    next: () => {
+      this.events = this.events.filter(e => e.id !== this.pendingCancelId);
+      this.cancellingId = null;
+      this.pendingCancelId = null;
+    },
+    error: (err) => {
+      console.error('Error al cancelar el evento', err);
+      this.cancellingId = null;
+      this.pendingCancelId = null;
+    }
+  });
+}
 
   onCancelDismissed(): void {              
     this.pendingCancelId = null;
