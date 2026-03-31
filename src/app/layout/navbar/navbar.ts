@@ -1,34 +1,37 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { AuthService, CurrentUser } from '../../services/auth/auth.service';
-
+import { LoginModalComponent } from '../../components/auth/login-modal/login-modal';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive, CommonModule],
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive, CommonModule, LoginModalComponent],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
 export class Navbar implements OnInit {
-
   mobileMenuOpen = false;
+  userDropdownOpen = false; 
+  showLoginModal = false; 
   currentUser: CurrentUser | null = null;
-  userDropdownOpen = false;
-
-  constructor(private authService: AuthService, private router: Router) {}
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   ngOnInit() {
     document.body.classList.add('scrolled');
-    this.loadCurrentUser();
+    this.checkUserSession();
   }
 
-  private loadCurrentUser(): void {
+  checkUserSession() {
     if (this.authService.isLoggedIn()) {
       this.authService.getCurrentUser().subscribe({
         next: (user) => { this.currentUser = user; },
         error: () => { this.currentUser = null; }
       });
+    } else {
+      this.currentUser = null;
     }
   }
 
@@ -58,7 +61,17 @@ export class Navbar implements OnInit {
     this.userDropdownOpen = false;
   }
 
-  logout(): void {
+  openLoginModal() {
+    this.showLoginModal = true;
+    this.closeMobileMenu();
+  }
+
+  closeLoginModal() {
+    this.showLoginModal = false;
+    this.checkUserSession(); 
+  }
+
+  logout() {
     this.authService.logout();
     this.currentUser = null;
     this.userDropdownOpen = false;
@@ -75,7 +88,7 @@ export class Navbar implements OnInit {
     if (this.mobileMenuOpen) {
       document.body.classList.add('mobile-nav-active');
     } else {
-        document.body.classList.remove('mobile-nav-active');
+      document.body.classList.remove('mobile-nav-active');
     }
   }
 
@@ -83,5 +96,4 @@ export class Navbar implements OnInit {
     this.mobileMenuOpen = false;
     document.body.classList.remove('mobile-nav-active');
   } 
-
 }

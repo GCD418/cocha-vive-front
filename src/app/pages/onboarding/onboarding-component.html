@@ -1,0 +1,70 @@
+<div class="onboarding-wrapper">
+  
+  @if (isSuccess) {
+    <div class="success-message">
+      <div class="check-icon"><i class="bi bi-check-lg"></i></div>
+      <h2>¡Perfil Actualizado!</h2>
+      <p>Tus datos se han guardado correctamente.</p>
+      <button class="btn-save mt-3" routerLink="/home">Ir al Inicio</button>
+    </div>
+
+  } @else if (isError) {
+    <div class="error-message">
+      <div class="error-icon"><i class="bi bi-exclamation-lg"></i></div>
+      <h2>¡Uy, algo salió mal!</h2>
+      <p>Hubo un problema al guardar tus datos. Por favor, verifica tu conexión o intenta nuevamente.</p>
+      <button class="btn-save mt-3" (click)="retry()">Volver a intentar</button>
+    </div>
+
+  } @else {
+    <h2>Completa tu perfil</h2>
+    <p>Ingresa tus datos de identidad para continuar.</p>
+
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+      
+      <div class="field">
+        <label for="dn">Carnet de Identidad (CI) *</label>
+        <input 
+          type="text" 
+          id="dn" 
+          name="documentNumber" 
+          [(ngModel)]="onboardingData.documentNumber" 
+          required
+          maxlength="9"
+          pattern="^[0-9]+$"
+          #dn="ngModel"
+          placeholder="Ej: 8347210">
+          
+        @if (dn.invalid && (dn.dirty || dn.touched)) {
+          @if (dn.errors?.['pattern']) {
+            <small style="color: #dc3545;">Solo se permiten números.</small>
+          }
+        }
+      </div>
+
+      <div class="field">
+        <label for="ext">Complemento (Opcional)</label>
+        <input 
+          type="text" 
+          id="ext" 
+          name="documentExtension" 
+          [(ngModel)]="onboardingData.documentExtension" 
+          maxlength="2"
+          pattern="^[0-9][A-Z]$"
+          #ext="ngModel"
+          placeholder="Ej: 1H, 1A...">
+          
+        @if (ext.invalid && (ext.dirty || ext.touched)) {
+          <small style="color: #dc3545;">Debe ser un número y una letra en mayúscula (Ej: 1H).</small>
+        } @else {
+          <small>Solo si tu carnet tiene un código adicional al número.</small>
+        }
+      </div>
+
+      <button type="submit" [disabled]="!form.valid" class="btn-save">
+        Guardar y Continuar
+      </button>
+    </form>
+  }
+
+</div>

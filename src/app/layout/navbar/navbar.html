@@ -1,9 +1,7 @@
 <header id="header" class="header d-flex align-items-center fixed-top">
-
   <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-    <a routerLink="/" class="logo d-flex align-items-center me-auto"
-       (click)="closeMobileMenu()">
+    <a routerLink="/" class="logo d-flex align-items-center me-auto" (click)="closeMobileMenu()">
       <img src="assets/img/logo.png" alt="Logo">
     </a>
 
@@ -13,12 +11,10 @@
                 <a routerLink="/" fragment="hero" (click)="closeMobileMenu()">Inicio</a>
             </li>
             <li>
-            <a routerLink="explore-events" routerLinkActive="active"
-                (click)="closeMobileMenu()">Explorar</a>
+            <a routerLink="explore-events" routerLinkActive="active" (click)="closeMobileMenu()">Explorar</a>
             </li>
             <li>        
-            <a routerLink="/events" routerLinkActive="active"
-                (click)="closeMobileMenu()">Mis Eventos</a>
+            <a routerLink="/events" routerLinkActive="active" (click)="closeMobileMenu()">Mis Eventos</a>
             </li>
         </ul>
 
@@ -29,56 +25,64 @@
         </i>
     </nav>
 
-    <a class="cta-btn d-none d-sm-block" [routerLink]="['/events/create']">Publicar Evento</a>
+    <div class="d-flex align-items-center ms-auto gap-3">
+      
+      <a class="cta-btn d-none d-sm-block" [routerLink]="['/events/create']">Publicar Evento</a>
 
-    @if (isLoggedIn) {
-      <div class="dropdown ms-3">
-        <button
-          class="btn btn-link nav-user-btn d-flex align-items-center gap-2 dropdown-toggle"
-          type="button"
-          (click)="toggleUserDropdown($event)">
-          <span class="nav-user-initials">{{ initials }}</span>
-          <span class="d-none d-md-inline">{{ displayName }}</span>
-        </button>
+      @if (currentUser) {
+        <div class="dropdown">
+          <button
+            class="btn btn-link nav-user-btn d-flex align-items-center gap-2 dropdown-toggle text-decoration-none"
+            type="button"
+            (click)="toggleUserDropdown($event)">
+            <span class="nav-user-initials">{{ initials }}</span>
+            <span class="d-none d-md-inline text-white fw-bold">{{ displayName }}</span>
+          </button>
 
-        <ul class="dropdown-menu dropdown-menu-end shadow"
-            [class.show]="userDropdownOpen">
-
-          <li>
-            <div class="d-flex align-items-center gap-3 px-3 py-2">
-              @if (currentUser?.photoUrl) {
-                <img [src]="currentUser!.photoUrl"
-                     [alt]="displayName"
-                     class="nav-user-avatar">
-              } @else {
-                <div class="nav-user-avatar nav-user-avatar-fallback d-flex align-items-center justify-content-center">
-                  <span>{{ initials }}</span>
+          <ul class="dropdown-menu dropdown-menu-end shadow nav-user-dropdown" [class.show]="userDropdownOpen">
+            <li>
+<div class="d-flex align-items-center gap-3 px-3 py-2">
+                @if (currentUser?.photoUrl) {
+                  <img [src]="currentUser!.photoUrl" 
+                       [alt]="displayName" 
+                       class="nav-user-avatar"
+                       referrerpolicy="no-referrer">
+                } @else {
+                  <div class="nav-user-avatar nav-user-avatar-fallback d-flex align-items-center justify-content-center">
+                    <span>{{ initials }}</span>
+                  </div>
+                }
+                <div class="overflow-hidden">
+                  <p class="mb-0 fw-bold text-truncate" style="color: var(--heading-color); font-size: 14px;">
+                    {{ displayName }}
+                  </p>
+                  <p class="mb-0 text-muted text-truncate" style="font-size: 12px;">
+                    {{ currentUser?.email }}
+                  </p>
                 </div>
-              }
-              <div class="overflow-hidden">
-                <p class="mb-0 fw-bold text-truncate" style="color: var(--heading-color); font-size: 14px;">
-                  {{ displayName }}
-                </p>
-                <p class="mb-0 text-muted text-truncate" style="font-size: 12px;">
-                  {{ currentUser?.email }}
-                </p>
               </div>
-            </div>
-          </li>
+            </li>
 
-          <li><hr class="dropdown-divider"></li>
+            <li><hr class="dropdown-divider"></li>
 
-          <li>
-            <button class="dropdown-item text-danger d-flex align-items-center gap-2"
-                    type="button"
-                    (click)="logout()">
-              <i class="bi bi-box-arrow-right"></i>
-              Cerrar sesión
-            </button>
-          </li>
+            <li>
+              <button class="dropdown-item text-danger d-flex align-items-center gap-2" type="button" (click)="logout()">
+                <i class="bi bi-box-arrow-right"></i>
+                Cerrar sesión
+              </button>
+            </li>
+          </ul>
+        </div>
+      } @else {
+        <button class="cta-btn border-0" (click)="openLoginModal()">
+          Iniciar Sesión
+        </button>
+      }
 
-        </ul>
-      </div>
-    }
+    </div>
   </div>
 </header>
+
+@if (showLoginModal) {
+  <app-login-modal (closeModal)="closeLoginModal()"></app-login-modal>
+}
