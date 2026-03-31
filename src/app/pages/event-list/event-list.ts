@@ -6,27 +6,30 @@ import { EventModel } from '../../models/event-model';
 import { AuthService, CurrentUser } from '../../services/auth/auth.service';
 import { PricePipe } from '../../shared/pipes/price.pipe';
 import { EventFormResult, EventFormComponent } from '../../components/events/event-form-component/event-form-component';
+import { ConfirmModalComponent } from '../../shared/confirmModal-Component/confirmModal-component';
 
 declare const bootstrap: any;
 
 @Component({
   selector: 'app-event-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, PricePipe, EventFormComponent],
+  imports: [CommonModule, RouterLink, PricePipe, EventFormComponent, ConfirmModalComponent],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css',
 })
-export class EventList {
+export class EventList implements OnInit {
 
   events: EventModel[] = [];
   currentUser: CurrentUser | null = null;
   loading = true;
   selectedEvent: EventModel | null = null;
   showSuccessToast = false;
+  cancellingId: number | null = null;
+  pendingCancelId: number | null = null;
 
   private editModal: any;
 
-  constructor(private eventService : EventService,
+  constructor(private eventService: EventService,
               private authService: AuthService,
               private router: Router) { }
 
@@ -67,22 +70,20 @@ export class EventList {
     });
   }
 
-  eventDetails(id: number){
+  eventDetails(id: number): void {
     this.router.navigate(['/event-details', id]);
   }
 
   openEditModal(event: EventModel): void {
     this.selectedEvent = event;
-
     const modalEl = document.getElementById('editEventModal');
-    
     if (modalEl) {
       this.editModal = new bootstrap.Modal(modalEl);
       this.editModal.show();
     }
   }
 
-   onEditFormResult(result: EventFormResult): void {
+  onEditFormResult(result: EventFormResult): void {
     if (this.editModal) {
       this.editModal.hide();
     }
@@ -91,12 +92,38 @@ export class EventList {
     if (result.success) {
       this.showSuccessToast = true;
       setTimeout(() => { this.showSuccessToast = false; }, 500);
- 
+
       if (this.currentUser) {
         this.loadMyEvents(this.currentUser.id);
       }
     }
   }
 
+  openCancelModal(id: number): void {      
+  this.pendingCancelId = id;
+}
 
+onCancelConfirmed(): void {              
+  if (this.pendingCancelId === null) return;
+
+  this.cancellingId = this.pendingCancelId;
+
+  this.eventService.cancelEvent(this.pendingCancelId).subscribe({
+    next: () => {
+      this.events = this.events.filter(e => e.id !== this.pendingCancelId);
+      this.cancellingId = null;
+      this.pendingCancelId = null;
+    },
+    error: (err) => {
+      console.error('Error al cancelar el evento', err);
+      this.cancellingId = null;
+      this.pendingCancelId = null;
+    }
+  });
+}
+
+  onCancelDismissed(): void {              
+    this.pendingCancelId = null;
+    this.cancellingId = null;
+  }
 }

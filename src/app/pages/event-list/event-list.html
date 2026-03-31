@@ -39,13 +39,19 @@
               <td style="text-align: end;">{{ event.cost | price }}</td>
               <td class="text-center">
                 <div class="d-flex gap-2 justify-content-center">
-                  <button (click)="eventDetails(event.id)" 
-                          class="btn btn-info btn-sm action-btn" style="margin-left: 10px;"> 
-                    <i class="bi bi-eye me-1"></i>Detalles 
+                  <button (click)="eventDetails(event.id)"
+                          class="btn btn-info btn-sm action-btn">
+                    <i class="bi bi-eye me-1"></i>Detalles
                   </button>
                   <button (click)="openEditModal(event)"
                           class="btn btn-warning btn-sm">
                     <i class="bi bi-pencil me-1"></i> Editar
+                  </button>
+
+                  <button 
+                    class="btn btn-danger btn-sm"
+                    (click)="openCancelModal(event.id)">
+                    Cancelar
                   </button>
                 </div>
               </td>
@@ -67,15 +73,15 @@
      aria-labelledby="editEventModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
- 
+
       <div class="modal-header">
         <h5 class="modal-title fw-bold" id="editEventModalLabel">
           <i class="bi bi-pencil-square me-2" style="color: var(--accent-color);"></i>
           Editar Evento
         </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
- 
+
       <div class="modal-body p-4">
         @if (selectedEvent) {
           <app-event-form-component
@@ -84,8 +90,18 @@
           </app-event-form-component>
         }
       </div>
- 
+
     </div>
   </div>
 </div>
 
+@if (pendingCancelId !== null) {
+  <app-confirm-modal
+    title="¿Cancelar evento?"
+    message="El evento será cancelado y dejará de ser visible. ¿Estás seguro?"
+    confirmText="Sí, cancelar"
+    [loading]="cancellingId !== null"
+    (confirmed)="onCancelConfirmed()"
+    (cancelled)="onCancelDismissed()">
+  </app-confirm-modal>
+}

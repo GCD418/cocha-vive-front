@@ -245,7 +245,7 @@ export class EventFormComponent implements OnInit, OnChanges {
     const payload = this.buildPayload();
 
     if (this.isEditMode && this.eventToEdit) {
-      this.eventService.updateEvent(this.eventToEdit.id, payload, this.selectedFiles).subscribe({
+      this.eventService.updateEvent(this.eventToEdit.id, payload, this.newFiles.map(f => f.file)).subscribe({
         next: () => {
           this.successMessage = true;
           setTimeout(() => {
@@ -258,7 +258,7 @@ export class EventFormComponent implements OnInit, OnChanges {
         },
       });
     } else {
-      this.eventService.createEvent(payload, this.selectedFiles).subscribe({
+      this.eventService.createEvent(payload, this.newFiles.map(f => f.file)).subscribe({
         next: () => {
           this.successMessage = true;
           setTimeout(() => {

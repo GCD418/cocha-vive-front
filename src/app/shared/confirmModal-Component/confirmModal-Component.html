@@ -1,0 +1,23 @@
+<div class="modal-overlay" (click)="onCancel()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+
+    <button class="close-btn" (click)="onCancel()">&times;</button>
+
+    <div class="modal-header">
+      <i class="bi bi-exclamation-triangle confirm-icon"></i>
+      <h2>{{ title }}</h2>
+      <p>{{ message }}</p>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel-action" (click)="onCancel()">
+        <i class="bi bi-x-circle me-1"></i> Cancelar
+      </button>
+      <button class="btn-confirm-action" (click)="onConfirm()" [disabled]="loading">
+        <i class="bi bi-check-circle me-1"></i>
+        {{ loading ? 'Procesando...' : confirmText }}
+      </button>
+    </div>
+
+  </div>
+</div>
