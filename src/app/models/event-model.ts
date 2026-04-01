@@ -24,7 +24,7 @@ export interface EventModel {
     shortPlaceDescription: string;
     tags: string[];
     photoLinks: string[];
-    eventStatus: boolean;
+    eventStatus: string;
     reviewedByAdminId?: number;
     createdAt: string;
     updatedAt?: string;
