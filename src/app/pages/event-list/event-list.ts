@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe, NgClass } from '@angular/common';
 import { EventService } from '../../services/event-service/event.service';
 import { Router, RouterLink } from '@angular/router';
 import { EventModel } from '../../models/event-model';
@@ -13,7 +13,15 @@ declare const bootstrap: any;
 @Component({
   selector: 'app-event-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, PricePipe, EventFormComponent, ConfirmModalComponent],
+  imports: [
+    CommonModule, 
+    RouterLink, 
+    PricePipe, 
+    EventFormComponent, 
+    ConfirmModalComponent,
+    NgClass,
+    DatePipe
+  ],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css',
 })
@@ -125,5 +133,29 @@ onCancelConfirmed(): void {
   onCancelDismissed(): void {              
     this.pendingCancelId = null;
     this.cancellingId = null;
+  }
+
+  countByStatus(status: string): number {
+    return this.events.filter(e => e.eventStatus === status).length;
+  }
+
+  getStatusLabel(status: string): string {
+    const labels: Record<string, string> = {
+      PENDING: 'Pendiente',
+      APPROVED: 'Aprobado',
+      REJECTED: 'Rechazado',
+      CANCELLED: 'Cancelado',
+    };
+    return labels[status] ?? status;
+  }
+
+  getStatusClass(status: string): string {
+    const classes: Record<string, string> = {
+      PENDING: 'bg-warning text-dark',
+      APPROVED: 'bg-success',
+      REJECTED: 'bg-danger',
+      CANCELLED: 'bg-secondary',
+    };
+    return classes[status] ?? 'bg-secondary';
   }
 }
