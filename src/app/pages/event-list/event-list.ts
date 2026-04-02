@@ -239,4 +239,18 @@ export class EventList implements OnInit {
     };
     return classes[status] ?? 'bg-secondary';
   }
+
+  hasActiveFilters(): boolean {
+    return !!(this.searchText || this.filterStatus || this.filterCategory || this.filterType || this.filterDateFrom || this.filterDateTo);
+  }
+
+  clearFilters(): void {
+    this.searchText = '';
+    this.filterStatus = '';
+    this.filterCategory = '';
+    this.filterType = '';
+    this.filterDateFrom = '';
+    this.filterDateTo = '';
+    this.onFilterChange();
+  }
 }

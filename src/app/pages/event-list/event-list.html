@@ -46,17 +46,21 @@
         <h2 class="mb-0"> Mis Eventos </h2>
       </div>
 
-      <div class="row g-2 mb-3">
-        <div class="col-md-6">
-          <div class="input-group input-group-sm">
-            <span class="input-group-text bg-white"><i class="bi bi-search text-secondary"></i></span>
-            <input type="text"
-                  class="form-control border-start-0"
-                  placeholder="Buscar por título..."
-                  [(ngModel)]="searchText"
-                  (ngModelChange)="onFilterChange()">
-          </div>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="input-group input-group-sm w-auto flex-grow-1 me-2">
+          <span class="input-group-text bg-white"><i class="bi bi-search text-secondary"></i></span>
+          <input type="text"
+                class="form-control border-start-0"
+                placeholder="Buscar por título..."
+                [(ngModel)]="searchText"
+                (ngModelChange)="onFilterChange()">
         </div>
+        @if (hasActiveFilters()) {
+          <button class="btn btn-sm btn-outline-secondary text-nowrap"
+                  (click)="clearFilters()">
+            <i class="bi bi-x-lg me-1"></i> Quitar filtros
+          </button>
+        }
       </div>
 
       <div class="card border-0 shadow-sm">
