@@ -56,7 +56,6 @@
                 <th>Fecha</th>
                 <th>Categoría</th>
                 <th>Tipo</th>
-                <th>Precio</th>
                 <th>Estado</th>
                 <th>Acciones</th>
                 <!-- <th class="text-center" style="width: 15%;">Precio [Bs.]</th> -->
@@ -66,15 +65,9 @@
               @for (event of events; track event.id) {
                 <tr>
                   <td class="fw-semibold">{{ event.title }}</td>
-                  <td class="text-nowrap">
-                    @if (event.dateStart === event.dateEnd) {
-                      {{ event.dateStart | date:'d/M/yyyy' }}
-                    } @else {
-                      {{ event.dateStart | date:'d/M/yyyy' }} – {{ event.dateEnd | date:'d/M/yyyy' }}
-                    }
-                  </td>
+                  <td class="text-nowrap text-center">{{ event.dateStart | date:'d/M/yyyy' }}</td>
                   <td>{{ event.category?.name }}</td>
-                  <td>
+                  <td class="text-center">
                     <span class="badge rounded-pill"
                       [class.bg-warning]="event.cost === 0"
                       [class.text-dark]="event.cost === 0"
@@ -82,14 +75,13 @@
                       {{ event.cost === 0 ? 'Gratis' : 'De pago' }}
                     </span>
                   </td>
-                  <td>{{ event.cost === 0 ? '—' : (event.cost | price) }}</td>
-                  <td>
+                  <td class="text-center">
                     <span class="badge rounded-pill" [ngClass]="getStatusClass(event.eventStatus)">
                       {{ getStatusLabel(event.eventStatus) }}
                     </span>
                   </td>
-                  <td class="text-end">
-                    <div class="d-flex gap-3 justify-content-end">
+                  <td class="text-center">
+                    <div class="d-flex gap-3 justify-content-center">
                       <button (click)="eventDetails(event.id)"
                               class="btn btn-link p-0 text-body-tertiary link-dark"
                               title="Ver detalles">
