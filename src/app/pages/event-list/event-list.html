@@ -42,9 +42,21 @@
         </div>
       </div>
 
-
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0"> Mis Eventos </h2>
+      </div>
+
+      <div class="row g-2 mb-3">
+        <div class="col-md-6">
+          <div class="input-group input-group-sm">
+            <span class="input-group-text bg-white"><i class="bi bi-search text-secondary"></i></span>
+            <input type="text"
+                  class="form-control border-start-0"
+                  placeholder="Buscar por título..."
+                  [(ngModel)]="searchText"
+                  (ngModelChange)="onFilterChange()">
+          </div>
+        </div>
       </div>
 
       <div class="card border-0 shadow-sm">
@@ -53,20 +65,150 @@
             <thead class="table-light">
               <tr class="text-center">
                 <th>Título</th>
-                <th>Fecha</th>
-                <th>Categoría</th>
-                <th>Tipo</th>
-                <th>Estado</th>
+
+                <th class="p-0">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-secondary text-center fw-bold text-decoration-none w-100 text-start px-3 py-2 dropdown-toggle"
+                            [class.text-primary]="filterDateFrom || filterDateTo"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside"
+                            aria-expanded="false">
+                      Fecha
+                    </button>
+                    <div class="dropdown-menu p-3" style="min-width: 220px;">
+                      <label class="form-label small text-muted mb-1">Desde</label>
+                      <input type="date" class="form-control form-control-sm mb-2"
+                            [(ngModel)]="filterDateFrom" (ngModelChange)="onFilterChange()">
+                      <label class="form-label small text-muted mb-1">Hasta</label>
+                      <input type="date" class="form-control form-control-sm"
+                            [(ngModel)]="filterDateTo" (ngModelChange)="onFilterChange()">
+                    </div>
+                  </div>
+                </th>
+
+                <th class="p-0">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-secondary text-center fw-bold text-decoration-none w-100 text-start px-3 py-2 dropdown-toggle"
+                            [class.text-primary]="filterCategory"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="true"
+                            aria-expanded="false">
+                      Categoría
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterCategory === ''"
+                          (click)="filterCategory = ''; onFilterChange()">
+                          Todas @if (filterCategory === '') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                        @for (cat of availableCategories; track cat) {
+                          <li>
+                            <a class="dropdown-item d-flex justify-content-between align-items-center"
+                              [class.selected]="filterCategory === cat"
+                              (click)="filterCategory = cat; onFilterChange()">
+                              {{ cat }} @if (filterCategory === '') { <i class="bi bi-check"></i> }
+                            </a>
+                          </li>
+                        }
+                    </ul>
+                  </div>
+                </th>
+
+                <th class="p-0">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-secondary text-center fw-bold text-decoration-none w-100 text-start px-3 py-2 dropdown-toggle"
+                            [class.text-primary]="filterType"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="true"
+                            aria-expanded="false">
+                      Tipo
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterType === ''"
+                          (click)="filterType = ''; onFilterChange()">
+                          Todos @if (filterType === '') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterType === 'gratis'"
+                          (click)="filterType = 'gratis'; onFilterChange()">
+                          Gratis @if (filterType === 'gratis') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterType === 'depago'"
+                          (click)="filterType = 'depago'; onFilterChange()">
+                          De pago @if (filterType === 'depago') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </th>
+
+                <th class="p-0">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-secondary text-center fw-bold text-decoration-none w-100 text-start px-3 py-2 dropdown-toggle"
+                            [class.text-primary]="filterStatus"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="true"
+                            aria-expanded="false">
+                      Estado
+                    </button>
+                <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterStatus === ''"
+                          (click)="filterStatus = ''; onFilterChange()">
+                          Todos @if (filterStatus === '') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterStatus === 'PENDING'"
+                          (click)="filterStatus = 'PENDING'; onFilterChange()">
+                          Pendiente @if (filterStatus === 'PENDING') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterStatus === 'APPROVED'"
+                          (click)="filterStatus = 'APPROVED'; onFilterChange()">
+                          Aprobado @if (filterStatus === 'APPROVED') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterStatus === 'REJECTED'"
+                          (click)="filterStatus = 'REJECTED'; onFilterChange()">
+                          Rechazado @if (filterStatus === 'REJECTED') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterStatus === 'CANCELLED'"
+                          (click)="filterStatus = 'CANCELLED'; onFilterChange()">
+                          Cancelado @if (filterStatus === 'CANCELLED') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </th>
+
                 <th>Acciones</th>
-                <!-- <th class="text-center" style="width: 15%;">Precio [Bs.]</th> -->
               </tr>
             </thead>
             <tbody  class="text-muted small">
-              @for (event of events; track event.id) {
+              @for (event of pagedEvents; track event.id) {
                 <tr>
                   <td class="fw-semibold">{{ event.title }}</td>
                   <td class="text-nowrap text-center">{{ event.dateStart | date:'d/M/yyyy' }}</td>
-                  <td>{{ event.category?.name }}</td>
+                  <td>{{ event.category.name }}</td>
                   <td class="text-center">
                     <span class="badge rounded-pill"
                       [class.bg-warning]="event.cost === 0"
@@ -141,6 +283,33 @@
     </div>
   </div>
 </div>
+
+<div class="d-flex justify-content-between align-items-center mt-3">
+  <small class="text-muted">
+    Mostrando {{ filteredEvents.length === 0 ? 0 : (currentPage - 1) * pageSize + 1 }}
+    – {{ min(currentPage * pageSize, filteredEvents.length) }}
+    de {{ filteredEvents.length }} eventos
+  </small>
+  <nav>
+    <ul class="pagination pagination-sm mb-0">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="goToPage(currentPage - 1)">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+      </li>
+      @for (page of totalPagesArray; track page) {
+        <li class="page-item" [class.active]="page === currentPage">
+          <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+        </li>
+      }
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <button class="page-link" (click)="goToPage(currentPage + 1)">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>  
 
 @if (pendingCancelId !== null) {
   <app-confirm-modal
