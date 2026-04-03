@@ -22,5 +22,12 @@
     "GOOGLE_BUTTON": "Continuar con Google",
     "MODAL_TITLE": "Iniciar Sesión",
     "MODAL_WELCOME": "Bienvenido a Cocha Vive"
+  },
+  "CATEGORIES": {
+    "TITLE": "Categorías",
+    "SUBTITLE": "Explora eventos culturales según tus intereses",
+    "LOADING": "Cargando categorías...",
+    "ERROR": "Hubo un error al cargar las categorías.",
+    "EMPTY": "No se encontraron categorías disponibles."
   }
 }
