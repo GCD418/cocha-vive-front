@@ -11,5 +11,9 @@
       "EN": "EN (English)",
       "PT": "PT (Português)"
     }
+  },
+"HERO": {
+    "WELCOME": "Bienvenido a",
+    "SUBTITLE": "Descubre los mejores eventos de Cochabamba"
   }
 }
