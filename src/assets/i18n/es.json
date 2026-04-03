@@ -19,6 +19,8 @@
   "AUTH": {
     "LOGIN_TITLE": "Sistema CochaVive",
     "LOGIN_SUBTITLE": "Inicia sesión con tu cuenta de Google",
-    "GOOGLE_BUTTON": "Continuar con Google"
+    "GOOGLE_BUTTON": "Continuar con Google",
+    "MODAL_TITLE": "Iniciar Sesión",
+    "MODAL_WELCOME": "Bienvenido a Cocha Vive"
   }
 }
