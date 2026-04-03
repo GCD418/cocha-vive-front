@@ -29,5 +29,8 @@
     "LOADING": "Cargando categorías...",
     "ERROR": "Hubo un error al cargar las categorías.",
     "EMPTY": "No se encontraron categorías disponibles."
+  },
+  "EVENT_CARD": {
+    "TBA_LOCATION": "Lugar por confirmar"
   }
 }
