@@ -15,5 +15,10 @@
 "HERO": {
     "WELCOME": "Bienvenido a",
     "SUBTITLE": "Descubre los mejores eventos de Cochabamba"
+  },
+  "AUTH": {
+    "LOGIN_TITLE": "Sistema CochaVive",
+    "LOGIN_SUBTITLE": "Inicia sesión con tu cuenta de Google",
+    "GOOGLE_BUTTON": "Continuar con Google"
   }
 }
