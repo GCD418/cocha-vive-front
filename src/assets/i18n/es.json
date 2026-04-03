@@ -1,3 +1,15 @@
 {
-    
+"NAV": {
+    "START": "Inicio",
+    "EXPLORE": "Explorar",
+    "MY_EVENTS": "Mis Eventos",
+    "PUBLISH_EVENT": "Publicar Evento",
+    "LOGIN": "Iniciar Sesión",
+    "LOGOUT": "Cerrar sesión",
+    "LANGUAGES": {
+      "ES": "ES (Español)",
+      "EN": "EN (English)",
+      "PT": "PT (Português)"
+    }
+  }
 }

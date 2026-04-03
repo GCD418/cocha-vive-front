@@ -8,13 +8,13 @@
     <nav id="navmenu" class="navmenu">
         <ul>
             <li>
-                <a routerLink="/" fragment="hero" (click)="closeMobileMenu()">Inicio</a>
+                <a routerLink="/" fragment="hero" (click)="closeMobileMenu()">{{ 'NAV.START' | translate }}</a>
             </li>
             <li>
-            <a routerLink="explore-events" routerLinkActive="active" (click)="closeMobileMenu()">Explorar</a>
+            <a routerLink="explore-events" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'NAV.EXPLORE' | translate }}</a>
             </li>
             <li>        
-            <a routerLink="/events" routerLinkActive="active" (click)="closeMobileMenu()">Mis Eventos</a>
+            <a routerLink="/events" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'NAV.MY_EVENTS' | translate }}</a>
             </li>
         </ul>
 
@@ -26,9 +26,28 @@
     </nav>
 
     <div class="d-flex align-items-center ms-auto gap-3">
-      
-      <a class="cta-btn d-none d-sm-block" [routerLink]="['/events/create']">Publicar Evento</a>
+      <div class="dropdown">
+        <button 
+          class="cta-btn border-0 d-flex align-items-center gap-2 dropdown-toggle" 
+          type="button"
+          (click)="toggleLangDropdown($event)">
+          <i class="bi bi-globe"></i>
+          <span>{{ currentLangLabel }}</span>
+        </button>
 
+        <ul class="dropdown-menu dropdown-menu-end shadow" [class.show]="langDropdownOpen" style="min-width: 100px; margin-top: 10px;">
+            <li>
+              <button class="dropdown-item" (click)="changeLanguage('es')">{{ 'NAV.LANGUAGES.ES' | translate }}</button>
+            </li>
+            <li>
+              <button class="dropdown-item" (click)="changeLanguage('en')">{{ 'NAV.LANGUAGES.EN' | translate }}</button>
+            </li>
+            <li>
+              <button class="dropdown-item" (click)="changeLanguage('pt')">{{ 'NAV.LANGUAGES.PT' | translate }}</button>
+            </li>
+        </ul>
+      </div>
+      <a class="cta-btn d-none d-sm-block" [routerLink]="['/events/create']">{{ 'NAV.PUBLISH_EVENT' | translate }}</a>
       @if (currentUser) {
         <div class="dropdown">
           <button
@@ -68,14 +87,14 @@
             <li>
               <button class="dropdown-item text-danger d-flex align-items-center gap-2" type="button" (click)="logout()">
                 <i class="bi bi-box-arrow-right"></i>
-                Cerrar sesión
+                {{ 'NAV.LOGOUT' | translate }}
               </button>
             </li>
           </ul>
         </div>
       } @else {
         <button class="cta-btn border-0" (click)="openLoginModal()">
-          Iniciar Sesión
+          {{ 'NAV.LOGIN' | translate }}
         </button>
       }
 
