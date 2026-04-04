@@ -1,5 +1,5 @@
 {
-"NAV": {
+  "NAV": {
     "START": "Inicio",
     "EXPLORE": "Explorar",
     "MY_EVENTS": "Mis Eventos",
@@ -12,7 +12,7 @@
       "PT": "PT (Português)"
     }
   },
-"HERO": {
+  "HERO": {
     "WELCOME": "Bienvenido a",
     "SUBTITLE": "Descubre los mejores eventos de Cochabamba"
   },
@@ -96,5 +96,10 @@
     "LOADING": "Cargando próximos eventos...",
     "ERROR": "Hubo un error al cargar los eventos.",
     "EMPTY": "No hay eventos programados."
+  },
+  "EVENTS_LIST": {
+    "TITLE": "Próximos Eventos",
+    "SUBTITLE": "Descubre lo que está pasando en la ciudad"
   }
+
 }
