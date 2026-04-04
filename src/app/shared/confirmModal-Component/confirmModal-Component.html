@@ -11,11 +11,11 @@
 
     <div class="modal-actions">
       <button class="btn-cancel-action" (click)="onCancel()">
-        <i class="bi bi-x-circle me-1"></i> Cancelar
+        <i class="bi bi-x-circle me-1"></i> {{ 'CONFIRM_MODAL.CANCEL' | translate }}
       </button>
       <button class="btn-confirm-action" (click)="onConfirm()" [disabled]="loading">
         <i class="bi bi-check-circle me-1"></i>
-        {{ loading ? 'Procesando...' : confirmText }}
+        {{ loading ? ('CONFIRM_MODAL.PROCESSING' | translate) : confirmText }}
       </button>
     </div>
 

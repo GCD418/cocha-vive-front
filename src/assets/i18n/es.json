@@ -237,5 +237,9 @@
       "EXTENSION_HINT": "Solo si tu carnet tiene un código adicional al número.",
       "SUBMIT_BUTTON": "Guardar y Continuar"
     }
+  },
+  "CONFIRM_MODAL": {
+    "CANCEL": "Cancelar",
+    "PROCESSING": "Procesando..."
   }
 }
