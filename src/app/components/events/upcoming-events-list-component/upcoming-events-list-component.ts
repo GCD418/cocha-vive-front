@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { EventModel } from '../../../models/event-model';
 import { EventService } from '../../../services/event-service/event.service';
 import { EventCardComponent } from "../event-card-component/event-card-component";
 import { TranslateModule } from '@ngx-translate/core';
+import { FeatureToggleService } from '../../../services/feature-toggle/feature-toggle.service';
 
 @Component({
   selector: 'app-upcoming-events-list-component',
@@ -12,6 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class UpcomingEventsListComponent implements OnInit {
   events: EventModel[] = [];
+  public featureService = inject(FeatureToggleService);
 
   constructor(private eventService: EventService) { }
 

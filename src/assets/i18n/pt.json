@@ -99,7 +99,8 @@
   },
   "UPCOMING_EVENTS": {
     "TITLE": "Próximos Eventos",
-    "SUBTITLE": "Descubra o que está acontecendo na cidade"
+    "SUBTITLE": "Descubra o que está acontecendo na cidade",
+    "FEATURE_DISABLED": "Esta função está atualmente desabilitada."
   },
   "CATEGORY_EVENTS": {
     "EVENTS_FOUND": "EVENTOS ENCONTRADOS"
