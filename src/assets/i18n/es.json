@@ -90,5 +90,11 @@
       "PEOPLE_CAPACITY": "Ej: 200",
       "TAG_INPUT": "Escribe una etiqueta y presiona Enter"
     }
+  },
+  "UPCOMING_EVENTS": {
+    "TITLE": "Eventos Destacados",
+    "LOADING": "Cargando próximos eventos...",
+    "ERROR": "Hubo un error al cargar los eventos.",
+    "EMPTY": "No hay eventos programados."
   }
 }
