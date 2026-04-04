@@ -1,20 +1,20 @@
 <section id="upcoming-events" class="speakers section py-5">
 
   <div class="container section-title">
-    <h2>{{ 'UPCOMING_EVENTS.TITLE' | translate }}<br></h2>
+    <h2>{{ 'FEATURED_EVENTS.TITLE' | translate }}<br></h2>
   </div>
 
   <div class="container">
     
     @if (loading) {
       <div class="text-center">
-        <p>⏳ {{ 'UPCOMING_EVENTS.LOADING' | translate }}</p>
+        <p>⏳ {{ 'FEATURED_EVENTS.LOADING' | translate }}</p>
       </div>
     }
 
     @if (errorLoading) {
       <div class="text-center text-danger">
-        <p>❌ {{ 'UPCOMING_EVENTS.ERROR' | translate }}</p>
+        <p>❌ {{ 'FEATURED_EVENTS.ERROR' | translate }}</p>
       </div>
     }
     
@@ -56,7 +56,7 @@
           </div>
         } @empty {
           <div class="text-center text-warning fw-bold">
-            <p>⚠️ {{ 'UPCOMING_EVENTS.EMPTY' | translate }}</p>
+            <p>⚠️ {{ 'FEATURED_EVENTS.EMPTY' | translate }}</p>
           </div>
         }
 

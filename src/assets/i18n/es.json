@@ -91,13 +91,13 @@
       "TAG_INPUT": "Escribe una etiqueta y presiona Enter"
     }
   },
-  "UPCOMING_EVENTS": {
+  "FEATURED_EVENTS": {
     "TITLE": "Eventos Destacados",
     "LOADING": "Cargando próximos eventos...",
     "ERROR": "Hubo un error al cargar los eventos.",
     "EMPTY": "No hay eventos programados."
   },
-  "EVENTS_LIST": {
+  "UPCOMING_EVENTS": {
     "TITLE": "Próximos Eventos",
     "SUBTITLE": "Descubre lo que está pasando en la ciudad"
   },
