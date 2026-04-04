@@ -213,5 +213,29 @@
       "HOME": "Ir al inicio",
       "EVENTS": "Ver eventos"
     }
+  },
+  "ONBOARDING": {
+    "SUCCESS": {
+      "TITLE": "¡Perfil Actualizado!",
+      "MESSAGE": "Tus datos se han guardado correctamente.",
+      "BUTTON": "Ir al Inicio"
+    },
+    "ERROR": {
+      "TITLE": "¡Uy, algo salió mal!",
+      "MESSAGE": "Hubo un problema al guardar tus datos. Por favor, verifica tu conexión o intenta nuevamente.",
+      "BUTTON": "Volver a intentar"
+    },
+    "FORM": {
+      "TITLE": "Completa tu perfil",
+      "SUBTITLE": "Ingresa tus datos de identidad para continuar.",
+      "DOCUMENT_LABEL": "Carnet de Identidad (CI)",
+      "DOCUMENT_PLACEHOLDER": "Ej: 8347210",
+      "DOCUMENT_ERROR": "Solo se permiten números.",
+      "EXTENSION_LABEL": "Complemento (Opcional)",
+      "EXTENSION_PLACEHOLDER": "Ej: 1H, 1A...",
+      "EXTENSION_ERROR": "Debe ser un número y una letra en mayúscula (Ej: 1H).",
+      "EXTENSION_HINT": "Solo si tu carnet tiene un código adicional al número.",
+      "SUBMIT_BUTTON": "Guardar y Continuar"
+    }
   }
 }
