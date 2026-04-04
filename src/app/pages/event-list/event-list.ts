@@ -7,7 +7,7 @@ import { AuthService, CurrentUser } from '../../services/auth/auth.service';
 import { PricePipe } from '../../shared/pipes/price.pipe';
 import { EventFormResult, EventFormComponent } from '../../components/events/event-form-component/event-form-component';
 import { ConfirmModalComponent } from '../../shared/confirmModal-Component/confirmModal-component';
-
+import { TranslateModule } from '@ngx-translate/core';
 declare const bootstrap: any;
 
 @Component({
@@ -20,7 +20,8 @@ declare const bootstrap: any;
     EventFormComponent, 
     ConfirmModalComponent,
     NgClass,
-    DatePipe
+    DatePipe,
+    TranslateModule
   ],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css',

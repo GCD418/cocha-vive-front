@@ -127,5 +127,40 @@
     "LOCATION_SOON": "Ubicación disponible próximamente",
     "SHARE": "Compartir Evento",
     "LOADING": "Cargando..."
+  },
+  "EVENT_LIST": {
+    "TITLE": "Mis Eventos",
+    "TOAST_SUCCESS": "¡Evento actualizado exitosamente!",
+    "STATS": {
+      "TOTAL": "Total de eventos",
+      "APPROVED": "Aprobados",
+      "PENDING": "Pendientes"
+    },
+    "TABLE": {
+      "HEADERS": {
+        "TITLE": "Título",
+        "DATE": "Fecha",
+        "CATEGORY": "Categoría",
+        "TYPE": "Tipo",
+        "STATUS": "Estado",
+        "ACTIONS": "Acciones"
+      },
+      "TYPE_FREE": "Gratis",
+      "TYPE_PAID": "De pago",
+      "ACTIONS": {
+        "VIEW": "Ver detalles",
+        "EDIT": "Editar",
+        "CANCEL": "Cancelar evento"
+      },
+      "EMPTY_STATE": "No hay eventos registrados actualmente."
+    },
+    "MODAL_EDIT": {
+      "TITLE": "Editar Evento"
+    },
+    "MODAL_CANCEL": {
+      "TITLE": "¿Cancelar evento?",
+      "MESSAGE": "El evento será cancelado y dejará de ser visible. ¿Estás seguro?",
+      "CONFIRM": "Sí, cancelar"
+    }
   }
 }
