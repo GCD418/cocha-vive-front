@@ -6,11 +6,12 @@ import { CategoryService } from '../../services/category-services/category.servi
 import { EventModel } from '../../models/event-model';
 import { Category } from '../../models/category.model';
 import { EventCardComponent } from '../../components/events/event-card-component/event-card-component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-explore-event',
   standalone: true,
-  imports: [CommonModule, FormsModule, EventCardComponent],
+  imports: [CommonModule, FormsModule, EventCardComponent, TranslateModule],
   templateUrl: './explore-event.html',
   styleUrl: './explore-event.css',
 })

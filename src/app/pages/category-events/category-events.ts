@@ -5,11 +5,12 @@ import { CategoryService } from '../../services/category-services/category.servi
 import { EventService } from '../../services/event-service/event.service';
 import { EventModel } from '../../models/event-model'; 
 import { EventCardComponent } from '../../components/events/event-card-component/event-card-component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-category-events',
   standalone: true,
-  imports: [CommonModule, EventCardComponent], 
+  imports: [CommonModule, EventCardComponent, TranslateModule], 
   templateUrl: './category-events.html',
   styleUrl: './category-events.css'
 })

@@ -1,12 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-declare const bootstrap: any;
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-confirm-modal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './confirmModal-Component.html',
   styleUrl: './confirmModal-Component.css'
 })

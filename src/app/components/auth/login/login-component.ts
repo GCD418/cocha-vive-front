@@ -2,10 +2,11 @@ import { GoogleSigninButtonModule, SocialAuthService } from '@abacritt/angularx-
 import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
-  imports: [GoogleSigninButtonModule],
+  imports: [GoogleSigninButtonModule, TranslateModule],
   templateUrl: './login-component.html',
   styleUrl: './login-component.css',
 })

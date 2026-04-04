@@ -1,9 +1,9 @@
 <div class="page-title" style="background-image: url('/assets/img/hero-bg.jpg');">
   <div class="container position-relative">
-    <h1>Acceso Denegado</h1>
+    <h1>{{ 'FORBIDDEN.PAGE_TITLE' | translate }}</h1>
     <nav class="breadcrumbs">
       <ol>
-        <li><a routerLink="/home">Inicio</a></li>
+        <li><a routerLink="/home">{{ 'FORBIDDEN.BREADCRUMB_HOME' | translate }}</a></li>
         <li class="current">403</li>
       </ol>
     </nav>
@@ -13,8 +13,8 @@
 <section class="section light-background">
   <div class="container">
     <div class="section-title">
-      <h2>Error 403</h2>
-      <p>No cuentas con permisos para acceder a esta página.</p>
+      <h2>{{ 'FORBIDDEN.SECTION_TITLE' | translate }}</h2>
+      <p>{{ 'FORBIDDEN.SECTION_SUBTITLE' | translate }}</p>
     </div>
 
     <div class="row justify-content-center">
@@ -22,18 +22,18 @@
         <div class="card border-0 shadow-sm">
           <div class="card-body p-4 p-md-5 text-center">
             <p class="mb-0">
-              Si crees que esto es un error, contacta al administrador del sistema.
+              {{ 'FORBIDDEN.MESSAGE' | translate }}
             </p>
 
             @if (attemptedUrl) {
               <div class="alert alert-light mt-4 mb-0 text-start" role="alert">
-                <strong>Ruta solicitada:</strong> {{ attemptedUrl }}
+                <strong>{{ 'FORBIDDEN.ATTEMPTED_URL' | translate }}</strong> {{ attemptedUrl }}
               </div>
             }
 
             <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
-              <a class="btn btn-primary" routerLink="/home">Ir al inicio</a>
-              <a class="btn btn-outline-primary" routerLink="/events">Ver eventos</a>
+              <a class="btn btn-primary" routerLink="/home">{{ 'FORBIDDEN.ACTIONS.HOME' | translate }}</a>
+              <a class="btn btn-outline-primary" routerLink="/events">{{ 'FORBIDDEN.ACTIONS.EVENTS' | translate }}</a>
             </div>
           </div>
         </div>

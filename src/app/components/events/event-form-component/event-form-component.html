@@ -5,7 +5,7 @@
                 <div class="d-flex">
                     <div class="toast-body d-flex align-items-center gap-2">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>{{ isEditMode ? '¡Evento actualizado exitosamente!' : '¡Evento creado exitosamente!' }}</span>
+                        <span>{{ isEditMode ? ('EVENT_FORM.MESSAGES.SUCCESS_UPDATE' | translate) : ('EVENT_FORM.MESSAGES.SUCCESS_CREATE' | translate) }}</span>
                     </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@
                 <div class="d-flex">
                     <div class="toast-body d-flex align-items-center gap-2">
                         <i class="bi bi-exclamation-circle-fill"></i>
-                        <span>Por favor completa todos los campos obligatorios.</span>
+                        <span>{{ 'EVENT_FORM.MESSAGES.ERROR_REQUIRED' | translate }}</span>
                     </div>
                 </div>
             </div>
@@ -29,20 +29,20 @@
         <div class="card-body p-4">
             <h5 class="fw-bold mb-4">
                 <i class="bi bi-info-circle me-2" style="color: var(--accent-color);"></i>
-                Información General del Evento
+                {{ 'EVENT_FORM.SECTIONS.GENERAL' | translate }}
             </h5>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Nombre del evento <span class="text-danger">*</span></label>
+                <label class="form-label fw-semibold">{{ 'EVENT_FORM.LABELS.TITLE' | translate }} <span class="text-danger">*</span></label>
                 <input type="text" class="form-control"
-                        placeholder="Ej: Festival de Danza Contemporánea"
+                        [placeholder]="'EVENT_FORM.PLACEHOLDERS.TITLE' | translate"
                         [(ngModel)]="form.title" name="title">
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Categoría <span class="text-danger">*</span></label>
+                <label class="form-label fw-semibold">{{ 'EVENT_FORM.LABELS.CATEGORY' | translate }} <span class="text-danger">*</span></label>
                 <select class="form-select" [(ngModel)]="form.categoryId" name="categoryId">
-                    <option [ngValue]="null" disabled>Selecciona una categoría</option>
+                    <option [ngValue]="null" disabled>{{ 'EVENT_FORM.LABELS.SELECT_CAT' | translate }}</option>
                     @for (cat of categories; track cat.id) {
                         <option [ngValue]="cat.id">{{ cat.name }}</option>
                     }
@@ -50,17 +50,17 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Descripción corta <span class="text-danger">*</span></label>
+                <label class="form-label fw-semibold">{{ 'EVENT_FORM.LABELS.SHORT_DESC' | translate }} <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" maxlength="120"
-                        placeholder="Resumen breve del evento (máx. 120 caracteres)"
+                        [placeholder]="'EVENT_FORM.PLACEHOLDERS.SHORT_DESC' | translate"
                         [(ngModel)]="form.shortDescription" name="shortDescription">
                 <div class="form-text text-end">{{ form.shortDescription.length }}/120</div>
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Descripción detallada <span class="text-danger">*</span></label>
+                <label class="form-label fw-semibold">{{ 'EVENT_FORM.LABELS.LONG_DESC' | translate }} <span class="text-danger">*</span></label>
                 <textarea class="form-control" rows="5"
-                            placeholder="Describe el evento, artistas participantes, programación, etc."
+                            [placeholder]="'EVENT_FORM.PLACEHOLDERS.LONG_DESC' | translate"
                             [(ngModel)]="form.description" name="description"></textarea>
             </div>
         </div>
@@ -70,30 +70,30 @@
         <div class="card-body p-4">
             <h5 class="fw-bold mb-4">
                 <i class="bi bi-calendar-event me-2" style="color: var(--accent-color);"></i>
-                Fecha y Horario
+                {{ 'EVENT_FORM.SECTIONS.DATE_TIME' | translate }}
             </h5>
 
             <div class="row g-3">
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Fecha de inicio <span class="text-danger">*</span></label>
+                    <label class="form-label fw-semibold">{{ 'EVENT_FORM.LABELS.START_DATE' | translate }} <span class="text-danger">*</span></label>
                     <input type="date" class="form-control"
                             [(ngModel)]="form.startDate" name="startDate">
                 </div>
                 <div class="col-md-6">
                     <label class="form-label fw-semibold">
-                        Fecha de finalización
+                        {{ 'EVENT_FORM.LABELS.END_DATE' | translate }}
                         <span class="text-muted fw-normal" style="font-size: 13px;">(opcional)</span>
                     </label>
                     <input type="date" class="form-control"
                             [(ngModel)]="form.endDate" name="endDate">
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label fw-semibold">Hora de inicio <span class="text-danger">*</span></label>
+                    <label class="form-label fw-semibold">{{ 'EVENT_FORM.LABELS.START_TIME' | translate }} <span class="text-danger">*</span></label>
                     <input type="time" class="form-control"
                             [(ngModel)]="form.startTime" name="startTime">
                 </div>
                     <div class="col-md-6">
-                    <label class="form-label fw-semibold">Hora de finalización</label>
+                    <label class="form-label fw-semibold">{{ 'EVENT_FORM.LABELS.END_TIME' | translate }}</label>
                     <input type="time" class="form-control"
                             [(ngModel)]="form.endTime" name="endTime">
                 </div>
@@ -105,50 +105,50 @@
         <div class="card-body p-4">
             <h5 class="fw-bold mb-4">
                 <i class="bi bi-ticket-perforated me-2" style="color: var(--accent-color);"></i>
-                Detalles del Evento
+                {{ 'EVENT_FORM.SECTIONS.DETAILS' | translate }}
             </h5>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Tipo de evento <span class="text-danger">*</span></label>
+                <label class="form-label fw-semibold">{{ 'EVENT_FORM.LABELS.COST_TYPE' | translate }} <span class="text-danger">*</span></label>
                 <div class="d-flex gap-4">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="costType"
                             id="gratuito" value="gratuito" [(ngModel)]="form.costType">
-                        <label class="form-check-label" for="gratuito">Gratuito</label>
+                        <label class="form-check-label" for="gratuito">{{ 'EVENT_FORM.LABELS.FREE' | translate }}</label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="costType"
                             id="depago" value="depago" [(ngModel)]="form.costType">
-                        <label class="form-check-label" for="depago">De pago</label>
+                        <label class="form-check-label" for="depago">{{ 'EVENT_FORM.LABELS.PAID' | translate }}</label>
                     </div>
                 </div>
             </div>
 
             @if (form.costType === 'depago') {
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Costo (Bs.) <span class="text-danger">*</span></label>
+                    <label class="form-label fw-semibold">{{ 'EVENT_FORM.LABELS.COST' | translate }} <span class="text-danger">*</span></label>
                     <input type="number" class="form-control" min="1"
-                            placeholder="Ej: 50"
+                            [placeholder]="'EVENT_FORM.PLACEHOLDERS.COST' | translate"
                             [(ngModel)]="form.cost" name="cost"
                             [class.is-invalid]="errorMessage && form.cost <= 0">
-                    <div class="invalid-feedback">Debe ser mayor a 0.</div>
+                    <div class="invalid-feedback">{{ 'EVENT_FORM.LABELS.COST_ERROR' | translate }}</div>
                 </div>
             }
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Descripción del lugar</label>
+                <label class="form-label fw-semibold">{{ 'EVENT_FORM.LABELS.PLACE_DESC' | translate }}</label>
                 <input type="text" class="form-control"
-                    placeholder="Ej: Teatro Achá, sala principal"
+                    [placeholder]="'EVENT_FORM.PLACEHOLDERS.PLACE' | translate"
                     [(ngModel)]="form.shortPlaceDescription" name="shortPlaceDescription">
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">
-                Capacidad de personas
-                <span class="text-muted fw-normal" style="font-size: 13px;">(opcional)</span>
+                <label class="form-label fw-semibold" >
+                    {{ 'EVENT_FORM.LABELS.PEOPLE_CAPACITY' | translate }}
+                <span class="text-muted fw-normal" style="font-size: 13px;">{{ 'EVENT_FORM.LABELS.OPTIONAL' | translate }}</span>
                 </label>
-                <input type="number" class="form-control" min="1"
-                    placeholder="Ej: 200"
+                <input type="number" class="form-control" min="1" 
+                    [placeholder]="'EVENT_FORM.PLACEHOLDERS.PEOPLE_CAPACITY' | translate"
                     [(ngModel)]="form.peopleCapacity" name="peopleCapacity">
             </div>
         </div>
@@ -160,15 +160,15 @@
                 <i class="bi bi-tags me-2" style="color: var(--accent-color);"></i>
                 Etiquetas
             </h5>
-            <p class="form-text mb-3">Agrega palabras clave para ayudar a clasificar tu evento (máx. 10).</p>
+            <p class="form-text mb-3">{{ 'EVENT_FORM.LABELS.TAGS_DESCRIPTION' | translate }}</p>
 
             <div class="input-group mb-3">
                 <input type="text" class="form-control"
-                    placeholder="Escribe una etiqueta y presiona Enter"
+                    [placeholder]="'EVENT_FORM.PLACEHOLDERS.TAG_INPUT' | translate"
                     [(ngModel)]="form.tagInput" name="tagInput"
                     (keydown)="onTagKeydown($event)">
                 <button class="btn btn-warning btn-outline-secondary btn-sm" type="button" (click)="addTag()">
-                    <i class="bi bi-plus-circle me-1"></i> Agregar
+                    <i class="bi bi-plus-circle me-1"></i> {{ 'EVENT_FORM.LABELS.ADD_TAG' | translate }}
                 </button>
             </div>
 
@@ -188,14 +188,14 @@
         <div class="card-body p-4">
             <h5 class="fw-bold mb-2">
             <i class="bi bi-images me-2" style="color: var(--accent-color);"></i>
-            Fotos del Evento
+            {{ 'EVENT_FORM.SECTIONS.PHOTOS' | translate }}
             </h5>
 
             @if (isEditMode) {
             @if (existingPhotos.length > 0) {
                 <p class="form-text mt-2 mb-2">
-                Arrastra para reordenar · La primera es la portada ·
-                <span style="color: var(--accent-color);">✕ para eliminar</span>
+                {{ 'EVENT_FORM.LABELS.DRAG_REORDER' | translate }} · {{ 'EVENT_FORM.LABELS.FIRST_COVER' | translate }} ·
+                <span style="color: var(--accent-color);">✕ {{ 'EVENT_FORM.LABELS.REMOVE_PHOTO' | translate }}</span>
                 </p>
                 <div class="d-flex flex-wrap gap-2 mb-3">
                 @for (photo of existingPhotos; track photo; let i = $index) {
@@ -207,12 +207,12 @@
                         (dragover)="onDragOver($event, i)"
                         (drop)="onDrop($event, i)"
                         (dragend)="onDragEnd()">
-                    <img [src]="photo" alt="Foto existente">
+                    <img [src]="photo" [alt]="'EVENT_FORM.LABELS.EVENT_PHOTO' | translate">
                     @if (i === 0) {
-                        <span class="cover-badge">Portada</span>
+                        <span class="cover-badge">{{ 'EVENT_FORM.LABELS.COVER_PHOTO' | translate }}</span>
                     }
                     <button class="remove-btn" type="button"
-                            (click)="removeExistingPhoto(i)" title="Eliminar foto">
+                            (click)="removeExistingPhoto(i)" [title]="'EVENT_FORM.LABELS.REMOVE_PHOTO' | translate">
                         <i class="bi bi-x"></i>
                     </button>
                     </div>
@@ -221,24 +221,24 @@
             } @else {
                 <p class="form-text text-warning mb-2">
                 <i class="bi bi-exclamation-triangle me-1"></i>
-                Este evento no tiene fotos aún.
+                {{ 'EVENT_FORM.LABELS.NO_PHOTOS' | translate }}
                 </p>
             }
             } @else {
-            <p class="form-text mt-2 mb-2">La primera foto será la portada.</p>
+            <p class="form-text mt-2 mb-2">{{ 'EVENT_FORM.LABELS.FIRST_COVER' | translate }}</p>
             }
 
             @if (newFiles.length > 0) {
-            <p class="form-text mb-2">{{ isEditMode ? 'Nuevas fotos a subir:' : 'Vista previa:' }}</p>
+            <p class="form-text mb-2">{{ isEditMode ? ('EVENT_FORM.LABELS.NEW_PHOTOS' | translate) : ('EVENT_FORM.LABELS.PREVIEW_PHOTOS' | translate) }}</p>
             <div class="d-flex flex-wrap gap-2 mb-3">
                 @for (file of newFiles; track file.previewUrl; let i = $index) {
                 <div class="photo-thumb new-thumb">
                     <img [src]="file.previewUrl" [alt]="file.file.name">
                     @if (i === 0 && !isEditMode) {
-                    <span class="cover-badge">Portada</span>
+                    <span class="cover-badge">{{ 'EVENT_FORM.LABELS.COVER_PHOTO' | translate }}</span>
                     }
                     <button class="remove-btn" type="button"
-                            (click)="removeNewFile(i)" title="Quitar">
+                            (click)="removeNewFile(i)" [title]="'EVENT_FORM.LABELS.REMOVE_PHOTO' | translate">
                     <i class="bi bi-x"></i>
                     </button>
                 </div>
@@ -247,21 +247,21 @@
             }
 
             <label class="form-label fw-semibold">
-            {{ isEditMode ? 'Agregar nuevas fotos' : 'Seleccionar fotos' }}
+            {{ isEditMode ? ('EVENT_FORM.LABELS.ADD_NEW_PHOTOS' | translate) : ('EVENT_FORM.LABELS.SELECT_PHOTOS' | translate) }}
             </label>
             <input type="file" class="form-control"
                 (change)="onFilesSelected($event)" accept="image/*" multiple>
             @if (isEditMode) {
-            <div class="form-text">Las nuevas fotos se agregarán después de las existentes.</div>
+            <div class="form-text">{{ 'EVENT_FORM.LABELS.NEW_PHOTOS_INFO' | translate }}</div>
             }
         </div>
     </div>
         
 
     <div class="d-flex justify-content-end gap-3 mt-2">
-        <button class="btn btn-outline-secondary" type="button" (click)="onCancel()">Cancelar</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="onCancel()">{{ 'EVENT_FORM.LABELS.CANCEL' | translate }}</button>
         <button class="btn btn-danger px-4" type="button" (click)="onSubmit()">
-        <i class="bi bi-send me-1"></i>{{ isEditMode ? 'Guardar Cambios' : 'Publicar Evento' }}
+        <i class="bi bi-send me-1"></i>{{ isEditMode ? ('EVENT_FORM.LABELS.SAVE_CHANGES' | translate) : ('EVENT_FORM.LABELS.PUBLISH_EVENT' | translate) }}
         </button>
     </div>
 

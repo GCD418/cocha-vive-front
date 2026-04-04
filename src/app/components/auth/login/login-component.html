@@ -1,10 +1,15 @@
 <div class="flex flex-col items-center justify-center min-h-screen bg-slate-100">
-      <div class="p-8 bg-white rounded-xl shadow-lg text-center max-w-md w-full">
-        <h2 class="text-3xl font-bold mb-2 text-slate-800">CochaVive System</h2>
-        <p class="text-slate-500 mb-8">Inicia sesión con tu cuenta de Google</p>
-        
-        <div class="flex justify-center">
-          <asl-google-signin-button type="standard" size="large"></asl-google-signin-button>
-        </div>
-      </div>
+  <div class="p-8 bg-white rounded-xl shadow-lg text-center max-w-md w-full">
+    <h2 class="text-3xl font-bold mb-2 text-slate-800">
+      {{ 'AUTH.LOGIN_TITLE' | translate }}
+    </h2>
+    
+    <p class="text-slate-500 mb-8">
+      {{ 'AUTH.LOGIN_SUBTITLE' | translate }}
+    </p>
+    
+    <div class="flex justify-center">
+      <asl-google-signin-button type="standard" size="large"></asl-google-signin-button>
     </div>
+  </div>
+</div>

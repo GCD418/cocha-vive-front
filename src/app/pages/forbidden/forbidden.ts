@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-forbidden-page',
-  imports: [RouterLink],
+  imports: [RouterLink, TranslateModule],
   templateUrl: './forbidden.html',
   styleUrl: './forbidden.css',
 })

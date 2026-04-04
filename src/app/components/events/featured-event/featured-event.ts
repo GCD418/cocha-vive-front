@@ -5,11 +5,12 @@ import { EventModel } from '../../../models/event-model';
 import { EventService } from '../../../services/event-service/event.service'; 
 import * as AOS from 'aos';
 import { PricePipe } from '../../../shared/pipes/price.pipe';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-featured-event',
   standalone: true,
-  imports: [RouterLink, DatePipe, SlicePipe, PricePipe],
+  imports: [RouterLink, DatePipe, SlicePipe, PricePipe, TranslateModule],
   templateUrl: './featured-event.html',
   styleUrl: './featured-event.css'
 })

@@ -1,19 +1,19 @@
 <section id="categories" class="schedule section py-5">
   
   <div class="container section-title">
-    <h2>Categorías</h2>
-    <p>Explora eventos culturales según tus intereses</p>
+    <h2>{{ 'CATEGORIES.TITLE' | translate }}</h2>
+    <p>{{ 'CATEGORIES.SUBTITLE' | translate }}</p>
   </div>
 
   @if (loading) {
     <div class="container text-center">
-      <p style="color: black;">⏳ Cargando categorías...</p>
+      <p style="color: black;">⏳ {{ 'CATEGORIES.LOADING' | translate }}</p>
     </div>
   }
 
   @if (errorLoading) {
     <div class="container text-center text-danger">
-      <p>❌ Hubo un error al cargar las categorías.</p>
+      <p>❌ {{ 'CATEGORIES.ERROR' | translate }}</p>
     </div>
   }
 
@@ -47,7 +47,7 @@
           </div>
         } @empty {
           <div class="container text-center text-warning">
-            <p>⚠️ No se encontraron categorías disponibles.</p>
+            <p>⚠️ {{ 'CATEGORIES.EMPTY' | translate }}</p>
           </div>
         }
 

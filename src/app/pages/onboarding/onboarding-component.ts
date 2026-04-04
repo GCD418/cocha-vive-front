@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common'; 
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-onboarding',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, TranslateModule],
   templateUrl: './onboarding-component.html',
   styleUrls: ['./onboarding-component.css']
 })
