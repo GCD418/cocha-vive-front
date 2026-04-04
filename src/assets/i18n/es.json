@@ -201,5 +201,17 @@
       "EMPTY_DESC": "Intenta cambiar o limpiar los filtros.",
       "VIEW_ALL": "Ver todos los eventos"
     }
+  },
+  "FORBIDDEN": {
+    "PAGE_TITLE": "Acceso Denegado",
+    "BREADCRUMB_HOME": "Inicio",
+    "SECTION_TITLE": "Error 403",
+    "SECTION_SUBTITLE": "No cuentas con permisos para acceder a esta página.",
+    "MESSAGE": "Si crees que esto es un error, contacta al administrador del sistema.",
+    "ATTEMPTED_URL": "Ruta solicitada:",
+    "ACTIONS": {
+      "HOME": "Ir al inicio",
+      "EVENTS": "Ver eventos"
+    }
   }
 }
