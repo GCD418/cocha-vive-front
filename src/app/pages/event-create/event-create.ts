@@ -1,11 +1,12 @@
 import { Router } from '@angular/router';
 import { Component} from '@angular/core';
 import { EventFormResult, EventFormComponent } from '../../components/events/event-form-component/event-form-component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-event-create',
   standalone: true,
-  imports: [EventFormComponent],
+  imports: [EventFormComponent, TranslateModule],
   templateUrl: './event-create.html',
   styleUrl: './event-create.css',
 })

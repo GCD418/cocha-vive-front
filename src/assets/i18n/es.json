@@ -103,6 +103,9 @@
   },
   "CATEGORY_EVENTS": {
     "EVENTS_FOUND": "EVENTOS ENCONTRADOS"
+  },
+  "EVENT_CREATE": {
+    "TITLE": "Publicar un Evento",
+    "SUBTITLE": "Completa el formulario y nuestro equipo lo revisará."
   }
-
 }
