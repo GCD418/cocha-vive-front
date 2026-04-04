@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, importProvidersFrom, APP_INITIALIZER, provideAppInitializer, inject } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { SocialAuthServiceConfig, GoogleLoginProvider, SOCIAL_AUTH_CONFIG } from '@abacritt/angularx-social-login';
 import { routes } from './app.routes';
@@ -7,6 +7,7 @@ import { authInterceptor } from './core/interceptors/auth-interceptor';
 import { environment } from '../environments/environment';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader, TRANSLATE_HTTP_LOADER_CONFIG } from '@ngx-translate/http-loader';
+import { FeatureToggleService } from './services/feature-toggle/feature-toggle.service';
 
 export function HttpLoaderFactory() {
   return new TranslateHttpLoader();
@@ -50,6 +51,11 @@ export const appConfig: ApplicationConfig = {
           console.error('Google Auth Init Error:', err);
         }
       } as SocialAuthServiceConfig,
-    }
+    },
+
+    provideAppInitializer(() => {
+      const featureToggleService = inject(FeatureToggleService);
+      return featureToggleService.loadFeatures();
+    })
   ]
 };
