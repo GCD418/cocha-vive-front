@@ -4,6 +4,7 @@ import { EventService } from '../../../services/event-service/event.service';
 import { EventCardComponent } from "../event-card-component/event-card-component";
 import { TranslateModule } from '@ngx-translate/core';
 import { FeatureToggleService } from '../../../services/feature-toggle/feature-toggle.service';
+import { AppFeatures } from '../../../models/app-features';
 
 @Component({
   selector: 'app-upcoming-events-list-component',
@@ -14,6 +15,7 @@ import { FeatureToggleService } from '../../../services/feature-toggle/feature-t
 export class UpcomingEventsListComponent implements OnInit {
   events: EventModel[] = [];
   public featureService = inject(FeatureToggleService);
+  public readonly AppFeatures = AppFeatures;
 
   constructor(private eventService: EventService) { }
 

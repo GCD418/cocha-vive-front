@@ -7,6 +7,7 @@ import * as AOS from 'aos';
 import { PricePipe } from '../../../shared/pipes/price.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { FeatureToggleService } from '../../../services/feature-toggle/feature-toggle.service';
+import { AppFeatures } from '../../../models/app-features';
 
 @Component({
   selector: 'app-featured-event',
@@ -17,6 +18,7 @@ import { FeatureToggleService } from '../../../services/feature-toggle/feature-t
 })
 export class FeaturedEventComponent implements OnInit {
   public featureService = inject(FeatureToggleService);
+  public readonly AppFeatures = AppFeatures;
 
   events: EventModel[] = [];
   loading = true;
