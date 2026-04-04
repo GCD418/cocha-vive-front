@@ -32,5 +32,63 @@
   },
   "EVENT_CARD": {
     "TBA_LOCATION": "Lugar por confirmar"
+  },
+  "EVENT_FORM": {
+    "MESSAGES": {
+      "SUCCESS_CREATE": "¡Evento creado exitosamente!",
+      "SUCCESS_UPDATE": "¡Evento actualizado exitosamente!",
+      "ERROR_REQUIRED": "Por favor completa todos los campos obligatorios."
+    },
+    "SECTIONS": {
+      "GENERAL": "Información General del Evento",
+      "DATE_TIME": "Fecha y Horario",
+      "DETAILS": "Detalles del Evento",
+      "TAGS": "Etiquetas",
+      "PHOTOS": "Fotos del Evento"
+    },
+    "LABELS": {
+      "TITLE": "Nombre del evento",
+      "CATEGORY": "Categoría",
+      "SELECT_CAT": "Selecciona una categoría",
+      "SHORT_DESC": "Descripción corta",
+      "LONG_DESC": "Descripción detallada",
+      "START_DATE": "Fecha de inicio",
+      "END_DATE": "Fecha de finalización",
+      "OPTIONAL": "(opcional)",
+      "START_TIME": "Hora de inicio",
+      "END_TIME": "Hora de finalización",
+      "COST_TYPE": "Tipo de evento",
+      "FREE": "Gratuito",
+      "PAID": "De pago",
+      "COST": "Costo (Bs.)",
+      "COST_ERROR": "Debe ser mayor a 0.",
+      "PLACE_DESC": "Descripción del lugar",
+      "PEOPLE_CAPACITY": "Capacidad de personas",
+      "TAGS_DESCRIPTION": "Agrega palabras clave para ayudar a clasificar tu evento (máx. 10).",
+      "ADD_TAG": "Agregar",
+      "COVER_PHOTO": "Portada",
+      "EVENT_PHOTO": "Foto del evento",
+      "NO_PHOTOS": "Este evento no tiene fotos aún.",
+      "DRAG_REORDER": "Arrastra para reordenar",
+      "FIRST_COVER": "La primera es la portada",
+      "REMOVE_PHOTO": "Eliminar foto",
+      "NEW_PHOTOS": "Nuevas fotos a subir:",
+      "PREVIEW_PHOTOS": "Vista previa:",
+      "SELECT_PHOTOS": "Seleccionar fotos",
+      "ADD_NEW_PHOTOS": "Agregar nuevas fotos",
+      "NEW_PHOTOS_INFO": "Las nuevas fotos se agregarán después de las existentes.",
+      "CANCEL": "Cancelar",
+      "SAVE_CHANGES": "Guardar Cambios",
+      "PUBLISH_EVENT": "Publicar Evento"
+    },
+    "PLACEHOLDERS": {
+      "TITLE": "Ej: Festival de Danza Contemporánea",
+      "SHORT_DESC": "Resumen breve del evento (máx. 120 caracteres)",
+      "LONG_DESC": "Describe el evento, artistas participantes, programación, etc.",
+      "COST": "Ej: 50",
+      "PLACE": "Ej: Teatro Achá, sala principal",
+      "PEOPLE_CAPACITY": "Ej: 200",
+      "TAG_INPUT": "Escribe una etiqueta y presiona Enter"
+    }
   }
 }
