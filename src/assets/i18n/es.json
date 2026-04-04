@@ -107,5 +107,25 @@
   "EVENT_CREATE": {
     "TITLE": "Publicar un Evento",
     "SUBTITLE": "Completa el formulario y nuestro equipo lo revisará."
+  },
+  "EVENT_DETAILS": {
+    "BACK_BUTTON": "Volver a Eventos",
+    "PHOTO_ALT": "Foto del evento",
+    "PREV": "Anterior",
+    "NEXT": "Siguiente",
+    "MODAL_PHOTO_ALT": "Foto extendida",
+    "NO_PHOTOS": "Sin fotos disponibles",
+    "ABOUT": "Acerca del Evento",
+    "TAGS": "Etiquetas",
+    "ORGANIZER": "Organizador",
+    "ORGANIZER_ROLE": "Organizador del evento",
+    "CATEGORY": "Categoría",
+    "START_DATE": "Fecha de inicio",
+    "END_DATE": "Fecha de fin",
+    "COST": "Costo",
+    "VIEW_MAP": "Ver en Mapa",
+    "LOCATION_SOON": "Ubicación disponible próximamente",
+    "SHARE": "Compartir Evento",
+    "LOADING": "Cargando..."
   }
 }
