@@ -100,6 +100,9 @@
   "EVENTS_LIST": {
     "TITLE": "Próximos Eventos",
     "SUBTITLE": "Descubre lo que está pasando en la ciudad"
+  },
+  "CATEGORY_EVENTS": {
+    "EVENTS_FOUND": "EVENTOS ENCONTRADOS"
   }
 
 }
