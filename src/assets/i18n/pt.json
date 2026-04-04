@@ -1,0 +1,245 @@
+{
+  "NAV": {
+    "START": "Início",
+    "EXPLORE": "Explorar",
+    "MY_EVENTS": "Meus Eventos",
+    "PUBLISH_EVENT": "Publicar Evento",
+    "LOGIN": "Fazer Login",
+    "LOGOUT": "Sair",
+    "LANGUAGES": {
+      "ES": "ES (Español)",
+      "EN": "EN (English)",
+      "PT": "PT (Português)"
+    }
+  },
+  "HERO": {
+    "WELCOME": "Bem-vindo ao",
+    "SUBTITLE": "Descubra os melhores eventos de Cochabamba"
+  },
+  "AUTH": {
+    "LOGIN_TITLE": "Sistema CochaVive",
+    "LOGIN_SUBTITLE": "Faça login com a sua conta do Google",
+    "GOOGLE_BUTTON": "Continuar com o Google",
+    "MODAL_TITLE": "Fazer Login",
+    "MODAL_WELCOME": "Bem-vindo ao CochaVive"
+  },
+  "CATEGORIES": {
+    "TITLE": "Categorias",
+    "SUBTITLE": "Explore eventos culturais de acordo com seus interesses",
+    "LOADING": "Carregando categorias...",
+    "ERROR": "Ocorreu um erro ao carregar as categorias.",
+    "EMPTY": "Nenhuma categoria disponível encontrada."
+  },
+  "EVENT_CARD": {
+    "TBA_LOCATION": "Local a confirmar"
+  },
+  "EVENT_FORM": {
+    "MESSAGES": {
+      "SUCCESS_CREATE": "Evento criado com sucesso!",
+      "SUCCESS_UPDATE": "Evento atualizado com sucesso!",
+      "ERROR_REQUIRED": "Por favor, preencha todos os campos obrigatórios."
+    },
+    "SECTIONS": {
+      "GENERAL": "Informações Gerais do Evento",
+      "DATE_TIME": "Data e Horário",
+      "DETAILS": "Detalhes do Evento",
+      "TAGS": "Tags",
+      "PHOTOS": "Fotos do Evento"
+    },
+    "LABELS": {
+      "TITLE": "Nome do evento",
+      "CATEGORY": "Categoria",
+      "SELECT_CAT": "Selecione uma categoria",
+      "SHORT_DESC": "Descrição curta",
+      "LONG_DESC": "Descrição detalhada",
+      "START_DATE": "Data de início",
+      "END_DATE": "Data de término",
+      "OPTIONAL": "(opcional)",
+      "START_TIME": "Horário de início",
+      "END_TIME": "Horário de término",
+      "COST_TYPE": "Tipo de evento",
+      "FREE": "Gratuito",
+      "PAID": "Pago",
+      "COST": "Custo (Bs.)",
+      "COST_ERROR": "Deve ser maior que 0.",
+      "PLACE_DESC": "Descrição do local",
+      "PEOPLE_CAPACITY": "Capacidade de pessoas",
+      "TAGS_DESCRIPTION": "Adicione palavras-chave para ajudar a classificar o seu evento (máx. 10).",
+      "ADD_TAG": "Adicionar",
+      "COVER_PHOTO": "Capa",
+      "EVENT_PHOTO": "Foto do evento",
+      "NO_PHOTOS": "Este evento ainda não tem fotos.",
+      "DRAG_REORDER": "Arraste para reordenar",
+      "FIRST_COVER": "A primeira é a capa",
+      "REMOVE_PHOTO": "Excluir foto",
+      "NEW_PHOTOS": "Novas fotos para enviar:",
+      "PREVIEW_PHOTOS": "Pré-visualização:",
+      "SELECT_PHOTOS": "Selecionar fotos",
+      "ADD_NEW_PHOTOS": "Adicionar novas fotos",
+      "NEW_PHOTOS_INFO": "As novas fotos serão adicionadas após as existentes.",
+      "CANCEL": "Cancelar",
+      "SAVE_CHANGES": "Salvar Alterações",
+      "PUBLISH_EVENT": "Publicar Evento"
+    },
+    "PLACEHOLDERS": {
+      "TITLE": "Ex: Festival de Dança Contemporânea",
+      "SHORT_DESC": "Breve resumo do evento (máx. 120 caracteres)",
+      "LONG_DESC": "Descreva o evento, artistas participantes, programação, etc.",
+      "COST": "Ex: 50",
+      "PLACE": "Ex: Teatro Achá, sala principal",
+      "PEOPLE_CAPACITY": "Ex: 200",
+      "TAG_INPUT": "Digite uma tag e pressione Enter"
+    }
+  },
+  "FEATURED_EVENTS": {
+    "TITLE": "Eventos em Destaque",
+    "LOADING": "Carregando os próximos eventos...",
+    "ERROR": "Ocorreu um erro ao carregar os eventos.",
+    "EMPTY": "Não há eventos programados."
+  },
+  "UPCOMING_EVENTS": {
+    "TITLE": "Próximos Eventos",
+    "SUBTITLE": "Descubra o que está acontecendo na cidade"
+  },
+  "CATEGORY_EVENTS": {
+    "EVENTS_FOUND": "EVENTOS ENCONTRADOS"
+  },
+  "EVENT_CREATE": {
+    "TITLE": "Publicar um Evento",
+    "SUBTITLE": "Preencha o formulário e a nossa equipe o analisará."
+  },
+  "EVENT_DETAILS": {
+    "BACK_BUTTON": "Voltar para Eventos",
+    "PHOTO_ALT": "Foto do evento",
+    "PREV": "Anterior",
+    "NEXT": "Próximo",
+    "MODAL_PHOTO_ALT": "Foto ampliada",
+    "NO_PHOTOS": "Sem fotos disponíveis",
+    "ABOUT": "Sobre o Evento",
+    "TAGS": "Tags",
+    "ORGANIZER": "Organizador",
+    "ORGANIZER_ROLE": "Organizador do evento",
+    "CATEGORY": "Categoria",
+    "START_DATE": "Data de início",
+    "END_DATE": "Data de término",
+    "COST": "Custo",
+    "VIEW_MAP": "Ver no Mapa",
+    "LOCATION_SOON": "Localização disponível em breve",
+    "SHARE": "Compartilhar Evento",
+    "LOADING": "Carregando..."
+  },
+  "EVENT_LIST": {
+    "TITLE": "Meus Eventos",
+    "TOAST_SUCCESS": "Evento atualizado com sucesso!",
+    "STATS": {
+      "TOTAL": "Total de eventos",
+      "APPROVED": "Aprovados",
+      "PENDING": "Pendentes"
+    },
+    "TABLE": {
+      "HEADERS": {
+        "TITLE": "Título",
+        "DATE": "Data",
+        "CATEGORY": "Categoria",
+        "TYPE": "Tipo",
+        "STATUS": "Status",
+        "ACTIONS": "Ações"
+      },
+      "TYPE_FREE": "Gratuito",
+      "TYPE_PAID": "Pago",
+      "ACTIONS": {
+        "VIEW": "Ver detalhes",
+        "EDIT": "Editar",
+        "CANCEL": "Cancelar evento"
+      },
+      "EMPTY_STATE": "Não há eventos registrados no momento."
+    },
+    "MODAL_EDIT": {
+      "TITLE": "Editar Evento"
+    },
+    "MODAL_CANCEL": {
+      "TITLE": "Cancelar evento?",
+      "MESSAGE": "O evento será cancelado e deixará de ser visível. Tem certeza?",
+      "CONFIRM": "Sim, cancelar"
+    }
+  },
+  "EXPLORE": {
+    "SIDEBAR": {
+      "TITLE": "Explorar",
+      "SUBTITLE": "Filtre entre todos os eventos disponíveis",
+      "SEARCH_LABEL": "Pesquisar",
+      "SEARCH_PLACEHOLDER": "Título, descrição, local...",
+      "CLEAR_TOOLTIP": "Limpar",
+      "EVENT_FOUND_SINGULAR": "evento encontrado",
+      "EVENT_FOUND_PLURAL": "eventos encontrados",
+      "SEARCH_HINT": "Pesquise por título, descrição, tags ou localização.",
+      "CATEGORY_LABEL": "Categoria",
+      "CATEGORY_ALL": "Todas as categorias",
+      "TYPE_LABEL": "Tipo",
+      "TYPE_ALL": "Todos",
+      "TYPE_FREE": "Gratuito",
+      "TYPE_PAID": "Pago",
+      "PRICE_LABEL": "Faixa de Preço",
+      "PRICE_MIN": "Mín",
+      "PRICE_MAX": "Máx",
+      "DATES_LABEL": "Datas",
+      "DATE_FROM": "De",
+      "DATE_TO": "Até",
+      "CLEAR_FILTERS": "Limpar Filtros"
+    },
+    "MAIN": {
+      "TITLE": "Explorar Eventos",
+      "SUBTITLE": "Descubra o que está acontecendo em Cochabamba",
+      "LOADING": "Carregando...",
+      "LOADING_EVENTS": "Carregando eventos...",
+      "ERROR_TITLE": "Não foi possível carregar os eventos.",
+      "ERROR_DESC": "Verifique sua conexão e tente novamente.",
+      "PAGINATION_LABEL": "Paginação",
+      "PREV": "Anterior",
+      "NEXT": "Próximo",
+      "EMPTY_TITLE": "Nenhum resultado para a sua pesquisa",
+      "EMPTY_DESC": "Tente alterar ou limpar os filtros.",
+      "VIEW_ALL": "Ver todos os eventos"
+    }
+  },
+  "FORBIDDEN": {
+    "PAGE_TITLE": "Acesso Negado",
+    "BREADCRUMB_HOME": "Início",
+    "SECTION_TITLE": "Erro 403",
+    "SECTION_SUBTITLE": "Você não tem permissão para acessar esta página.",
+    "MESSAGE": "Se você acha que isso é um erro, entre em contato com o administrador do sistema.",
+    "ATTEMPTED_URL": "Rota solicitada:",
+    "ACTIONS": {
+      "HOME": "Ir para o início",
+      "EVENTS": "Ver eventos"
+    }
+  },
+  "ONBOARDING": {
+    "SUCCESS": {
+      "TITLE": "Perfil Atualizado!",
+      "MESSAGE": "Seus dados foram salvos com sucesso.",
+      "BUTTON": "Ir para o Início"
+    },
+    "ERROR": {
+      "TITLE": "Ops, algo deu errado!",
+      "MESSAGE": "Houve um problema ao salvar seus dados. Verifique sua conexão ou tente novamente.",
+      "BUTTON": "Tentar novamente"
+    },
+    "FORM": {
+      "TITLE": "Complete o seu perfil",
+      "SUBTITLE": "Insira os seus dados de identidade para continuar.",
+      "DOCUMENT_LABEL": "Carteira de Identidade (CI)",
+      "DOCUMENT_PLACEHOLDER": "Ex: 8347210",
+      "DOCUMENT_ERROR": "Apenas números são permitidos.",
+      "EXTENSION_LABEL": "Complemento (Opcional)",
+      "EXTENSION_PLACEHOLDER": "Ex: 1H, 1A...",
+      "EXTENSION_ERROR": "Deve ser um número e uma letra maiúscula (Ex: 1H).",
+      "EXTENSION_HINT": "Apenas se a sua identidade tiver um código adicional ao número.",
+      "SUBMIT_BUTTON": "Salvar e Continuar"
+    }
+  },
+  "CONFIRM_MODAL": {
+    "CANCEL": "Cancelar",
+    "PROCESSING": "Processando..."
+  }
+}
