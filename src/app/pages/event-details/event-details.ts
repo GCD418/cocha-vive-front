@@ -30,7 +30,7 @@ export class EventDetails implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/events']);
+    this.router.navigate(['/explore-events']);
   }
 
 }
