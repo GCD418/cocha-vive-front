@@ -99,7 +99,8 @@
   },
   "UPCOMING_EVENTS": {
     "TITLE": "Upcoming Events",
-    "SUBTITLE": "Discover what's happening in the city"
+    "SUBTITLE": "Discover what's happening in the city",
+    "FEATURE_DISABLED": "This feature is currently disabled."
   },
   "CATEGORY_EVENTS": {
     "EVENTS_FOUND": "EVENTS FOUND"

@@ -4,6 +4,9 @@
     <h2>{{ 'FEATURED_EVENTS.TITLE' | translate }}<br></h2>
   </div>
 
+
+  @if (featureService.isEnabled(AppFeatures.VIEW_FEATURED_EVENTS)) {
+
   <div class="container">
     
     @if (loading) {
@@ -64,5 +67,11 @@
     }
 
   </div>
+  }
+  @else {
+    <div class="alert alert-info text-center" role="alert">
+      {{ 'UPCOMING_EVENTS.FEATURE_DISABLED' | translate }}
+    </div>
+  }
 
 </section>
