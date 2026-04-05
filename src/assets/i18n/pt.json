@@ -153,7 +153,8 @@
         "EDIT": "Editar",
         "CANCEL": "Cancelar evento"
       },
-      "EMPTY_STATE": "Não há eventos registrados no momento."
+      "EMPTY_STATE": "Não há eventos registrados no momento.",
+      "PAGINATION_LABEL": "Exibindo"
     },
     "MODAL_EDIT": {
       "TITLE": "Editar Evento"
@@ -162,6 +163,19 @@
       "TITLE": "Cancelar evento?",
       "MESSAGE": "O evento será cancelado e deixará de ser visível. Tem certeza?",
       "CONFIRM": "Sim, cancelar"
+    },
+    "FILTERS": {
+      "ALL": "Todos",
+      "PENDING": "Pendentes",
+      "APPROVED": "Aprovados",
+      "REJECTED": "Rejeitados",
+      "CANCELLED": "Cancelados",
+      "CLEAR_FILTERS": "Limpar Filtros",
+      "DATE_FROM": "De",
+      "DATE_TO": "Até"
+    },
+    "PLACEHOLDERS": {
+      "SEARCH": "Pesquisar por título..."
     }
   },
   "EXPLORE": {
