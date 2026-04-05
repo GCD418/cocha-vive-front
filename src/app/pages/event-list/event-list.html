@@ -8,7 +8,7 @@
             <div class="d-flex">
               <div class="toast-body d-flex align-items-center gap-2">
                 <i class="bi bi-check-circle-fill"></i>
-                <span>¡Evento actualizado exitosamente!</span>
+                <span>{{ 'EVENT_LIST.TOAST_SUCCESS' | translate }}</span>
               </div>
             </div>
           </div>
@@ -298,7 +298,7 @@
       <div class="modal-header">
         <h5 class="modal-title fw-bold" id="editEventModalLabel">
           <i class="bi bi-pencil-square me-2" style="color: var(--accent-color);"></i>
-          Editar Evento
+          {{ 'EVENT_LIST.MODAL_EDIT.TITLE' | translate }}
         </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
@@ -318,9 +318,9 @@
 
 @if (pendingCancelId !== null) {
   <app-confirm-modal
-    title="¿Cancelar evento?"
-    message="El evento será cancelado y dejará de ser visible. ¿Estás seguro?"
-    confirmText="Sí, cancelar"
+    [title]="'EVENT_LIST.MODAL_CANCEL.TITLE' | translate"
+    [message]="'EVENT_LIST.MODAL_CANCEL.MESSAGE' | translate"
+    [confirmText]="'EVENT_LIST.MODAL_CANCEL.CONFIRM' | translate"
     [loading]="cancellingId !== null"
     (confirmed)="onCancelConfirmed()"
     (cancelled)="onCancelDismissed()">

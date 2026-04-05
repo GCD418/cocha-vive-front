@@ -3,25 +3,45 @@ import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { AuthService, CurrentUser } from '../../services/auth/auth.service';
 import { LoginModalComponent } from '../../components/auth/login-modal/login-modal';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, LoginModalComponent],
+  imports: [RouterLink, RouterLinkActive, CommonModule, LoginModalComponent, TranslateModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
 export class Navbar implements OnInit {
   mobileMenuOpen = false;
   userDropdownOpen = false; 
+  langDropdownOpen = false;
   showLoginModal = false; 
   currentUser: CurrentUser | null = null;
+
   private authService = inject(AuthService);
   private router = inject(Router);
+  private translate = inject(TranslateService);
+
+  get currentLangLabel(): string {
+    return (this.translate.getCurrentLang()|| 'es').toUpperCase();
+  }
 
   ngOnInit() {
     document.body.classList.add('scrolled');
     this.checkUserSession();
+  }
+
+  toggleLangDropdown(event: Event): void {
+    event.stopPropagation();
+    this.langDropdownOpen = !this.langDropdownOpen;
+    this.userDropdownOpen = false;
+  }
+
+  changeLanguage(lang: string) {
+    this.translate.use(lang);
+    localStorage.setItem('lang', lang);
+    this.langDropdownOpen = false;
   }
 
   checkUserSession() {
@@ -54,11 +74,13 @@ export class Navbar implements OnInit {
   toggleUserDropdown(event: Event): void {
     event.stopPropagation();
     this.userDropdownOpen = !this.userDropdownOpen;
+    this.langDropdownOpen = false; 
   }
 
   @HostListener('document:click')
   onDocumentClick(): void {
     this.userDropdownOpen = false;
+    this.langDropdownOpen = false; 
   }
 
   openLoginModal() {

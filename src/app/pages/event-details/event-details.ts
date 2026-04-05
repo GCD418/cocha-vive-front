@@ -5,10 +5,11 @@ import { EventService } from '../../services/event-service/event.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { PricePipe } from '../../shared/pipes/price.pipe';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-event-details',
-  imports: [CommonModule, PricePipe],
+  imports: [CommonModule, PricePipe, TranslateModule],
   templateUrl: './event-details.html',
   styleUrl: './event-details.css',
 })
@@ -29,7 +30,7 @@ export class EventDetails implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/events']);
+    this.router.navigate(['/explore-events']);
   }
 
 }

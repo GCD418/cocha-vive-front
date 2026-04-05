@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CategoryDTO, EventModel } from '../../../models/event-model';
 import { EventService } from '../../../services/event-service/event.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 export interface EventFormResult {
   success: boolean;
@@ -12,7 +13,7 @@ export interface EventFormResult {
 @Component({
   selector: 'app-event-form-component',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslateModule],
   templateUrl: './event-form-component.html',
   styleUrl: './event-form-component.css',
 })

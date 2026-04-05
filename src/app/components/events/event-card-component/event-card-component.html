@@ -41,7 +41,7 @@
       <li class="d-flex align-items-center">
         <i class="bi bi-geo-alt event-icon me-2"></i>
         <span class="text-truncate" [title]="event.shortPlaceDescription">
-          {{ event.shortPlaceDescription || 'Lugar por confirmar' }}
+          {{ event.shortPlaceDescription || ('EVENT_CARD.TBA_LOCATION' | translate) }}
         </span>
       </li>
     </ul>

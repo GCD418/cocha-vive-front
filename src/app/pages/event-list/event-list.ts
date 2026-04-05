@@ -6,7 +6,7 @@ import { EventModel } from '../../models/event-model';
 import { AuthService, CurrentUser } from '../../services/auth/auth.service';
 import { EventFormResult, EventFormComponent } from '../../components/events/event-form-component/event-form-component';
 import { ConfirmModalComponent } from '../../shared/confirmModal-Component/confirmModal-component';
-import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';import { FormsModule } from '@angular/forms';
 
 declare const bootstrap: any;
 
@@ -14,13 +14,16 @@ declare const bootstrap: any;
   selector: 'app-event-list',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterLink,
-    EventFormComponent, 
+    CommonModule,
+    RouterLink, 
+    EventFormComponent,
     ConfirmModalComponent,
     NgClass,
     DatePipe,
-    FormsModule
+    FormsModule,
+    NgClass,
+    DatePipe,
+    TranslateModule
   ],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css',
@@ -253,4 +256,5 @@ export class EventList implements OnInit {
     this.filterDateTo = '';
     this.onFilterChange();
   }
+
 }

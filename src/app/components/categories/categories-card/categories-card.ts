@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CategoryService } from '../../../services/category-services/category.service';
 import { Category } from '../../../models/category.model';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-categories-card',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslateModule],
   templateUrl: './categories-card.html',
   styleUrl: './categories-card.css'
 })

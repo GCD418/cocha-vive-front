@@ -1,19 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DatePipe, SlicePipe } from '@angular/common';
 import { EventModel } from '../../../models/event-model'; 
 import { EventService } from '../../../services/event-service/event.service'; 
 import * as AOS from 'aos';
 import { PricePipe } from '../../../shared/pipes/price.pipe';
+import { TranslateModule } from '@ngx-translate/core';
+import { FeatureToggleService } from '../../../services/feature-toggle/feature-toggle.service';
+import { AppFeatures } from '../../../models/app-features';
 
 @Component({
   selector: 'app-featured-event',
   standalone: true,
-  imports: [RouterLink, DatePipe, SlicePipe, PricePipe],
+  imports: [RouterLink, DatePipe, SlicePipe, PricePipe, TranslateModule],
   templateUrl: './featured-event.html',
   styleUrl: './featured-event.css'
 })
 export class FeaturedEventComponent implements OnInit {
+  public featureService = inject(FeatureToggleService);
+  public readonly AppFeatures = AppFeatures;
 
   events: EventModel[] = [];
   loading = true;

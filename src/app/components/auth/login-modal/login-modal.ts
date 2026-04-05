@@ -2,11 +2,12 @@ import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { GoogleSigninButtonModule, SocialAuthService } from '@abacritt/angularx-social-login';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-modal',
   standalone: true,
-  imports: [GoogleSigninButtonModule],
+  imports: [GoogleSigninButtonModule, TranslateModule],
   templateUrl: './login-modal.html',
   styleUrls: ['./login-modal.css']
 })

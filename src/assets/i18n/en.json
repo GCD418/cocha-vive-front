@@ -1,0 +1,246 @@
+{
+  "NAV": {
+    "START": "Home",
+    "EXPLORE": "Explore",
+    "MY_EVENTS": "My Events",
+    "PUBLISH_EVENT": "Publish Event",
+    "LOGIN": "Log In",
+    "LOGOUT": "Log Out",
+    "LANGUAGES": {
+      "ES": "ES (Spanish)",
+      "EN": "EN (English)",
+      "PT": "PT (Portuguese)"
+    }
+  },
+  "HERO": {
+    "WELCOME": "Welcome to",
+    "SUBTITLE": "Discover the best events in Cochabamba"
+  },
+  "AUTH": {
+    "LOGIN_TITLE": "CochaVive System",
+    "LOGIN_SUBTITLE": "Log in with your Google account",
+    "GOOGLE_BUTTON": "Continue with Google",
+    "MODAL_TITLE": "Log In",
+    "MODAL_WELCOME": "Welcome to CochaVive"
+  },
+  "CATEGORIES": {
+    "TITLE": "Categories",
+    "SUBTITLE": "Explore cultural events based on your interests",
+    "LOADING": "Loading categories...",
+    "ERROR": "There was an error loading categories.",
+    "EMPTY": "No categories found."
+  },
+  "EVENT_CARD": {
+    "TBA_LOCATION": "Location TBA"
+  },
+  "EVENT_FORM": {
+    "MESSAGES": {
+      "SUCCESS_CREATE": "Event created successfully!",
+      "SUCCESS_UPDATE": "Event updated successfully!",
+      "ERROR_REQUIRED": "Please fill in all required fields."
+    },
+    "SECTIONS": {
+      "GENERAL": "General Event Information",
+      "DATE_TIME": "Date and Time",
+      "DETAILS": "Event Details",
+      "TAGS": "Tags",
+      "PHOTOS": "Event Photos"
+    },
+    "LABELS": {
+      "TITLE": "Event name",
+      "CATEGORY": "Category",
+      "SELECT_CAT": "Select a category",
+      "SHORT_DESC": "Short description",
+      "LONG_DESC": "Detailed description",
+      "START_DATE": "Start date",
+      "END_DATE": "End date",
+      "OPTIONAL": "(optional)",
+      "START_TIME": "Start time",
+      "END_TIME": "End time",
+      "COST_TYPE": "Event type",
+      "FREE": "Free",
+      "PAID": "Paid",
+      "COST": "Cost (Bs.)",
+      "COST_ERROR": "Must be greater than 0.",
+      "PLACE_DESC": "Venue description",
+      "PEOPLE_CAPACITY": "Capacity",
+      "TAGS_DESCRIPTION": "Add keywords to help classify your event (max. 10).",
+      "ADD_TAG": "Add",
+      "COVER_PHOTO": "Cover",
+      "EVENT_PHOTO": "Event photo",
+      "NO_PHOTOS": "This event has no photos yet.",
+      "DRAG_REORDER": "Drag to reorder",
+      "FIRST_COVER": "The first one is the cover",
+      "REMOVE_PHOTO": "Remove photo",
+      "NEW_PHOTOS": "New photos to upload:",
+      "PREVIEW_PHOTOS": "Preview:",
+      "SELECT_PHOTOS": "Select photos",
+      "ADD_NEW_PHOTOS": "Add new photos",
+      "NEW_PHOTOS_INFO": "New photos will be added after the existing ones.",
+      "CANCEL": "Cancel",
+      "SAVE_CHANGES": "Save Changes",
+      "PUBLISH_EVENT": "Publish Event"
+    },
+    "PLACEHOLDERS": {
+      "TITLE": "Ex: Contemporary Dance Festival",
+      "SHORT_DESC": "Brief summary (max. 120 characters)",
+      "LONG_DESC": "Describe the event, participating artists, schedule, etc.",
+      "COST": "Ex: 50",
+      "PLACE": "Ex: Achá Theater, main hall",
+      "PEOPLE_CAPACITY": "Ex: 200",
+      "TAG_INPUT": "Type a tag and press Enter"
+    }
+  },
+  "FEATURED_EVENTS": {
+    "TITLE": "Featured Events",
+    "LOADING": "Loading upcoming events...",
+    "ERROR": "There was an error loading events.",
+    "EMPTY": "No scheduled events."
+  },
+  "UPCOMING_EVENTS": {
+    "TITLE": "Upcoming Events",
+    "SUBTITLE": "Discover what's happening in the city",
+    "FEATURE_DISABLED": "This feature is currently disabled."
+  },
+  "CATEGORY_EVENTS": {
+    "EVENTS_FOUND": "EVENTS FOUND"
+  },
+  "EVENT_CREATE": {
+    "TITLE": "Publish an Event",
+    "SUBTITLE": "Complete the form and our team will review it."
+  },
+  "EVENT_DETAILS": {
+    "BACK_BUTTON": "Back to Events",
+    "PHOTO_ALT": "Event photo",
+    "PREV": "Prev",
+    "NEXT": "Next",
+    "MODAL_PHOTO_ALT": "Expanded photo",
+    "NO_PHOTOS": "No photos available",
+    "ABOUT": "About the Event",
+    "TAGS": "Tags",
+    "ORGANIZER": "Organizer",
+    "ORGANIZER_ROLE": "Event organizer",
+    "CATEGORY": "Category",
+    "START_DATE": "Start date",
+    "END_DATE": "End date",
+    "COST": "Cost",
+    "VIEW_MAP": "View on Map",
+    "LOCATION_SOON": "Location available soon",
+    "SHARE": "Share Event",
+    "LOADING": "Loading..."
+  },
+  "EVENT_LIST": {
+    "TITLE": "My Events",
+    "TOAST_SUCCESS": "Event updated successfully!",
+    "STATS": {
+      "TOTAL": "Total events",
+      "APPROVED": "Approved",
+      "PENDING": "Pending"
+    },
+    "TABLE": {
+      "HEADERS": {
+        "TITLE": "Title",
+        "DATE": "Date",
+        "CATEGORY": "Category",
+        "TYPE": "Type",
+        "STATUS": "Status",
+        "ACTIONS": "Actions"
+      },
+      "TYPE_FREE": "Free",
+      "TYPE_PAID": "Paid",
+      "ACTIONS": {
+        "VIEW": "View details",
+        "EDIT": "Edit",
+        "CANCEL": "Cancel event"
+      },
+      "EMPTY_STATE": "No events registered currently."
+    },
+    "MODAL_EDIT": {
+      "TITLE": "Edit Event"
+    },
+    "MODAL_CANCEL": {
+      "TITLE": "Cancel event?",
+      "MESSAGE": "The event will be cancelled and will no longer be visible. Are you sure?",
+      "CONFIRM": "Yes, cancel"
+    }
+  },
+  "EXPLORE": {
+    "SIDEBAR": {
+      "TITLE": "Explore",
+      "SUBTITLE": "Filter through all available events",
+      "SEARCH_LABEL": "Search",
+      "SEARCH_PLACEHOLDER": "Title, description, place...",
+      "CLEAR_TOOLTIP": "Clear",
+      "EVENT_FOUND_SINGULAR": "event found",
+      "EVENT_FOUND_PLURAL": "events found",
+      "SEARCH_HINT": "Search by title, description, tags, or location.",
+      "CATEGORY_LABEL": "Category",
+      "CATEGORY_ALL": "All categories",
+      "TYPE_LABEL": "Type",
+      "TYPE_ALL": "All",
+      "TYPE_FREE": "Free",
+      "TYPE_PAID": "Paid",
+      "PRICE_LABEL": "Price Range",
+      "PRICE_MIN": "Min",
+      "PRICE_MAX": "Max",
+      "DATES_LABEL": "Dates",
+      "DATE_FROM": "From",
+      "DATE_TO": "To",
+      "CLEAR_FILTERS": "Clear Filters"
+    },
+    "MAIN": {
+      "TITLE": "Explore Events",
+      "SUBTITLE": "Discover what's happening in Cochabamba",
+      "LOADING": "Loading...",
+      "LOADING_EVENTS": "Loading events...",
+      "ERROR_TITLE": "Could not load events.",
+      "ERROR_DESC": "Please check your connection and try again.",
+      "PAGINATION_LABEL": "Pagination",
+      "PREV": "Prev",
+      "NEXT": "Next",
+      "EMPTY_TITLE": "No results for your search",
+      "EMPTY_DESC": "Try changing or clearing filters.",
+      "VIEW_ALL": "View all events"
+    }
+  },
+  "FORBIDDEN": {
+    "PAGE_TITLE": "Access Denied",
+    "BREADCRUMB_HOME": "Home",
+    "SECTION_TITLE": "Error 403",
+    "SECTION_SUBTITLE": "You do not have permission to access this page.",
+    "MESSAGE": "If you believe this is an error, please contact the system administrator.",
+    "ATTEMPTED_URL": "Requested path:",
+    "ACTIONS": {
+      "HOME": "Go to home",
+      "EVENTS": "View events"
+    }
+  },
+  "ONBOARDING": {
+    "SUCCESS": {
+      "TITLE": "Profile Updated!",
+      "MESSAGE": "Your information has been saved successfully.",
+      "BUTTON": "Go to Home"
+    },
+    "ERROR": {
+      "TITLE": "Oops, something went wrong!",
+      "MESSAGE": "There was a problem saving your data. Please check your connection or try again.",
+      "BUTTON": "Try again"
+    },
+    "FORM": {
+      "TITLE": "Complete your profile",
+      "SUBTITLE": "Enter your identity details to continue.",
+      "DOCUMENT_LABEL": "Identity Card (ID)",
+      "DOCUMENT_PLACEHOLDER": "Ex: 8347210",
+      "DOCUMENT_ERROR": "Only numbers are allowed.",
+      "EXTENSION_LABEL": "Extension (Optional)",
+      "EXTENSION_PLACEHOLDER": "Ex: 1H, 1A...",
+      "EXTENSION_ERROR": "Must be a number and an uppercase letter (Ex: 1H).",
+      "EXTENSION_HINT": "Only if your ID has an additional code.",
+      "SUBMIT_BUTTON": "Save and Continue"
+    }
+  },
+  "CONFIRM_MODAL": {
+    "CANCEL": "Cancel",
+    "PROCESSING": "Processing..."
+  }
+}

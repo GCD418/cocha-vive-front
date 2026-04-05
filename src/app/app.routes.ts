@@ -8,6 +8,8 @@ import { ForbiddenPageComponent } from './pages/forbidden/forbidden';
 import { authGuard } from './core/guards/auth-guard';
 import { ExploreEvent } from './pages/explore-event/explore-event';
 import { OnboardingComponent } from './pages/onboarding/onboarding-component';
+import { requireFeature } from './core/guards/require-feature';
+import { AppFeatures } from './models/app-features';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -24,4 +26,6 @@ export const routes: Routes = [
     { path: 'forbidden', component: ForbiddenPageComponent },
     { path: 'explore-events', component: ExploreEvent },
     { path: 'onboarding', component: OnboardingComponent, canActivate: [authGuard] },
+    // Example of a route protected by a feature flag. If anyone uses something different 10 Bs.
+    // {path: 'make-payment', component: NonExistentComponent, canActivate: [requireFeature(AppFeatures.VIEW_FEATURED_EVENTS)]},
 ];
