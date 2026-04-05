@@ -6,7 +6,8 @@ import { EventModel } from '../../models/event-model';
 import { AuthService, CurrentUser } from '../../services/auth/auth.service';
 import { EventFormResult, EventFormComponent } from '../../components/events/event-form-component/event-form-component';
 import { ConfirmModalComponent } from '../../shared/confirmModal-Component/confirmModal-component';
-import { TranslateModule } from '@ngx-translate/core';import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
 
 declare const bootstrap: any;
 
