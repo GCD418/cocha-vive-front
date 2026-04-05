@@ -39,7 +39,26 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    const token = this.getToken();
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const payloadBase64 = token.split('.')[1];
+      const decodedPayload = JSON.parse(atob(payloadBase64));
+      const exp = decodedPayload.exp * 1000;
+      const currentTime = Date.now();
+      if (currentTime > exp) {
+        this.logout();
+        return false;
+      }
+      return true;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      this.logout();
+      return false;
+    }
   }
 
   getCurrentUser(): Observable<CurrentUser | null> {
