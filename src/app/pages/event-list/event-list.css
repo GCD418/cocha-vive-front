@@ -1,0 +1,13 @@
+.dropdown-item {
+  cursor: pointer;
+}
+
+.dropdown-item.selected {
+  color: var(--accent-color);
+  background-color: transparent;
+  font-weight: 500;
+}
+
+.dropdown-item.selected:hover {
+  background-color: var(--bs-dropdown-link-hover-bg);
+}

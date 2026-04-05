@@ -153,7 +153,8 @@
         "EDIT": "Edit",
         "CANCEL": "Cancel event"
       },
-      "EMPTY_STATE": "No events registered currently."
+      "EMPTY_STATE": "No events registered currently.",
+      "PAGINATION_LABEL": "Showing"
     },
     "MODAL_EDIT": {
       "TITLE": "Edit Event"
@@ -162,6 +163,19 @@
       "TITLE": "Cancel event?",
       "MESSAGE": "The event will be cancelled and will no longer be visible. Are you sure?",
       "CONFIRM": "Yes, cancel"
+    },
+     "FILTERS": {
+      "ALL": "All",
+      "PENDING": "Pending",
+      "APPROVED": "Approved",
+      "REJECTED": "Rejected",
+      "CANCELLED": "Cancelled",
+      "CLEAR_FILTERS": "Clear Filters",
+      "DATE_FROM": "From",
+      "DATE_TO": "To"
+    },
+    "PLACEHOLDERS": {
+      "SEARCH": "Search by title..."
     }
   },
   "EXPLORE": {

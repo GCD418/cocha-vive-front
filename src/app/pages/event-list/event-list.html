@@ -42,9 +42,25 @@
         </div>
       </div>
 
-
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0"> {{ 'EVENT_LIST.TITLE' | translate }} </h2>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="input-group input-group-sm w-auto flex-grow-1 me-2">
+          <span class="input-group-text bg-white"><i class="bi bi-search text-secondary"></i></span>
+          <input type="text"
+                class="form-control border-start-0"
+                placeholder="{{ 'EVENT_LIST.PLACEHOLDERS.SEARCH' | translate }}"
+                [(ngModel)]="searchText"
+                (ngModelChange)="onFilterChange()">
+        </div>
+        @if (hasActiveFilters()) {
+          <button class="btn btn-sm btn-outline-secondary text-nowrap"
+                  (click)="clearFilters()">
+            <i class="bi bi-x-lg me-1"></i> {{ 'EVENT_LIST.FILTERS.CLEAR_FILTERS' | translate }}
+          </button>
+        }
       </div>
 
       <div class="card border-0 shadow-sm">
@@ -53,19 +69,150 @@
             <thead class="table-light">
               <tr class="text-center">
                 <th>{{ 'EVENT_LIST.TABLE.HEADERS.TITLE' | translate }}</th>
-                <th>{{ 'EVENT_LIST.TABLE.HEADERS.DATE' | translate }}</th>
-                <th>{{ 'EVENT_LIST.TABLE.HEADERS.CATEGORY' | translate }}</th>
-                <th>{{ 'EVENT_LIST.TABLE.HEADERS.TYPE' | translate }}</th>
-                <th>{{ 'EVENT_LIST.TABLE.HEADERS.STATUS' | translate }}</th>
+
+                <th class="p-0">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-secondary text-center fw-bold text-decoration-none w-100 text-start px-3 py-2 dropdown-toggle"
+                            [class.text-primary]="filterDateFrom || filterDateTo"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside"
+                            aria-expanded="false">
+                      {{ 'EVENT_LIST.TABLE.HEADERS.DATE' | translate }}
+                    </button>
+                    <div class="dropdown-menu p-3" style="min-width: 220px;">
+                      <label class="form-label small text-muted mb-1">{{ 'EVENT_LIST.FILTERS.DATE_FROM' | translate }}</label>
+                      <input type="date" class="form-control form-control-sm mb-2"
+                            [(ngModel)]="filterDateFrom" (ngModelChange)="onFilterChange()">
+                      <label class="form-label small text-muted mb-1">{{ 'EVENT_LIST.FILTERS.DATE_TO' | translate }}</label>
+                      <input type="date" class="form-control form-control-sm"
+                            [(ngModel)]="filterDateTo" (ngModelChange)="onFilterChange()">
+                    </div>
+                  </div>
+                </th>
+
+                <th class="p-0">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-secondary text-center fw-bold text-decoration-none w-100 text-start px-3 py-2 dropdown-toggle"
+                            [class.text-primary]="filterCategory"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="true"
+                            aria-expanded="false">
+                      {{ 'EVENT_LIST.TABLE.HEADERS.CATEGORY' | translate }}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterCategory === ''"
+                          (click)="filterCategory = ''; onFilterChange()">
+                          {{ 'EVENT_LIST.FILTERS.ALL' | translate }} @if (filterCategory === '') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                        @for (cat of availableCategories; track cat) {
+                          <li>
+                            <a class="dropdown-item d-flex justify-content-between align-items-center"
+                              [class.selected]="filterCategory === cat"
+                              (click)="filterCategory = cat; onFilterChange()">
+                              {{ cat }} @if (filterCategory === '') { <i class="bi bi-check"></i> }
+                            </a>
+                          </li>
+                        }
+                    </ul>
+                  </div>
+                </th>
+
+                <th class="p-0">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-secondary text-center fw-bold text-decoration-none w-100 text-start px-3 py-2 dropdown-toggle"
+                            [class.text-primary]="filterType"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="true"
+                            aria-expanded="false">
+                      {{ 'EVENT_LIST.TABLE.HEADERS.TYPE' | translate }}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterType === ''"
+                          (click)="filterType = ''; onFilterChange()">
+                          {{ 'EVENT_LIST.FILTERS.ALL' | translate }} @if (filterType === '') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterType === 'gratis'"
+                          (click)="filterType = 'gratis'; onFilterChange()">
+                          {{ 'EVENT_LIST.TABLE.TYPE_FREE' | translate }} @if (filterType === 'gratis') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterType === 'depago'"
+                          (click)="filterType = 'depago'; onFilterChange()">
+                          {{ 'EVENT_LIST.TABLE.TYPE_PAID' | translate }} @if (filterType === 'depago') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </th>
+
+                <th class="p-0">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-secondary text-center fw-bold text-decoration-none w-100 text-start px-3 py-2 dropdown-toggle"
+                            [class.text-primary]="filterStatus"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="true"
+                            aria-expanded="false">
+                      {{ 'EVENT_LIST.TABLE.HEADERS.STATUS' | translate }}
+                    </button>
+                <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterStatus === ''"
+                          (click)="filterStatus = ''; onFilterChange()">
+                          {{ 'EVENT_LIST.FILTERS.ALL' | translate }} @if (filterStatus === '') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterStatus === 'PENDING'"
+                          (click)="filterStatus = 'PENDING'; onFilterChange()">
+                          {{ 'EVENT_LIST.FILTERS.PENDING' | translate }} @if (filterStatus === 'PENDING') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterStatus === 'APPROVED'"
+                          (click)="filterStatus = 'APPROVED'; onFilterChange()">
+                          {{ 'EVENT_LIST.FILTERS.APPROVED' | translate }} @if (filterStatus === 'APPROVED') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterStatus === 'REJECTED'"
+                          (click)="filterStatus = 'REJECTED'; onFilterChange()">
+                          {{ 'EVENT_LIST.FILTERS.REJECTED' | translate }} @if (filterStatus === 'REJECTED') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          [class.selected]="filterStatus === 'CANCELLED'"
+                          (click)="filterStatus = 'CANCELLED'; onFilterChange()">
+                          {{ 'EVENT_LIST.FILTERS.CANCELLED' | translate }} @if (filterStatus === 'CANCELLED') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </th>
+
                 <th>{{ 'EVENT_LIST.TABLE.HEADERS.ACTIONS' | translate }}</th>
               </tr>
             </thead>
             <tbody  class="text-muted small">
-              @for (event of events; track event.id) {
+              @for (event of pagedEvents; track event.id) {
                 <tr>
                   <td class="fw-semibold">{{ event.title }}</td>
                   <td class="text-nowrap text-center">{{ event.dateStart | date:'d/M/yyyy' }}</td>
-                  <td class="text-nowrap text-center">{{ event.category?.name }}</td>
+                  <td>{{ event.category.name }}</td>
                   <td class="text-center">
                     <span class="badge rounded-pill"
                       [class.bg-warning]="event.cost === 0"
@@ -102,12 +249,40 @@
               } @empty {
                 <tr>
                   <td colspan="6" class="text-center italic text-muted">
-                    {{ 'EVENT_LIST.TABLE.EMPTY_STATE' | translate }}
+                    {{ 'EVENT_LIST.TABLE.EMPTY_STATE' | translate }}  
                   </td>
                 </tr>
               }
             </tbody>
           </table>
+
+          <div class="d-flex justify-content-between align-items-center mt-3 px-2">
+            <small class="text-muted">
+              {{ 'EVENT_LIST.TABLE.PAGINATION_LABEL' | translate }}:
+              {{ filteredEvents.length === 0 ? 0 : (currentPage - 1) * pageSize + 1 }}
+              – {{ min(currentPage * pageSize, filteredEvents.length) }}
+            </small>
+            <nav>
+              <ul class="pagination pagination-sm mb-0">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <button class="page-link" (click)="goToPage(currentPage - 1)">
+                    <i class="bi bi-chevron-left"></i>
+                  </button>
+                </li>
+                @for (page of totalPagesArray; track page) {
+                  <li class="page-item" [class.active]="page === currentPage">
+                    <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+                  </li>
+                }
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <button class="page-link" (click)="goToPage(currentPage + 1)">
+                    <i class="bi bi-chevron-right"></i>
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div> 
+
         </div>
       </div>
 
@@ -139,7 +314,7 @@
 
     </div>
   </div>
-</div>
+</div> 
 
 @if (pendingCancelId !== null) {
   <app-confirm-modal
