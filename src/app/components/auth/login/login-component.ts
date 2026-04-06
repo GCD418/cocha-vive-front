@@ -1,8 +1,9 @@
 import { GoogleSigninButtonModule, SocialAuthService } from '@abacritt/angularx-social-login';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +15,10 @@ export class LoginComponent implements OnInit {
   private socialAuthService = inject(SocialAuthService);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.socialAuthService.authState.subscribe((googleUser) => {
+    this.socialAuthService.authState.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((googleUser) => {
       if (googleUser && googleUser.idToken) {
         this.authService.verifyGoogleToken(googleUser.idToken).subscribe({
           next: (response) => {

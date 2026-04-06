@@ -8,6 +8,7 @@ import { environment } from '../environments/environment';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader, TRANSLATE_HTTP_LOADER_CONFIG } from '@ngx-translate/http-loader';
 import { FeatureToggleService } from './services/feature-toggle/feature-toggle.service';
+import { AuthService } from './services/auth/auth.service';
 
 export function HttpLoaderFactory() {
   return new TranslateHttpLoader();
@@ -56,6 +57,10 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => {
       const featureToggleService = inject(FeatureToggleService);
       return featureToggleService.loadFeatures();
+    }),
+    provideAppInitializer(() => {
+      const authService = inject(AuthService);
+      authService.initAuthFromStorage();
     })
   ]
 };

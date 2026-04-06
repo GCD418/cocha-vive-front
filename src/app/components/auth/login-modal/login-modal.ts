@@ -1,8 +1,9 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, DestroyRef, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { GoogleSigninButtonModule, SocialAuthService } from '@abacritt/angularx-social-login';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login-modal',
@@ -14,11 +15,12 @@ export class LoginModalComponent implements OnInit {
   private socialAuthService = inject(SocialAuthService);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   @Output() closeModal = new EventEmitter<void>();
 
   ngOnInit(): void {
-    this.socialAuthService.authState.subscribe((googleUser) => {
+    this.socialAuthService.authState.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((googleUser) => {
       if (googleUser && googleUser.idToken) {
         this.authService.verifyGoogleToken(googleUser.idToken).subscribe({
           next: (response) => {

@@ -9,7 +9,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (req.url.includes('/api/auth/')) {
+  if (req.url.includes('/auth/google')) {
     return next(req);
   }
   const token = authService.getToken();
