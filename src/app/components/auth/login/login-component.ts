@@ -22,8 +22,22 @@ export class LoginComponent implements OnInit {
           next: (response) => {
             if (response.requiresOnboarding) {
               this.router.navigate(['/onboarding']);
-            } else {
-              this.router.navigate(['/home']);
+              return;
+            } 
+            
+            const userRole = this.authService.getRoleFromToken();
+            switch (userRole) {
+              case 'ROLE_PUBLISHER':
+                this.router.navigate(['/events']);
+                break;
+              
+              case 'ROLE_USER':
+                this.router.navigate(['/home']);
+                break;
+              
+              default:
+                this.router.navigate(['/home']);
+                break;
             }
           },
           error: (err) => {

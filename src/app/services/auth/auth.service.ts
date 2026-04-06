@@ -45,8 +45,7 @@ export class AuthService {
     }
 
     try {
-      const payloadBase64 = token.split('.')[1];
-      const decodedPayload = JSON.parse(atob(payloadBase64));
+      const decodedPayload = this.getDecodedPayload(token);
       const exp = decodedPayload.exp * 1000;
       const currentTime = Date.now();
       if (currentTime > exp) {
@@ -58,6 +57,33 @@ export class AuthService {
       console.error('Error decoding token:', error);
       this.logout();
       return false;
+    }
+  }
+
+  getDecodedPayload(token: string): any | null {
+    try {
+      const payloadBase64 = token.split('.')[1];
+      return JSON.parse(atob(payloadBase64));
+    } catch (error) {
+      return null;
+    }
+  }
+
+  getRoleFromToken(): string | null {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+    
+    try {
+      const decodedPayload = this.getDecodedPayload(token);
+      const roles: any[] = decodedPayload.roles;
+      if (Array.isArray(roles) && roles.length > 0) {
+        return roles[0].authority;
+      }
+      return null;
+    } catch (error) {
+      return null;
     }
   }
 
