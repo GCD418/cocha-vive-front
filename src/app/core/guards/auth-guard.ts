@@ -57,7 +57,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     return router.createUrlTree(['/home']);
   }
 
-  if (!userRoles.includes('ROLE_PUBLISHER') && state.url === '/events/create') {
+  if (!userRoles.includes('ROLE_PUBLISHER') && state.url.startsWith('/events/create')) {
     return router.createUrlTree(['/publisher-apply-form'], {
       queryParams: { from: state.url },
     });
