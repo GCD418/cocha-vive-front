@@ -6,7 +6,6 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-modal',
-  standalone: true,
   imports: [GoogleSigninButtonModule, TranslateModule],
   templateUrl: './login-modal.html',
   styleUrls: ['./login-modal.css']
