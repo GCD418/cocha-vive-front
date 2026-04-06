@@ -37,10 +37,6 @@ export class AuthService {
   actualRole = signal<string | null>(null);
   isAuthenticated = computed(() => this.actualRole() !== null && this.getToken() !== null);
 
-  constructor() {
-    this.initAuthFromStorage();
-  }
-
   initAuthFromStorage(): void {
     const token = this.getToken();
 
