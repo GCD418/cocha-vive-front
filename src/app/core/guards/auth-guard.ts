@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthService, JwtPayload } from '../../services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 function normalizeRoles(rawRoles: unknown): string[] {
   if (!Array.isArray(rawRoles)) {
@@ -32,13 +32,17 @@ export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
 
   if (!authService.isLoggedIn()) {
-    return router.createUrlTree(['/login']);
+    return router.createUrlTree(['/home'], {
+      queryParams: { login: 1, returnUrl: state.url },
+    });
   }
 
   const decodedPayload = authService.getDecodedPayload(authService.getToken());
   if (!decodedPayload) {
     authService.logout();
-    return router.createUrlTree(['/login']);
+    return router.createUrlTree(['/home'], {
+      queryParams: { login: 1, returnUrl: state.url },
+    });
   }
 
   const requiresOnboarding = Boolean(decodedPayload.requiresOnboarding);

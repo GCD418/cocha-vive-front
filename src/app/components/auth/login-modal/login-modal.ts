@@ -29,6 +29,12 @@ export class LoginModalComponent implements OnInit {
               this.router.navigate(['/onboarding']);
               return;
             } 
+
+            const returnUrl = this.getReturnUrl();
+            if (returnUrl) {
+              this.router.navigateByUrl(returnUrl);
+              return;
+            }
             
             const userRole = this.authService.getRoleFromToken();
             switch (userRole) {
@@ -55,5 +61,16 @@ export class LoginModalComponent implements OnInit {
 
   close() {
     this.closeModal.emit();
+  }
+
+  private getReturnUrl(): string | null {
+    const queryParams = this.router.parseUrl(this.router.url).queryParams;
+    const returnUrl = queryParams['returnUrl'];
+
+    if (typeof returnUrl === 'string' && returnUrl.startsWith('/')) {
+      return returnUrl;
+    }
+
+    return null;
   }
 }
