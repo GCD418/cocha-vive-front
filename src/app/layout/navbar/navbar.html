@@ -47,7 +47,9 @@
             </li>
         </ul>
       </div>
-      <a class="cta-btn d-none d-sm-block" [routerLink]="['/events/create']">{{ 'NAV.PUBLISH_EVENT' | translate }}</a>
+      @if (this.authService.actualRole()) {
+        <a class="cta-btn d-none d-sm-block" [routerLink]="['/events/create']">{{ 'NAV.PUBLISH_EVENT' | translate }}</a>
+      }
       @if (currentUser) {
         <div class="dropdown">
           <button

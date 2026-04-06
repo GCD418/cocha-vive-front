@@ -19,7 +19,7 @@ export class Navbar implements OnInit {
   showLoginModal = false; 
   currentUser: CurrentUser | null = null;
 
-  private authService = inject(AuthService);
+  protected authService = inject(AuthService);
   private router = inject(Router);
   private translate = inject(TranslateService);
 
