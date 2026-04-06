@@ -63,7 +63,7 @@
           <ul class="dropdown-menu dropdown-menu-end shadow nav-user-dropdown" [class.show]="userDropdownOpen">
             <li>
 <div class="d-flex align-items-center gap-3 px-3 py-2">
-                @if (currentUser?.photoUrl) {
+                @if (currentUser.photoUrl) {
                   <img [src]="currentUser!.photoUrl" 
                        [alt]="displayName" 
                        class="nav-user-avatar"
@@ -78,7 +78,7 @@
                     {{ displayName }}
                   </p>
                   <p class="mb-0 text-muted text-truncate" style="font-size: 12px;">
-                    {{ currentUser?.email }}
+                    {{ currentUser.email }}
                   </p>
                 </div>
               </div>
