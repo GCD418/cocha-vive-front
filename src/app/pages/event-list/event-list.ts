@@ -73,17 +73,6 @@ export class EventList implements OnInit {
 
       this.loadMyEvents(user.id);
     });
-
-    this.authService.getCurrentUser().subscribe(user => {
-      console.log('Usuario logueado:', user);
-      console.log('Tipo de user.id:', typeof user?.id, '→ valor:', user?.id);
-    });
-
-    this.eventService.getEvents().subscribe(data => {
-      data.forEach(e => {
-        console.log(`Evento "${e.title}" → organizedByUser.id:`, e.organizedByUser.id, '| tipo:', typeof e.organizedByUser.id);
-      });
-    });
   }
 
   private loadMyEvents(userId: number): void {

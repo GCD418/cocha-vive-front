@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, inject, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { AuthService, CurrentUser } from '../../services/auth/auth.service';
 import { LoginModalComponent } from '../../components/auth/login-modal/login-modal';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -19,8 +19,9 @@ export class Navbar implements OnInit {
   showLoginModal = false; 
   currentUser: CurrentUser | null = null;
 
-  private authService = inject(AuthService);
+  protected authService = inject(AuthService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private translate = inject(TranslateService);
 
   get currentLangLabel(): string {
@@ -30,6 +31,16 @@ export class Navbar implements OnInit {
   ngOnInit() {
     document.body.classList.add('scrolled');
     this.checkUserSession();
+    this.route.queryParamMap.subscribe((params) => {
+      if (params.get('login') === '1' && !this.showLoginModal) {
+        this.openLoginModal();
+        this.router.navigate([], {
+          queryParams: { login: null },
+          queryParamsHandling: 'merge',
+          replaceUrl: true,
+        });
+      }
+    });
   }
 
   toggleLangDropdown(event: Event): void {

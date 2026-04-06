@@ -14,7 +14,7 @@ import { AppFeatures } from './models/app-features';
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
-    { path: 'events', component: EventList },
+    { path: 'events', component: EventList, canActivate: [authGuard], data: { roles: ['ROLE_PUBLISHER'] } },
     {
         path: 'events/create',
         component: EventCreate,

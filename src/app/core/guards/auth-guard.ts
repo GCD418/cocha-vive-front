@@ -1,15 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-
-type JwtPayload = {
-  requiresOnboarding?: boolean;
-  roles?: unknown;
-};
-
-function parseJwtPayload(token: string): JwtPayload {
-  const payloadBase64 = token.split('.')[1];
-  return JSON.parse(atob(payloadBase64)) as JwtPayload;
-}
+import { AuthService } from '../../services/auth/auth.service';
 
 function normalizeRoles(rawRoles: unknown): string[] {
   if (!Array.isArray(rawRoles)) {
@@ -38,41 +29,49 @@ function normalizeRoles(rawRoles: unknown): string[] {
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
-  const token = localStorage.getItem('cocha_vive_token');
+  const authService = inject(AuthService);
 
-  if (!token) {
-    return router.createUrlTree(['/login']);
+  if (!authService.isLoggedIn()) {
+    return router.createUrlTree(['/home'], {
+      queryParams: { login: 1, returnUrl: state.url },
+    });
   }
 
-  try {
-    const decodedPayload = parseJwtPayload(token);
-
-    const requiresOnboarding = decodedPayload.requiresOnboarding;
-    const userRoles = normalizeRoles(decodedPayload.roles);
-    const requiredRoles = (route.data?.['roles'] as string[] | undefined) ?? [];
-
-if (requiresOnboarding && state.url !== '/onboarding') {
-      return router.createUrlTree(['/onboarding']);
-    }
-
-    // --- COMENTA ESTO TEMPORALMENTE PARA PODER ENTRAR A LA FUERZA ---
-    if (!requiresOnboarding && state.url === '/onboarding') {
-      return router.createUrlTree(['/home']);
-    }
-
-    if (requiredRoles.length > 0) {
-      const hasRequiredRole = requiredRoles.some((role) => userRoles.includes(role));
-
-      if (!hasRequiredRole) {
-        return router.createUrlTree(['/forbidden'], {
-          queryParams: { from: state.url },
-        });
-      }
-    }
-
-    return true;
-  } catch (error) {
-    localStorage.removeItem('cocha_vive_token');
-    return router.createUrlTree(['/login']);
+  const decodedPayload = authService.getDecodedPayload(authService.getToken());
+  if (!decodedPayload) {
+    authService.logout();
+    return router.createUrlTree(['/home'], {
+      queryParams: { login: 1, returnUrl: state.url },
+    });
   }
+
+  const requiresOnboarding = Boolean(decodedPayload.requiresOnboarding);
+  const userRoles = normalizeRoles(decodedPayload.roles);
+  const requiredRoles = (route.data?.['roles'] as string[] | undefined) ?? [];
+
+  if (requiresOnboarding && state.url !== '/onboarding') {
+    return router.createUrlTree(['/onboarding']);
+  }
+
+  if (!requiresOnboarding && state.url === '/onboarding') {
+    return router.createUrlTree(['/home']);
+  }
+
+  if (!userRoles.includes('ROLE_PUBLISHER') && state.url.startsWith('/events/create')) {
+    return router.createUrlTree(['/publisher-apply-form'], {
+      queryParams: { from: state.url },
+    });
+  }
+
+  if (requiredRoles.length > 0) {
+    const hasRequiredRole = requiredRoles.some((role) => userRoles.includes(role));
+
+    if (!hasRequiredRole) {
+      return router.createUrlTree(['/forbidden'], {
+        queryParams: { from: state.url },
+      });
+    }
+  }
+
+  return true;
 };
