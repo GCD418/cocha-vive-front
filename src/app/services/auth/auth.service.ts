@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable, tap, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -25,11 +25,13 @@ export class AuthService {
   private http = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/auth/google`;
   private usersUrl = `${environment.apiUrl}/users`;
+  actualRole = signal<string | null>(this.getRoleFromToken());
 
   verifyGoogleToken(googleToken: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(this.apiUrl, { token: googleToken }).pipe(
       tap((response) => {
         localStorage.setItem('cocha_vive_token', response.internalToken);
+        this.actualRole.set(this.getRoleFromToken());
       })
     );
   }
@@ -98,6 +100,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('cocha_vive_token');
+    this.actualRole.set(null);
   }
   updateOnboarding(data: { documentNumber: string; documentExtension: string }): Observable<any> {
     return this.http.put(`${environment.apiUrl}/users/complete-profile`, data);
