@@ -13,14 +13,21 @@
       </div>
 
       <div class="modal-body p-0">
-        @if (latitude !== 0 && longitude !== 0) {
+        @if (apiLoaded && latitude !== 0 && longitude !== 0) {
           <google-map
             [center]="center"
             [options]="mapOptions"
             width="100%"
             height="450px">
-            <map-marker [position]="markerPosition" />
+            <map-advanced-marker [position]="markerPosition" />
           </google-map>
+        } @else if (!apiLoaded) {
+          <div class="d-flex justify-content-center align-items-center"
+                style="height: 450px;">
+            <div class="spinner-border" style="color: #f82249;" role="status">
+              <span class="visually-hidden">Cargando mapa...</span>
+            </div>
+          </div>
         } @else {
           <div class="d-flex justify-content-center align-items-center"
                style="height: 450px; background-color: #f2f2f3;">
