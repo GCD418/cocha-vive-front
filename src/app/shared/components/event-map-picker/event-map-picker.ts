@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, NgZone, Output  } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, NgZone, Output, AfterViewInit  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { environment } from '../../../../environments/environment';
+
+declare const bootstrap: any;
 
 @Component({
   selector: 'app-event-map-picker',
@@ -10,7 +12,7 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './event-map-picker.html',
   styleUrl: './event-map-picker.css',
 })
-export class EventMapPicker implements OnInit {
+export class EventMapPickerComponent implements OnInit {
   @Input() initialLatitude: number = -17.3895;
   @Input() initialLongitude: number = -66.1568;
 
@@ -18,6 +20,8 @@ export class EventMapPicker implements OnInit {
 
   apiLoaded = false;
   markerPosition: google.maps.LatLngLiteral = { lat: -17.3895, lng: -66.1568 };
+
+  private modalInstance: any;
 
   get center(): google.maps.LatLngLiteral {
     return this.markerPosition;
@@ -28,7 +32,8 @@ export class EventMapPicker implements OnInit {
     mapTypeControl: false,
     streetViewControl: false,
     fullscreenControl: false,
-    mapId: 'DEMO_MAP_ID'
+    mapId: 'DEMO_MAP_ID',
+    draggableCursor: 'crosshair'
   };
 
   constructor(private ngZone: NgZone) {}
@@ -41,6 +46,24 @@ export class EventMapPicker implements OnInit {
       };
     }
     this.loadGoogleMaps();
+  }
+
+  openModal() {
+    if (this.initialLatitude !== 0 && this.initialLongitude !== 0) {
+      this.markerPosition = {
+        lat: this.initialLatitude,
+        lng: this.initialLongitude
+      };
+    }
+
+    const modalEl = document.getElementById('mapPickerModal');
+    if (modalEl) {
+      this.modalInstance = new bootstrap.Modal(modalEl, {
+        backdrop: true,
+        keyboard: true
+      });
+      this.modalInstance.show();
+    }
   }
 
   private loadGoogleMaps() {

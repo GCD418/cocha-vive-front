@@ -143,6 +143,31 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    Ubicación en el mapa
+                    <span class="text-muted fw-normal" style="font-size: 13px;">(opcional)</span>
+                </label>
+
+                <div>
+                    <button type="button"
+                            class="btn btn-outline-secondary w-100 text-start"
+                            (click)="mapPicker.openModal()">
+                    @if (hasLocation) {
+                        <i class="bi bi-geo-alt-fill me-2" style="color: #f82249;"></i>
+                        Ubicación seleccionada — Lat: {{ form.latitude | number:'1.4-4' }},
+                        Lng: {{ form.longitude | number:'1.4-4' }}
+                        <span class="float-end text-muted" style="font-size: 12px;">
+                        Clic para cambiar
+                        </span>
+                    } @else {
+                        <i class="bi bi-geo-alt me-2 text-muted"></i>
+                        <span class="text-muted">Seleccionar en el mapa</span>
+                    }
+                    </button>
+                </div>
+                </div>
+
+            <div class="mb-3">
                 <label class="form-label fw-semibold" >
                     {{ 'EVENT_FORM.LABELS.PEOPLE_CAPACITY' | translate }}
                 <span class="text-muted fw-normal" style="font-size: 13px;">{{ 'EVENT_FORM.LABELS.OPTIONAL' | translate }}</span>
@@ -264,5 +289,12 @@
         <i class="bi bi-send me-1"></i>{{ isEditMode ? ('EVENT_FORM.LABELS.SAVE_CHANGES' | translate) : ('EVENT_FORM.LABELS.PUBLISH_EVENT' | translate) }}
         </button>
     </div>
+
+    <app-event-map-picker
+        #mapPicker
+        [initialLatitude]="form.latitude"
+        [initialLongitude]="form.longitude"
+        (locationSelected)="onLocationSelected($event)">
+    </app-event-map-picker>
 
 </div>

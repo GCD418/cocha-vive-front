@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CategoryDTO, EventModel } from '../../../models/event-model';
 import { EventService } from '../../../services/event-service/event.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { EventMapPickerComponent } from '../../../shared/components/event-map-picker/event-map-picker';
 
 export interface EventFormResult {
   success: boolean;
@@ -13,7 +14,7 @@ export interface EventFormResult {
 @Component({
   selector: 'app-event-form-component',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule],
+  imports: [CommonModule, FormsModule, TranslateModule, EventMapPickerComponent],
   templateUrl: './event-form-component.html',
   styleUrl: './event-form-component.css',
 })
@@ -51,6 +52,8 @@ export class EventFormComponent implements OnInit, OnChanges {
     startTime: '',
     endDate: '',
     endTime: '',
+    latitude: 0,
+    longitude: 0,
   };
  
   constructor(private eventService: EventService) {}
@@ -91,6 +94,8 @@ export class EventFormComponent implements OnInit, OnChanges {
       startTime: this.toTimeInput(dateStart),
       endDate: this.toDateInput(dateEnd),
       endTime: this.toTimeInput(dateEnd),
+      latitude: event.latitude,
+      longitude: event.longitude,
     };
 
     this.existingPhotos = [...(event.photoLinks || [])];
@@ -122,6 +127,8 @@ export class EventFormComponent implements OnInit, OnChanges {
       startTime: '',
       endDate: '',
       endTime: '',
+      latitude: 0,
+      longitude: 0,
     };
     this.existingPhotos = [];
     this.newFiles = [];
@@ -225,8 +232,8 @@ export class EventFormComponent implements OnInit, OnChanges {
       cost: this.form.costType === 'gratuito' ? 0 : Math.round(this.form.cost * 100),
       categoryId: this.form.categoryId,
       organizedByUserId: 1,
-      latitude: 0.0,
-      longitude: 0.0,
+      latitude: this.form.latitude,
+      longitude: this.form.longitude,
       shortPlaceDescription: this.form.shortPlaceDescription,
       peopleCapacity: this.form.peopleCapacity,
       dateStart: `${this.form.startDate}T${this.form.startTime}:00`,
@@ -234,6 +241,15 @@ export class EventFormComponent implements OnInit, OnChanges {
       tags: this.form.tags,
       photoLinks: this.existingPhotos,
     };
+  }
+
+  onLocationSelected(coords: { lat: number; lng: number }): void {
+    this.form.latitude = coords.lat;
+    this.form.longitude = coords.lng;
+  }
+
+  get hasLocation(): boolean {
+    return this.form.latitude !== 0 && this.form.longitude !== 0;
   }
  
   onSubmit(): void {
