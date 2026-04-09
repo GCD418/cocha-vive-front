@@ -2,11 +2,12 @@ import { Component, Input, NgZone  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { environment } from '../../../../environments/environment';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-event-map-modal',
   standalone: true,
-  imports: [CommonModule, GoogleMapsModule],
+  imports: [CommonModule, GoogleMapsModule, TranslateModule],
   templateUrl: './event-map-modal.html',
   styleUrl: './event-map-modal.css',
 })

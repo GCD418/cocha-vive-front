@@ -2,13 +2,14 @@ import { Component, EventEmitter, Input, OnInit, NgZone, Output, AfterViewInit  
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { environment } from '../../../../environments/environment';
+import { TranslateModule } from '@ngx-translate/core';
 
 declare const bootstrap: any;
 
 @Component({
   selector: 'app-event-map-picker',
   standalone: true,
-  imports: [CommonModule, GoogleMapsModule],
+  imports: [CommonModule, GoogleMapsModule, TranslateModule],
   templateUrl: './event-map-picker.html',
   styleUrl: './event-map-picker.css',
 })

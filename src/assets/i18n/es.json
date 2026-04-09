@@ -44,7 +44,8 @@
       "DATE_TIME": "Fecha y Horario",
       "DETAILS": "Detalles del Evento",
       "TAGS": "Etiquetas",
-      "PHOTOS": "Fotos del Evento"
+      "PHOTOS": "Fotos del Evento",
+      "MAP-LOCATION": "Ubicación en el mapa"
     },
     "LABELS": {
       "TITLE": "Nombre del evento",
@@ -79,7 +80,12 @@
       "NEW_PHOTOS_INFO": "Las nuevas fotos se agregarán después de las existentes.",
       "CANCEL": "Cancelar",
       "SAVE_CHANGES": "Guardar Cambios",
-      "PUBLISH_EVENT": "Publicar Evento"
+      "PUBLISH_EVENT": "Publicar Evento",
+      "SELECTED_LOCATION": "Ubicación seleccionada — Lat: {{lat}}, Lng: {{lng}}",
+      "CLICK_TO_CHANGE": "Clic para cambiar",
+      "SELECT_ON_MAP": "Seleccionar en el mapa",
+      "TAGS": "Etiquetas"
+        
     },
     "PLACEHOLDERS": {
       "TITLE": "Ej: Festival de Danza Contemporánea",
@@ -128,7 +134,8 @@
     "LOCATION": "Detalles de ubicación",
     "LOCATION_SOON": "Ubicación disponible próximamente",
     "SHARE": "Compartir Evento",
-    "LOADING": "Cargando..."
+    "LOADING": "Cargando...",
+    "LOCATION_MAP": "Ver ubicación en el mapa"
   },
   "EVENT_LIST": {
     "TITLE": "Mis Eventos",
@@ -243,5 +250,17 @@
   "CONFIRM_MODAL": {
     "CANCEL": "Cancelar",
     "PROCESSING": "Procesando..."
+  },
+  "EVENT_MAP_MODAL": {
+    "LABELS": {
+        "LOCATION": "Ubicación del evento",
+        "CHARGING_MAP": "Cargando mapa...",
+        "UNAVAILABLE_LOCATION": "No hay ubicación disponible para este evento.",
+        "CLOSE": "Cerrar",
+        "SELECT_LOCATION": "Seleccionar ubicación",
+        "MOVE_MARKET": "Haz clic en el mapa para mover el marcador",
+        "CANCEL": "Cancelar",
+        "CONFIRM": "Confirmar ubicación"
+    }
   }
 }

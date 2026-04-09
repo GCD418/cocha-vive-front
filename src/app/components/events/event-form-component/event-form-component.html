@@ -144,7 +144,7 @@
 
             <div class="mb-3">
                 <label class="form-label fw-semibold">
-                    Ubicación en el mapa
+                    {{ 'EVENT_FORM.SECTIONS.MAP-LOCATION' | translate }}
                     <span class="text-muted fw-normal" style="font-size: 13px;">(opcional)</span>
                 </label>
 
@@ -154,14 +154,13 @@
                             (click)="mapPicker.openModal()">
                     @if (hasLocation) {
                         <i class="bi bi-geo-alt-fill me-2" style="color: #f82249;"></i>
-                        Ubicación seleccionada — Lat: {{ form.latitude | number:'1.4-4' }},
-                        Lng: {{ form.longitude | number:'1.4-4' }}
+                            {{ 'EVENT_FORM.LABELS.SELECTED_LOCATION' | translate:{ lat: form.latitude | number:'1.4-4', lng: form.longitude | number:'1.4-4' } }}
                         <span class="float-end text-muted" style="font-size: 12px;">
-                        Clic para cambiar
+                            {{ 'EVENT_FORM.LABELS.CLICK_TO_CHANGE' | translate }}
                         </span>
                     } @else {
                         <i class="bi bi-geo-alt me-2 text-muted"></i>
-                        <span class="text-muted">Seleccionar en el mapa</span>
+                        <span class="text-muted">{{ 'EVENT_FORM.LABELS.SELECT_ON_MAP' | translate }}</span>
                     }
                     </button>
                 </div>
@@ -183,7 +182,7 @@
         <div class="card-body p-4">
             <h5 class="fw-bold mb-3">
                 <i class="bi bi-tags me-2" style="color: var(--accent-color);"></i>
-                Etiquetas
+                {{ 'EVENT_FORM.SECTIONS.TAGS' | translate }}
             </h5>
             <p class="form-text mb-3">{{ 'EVENT_FORM.LABELS.TAGS_DESCRIPTION' | translate }}</p>
 
