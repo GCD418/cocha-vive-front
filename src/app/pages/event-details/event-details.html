@@ -2,14 +2,6 @@
   @if (event) {
     <div class="container pt-5 mt-5">
 
-      <div class="mb-3">
-        <button class="btn btn-sm text-white shadow-sm" 
-                style="background-color: #d9534f; border-color: #d9534f;" 
-                (click)="goBack()">
-          <i class="bi bi-arrow-left me-1"></i> {{ 'EVENT_DETAILS.BACK_BUTTON' | translate }}
-        </button>
-      </div>
-
       <div class="row g-4">
         <div class="col-lg-8">
 
@@ -92,6 +84,18 @@
           }
 
           <div class="mt-4">
+            <h4 class="fw-bold">{{ 'EVENT_DETAILS.LOCATION' | translate }}</h4>
+            <div class="rounded p-3 d-flex align-items-center gap-3"
+                 style="background-color: var(--surface-color); border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);">
+              <div class="rounded-circle d-flex align-items-center justify-content-center"
+                   style="width:50px; height:50px; min-width:50px; background-color: color-mix(in srgb, var(--default-color), transparent 85%);">
+                <i class="bi bi-geo-alt-fill fs-4" style="color: var(--accent-color);"></i>
+              </div>
+              <p class="mb-0">{{ event.shortPlaceDescription }}</p>
+            </div>
+          </div>
+
+          <div class="mt-4">
             <h4 class="fw-bold">{{ 'EVENT_DETAILS.ORGANIZER' | translate }}</h4>
             <div class="rounded p-3 d-flex align-items-center gap-3"
                  style="background-color: var(--surface-color); border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);">
@@ -151,12 +155,13 @@
             </div>
 
             <div class="d-grid mb-3">
-              <button class="btn btn-outline-secondary" disabled>
-                <i class="bi bi-geo-alt me-1"></i> {{ 'EVENT_DETAILS.VIEW_MAP' | translate }}
-              </button>
-              <p class="text-center mt-2" style="font-size: 12px; color: color-mix(in srgb, var(--default-color), transparent 50%);">
-                {{ 'EVENT_DETAILS.LOCATION_SOON' | translate }}
-              </p>
+              <button class="btn text-white"
+                    style="background-color: #f82249; border-color: #f82249;"
+                    data-bs-toggle="modal"
+                    data-bs-target="#eventMapModal"
+                    [disabled]="!event.latitude || !event.longitude">
+              <i class="bi bi-geo-alt me-1"></i> {{ 'EVENT_DETAILS.LOCATION_MAP' | translate }}
+            </button>
             </div>
 
             <hr style="border-color: color-mix(in srgb, var(--default-color), transparent 85%);">
@@ -177,5 +182,13 @@
         <span class="visually-hidden">{{ 'EVENT_DETAILS.LOADING' | translate }}</span>
       </div>
     </div>
+  }
+
+  @if (event) {
+    <app-event-map-modal
+      [latitude]="event.latitude"
+      [longitude]="event.longitude"
+      [locationName]="event.shortPlaceDescription">
+    </app-event-map-modal>
   }
 </div>

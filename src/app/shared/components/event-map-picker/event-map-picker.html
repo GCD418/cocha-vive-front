@@ -1,0 +1,64 @@
+<div class="modal fade" id="mapPickerModal" tabindex="-1" aria-hidden="true" style="z-index: 1060;">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header" style="background-color: #0e1b4d;">
+        <h5 class="modal-title text-white">
+          <i class="bi bi-geo-alt-fill me-2" style="color: #f82249;"></i>
+          {{'EVENT_MAP_MODAL.LABELS.SELECT_LOCATION' | translate}}
+        </h5>
+        <button type="button" class="btn-close btn-close-white"
+                data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+
+      <div class="modal-body p-0" style="position: relative;">
+        @if (apiLoaded) {
+          <google-map
+            [center]="center"
+            [options]="mapOptions"
+            width="100%"
+            height="450px"
+            (mapClick)="onMapClick($event)">
+            <map-advanced-marker [position]="markerPosition" />
+          </google-map>
+
+          <!-- Instrucción flotante -->
+          <div class="position-absolute top-0 start-50 translate-middle-x mt-2"
+               style="z-index: 10;">
+            <span class="badge text-bg-dark opacity-75 px-3 py-2">
+              <i class="bi bi-cursor me-1"></i>
+              {{'EVENT_MAP_MODAL.LABELS.MOVE_MARKET' | translate}}
+            </span>
+          </div>
+        } @else {
+          <div class="d-flex justify-content-center align-items-center"
+               style="height: 450px;">
+            <div class="spinner-border" style="color: #f82249;" role="status">
+              <span class="visually-hidden">{{ 'EVENT_MAP_MODAL.LABELS.CHARGING_MAP' | translate }}</span>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="modal-footer d-flex justify-content-between align-items-center">
+        <small class="text-muted">
+          <i class="bi bi-crosshair me-1"></i>
+          Lat: {{ markerPosition.lat | number:'1.6-6' }},
+          Lng: {{ markerPosition.lng | number:'1.6-6' }}
+        </small>
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-secondary"
+                  data-bs-dismiss="modal">{{ 'EVENT_MAP_MODAL.LABELS.CANCEL' | translate }}</button>
+          <button type="button" class="btn text-white"
+                  style="background-color: #f82249; border-color: #f82249;"
+                  data-bs-dismiss="modal"
+                  (click)="confirmLocation()">
+            <i class="bi bi-check-lg me-1"></i> {{ 'EVENT_MAP_MODAL.LABELS.CONFIRM' | translate }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

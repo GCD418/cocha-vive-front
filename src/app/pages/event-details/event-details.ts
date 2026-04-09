@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EventModel } from '../../models/event-model';
 import { EventService } from '../../services/event-service/event.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OnInit } from '@angular/core';
 import { PricePipe } from '../../shared/pipes/price.pipe';
 import { TranslateModule } from '@ngx-translate/core';
+import { EventMapModalComponent } from '../../components/events/event-map-modal/event-map-modal';
+
 
 @Component({
   selector: 'app-event-details',
-  imports: [CommonModule, PricePipe, TranslateModule],
+  imports: [CommonModule, PricePipe, TranslateModule, EventMapModalComponent],
   templateUrl: './event-details.html',
   styleUrl: './event-details.css',
 })

@@ -143,6 +143,30 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    {{ 'EVENT_FORM.SECTIONS.MAP-LOCATION' | translate }}
+                    <span class="text-muted fw-normal" style="font-size: 13px;">(opcional)</span>
+                </label>
+
+                <div>
+                    <button type="button"
+                            class="btn btn-outline-secondary w-100 text-start"
+                            (click)="mapPicker.openModal()">
+                    @if (hasLocation) {
+                        <i class="bi bi-geo-alt-fill me-2" style="color: #f82249;"></i>
+                            {{ 'EVENT_FORM.LABELS.SELECTED_LOCATION' | translate:{ lat: form.latitude | number:'1.4-4', lng: form.longitude | number:'1.4-4' } }}
+                        <span class="float-end text-muted" style="font-size: 12px;">
+                            {{ 'EVENT_FORM.LABELS.CLICK_TO_CHANGE' | translate }}
+                        </span>
+                    } @else {
+                        <i class="bi bi-geo-alt me-2 text-muted"></i>
+                        <span class="text-muted">{{ 'EVENT_FORM.LABELS.SELECT_ON_MAP' | translate }}</span>
+                    }
+                    </button>
+                </div>
+                </div>
+
+            <div class="mb-3">
                 <label class="form-label fw-semibold" >
                     {{ 'EVENT_FORM.LABELS.PEOPLE_CAPACITY' | translate }}
                 <span class="text-muted fw-normal" style="font-size: 13px;">{{ 'EVENT_FORM.LABELS.OPTIONAL' | translate }}</span>
@@ -158,7 +182,7 @@
         <div class="card-body p-4">
             <h5 class="fw-bold mb-3">
                 <i class="bi bi-tags me-2" style="color: var(--accent-color);"></i>
-                Etiquetas
+                {{ 'EVENT_FORM.SECTIONS.TAGS' | translate }}
             </h5>
             <p class="form-text mb-3">{{ 'EVENT_FORM.LABELS.TAGS_DESCRIPTION' | translate }}</p>
 
@@ -264,5 +288,12 @@
         <i class="bi bi-send me-1"></i>{{ isEditMode ? ('EVENT_FORM.LABELS.SAVE_CHANGES' | translate) : ('EVENT_FORM.LABELS.PUBLISH_EVENT' | translate) }}
         </button>
     </div>
+
+    <app-event-map-picker
+        #mapPicker
+        [initialLatitude]="form.latitude"
+        [initialLongitude]="form.longitude"
+        (locationSelected)="onLocationSelected($event)">
+    </app-event-map-picker>
 
 </div>

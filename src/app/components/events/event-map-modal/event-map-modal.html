@@ -1,0 +1,46 @@
+<div class="modal fade" id="eventMapModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header" style="background-color: #0e1b4d;">
+        <h5 class="modal-title text-white">
+          <i class="bi bi-geo-alt-fill me-2" style="color: #f82249;"></i>
+          {{ locationName || ('EVENT_MAP_MODAL.LABELS.LOCATION' | translate) }}
+        </h5>
+        <button type="button" class="btn-close btn-close-white"
+                data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+
+      <div class="modal-body p-0">
+        @if (apiLoaded && latitude !== 0 && longitude !== 0) {
+          <google-map
+            [center]="center"
+            [options]="mapOptions"
+            width="100%"
+            height="450px">
+            <map-advanced-marker [position]="markerPosition" />
+          </google-map>
+        } @else if (!apiLoaded) {
+          <div class="d-flex justify-content-center align-items-center"
+                style="height: 450px;">
+            <div class="spinner-border" style="color: #f82249;" role="status">
+              <span class="visually-hidden">{{ 'EVENT_MAP_MODAL.LABELS.CHARGING_MAP' | translate }}</span>
+            </div>
+          </div>
+        } @else {
+          <div class="d-flex justify-content-center align-items-center"
+               style="height: 450px; background-color: #f2f2f3;">
+            <p class="text-muted">{{ 'EVENT_MAP_MODAL.LABELS.UNAVAILABLE_LOCATION' | translate }}</p>
+          </div>
+        }
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                data-bs-dismiss="modal">{{'EVENT_MAP_MODAL.LABELS.CLOSE' | translate}}</button>
+      </div>
+
+    </div>
+  </div>
+</div>
