@@ -3,7 +3,6 @@ import { HeroComponent } from '../../layout/hero/hero';
 import { CategoriesCard } from '../../components/categories/categories-card/categories-card';
 import { FeaturedEventComponent } from '../../components/events/featured-event/featured-event';
 import { UpcomingEventsListComponent } from '../../components/events/upcoming-events-list-component/upcoming-events-list-component';
-import { LoginComponent } from '../../components/auth/login/login-component';
 
 @Component({
   selector: 'app-home',

@@ -51,14 +51,14 @@
           <span class="input-group-text bg-white"><i class="bi bi-search text-secondary"></i></span>
           <input type="text"
                 class="form-control border-start-0"
-                placeholder="Buscar por título..."
+                placeholder="{{ 'EVENT_LIST.PLACEHOLDERS.SEARCH' | translate }}"
                 [(ngModel)]="searchText"
                 (ngModelChange)="onFilterChange()">
         </div>
         @if (hasActiveFilters()) {
           <button class="btn btn-sm btn-outline-secondary text-nowrap"
                   (click)="clearFilters()">
-            <i class="bi bi-x-lg me-1"></i> Quitar filtros
+            <i class="bi bi-x-lg me-1"></i> {{ 'EVENT_LIST.FILTERS.CLEAR_FILTERS' | translate }}
           </button>
         }
       </div>
@@ -80,10 +80,10 @@
                       {{ 'EVENT_LIST.TABLE.HEADERS.DATE' | translate }}
                     </button>
                     <div class="dropdown-menu p-3" style="min-width: 220px;">
-                      <label class="form-label small text-muted mb-1">Desde</label>
+                      <label class="form-label small text-muted mb-1">{{ 'EVENT_LIST.FILTERS.DATE_FROM' | translate }}</label>
                       <input type="date" class="form-control form-control-sm mb-2"
                             [(ngModel)]="filterDateFrom" (ngModelChange)="onFilterChange()">
-                      <label class="form-label small text-muted mb-1">Hasta</label>
+                      <label class="form-label small text-muted mb-1">{{ 'EVENT_LIST.FILTERS.DATE_TO' | translate }}</label>
                       <input type="date" class="form-control form-control-sm"
                             [(ngModel)]="filterDateTo" (ngModelChange)="onFilterChange()">
                     </div>
@@ -104,7 +104,7 @@
                         <a class="dropdown-item d-flex justify-content-between align-items-center"
                           [class.selected]="filterCategory === ''"
                           (click)="filterCategory = ''; onFilterChange()">
-                          Todas @if (filterCategory === '') { <i class="bi bi-check"></i> }
+                          {{ 'EVENT_LIST.FILTERS.ALL' | translate }} @if (filterCategory === '') { <i class="bi bi-check"></i> }
                         </a>
                       </li>
                         @for (cat of availableCategories; track cat) {
@@ -134,21 +134,21 @@
                         <a class="dropdown-item d-flex justify-content-between align-items-center"
                           [class.selected]="filterType === ''"
                           (click)="filterType = ''; onFilterChange()">
-                          Todos @if (filterType === '') { <i class="bi bi-check"></i> }
+                          {{ 'EVENT_LIST.FILTERS.ALL' | translate }} @if (filterType === '') { <i class="bi bi-check"></i> }
                         </a>
                       </li>
                       <li>
                         <a class="dropdown-item d-flex justify-content-between align-items-center"
                           [class.selected]="filterType === 'gratis'"
                           (click)="filterType = 'gratis'; onFilterChange()">
-                          Gratis @if (filterType === 'gratis') { <i class="bi bi-check"></i> }
+                          {{ 'EVENT_LIST.TABLE.TYPE_FREE' | translate }} @if (filterType === 'gratis') { <i class="bi bi-check"></i> }
                         </a>
                       </li>
                       <li>
                         <a class="dropdown-item d-flex justify-content-between align-items-center"
                           [class.selected]="filterType === 'depago'"
                           (click)="filterType = 'depago'; onFilterChange()">
-                          De pago @if (filterType === 'depago') { <i class="bi bi-check"></i> }
+                          {{ 'EVENT_LIST.TABLE.TYPE_PAID' | translate }} @if (filterType === 'depago') { <i class="bi bi-check"></i> }
                         </a>
                       </li>
                     </ul>
@@ -169,35 +169,35 @@
                         <a class="dropdown-item d-flex justify-content-between align-items-center"
                           [class.selected]="filterStatus === ''"
                           (click)="filterStatus = ''; onFilterChange()">
-                          Todos @if (filterStatus === '') { <i class="bi bi-check"></i> }
+                          {{ 'EVENT_LIST.FILTERS.ALL' | translate }} @if (filterStatus === '') { <i class="bi bi-check"></i> }
                         </a>
                       </li>
                       <li>
                         <a class="dropdown-item d-flex justify-content-between align-items-center"
                           [class.selected]="filterStatus === 'PENDING'"
                           (click)="filterStatus = 'PENDING'; onFilterChange()">
-                          Pendiente @if (filterStatus === 'PENDING') { <i class="bi bi-check"></i> }
+                          {{ 'EVENT_LIST.FILTERS.PENDING' | translate }} @if (filterStatus === 'PENDING') { <i class="bi bi-check"></i> }
                         </a>
                       </li>
                       <li>
                         <a class="dropdown-item d-flex justify-content-between align-items-center"
                           [class.selected]="filterStatus === 'APPROVED'"
                           (click)="filterStatus = 'APPROVED'; onFilterChange()">
-                          Aprobado @if (filterStatus === 'APPROVED') { <i class="bi bi-check"></i> }
+                          {{ 'EVENT_LIST.FILTERS.APPROVED' | translate }} @if (filterStatus === 'APPROVED') { <i class="bi bi-check"></i> }
                         </a>
                       </li>
                       <li>
                         <a class="dropdown-item d-flex justify-content-between align-items-center"
                           [class.selected]="filterStatus === 'REJECTED'"
                           (click)="filterStatus = 'REJECTED'; onFilterChange()">
-                          Rechazado @if (filterStatus === 'REJECTED') { <i class="bi bi-check"></i> }
+                          {{ 'EVENT_LIST.FILTERS.REJECTED' | translate }} @if (filterStatus === 'REJECTED') { <i class="bi bi-check"></i> }
                         </a>
                       </li>
                       <li>
                         <a class="dropdown-item d-flex justify-content-between align-items-center"
                           [class.selected]="filterStatus === 'CANCELLED'"
                           (click)="filterStatus = 'CANCELLED'; onFilterChange()">
-                          Cancelado @if (filterStatus === 'CANCELLED') { <i class="bi bi-check"></i> }
+                          {{ 'EVENT_LIST.FILTERS.CANCELLED' | translate }} @if (filterStatus === 'CANCELLED') { <i class="bi bi-check"></i> }
                         </a>
                       </li>
                     </ul>
@@ -248,7 +248,7 @@
                 </tr>
               } @empty {
                 <tr>
-                  <td colspan="4" class="text-center italic text-muted">
+                  <td colspan="6" class="text-center italic text-muted">
                     {{ 'EVENT_LIST.TABLE.EMPTY_STATE' | translate }}  
                   </td>
                 </tr>
@@ -258,9 +258,9 @@
 
           <div class="d-flex justify-content-between align-items-center mt-3 px-2">
             <small class="text-muted">
-              Mostrando {{ filteredEvents.length === 0 ? 0 : (currentPage - 1) * pageSize + 1 }}
+              {{ 'EVENT_LIST.TABLE.PAGINATION_LABEL' | translate }}:
+              {{ filteredEvents.length === 0 ? 0 : (currentPage - 1) * pageSize + 1 }}
               – {{ min(currentPage * pageSize, filteredEvents.length) }}
-              de {{ filteredEvents.length }} eventos
             </small>
             <nav>
               <ul class="pagination pagination-sm mb-0">
