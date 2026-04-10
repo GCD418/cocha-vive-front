@@ -16,6 +16,14 @@ export class EventService {
     return this.httpClient.get<EventModel[]>(`${this.baseUrl}`);
   }
 
+  getMyEvents(): Observable<EventModel[]> {
+    return this.httpClient.get<EventModel[]>(`${this.baseUrl}/my-events`);
+  }
+
+  getAllEventsForAdmin(): Observable<EventModel[]> {
+    return this.httpClient.get<EventModel[]>(`${this.baseUrl}/admin/all`);
+  }
+
   getEventById(id: number): Observable<EventModel> {
     return this.httpClient.get<EventModel>(`${this.baseUrl}/${id}`);
   }
