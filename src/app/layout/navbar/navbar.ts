@@ -4,6 +4,8 @@ import { ActivatedRoute, RouterLink, RouterLinkActive, Router } from '@angular/r
 import { AuthService, CurrentUser } from '../../services/auth/auth.service';
 import { LoginModalComponent } from '../../components/auth/login-modal/login-modal';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { FeatureToggleService } from '../../services/feature-toggle/feature-toggle.service';
+import { AppFeatures } from '../../models/app-features';
 
 @Component({
   selector: 'app-navbar',
@@ -23,6 +25,7 @@ export class Navbar implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private translate = inject(TranslateService);
+  private featureToggleService = inject(FeatureToggleService);
 
   get currentLangLabel(): string {
     return (this.translate.getCurrentLang()|| 'es').toUpperCase();
@@ -68,6 +71,11 @@ export class Navbar implements OnInit {
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
+  }
+
+  get canSeePublisherRequestsAdminLink(): boolean {
+    const isFeatureEnabled = this.featureToggleService.isEnabled(AppFeatures.MANAGE_PUBLISHER_REQUESTS);
+    return isFeatureEnabled && this.userHasRole('ROLE_ADMIN');
   }
 
   get displayName(): string {
@@ -129,4 +137,35 @@ export class Navbar implements OnInit {
     this.mobileMenuOpen = false;
     document.body.classList.remove('mobile-nav-active');
   } 
+
+  private userHasRole(role: string): boolean {
+    const payload = this.authService.getDecodedPayload(this.authService.getToken());
+    const roles = this.normalizeRoles(payload?.roles);
+    return roles.includes(role);
+  }
+
+  private normalizeRoles(rawRoles: unknown): string[] {
+    if (!Array.isArray(rawRoles)) {
+      return [];
+    }
+
+    return rawRoles
+      .map((rawRole) => {
+        if (typeof rawRole === 'string') {
+          return rawRole;
+        }
+
+        if (
+          rawRole !== null &&
+          typeof rawRole === 'object' &&
+          'authority' in rawRole &&
+          typeof (rawRole as { authority?: unknown }).authority === 'string'
+        ) {
+          return (rawRole as { authority: string }).authority;
+        }
+
+        return null;
+      })
+      .filter((roleName): roleName is string => Boolean(roleName));
+  }
 }

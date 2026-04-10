@@ -3,6 +3,7 @@
     "START": "Inicio",
     "EXPLORE": "Explorar",
     "MY_EVENTS": "Mis Eventos",
+    "ADMIN_PUBLISHER_REQUESTS": "Solicitudes de Publicador",
     "PUBLISH_EVENT": "Publicar Evento",
     "LOGIN": "Iniciar Sesión",
     "LOGOUT": "Cerrar sesión",
@@ -223,6 +224,77 @@
       "EMPTY_TITLE": "Sin resultados para tu búsqueda",
       "EMPTY_DESC": "Intenta cambiar o limpiar los filtros.",
       "VIEW_ALL": "Ver todos los eventos"
+    }
+  },
+  "PUBLISHER_REQUESTS": {
+    "TITLE": "Solicitudes de Publicador",
+    "LOADING": "Cargando solicitudes de publicador...",
+    "STATS": {
+      "TOTAL": "Total de solicitudes",
+      "PENDING": "Pendientes",
+      "APPROVED": "Aprobadas"
+    },
+    "FILTERS": {
+      "PENDING": "Pendientes",
+      "ALL": "Todas"
+    },
+    "STATUS": {
+      "PENDING": "Pendiente",
+      "APPROVED": "Aprobada",
+      "REJECTED": "Rechazada"
+    },
+    "TABLE": {
+      "HEADERS": {
+        "ID": "ID",
+        "LEGAL_ENTITY_NAME": "Nombre de la Entidad Legal",
+        "REQUEST_STATUS": "Estado de la Solicitud",
+        "CREATED_AT": "Creada En",
+        "CREATED_BY_USER": "Creada por",
+        "QUICK_ACTIONS": "Acciones Rápidas"
+      },
+      "ACTIONS": {
+        "APPROVE": "Aprobar",
+        "REJECT": "Rechazar",
+        "VIEW": "Ver"
+      },
+      "EMPTY_STATE": "No se encontraron solicitudes de publicador para este filtro."
+    },
+    "DETAIL": {
+      "BACK_TO_LIST": "Volver a la lista",
+      "LOADING": "Cargando detalle de solicitud...",
+      "REQUEST_REASON": "Motivo de la Solicitud",
+      "EVIDENCE_IMAGES": "Imágenes de Evidencia",
+      "EVIDENCE_IMAGE_ALT": "Imagen de evidencia",
+      "NO_EVIDENCE_IMAGES": "No hay imágenes de evidencia cargadas.",
+      "DETAILS": "Detalles de la Solicitud",
+      "LEGAL_ENTITY_NAME": "Nombre de la Entidad Legal",
+      "MODIFIED_BY_USER_ID": "Modificada por Usuario ID",
+      "UPDATED_AT": "Actualizada En",
+      "IS_ACTIVE": "Está Activa",
+      "YES": "Sí",
+      "NO": "No",
+      "APPROVE": "Aprobar Solicitud",
+      "REJECT": "Rechazar Solicitud"
+    },
+    "MODAL": {
+      "APPROVE_TITLE": "¿Aprobar solicitud de publicador?",
+      "APPROVE_MESSAGE": "El usuario será promovido al rol publicador. ¿Deseas continuar?",
+      "APPROVE_BUTTON": "Sí, aprobar",
+      "REJECT_TITLE": "¿Rechazar solicitud de publicador?",
+      "REJECT_MESSAGE": "Esta solicitud será marcada como rechazada. ¿Deseas continuar?",
+      "REJECT_BUTTON": "Sí, rechazar"
+    },
+    "TOAST": {
+      "APPROVE_SUCCESS": "Solicitud de publicador aprobada correctamente.",
+      "REJECT_SUCCESS": "Solicitud de publicador rechazada correctamente."
+    },
+    "ERRORS": {
+      "UNAUTHORIZED": "Tu sesión ha expirado. Inicia sesión nuevamente.",
+      "FORBIDDEN": "No tienes acceso a este recurso.",
+      "NOT_FOUND": "No se encontró la solicitud de publicador solicitada.",
+      "SERVER": "Ocurrió un error del servidor. Intenta nuevamente.",
+      "INVALID_ID": "ID de solicitud de publicador inválido.",
+      "GENERIC": "No se pudo completar la acción. Intenta nuevamente."
     }
   },
   "FORBIDDEN": {

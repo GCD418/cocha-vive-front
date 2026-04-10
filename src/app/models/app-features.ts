@@ -1,6 +1,7 @@
 export const AppFeatures = {
     VIEW_UPCOMING_EVENTS: 'view_upcoming_events',
     VIEW_FEATURED_EVENTS: 'view_featured_events',
+    MANAGE_PUBLISHER_REQUESTS: 'manage_publisher_requests',
 } as const;
 
 export type AppFeatureKey = typeof AppFeatures[keyof typeof AppFeatures];
