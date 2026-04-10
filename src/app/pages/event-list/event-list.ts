@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe, NgClass } from '@angular/common';
 import { EventService } from '../../services/event-service/event.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { EventModel } from '../../models/event-model';
 import { AuthService, CurrentUser } from '../../services/auth/auth.service';
 import { EventFormResult, EventFormComponent } from '../../components/events/event-form-component/event-form-component';
@@ -16,7 +16,6 @@ declare const bootstrap: any;
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink, 
     EventFormComponent,
     ConfirmModalComponent,
     NgClass,

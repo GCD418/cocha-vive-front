@@ -1,0 +1,146 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col pt-5 mt-3">
+      <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+        <button class="btn btn-sm btn-outline-secondary" (click)="onBack()">
+          <i class="bi bi-arrow-left me-1"></i>
+          {{ 'PUBLISHER_REQUESTS.DETAIL.BACK_TO_LIST' | translate }}
+        </button>
+      </div>
+
+      @if (loading) {
+        <div class="card border-0 shadow-sm">
+          <div class="card-body text-center py-5">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="mt-2 text-muted">{{ 'PUBLISHER_REQUESTS.DETAIL.LOADING' | translate }}</div>
+          </div>
+        </div>
+      } @else if (errorMessageKey) {
+        <div class="alert alert-danger" role="alert">
+          {{ errorMessageKey | translate }}
+        </div>
+      } @else if (request) {
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="card border-0 shadow-sm mb-4">
+              <div class="card-body">
+                <h4 class="mb-3">{{ 'PUBLISHER_REQUESTS.DETAIL.REQUEST_REASON' | translate }}</h4>
+                <p class="mb-0">{{ request.requestReason }}</p>
+              </div>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+              <div class="card-body">
+                <h4 class="mb-3">{{ 'PUBLISHER_REQUESTS.DETAIL.EVIDENCE_IMAGES' | translate }}</h4>
+
+                @if (request.evidenceImages.length > 0) {
+                  <div class="row g-3">
+                    @for (image of request.evidenceImages; track $index) {
+                      <div class="col-md-4">
+                        <img
+                          [src]="image"
+                          class="img-fluid rounded w-100"
+                          [alt]="'PUBLISHER_REQUESTS.DETAIL.EVIDENCE_IMAGE_ALT' | translate"
+                          style="height: 180px; object-fit: cover; cursor: pointer;"
+                          data-bs-toggle="modal"
+                          [attr.data-bs-target]="'#publisherEvidenceModal' + request.id + '-' + $index"
+                        >
+                      </div>
+                    }
+                  </div>
+
+                  @for (image of request.evidenceImages; track $index) {
+                    <div class="modal fade" [id]="'publisherEvidenceModal' + request.id + '-' + $index" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-xl">
+                        <div class="modal-content bg-transparent border-0">
+                          <div class="modal-header border-0 pb-0 justify-content-end">
+                            <button
+                              type="button"
+                              class="btn-close btn-close-white"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body text-center p-0">
+                            <img
+                              [src]="image"
+                              class="img-fluid rounded shadow-lg"
+                              [alt]="'PUBLISHER_REQUESTS.DETAIL.EVIDENCE_IMAGE_ALT' | translate"
+                              style="max-height: 85vh; object-fit: contain;"
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                } @else {
+                  <div class="alert alert-light border text-muted mb-0">
+                    {{ 'PUBLISHER_REQUESTS.DETAIL.NO_EVIDENCE_IMAGES' | translate }}
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-3">
+              <div class="card-body">
+                <h5 class="mb-3">{{ 'PUBLISHER_REQUESTS.DETAIL.METADATA' | translate }}</h5>
+
+                <div class="d-flex justify-content-between py-2 border-bottom">
+                  <span class="text-muted">{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.ID' | translate }}</span>
+                  <strong>#{{ request.id }}</strong>
+                </div>
+                <div class="d-flex justify-content-between py-2 border-bottom">
+                  <span class="text-muted">{{ 'PUBLISHER_REQUESTS.DETAIL.LEGAL_ENTITY_NAME' | translate }}</span>
+                  <strong class="text-end ms-2">{{ request.legalEntityName }}</strong>
+                </div>
+                <div class="d-flex justify-content-between py-2 border-bottom align-items-center">
+                  <span class="text-muted">{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.REQUEST_STATUS' | translate }}</span>
+                  <span class="badge rounded-pill" [ngClass]="getStatusClass(request.requestStatus)">
+                    {{ getStatusTranslationKey(request.requestStatus) | translate }}
+                  </span>
+                </div>
+                <div class="d-flex justify-content-between py-2 border-bottom">
+                  <span class="text-muted">{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.CREATED_BY_USER_ID' | translate }}</span>
+                  <strong>{{ request.createdByUserId }}</strong>
+                </div>
+                <div class="d-flex justify-content-between py-2 border-bottom">
+                  <span class="text-muted">{{ 'PUBLISHER_REQUESTS.DETAIL.MODIFIED_BY_USER_ID' | translate }}</span>
+                  <strong>{{ request.modifiedByUserId ?? '-' }}</strong>
+                </div>
+                <div class="d-flex justify-content-between py-2 border-bottom">
+                  <span class="text-muted">{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.CREATED_AT' | translate }}</span>
+                  <strong>{{ request.createdAt | date:'d/M/yyyy HH:mm' }}</strong>
+                </div>
+                <div class="d-flex justify-content-between py-2 border-bottom">
+                  <span class="text-muted">{{ 'PUBLISHER_REQUESTS.DETAIL.UPDATED_AT' | translate }}</span>
+                  <strong>{{ request.updatedAt | date:'d/M/yyyy HH:mm' }}</strong>
+                </div>
+                <div class="d-flex justify-content-between py-2">
+                  <span class="text-muted">{{ 'PUBLISHER_REQUESTS.DETAIL.IS_ACTIVE' | translate }}</span>
+                  <strong>{{ request.isActive ? ('PUBLISHER_REQUESTS.DETAIL.YES' | translate) : ('PUBLISHER_REQUESTS.DETAIL.NO' | translate) }}</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+              <div class="card-body">
+                <div class="d-grid gap-2">
+                  <button class="btn btn-success" [disabled]="!canModerate()" (click)="onApprove()">
+                    {{ 'PUBLISHER_REQUESTS.DETAIL.APPROVE' | translate }}
+                  </button>
+                  <button class="btn btn-danger" [disabled]="!canModerate()" (click)="onReject()">
+                    {{ 'PUBLISHER_REQUESTS.DETAIL.REJECT' | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

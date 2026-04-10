@@ -224,6 +224,77 @@
       "VIEW_ALL": "Ver todos os eventos"
     }
   },
+  "PUBLISHER_REQUESTS": {
+    "TITLE": "Solicitações de Publicador",
+    "LOADING": "Carregando solicitações de publicador...",
+    "STATS": {
+      "TOTAL": "Total de solicitações",
+      "PENDING": "Pendentes",
+      "APPROVED": "Aprovadas"
+    },
+    "FILTERS": {
+      "PENDING": "Pendentes",
+      "ALL": "Todas"
+    },
+    "STATUS": {
+      "PENDING": "Pendente",
+      "APPROVED": "Aprovada",
+      "REJECTED": "Rejeitada"
+    },
+    "TABLE": {
+      "HEADERS": {
+        "ID": "ID",
+        "LEGAL_ENTITY_NAME": "Nome da Entidade Legal",
+        "REQUEST_STATUS": "Status da Solicitação",
+        "CREATED_AT": "Criada Em",
+        "CREATED_BY_USER_ID": "Criada por Usuário ID",
+        "QUICK_ACTIONS": "Ações Rápidas"
+      },
+      "ACTIONS": {
+        "APPROVE": "Aprovar",
+        "REJECT": "Rejeitar",
+        "VIEW": "Ver"
+      },
+      "EMPTY_STATE": "Nenhuma solicitação de publicador encontrada para este filtro."
+    },
+    "DETAIL": {
+      "BACK_TO_LIST": "Voltar para a lista",
+      "LOADING": "Carregando detalhes da solicitação...",
+      "REQUEST_REASON": "Motivo da Solicitação",
+      "EVIDENCE_IMAGES": "Imagens de Evidência",
+      "EVIDENCE_IMAGE_ALT": "Imagem de evidência",
+      "NO_EVIDENCE_IMAGES": "Nenhuma imagem de evidência enviada.",
+      "METADATA": "Metadados",
+      "LEGAL_ENTITY_NAME": "Nome da Entidade Legal",
+      "MODIFIED_BY_USER_ID": "Modificada por Usuário ID",
+      "UPDATED_AT": "Atualizada Em",
+      "IS_ACTIVE": "Está Ativa",
+      "YES": "Sim",
+      "NO": "Não",
+      "APPROVE": "Aprovar Solicitação",
+      "REJECT": "Rejeitar Solicitação"
+    },
+    "MODAL": {
+      "APPROVE_TITLE": "Aprovar solicitação de publicador?",
+      "APPROVE_MESSAGE": "O usuário será promovido para o papel de publicador. Deseja continuar?",
+      "APPROVE_BUTTON": "Sim, aprovar",
+      "REJECT_TITLE": "Rejeitar solicitação de publicador?",
+      "REJECT_MESSAGE": "Esta solicitação será marcada como rejeitada. Deseja continuar?",
+      "REJECT_BUTTON": "Sim, rejeitar"
+    },
+    "TOAST": {
+      "APPROVE_SUCCESS": "Solicitação de publicador aprovada com sucesso.",
+      "REJECT_SUCCESS": "Solicitação de publicador rejeitada com sucesso."
+    },
+    "ERRORS": {
+      "UNAUTHORIZED": "Sua sessão expirou. Faça login novamente.",
+      "FORBIDDEN": "Você não tem acesso a este recurso.",
+      "NOT_FOUND": "A solicitação de publicador não foi encontrada.",
+      "SERVER": "Ocorreu um erro no servidor. Tente novamente.",
+      "INVALID_ID": "ID de solicitação de publicador inválido.",
+      "GENERIC": "Não foi possível concluir a ação. Tente novamente."
+    }
+  },
   "FORBIDDEN": {
     "PAGE_TITLE": "Acesso Negado",
     "BREADCRUMB_HOME": "Início",
