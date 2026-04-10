@@ -248,7 +248,7 @@
         "LEGAL_ENTITY_NAME": "Legal Entity Name",
         "REQUEST_STATUS": "Request Status",
         "CREATED_AT": "Created At",
-        "CREATED_BY_USER_ID": "Created By User ID",
+        "CREATED_BY_USER": "Created By User",
         "QUICK_ACTIONS": "Quick Actions"
       },
       "ACTIONS": {
@@ -265,7 +265,7 @@
       "EVIDENCE_IMAGES": "Evidence Images",
       "EVIDENCE_IMAGE_ALT": "Evidence image",
       "NO_EVIDENCE_IMAGES": "No evidence images uploaded.",
-      "METADATA": "Metadata",
+      "DETAILS": "Request Details",
       "LEGAL_ENTITY_NAME": "Legal Entity Name",
       "MODIFIED_BY_USER_ID": "Modified By User ID",
       "UPDATED_AT": "Updated At",

@@ -54,4 +54,28 @@ export class PublisherRequestDetailComponent {
 
     return keys[status] ?? status;
   }
+
+  getCreatorFullName(): string {
+    if (!this.request) {
+      return '';
+    }
+
+    const names = [
+      this.request.createdByUser.names,
+      this.request.createdByUser.firstLastName,
+      this.request.createdByUser.secondLastName,
+    ].filter((part): part is string => Boolean(part && part.trim()));
+
+    return names.join(' ');
+  }
+
+  getCreatorInitials(): string {
+    if (!this.request) {
+      return '';
+    }
+
+    const first = this.request.createdByUser.names?.charAt(0) ?? '';
+    const last = this.request.createdByUser.firstLastName?.charAt(0) ?? '';
+    return `${first}${last}`.toUpperCase();
+  }
 }

@@ -41,6 +41,22 @@ export class PublisherRequestsTableComponent {
     return request.requestStatus === 'PENDING';
   }
 
+  getCreatorFullName(request: PublisherRequest): string {
+    const names = [
+      request.createdByUser.names,
+      request.createdByUser.firstLastName,
+      request.createdByUser.secondLastName,
+    ].filter((part): part is string => Boolean(part && part.trim()));
+
+    return names.join(' ');
+  }
+
+  getCreatorInitials(request: PublisherRequest): string {
+    const first = request.createdByUser.names?.charAt(0) ?? '';
+    const last = request.createdByUser.firstLastName?.charAt(0) ?? '';
+    return `${first}${last}`.toUpperCase();
+  }
+
   getStatusClass(status: string): string {
     const classes: Record<string, string> = {
       PENDING: 'bg-warning text-dark',

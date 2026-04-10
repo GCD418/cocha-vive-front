@@ -249,7 +249,7 @@
         "LEGAL_ENTITY_NAME": "Nombre de la Entidad Legal",
         "REQUEST_STATUS": "Estado de la Solicitud",
         "CREATED_AT": "Creada En",
-        "CREATED_BY_USER_ID": "Creada por Usuario ID",
+        "CREATED_BY_USER": "Creada por",
         "QUICK_ACTIONS": "Acciones Rápidas"
       },
       "ACTIONS": {
@@ -266,7 +266,7 @@
       "EVIDENCE_IMAGES": "Imágenes de Evidencia",
       "EVIDENCE_IMAGE_ALT": "Imagen de evidencia",
       "NO_EVIDENCE_IMAGES": "No hay imágenes de evidencia cargadas.",
-      "METADATA": "Metadatos",
+      "DETAILS": "Detalles de la Solicitud",
       "LEGAL_ENTITY_NAME": "Nombre de la Entidad Legal",
       "MODIFIED_BY_USER_ID": "Modificada por Usuario ID",
       "UPDATED_AT": "Actualizada En",

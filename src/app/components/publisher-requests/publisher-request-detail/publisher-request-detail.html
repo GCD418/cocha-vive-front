@@ -87,7 +87,7 @@
           <div class="col-lg-4">
             <div class="card border-0 shadow-sm mb-3">
               <div class="card-body">
-                <h5 class="mb-3">{{ 'PUBLISHER_REQUESTS.DETAIL.METADATA' | translate }}</h5>
+                <h5 class="mb-3">{{ 'PUBLISHER_REQUESTS.DETAIL.DETAILS' | translate }}</h5>
 
                 <div class="d-flex justify-content-between py-2 border-bottom">
                   <span class="text-muted">{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.ID' | translate }}</span>
@@ -103,9 +103,26 @@
                     {{ getStatusTranslationKey(request.requestStatus) | translate }}
                   </span>
                 </div>
-                <div class="d-flex justify-content-between py-2 border-bottom">
-                  <span class="text-muted">{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.CREATED_BY_USER_ID' | translate }}</span>
-                  <strong>{{ request.createdByUserId }}</strong>
+                <div class="py-2 border-bottom">
+                  <div class="text-muted small mb-2">{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.CREATED_BY_USER' | translate }}</div>
+                  <div class="d-flex align-items-center gap-2">
+                    @if (request.createdByUser.photoUrl) {
+                      <img
+                        [src]="request.createdByUser.photoUrl"
+                        [alt]="getCreatorFullName()"
+                        class="creator-avatar"
+                        referrerpolicy="no-referrer"
+                      >
+                    } @else {
+                      <div class="creator-avatar creator-avatar-fallback d-flex align-items-center justify-content-center">
+                        <span>{{ getCreatorInitials() }}</span>
+                      </div>
+                    }
+                    <div>
+                      <div class="fw-semibold">{{ getCreatorFullName() }}</div>
+                      <div class="small text-muted">{{ request.createdByUser.email }}</div>
+                    </div>
+                  </div>
                 </div>
                 <div class="d-flex justify-content-between py-2 border-bottom">
                   <span class="text-muted">{{ 'PUBLISHER_REQUESTS.DETAIL.MODIFIED_BY_USER_ID' | translate }}</span>

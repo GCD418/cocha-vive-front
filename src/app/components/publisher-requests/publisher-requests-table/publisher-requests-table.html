@@ -72,7 +72,7 @@
             <th>{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.LEGAL_ENTITY_NAME' | translate }}</th>
             <th>{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.REQUEST_STATUS' | translate }}</th>
             <th>{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.CREATED_AT' | translate }}</th>
-            <th>{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.CREATED_BY_USER_ID' | translate }}</th>
+            <th>{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.CREATED_BY_USER' | translate }}</th>
             <th>{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.QUICK_ACTIONS' | translate }}</th>
           </tr>
         </thead>
@@ -87,7 +87,26 @@
                 </span>
               </td>
               <td class="text-nowrap text-center">{{ request.createdAt | date:'d/M/yyyy HH:mm' }}</td>
-              <td class="text-center">{{ request.createdByUserId }}</td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  @if (request.createdByUser.photoUrl) {
+                    <img
+                      [src]="request.createdByUser.photoUrl"
+                      [alt]="getCreatorFullName(request)"
+                      class="creator-avatar"
+                      referrerpolicy="no-referrer"
+                    >
+                  } @else {
+                    <div class="creator-avatar creator-avatar-fallback d-flex align-items-center justify-content-center">
+                      <span>{{ getCreatorInitials(request) }}</span>
+                    </div>
+                  }
+                  <div class="creator-text">
+                    <div class="fw-semibold text-dark">{{ getCreatorFullName(request) }}</div>
+                    <div class="small text-muted">{{ request.createdByUser.email }}</div>
+                  </div>
+                </div>
+              </td>
               <td class="text-center">
                 <div class="d-flex gap-2 justify-content-center">
                   <button
