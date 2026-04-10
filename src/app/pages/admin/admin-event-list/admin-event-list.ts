@@ -130,10 +130,6 @@ export class AdminEventListComponent implements OnInit{
     });
   }
 
-  countByStatus(status: string): number {
-    return this.events.filter(e => e.eventStatus === status).length;
-  }
-
   getStatusLabel(status: string): string {
     const labels: Record<string, string> = {
       PENDING: 'Pendiente',

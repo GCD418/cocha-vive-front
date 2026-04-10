@@ -3,6 +3,7 @@
     "START": "Inicio",
     "EXPLORE": "Explorar",
     "MY_EVENTS": "Mis Eventos",
+    "ADMIN_EVENTS": "Administrar Eventos",
     "PUBLISH_EVENT": "Publicar Evento",
     "LOGIN": "Iniciar Sesión",
     "LOGOUT": "Cerrar sesión",
@@ -276,5 +277,27 @@
         "CANCEL": "Cancelar",
         "CONFIRM": "Confirmar ubicación"
     }
+  },
+  "ADMIN_EVENTS":{
+    "TITLE": "Administrar Eventos",
+    "PLACEHOLDERS.SEARCH": "Buscar por título...",
+    "FILTERS.CLEAR": "Quitar filtros",
+    "FILTERS.ALL": "Todos",
+    "ILTERS.DATE_FROM": "Desde",
+    "FILTERS.DATE_TO": "Hasta",
+    "TABLE": {
+      "TITLE": "Título",
+      "CREATED_AT": "Fecha de creación",
+      "DATE_START": "Fecha de inicio",
+      "CATEGORY": "Categoría",
+      "STATUS": "Estado",
+      "ACTIONS": "Acciones",
+      "EMPTY": ""
+    },
+    "ACTIONS": {
+      "VIEW": "Ver detalles",
+      "APPROVE": "Aprobar",
+      "REJECT": "Rechazar"
+     }
   }
 }

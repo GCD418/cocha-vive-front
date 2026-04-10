@@ -3,6 +3,7 @@
     "START": "Home",
     "EXPLORE": "Explore",
     "MY_EVENTS": "My Events",
+    "ADMIN_EVENTS": "Admin Events",
     "PUBLISH_EVENT": "Publish Event",
     "LOGIN": "Log In",
     "LOGOUT": "Log Out",
