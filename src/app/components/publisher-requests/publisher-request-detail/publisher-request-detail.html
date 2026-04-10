@@ -90,10 +90,6 @@
                 <h5 class="mb-3">{{ 'PUBLISHER_REQUESTS.DETAIL.DETAILS' | translate }}</h5>
 
                 <div class="d-flex justify-content-between py-2 border-bottom">
-                  <span class="text-muted">{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.ID' | translate }}</span>
-                  <strong>#{{ request.id }}</strong>
-                </div>
-                <div class="d-flex justify-content-between py-2 border-bottom">
                   <span class="text-muted">{{ 'PUBLISHER_REQUESTS.DETAIL.LEGAL_ENTITY_NAME' | translate }}</span>
                   <strong class="text-end ms-2">{{ request.legalEntityName }}</strong>
                 </div>
@@ -125,20 +121,8 @@
                   </div>
                 </div>
                 <div class="d-flex justify-content-between py-2 border-bottom">
-                  <span class="text-muted">{{ 'PUBLISHER_REQUESTS.DETAIL.MODIFIED_BY_USER_ID' | translate }}</span>
-                  <strong>{{ request.modifiedByUserId ?? '-' }}</strong>
-                </div>
-                <div class="d-flex justify-content-between py-2 border-bottom">
                   <span class="text-muted">{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.CREATED_AT' | translate }}</span>
                   <strong>{{ request.createdAt | date:'d/M/yyyy HH:mm' }}</strong>
-                </div>
-                <div class="d-flex justify-content-between py-2 border-bottom">
-                  <span class="text-muted">{{ 'PUBLISHER_REQUESTS.DETAIL.UPDATED_AT' | translate }}</span>
-                  <strong>{{ request.updatedAt | date:'d/M/yyyy HH:mm' }}</strong>
-                </div>
-                <div class="d-flex justify-content-between py-2">
-                  <span class="text-muted">{{ 'PUBLISHER_REQUESTS.DETAIL.IS_ACTIVE' | translate }}</span>
-                  <strong>{{ request.isActive ? ('PUBLISHER_REQUESTS.DETAIL.YES' | translate) : ('PUBLISHER_REQUESTS.DETAIL.NO' | translate) }}</strong>
                 </div>
               </div>
             </div>
