@@ -77,9 +77,9 @@ export class EventList implements OnInit {
 
   private loadMyEvents(userId: number): void {
     this.loading = true;
-    this.eventService.getEvents().subscribe({
+    this.eventService.getMyEvents().subscribe({
       next: (data) => {
-        this.events = data.filter(e => e.organizedByUser.id === userId);
+        this.events = data;
         this.availableCategories = [...new Set(this.events.map(e => e.category?.name).filter(Boolean))] as string[];
         this.applyFilters();
         this.loading = false;
