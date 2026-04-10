@@ -13,9 +13,21 @@
             <li>
             <a routerLink="explore-events" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'NAV.EXPLORE' | translate }}</a>
             </li>
-            <li>        
-            <a routerLink="/events" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'NAV.MY_EVENTS' | translate }}</a>
-            </li>
+            <li>
+            @if (authService.actualRole() === 'ROLE_ADMIN') {
+              <li>
+                <a routerLink="/admin/events" routerLinkActive="active" (click)="closeMobileMenu()">
+                  {{ 'NAV.ADMIN_EVENTS' | translate }}
+                </a>
+              </li>
+            } 
+            @if (authService.actualRole() === 'ROLE_PUBLISHER') {
+              <li>
+                <a routerLink="/publisher/events" routerLinkActive="active" (click)="closeMobileMenu()">
+                  {{ 'NAV.MY_EVENTS' | translate }}
+                </a>
+              </li>
+            }
         </ul>
 
         <i class="mobile-nav-toggle d-xl-none bi"
