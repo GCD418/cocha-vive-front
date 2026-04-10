@@ -68,4 +68,12 @@ export class EventService {
   cancelEvent(id: number): Observable<void> {
     return this.httpClient.patch<void>(`${this.baseUrl}/${id}/cancel`, {});
   }
+
+  approveEvent(id: number): Observable<void> {
+    return this.httpClient.patch<void>(`${this.baseUrl}/${id}/approve`, {});
+  }
+
+  rejectEvent(id: number): Observable<void> {
+    return this.httpClient.patch<void>(`${this.baseUrl}/${id}/reject`, {});
+  }
 }

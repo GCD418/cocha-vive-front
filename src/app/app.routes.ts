@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { EventList } from './pages/event-list/event-list';
+import { AdminEventListComponent } from './pages/admin/admin-event-list/admin-event-list';
 import { HomeComponent } from './pages/home/home';
 import { EventCreate } from './pages/event-create/event-create';
 import { EventDetails } from './pages/event-details/event-details';
@@ -15,12 +16,8 @@ export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'events', component: EventList, canActivate: [authGuard], data: { roles: ['ROLE_PUBLISHER'] } },
-    {
-        path: 'events/create',
-        component: EventCreate,
-        canActivate: [authGuard],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_PUBLISHER'] },
-    },
+    { path: 'events/create', component: EventCreate, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_PUBLISHER'] },},
+    { path: 'admin/events', component: AdminEventListComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
     { path: 'event-details/:id', component: EventDetails },
     { path: 'category-events/:name', component: CategoryEventsComponent },
     { path: 'forbidden', component: ForbiddenPageComponent },

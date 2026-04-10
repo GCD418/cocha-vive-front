@@ -1,1 +1,232 @@
-<p>admin-event-list works!</p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col pt-5 mt-3">
+
+      <div class="row g-3 mb-4">
+        <div class="col-md-3">
+          <div class="card text-center border-0 shadow-sm">
+            <div class="card-body">
+              <div class="fs-2 fw-bold text-secondary">{{ events.length }}</div>
+              <div class="text-muted small">{{ 'ADMIN_EVENTS.STATS.TOTAL' | translate }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center border-0 shadow-sm">
+            <div class="card-body">
+              <div class="fs-2 fw-bold text-warning">{{ countByStatus('PENDING') }}</div>
+              <div class="text-muted small">{{ 'ADMIN_EVENTS.STATS.PENDING' | translate }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center border-0 shadow-sm">
+            <div class="card-body">
+              <div class="fs-2 fw-bold text-success">{{ countByStatus('APPROVED') }}</div>
+              <div class="text-muted small">{{ 'ADMIN_EVENTS.STATS.APPROVED' | translate }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center border-0 shadow-sm">
+            <div class="card-body">
+              <div class="fs-2 fw-bold text-danger">{{ countByStatus('REJECTED') }}</div>
+              <div class="text-muted small">{{ 'ADMIN_EVENTS.STATS.REJECTED' | translate }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">{{ 'ADMIN_EVENTS.TITLE' | translate }}</h2>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="input-group input-group-sm w-auto flex-grow-1 me-2">
+          <span class="input-group-text bg-white"><i class="bi bi-search text-secondary"></i></span>
+          <input type="text"
+                 class="form-control border-start-0"
+                 placeholder="{{ 'ADMIN_EVENTS.PLACEHOLDERS.SEARCH' | translate }}"
+                 [(ngModel)]="searchText"
+                 (ngModelChange)="onFilterChange()">
+        </div>
+        @if (hasActiveFilters()) {
+          <button class="btn btn-sm btn-outline-secondary text-nowrap" (click)="clearFilters()">
+            <i class="bi bi-x-lg me-1"></i>{{ 'ADMIN_EVENTS.FILTERS.CLEAR' | translate }}
+          </button>
+        }
+      </div>
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+              <tr class="text-center">
+                <th>#</th>
+                <th>{{ 'ADMIN_EVENTS.TABLE.TITLE' | translate }}</th>
+
+                <th>{{ 'ADMIN_EVENTS.TABLE.CREATED_AT' | translate }}</th>
+
+                <th class="p-0">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-secondary fw-bold text-decoration-none w-100 text-start px-3 py-2 dropdown-toggle"
+                            [class.text-primary]="filterDateFrom || filterDateTo"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside"
+                            aria-expanded="false">
+                      {{ 'ADMIN_EVENTS.TABLE.DATE_START' | translate }}
+                    </button>
+                    <div class="dropdown-menu p-3" style="min-width: 220px;">
+                      <label class="form-label small text-muted mb-1">{{ 'ADMIN_EVENTS.FILTERS.DATE_FROM' | translate }}</label>
+                      <input type="date" class="form-control form-control-sm mb-2"
+                             [(ngModel)]="filterDateFrom" (ngModelChange)="onFilterChange()">
+                      <label class="form-label small text-muted mb-1">{{ 'ADMIN_EVENTS.FILTERS.DATE_TO' | translate }}</label>
+                      <input type="date" class="form-control form-control-sm"
+                             [(ngModel)]="filterDateTo" (ngModelChange)="onFilterChange()">
+                    </div>
+                  </div>
+                </th>
+
+                <th class="p-0">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-secondary fw-bold text-decoration-none w-100 text-start px-3 py-2 dropdown-toggle"
+                            [class.text-primary]="filterCategory"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="true"
+                            aria-expanded="false">
+                      {{ 'ADMIN_EVENTS.TABLE.CATEGORY' | translate }}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                           (click)="filterCategory = ''; onFilterChange()">
+                          {{ 'ADMIN_EVENTS.FILTERS.ALL' | translate }}
+                          @if (filterCategory === '') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      @for (cat of availableCategories; track cat) {
+                        <li>
+                          <a class="dropdown-item d-flex justify-content-between align-items-center"
+                             (click)="filterCategory = cat; onFilterChange()">
+                            {{ cat }}
+                            @if (filterCategory === cat) { <i class="bi bi-check"></i> }
+                          </a>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                </th>
+
+                <th class="p-0">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-secondary fw-bold text-decoration-none w-100 text-start px-3 py-2 dropdown-toggle"
+                            [class.text-primary]="filterStatus"
+                            data-bs-toggle="dropdown"
+                            data-bs-auto-close="true"
+                            aria-expanded="false">
+                      {{ 'ADMIN_EVENTS.TABLE.STATUS' | translate }}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                           (click)="filterStatus = ''; onFilterChange()">
+                          {{ 'ADMIN_EVENTS.FILTERS.ALL' | translate }}
+                          @if (filterStatus === '') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      @for (status of ['PENDING','APPROVED','REJECTED','CANCELLED']; track status) {
+                        <li>
+                          <a class="dropdown-item d-flex justify-content-between align-items-center"
+                             (click)="filterStatus = status; onFilterChange()">
+                            {{ getStatusLabel(status) }}
+                            @if (filterStatus === status) { <i class="bi bi-check"></i> }
+                          </a>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                </th>
+
+                <th>{{ 'ADMIN_EVENTS.TABLE.ACTIONS' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody class="text-muted small">
+              @for (event of pagedEvents; track event.id; let i = $index) {
+                <tr>
+                  <td class="text-center text-muted">
+                    {{ (currentPage - 1) * pageSize + i + 1 }}
+                  </td>
+                  <td class="fw-semibold">{{ event.title }}</td>
+                  <td class="text-nowrap text-center">{{ event.createdAt | date:'d/M/yyyy' }}</td>
+                  <td class="text-nowrap text-center">{{ event.dateStart | date:'d/M/yyyy' }}</td>
+                  <td>{{ event.category?.name }}</td>
+                  <td class="text-center">
+                    <span class="badge rounded-pill" [ngClass]="getStatusClass(event.eventStatus)">
+                      {{ getStatusLabel(event.eventStatus) }}
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    <div class="d-flex gap-3 justify-content-center">
+                      <button (click)="eventDetails(event.id)"
+                              class="btn btn-link p-0 text-body-tertiary link-dark"
+                              [title]="'ADMIN_EVENTS.ACTIONS.VIEW' | translate">
+                        <i class="bi bi-eye fs-5"></i>
+                      </button>
+                      @if (event.eventStatus === 'PENDING') {
+                        <button (click)="approve(event.id)"
+                                class="btn btn-link p-0 text-success"
+                                [title]="'ADMIN_EVENTS.ACTIONS.APPROVE' | translate">
+                          <i class="bi bi-check-circle fs-5"></i>
+                        </button>
+                        <button (click)="reject(event.id)"
+                                class="btn btn-link p-0 text-danger"
+                                [title]="'ADMIN_EVENTS.ACTIONS.REJECT' | translate">
+                          <i class="bi bi-x-circle fs-5"></i>
+                        </button>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="7" class="text-center text-muted">
+                    {{ 'ADMIN_EVENTS.TABLE.EMPTY' | translate }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+
+          <div class="d-flex justify-content-between align-items-center mt-3 px-2">
+            <small class="text-muted">
+              {{ filteredEvents.length === 0 ? 0 : (currentPage - 1) * pageSize + 1 }}
+              – {{ min(currentPage * pageSize, filteredEvents.length) }}
+              / {{ filteredEvents.length }}
+            </small>
+            <nav>
+              <ul class="pagination pagination-sm mb-0">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <button class="page-link" (click)="goToPage(currentPage - 1)">
+                    <i class="bi bi-chevron-left"></i>
+                  </button>
+                </li>
+                @for (page of totalPagesArray; track page) {
+                  <li class="page-item" [class.active]="page === currentPage">
+                    <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+                  </li>
+                }
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <button class="page-link" (click)="goToPage(currentPage + 1)">
+                    <i class="bi bi-chevron-right"></i>
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
