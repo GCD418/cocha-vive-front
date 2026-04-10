@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -18,17 +18,17 @@ type ModerationAction = 'approve' | 'reject';
 })
 export class PublisherRequestDetailsPageComponent implements OnInit {
   requestId: number | null = null;
-  mode: PublisherRequestFilterMode = 'pending';
-  request: PublisherRequest | null = null;
+  mode = signal<PublisherRequestFilterMode>('pending');
+  request = signal<PublisherRequest | null>(null);
 
-  loading = true;
-  actionLoading = false;
+  loading = signal(true);
+  actionLoading = signal(false);
 
-  errorMessageKey: string | null = null;
-  successToastKey: string | null = null;
-  errorToastKey: string | null = null;
+  errorMessageKey = signal<string | null>(null);
+  successToastKey = signal<string | null>(null);
+  errorToastKey = signal<string | null>(null);
 
-  pendingAction: ModerationAction | null = null;
+  pendingAction = signal<ModerationAction | null>(null);
 
   constructor(
     private publisherRequestService: PublisherRequestService,
@@ -39,7 +39,7 @@ export class PublisherRequestDetailsPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
       const mode = params.get('mode');
-      this.mode = mode === 'all' ? 'all' : 'pending';
+      this.mode.set(mode === 'all' ? 'all' : 'pending');
     });
 
     this.route.paramMap.subscribe((params) => {
@@ -47,8 +47,8 @@ export class PublisherRequestDetailsPageComponent implements OnInit {
       const parsedId = Number(rawId);
 
       if (!rawId || Number.isNaN(parsedId) || parsedId <= 0) {
-        this.loading = false;
-        this.errorMessageKey = 'PUBLISHER_REQUESTS.ERRORS.INVALID_ID';
+        this.loading.set(false);
+        this.errorMessageKey.set('PUBLISHER_REQUESTS.ERRORS.INVALID_ID');
         return;
       }
 
@@ -59,38 +59,38 @@ export class PublisherRequestDetailsPageComponent implements OnInit {
 
   onBackRequested(): void {
     this.router.navigate(['/admin/publisher-requests'], {
-      queryParams: { mode: this.mode },
+      queryParams: { mode: this.mode() },
     });
   }
 
   onApproveRequested(): void {
-    this.pendingAction = 'approve';
+    this.pendingAction.set('approve');
   }
 
   onRejectRequested(): void {
-    this.pendingAction = 'reject';
+    this.pendingAction.set('reject');
   }
 
   onActionDismissed(): void {
-    this.pendingAction = null;
+    this.pendingAction.set(null);
   }
 
   onActionConfirmed(): void {
-    if (!this.pendingAction || this.requestId === null) {
+    const action = this.pendingAction();
+    if (!action || this.requestId === null) {
       return;
     }
 
-    this.actionLoading = true;
+    this.actionLoading.set(true);
 
-    const request$ = this.pendingAction === 'approve'
+    const request$ = action === 'approve'
       ? this.publisherRequestService.approveRequest(this.requestId)
       : this.publisherRequestService.rejectRequest(this.requestId);
 
     request$.subscribe({
       next: () => {
-        this.actionLoading = false;
-        const action = this.pendingAction;
-        this.pendingAction = null;
+        this.actionLoading.set(false);
+        this.pendingAction.set(null);
         this.showSuccessToast(
           action === 'approve'
             ? 'PUBLISHER_REQUESTS.TOAST.APPROVE_SUCCESS'
@@ -99,39 +99,42 @@ export class PublisherRequestDetailsPageComponent implements OnInit {
         this.loadRequest();
       },
       error: (error: HttpErrorResponse) => {
-        this.actionLoading = false;
-        this.pendingAction = null;
+        this.actionLoading.set(false);
+        this.pendingAction.set(null);
         this.showErrorToast(this.mapErrorToMessageKey(error));
       }
     });
   }
 
   getConfirmTitleKey(): string {
-    if (!this.pendingAction) {
+    const action = this.pendingAction();
+    if (!action) {
       return '';
     }
 
-    return this.pendingAction === 'approve'
+    return action === 'approve'
       ? 'PUBLISHER_REQUESTS.MODAL.APPROVE_TITLE'
       : 'PUBLISHER_REQUESTS.MODAL.REJECT_TITLE';
   }
 
   getConfirmMessageKey(): string {
-    if (!this.pendingAction) {
+    const action = this.pendingAction();
+    if (!action) {
       return '';
     }
 
-    return this.pendingAction === 'approve'
+    return action === 'approve'
       ? 'PUBLISHER_REQUESTS.MODAL.APPROVE_MESSAGE'
       : 'PUBLISHER_REQUESTS.MODAL.REJECT_MESSAGE';
   }
 
   getConfirmButtonKey(): string {
-    if (!this.pendingAction) {
+    const action = this.pendingAction();
+    if (!action) {
       return '';
     }
 
-    return this.pendingAction === 'approve'
+    return action === 'approve'
       ? 'PUBLISHER_REQUESTS.MODAL.APPROVE_BUTTON'
       : 'PUBLISHER_REQUESTS.MODAL.REJECT_BUTTON';
   }
@@ -141,18 +144,18 @@ export class PublisherRequestDetailsPageComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
-    this.errorMessageKey = null;
+    this.loading.set(true);
+    this.errorMessageKey.set(null);
 
     this.publisherRequestService.getRequestById(this.requestId).subscribe({
       next: (request) => {
-        this.request = request;
-        this.loading = false;
+        this.request.set(request);
+        this.loading.set(false);
       },
       error: (error: HttpErrorResponse) => {
-        this.request = null;
-        this.loading = false;
-        this.errorMessageKey = this.mapErrorToMessageKey(error);
+        this.request.set(null);
+        this.loading.set(false);
+        this.errorMessageKey.set(this.mapErrorToMessageKey(error));
       }
     });
   }
@@ -173,16 +176,16 @@ export class PublisherRequestDetailsPageComponent implements OnInit {
   }
 
   private showSuccessToast(messageKey: string): void {
-    this.successToastKey = messageKey;
+    this.successToastKey.set(messageKey);
     setTimeout(() => {
-      this.successToastKey = null;
+      this.successToastKey.set(null);
     }, 2500);
   }
 
   private showErrorToast(messageKey: string): void {
-    this.errorToastKey = messageKey;
+    this.errorToastKey.set(messageKey);
     setTimeout(() => {
-      this.errorToastKey = null;
+      this.errorToastKey.set(null);
     }, 3500);
   }
 }

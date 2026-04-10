@@ -1,23 +1,23 @@
-@if (successToastKey) {
+@if (successToastKey()) {
   <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
     <div class="toast show align-items-center text-bg-success border-0" role="alert">
       <div class="d-flex">
         <div class="toast-body d-flex align-items-center gap-2">
           <i class="bi bi-check-circle-fill"></i>
-          <span>{{ successToastKey | translate }}</span>
+          <span>{{ successToastKey() | translate }}</span>
         </div>
       </div>
     </div>
   </div>
 }
 
-@if (errorToastKey) {
+@if (errorToastKey()) {
   <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
     <div class="toast show align-items-center text-bg-danger border-0" role="alert">
       <div class="d-flex">
         <div class="toast-body d-flex align-items-center gap-2">
           <i class="bi bi-exclamation-circle-fill"></i>
-          <span>{{ errorToastKey | translate }}</span>
+          <span>{{ errorToastKey() | translate }}</span>
         </div>
       </div>
     </div>
@@ -25,21 +25,21 @@
 }
 
 <app-publisher-request-detail
-  [request]="request"
-  [loading]="loading"
-  [errorMessageKey]="errorMessageKey"
-  [actionLoading]="actionLoading"
+  [request]="request()"
+  [loading]="loading()"
+  [errorMessageKey]="errorMessageKey()"
+  [actionLoading]="actionLoading()"
   (backRequested)="onBackRequested()"
   (approveRequested)="onApproveRequested()"
   (rejectRequested)="onRejectRequested()"
 />
 
-@if (pendingAction) {
+@if (pendingAction()) {
   <app-confirm-modal
     [title]="getConfirmTitleKey() | translate"
     [message]="getConfirmMessageKey() | translate"
     [confirmText]="getConfirmButtonKey() | translate"
-    [loading]="actionLoading"
+    [loading]="actionLoading()"
     (confirmed)="onActionConfirmed()"
     (cancelled)="onActionDismissed()"
   />

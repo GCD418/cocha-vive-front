@@ -1,26 +1,26 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col pt-5 mt-3">
-      @if (successToastKey) {
+      @if (successToastKey()) {
         <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
           <div class="toast show align-items-center text-bg-success border-0" role="alert">
             <div class="d-flex">
               <div class="toast-body d-flex align-items-center gap-2">
                 <i class="bi bi-check-circle-fill"></i>
-                <span>{{ successToastKey | translate }}</span>
+                <span>{{ successToastKey() | translate }}</span>
               </div>
             </div>
           </div>
         </div>
       }
 
-      @if (errorToastKey) {
+      @if (errorToastKey()) {
         <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
           <div class="toast show align-items-center text-bg-danger border-0" role="alert">
             <div class="d-flex">
               <div class="toast-body d-flex align-items-center gap-2">
                 <i class="bi bi-exclamation-circle-fill"></i>
-                <span>{{ errorToastKey | translate }}</span>
+                <span>{{ errorToastKey() | translate }}</span>
               </div>
             </div>
           </div>
@@ -28,23 +28,23 @@
       }
 
       <app-publisher-requests-table
-        [requests]="requests"
-        [loading]="loading"
-        [mode]="mode"
-        [errorMessageKey]="errorMessageKey"
-        [actionLoadingId]="actionLoadingId"
+        [requests]="requests()"
+        [loading]="loading()"
+        [mode]="mode()"
+        [errorMessageKey]="errorMessageKey()"
+        [actionLoadingId]="actionLoadingId()"
         (modeChanged)="onModeChanged($event)"
         (viewRequested)="onViewRequested($event)"
         (approveRequested)="onApproveRequested($event)"
         (rejectRequested)="onRejectRequested($event)"
       />
 
-      @if (pendingAction) {
+      @if (pendingAction()) {
         <app-confirm-modal
           [title]="getConfirmTitleKey() | translate"
           [message]="getConfirmMessageKey() | translate"
           [confirmText]="getConfirmButtonKey() | translate"
-          [loading]="actionLoadingId !== null"
+          [loading]="actionLoadingId() !== null"
           (confirmed)="onActionConfirmed()"
           (cancelled)="onActionDismissed()"
         />
