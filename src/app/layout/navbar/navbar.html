@@ -16,6 +16,11 @@
             <li>        
             <a routerLink="/events" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'NAV.MY_EVENTS' | translate }}</a>
             </li>
+            @if (canSeePublisherRequestsAdminLink) {
+              <li>
+                <a routerLink="/admin/publisher-requests" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'NAV.ADMIN_PUBLISHER_REQUESTS' | translate }}</a>
+              </li>
+            }
         </ul>
 
         <i class="mobile-nav-toggle d-xl-none bi"
