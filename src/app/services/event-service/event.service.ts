@@ -16,6 +16,14 @@ export class EventService {
     return this.httpClient.get<EventModel[]>(`${this.baseUrl}`);
   }
 
+  getMyEvents(): Observable<EventModel[]> {
+    return this.httpClient.get<EventModel[]>(`${this.baseUrl}/my-events`);
+  }
+
+  getAllEventsForAdmin(): Observable<EventModel[]> {
+    return this.httpClient.get<EventModel[]>(`${this.baseUrl}/admin/all`);
+  }
+
   getEventById(id: number): Observable<EventModel> {
     return this.httpClient.get<EventModel>(`${this.baseUrl}/${id}`);
   }
@@ -59,5 +67,13 @@ export class EventService {
   
   cancelEvent(id: number): Observable<void> {
     return this.httpClient.patch<void>(`${this.baseUrl}/${id}/cancel`, {});
+  }
+
+  approveEvent(id: number): Observable<void> {
+    return this.httpClient.patch<void>(`${this.baseUrl}/${id}/approve`, {});
+  }
+
+  rejectEvent(id: number): Observable<void> {
+    return this.httpClient.patch<void>(`${this.baseUrl}/${id}/reject`, {});
   }
 }
