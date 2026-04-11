@@ -1,4 +1,23 @@
 <div class="container mt-5">
+    @if (showToast) {
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+            <div class="toast show align-items-center border-0"
+                [class.text-bg-success]="toastType === 'success'"
+                [class.text-bg-danger]="toastType === 'danger'"
+                role="alert">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center gap-2">
+                <i class="bi"
+                    [class.bi-check-circle-fill]="toastType === 'success'"
+                    [class.bi-exclamation-circle-fill]="toastType === 'danger'">
+                </i>
+                <span>{{ toastMessage | translate }}</span>
+                </div>
+            </div>
+            </div>
+        </div>
+    }
+
     <div class="row">
         <div class="col pt-5 mt-3">
 
@@ -162,7 +181,7 @@
                     </tbody>
                 </table>
 
-                <div class="d-flex justify-content-between align-items-center mt-3 px-2">
+                <div class="d-flex justify-content-between align-items-center mt-3 px-2 pb-3">
                     <small class="text-muted">
                     {{ filteredEvents.length === 0 ? 0 : (currentPage - 1) * pageSize + 1 }}
                     – {{ min(currentPage * pageSize, filteredEvents.length) }}

@@ -32,6 +32,10 @@ export class AdminEventListComponent implements OnInit{
   totalPages = 1;
   totalPagesArray: number[] = [];
 
+  toastMessage = '';
+  toastType: 'success' | 'danger' = 'success';
+  showToast = false;
+
   constructor(
     private eventService: EventService,
     private router: Router
@@ -117,19 +121,34 @@ export class AdminEventListComponent implements OnInit{
     this.updatePagedEvents();
   }
 
+  private showNotification(message: string, type: 'success' | 'danger'): void {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.showToast = true;
+    setTimeout(() => { this.showToast = false; }, 4500);
+  }
+
   eventDetails(id: number): void {
     this.router.navigate(['/event-details', id]);
   }
 
   approve(id: number): void {
     this.eventService.approveEvent(id).subscribe({
-      next: () => this.loadAllEvents()
+      next: () => {
+        this.loadAllEvents();
+        setTimeout(() => this.showNotification('ADMIN_EVENTS.TOAST.APPROVED', 'success'), 0);
+      },
+      error: () => this.showNotification('ADMIN_EVENTS.TOAST.ERROR', 'danger')
     });
   }
 
   reject(id: number): void {
     this.eventService.rejectEvent(id).subscribe({
-      next: () => this.loadAllEvents()
+      next: () => {
+        this.loadAllEvents();
+        setTimeout(() => this.showNotification('ADMIN_EVENTS.TOAST.REJECTED', 'danger'), 0);
+      },
+      error: () => this.showNotification('ADMIN_EVENTS.TOAST.ERROR', 'danger')
     });
   }
 
@@ -176,4 +195,5 @@ export class AdminEventListComponent implements OnInit{
       .filter(Boolean)
       .join(' ');
   }
+  
 }

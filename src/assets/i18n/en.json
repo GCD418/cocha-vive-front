@@ -298,6 +298,11 @@
       "VIEW": "View details",
       "APPROVE": "Approve",
       "REJECT": "Reject"
-     }
+     },
+    "TOAST": {
+    "APPROVED": "Event approved successfully.",
+    "REJECTED": "Event rejected successfully.",
+    "ERROR": "An error occurred. Please try again."
+    }
   }
 }

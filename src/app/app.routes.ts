@@ -23,6 +23,7 @@ export const routes: Routes = [
     { path: 'forbidden', component: ForbiddenPageComponent },
     { path: 'explore-events', component: ExploreEvent },
     { path: 'onboarding', component: OnboardingComponent, canActivate: [authGuard] },
+    { path: 'admin/events', component: AdminEventListComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
     // Example of a route protected by a feature flag. If anyone uses something different 10 Bs.
     // {path: 'make-payment', component: NonExistentComponent, canActivate: [requireFeature(AppFeatures.VIEW_FEATURED_EVENTS)]},
 ];

@@ -299,6 +299,11 @@
       "VIEW": "Ver detalles",
       "APPROVE": "Aprobar",
       "REJECT": "Rechazar"
+     },
+     "TOAST": {
+      "APPROVED": "Evento aprobado exitosamente.",
+      "REJECTED": "Evento rechazado exitosamente.",
+      "ERROR": "Ocurrió un error. Por favor, intenta nuevamente."
      }
   }
 }

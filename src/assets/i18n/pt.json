@@ -300,6 +300,11 @@
       "VIEW": "Ver detalhes",
       "APPROVE": "Aprovar",
       "REJECT": "Rejeitar"
+    },
+    "TOAST": {
+      "APPROVED": "Evento aprovado com sucesso.",
+      "REJECTED": "Evento rejeitado com sucesso.",
+      "ERROR": "Ocorreu um erro. Por favor, tente novamente."
     }
   }
 }
