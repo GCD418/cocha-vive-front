@@ -4,6 +4,7 @@
     "EXPLORE": "Explorar",
     "MY_EVENTS": "Meus Eventos",
     "ADMIN_PUBLISHER_REQUESTS": "Solicitações de Publicador",
+    "ADMIN_EVENTS": "Administrar Eventos",
     "PUBLISH_EVENT": "Publicar Evento",
     "LOGIN": "Fazer Login",
     "LOGOUT": "Sair",
@@ -12,6 +13,10 @@
       "EN": "EN (English)",
       "PT": "PT (Português)"
     },
+    "ROLES.USER": "Usuário",
+    "ROLES.PUBLISHER": "Anunciante",
+    "ROLES.ADMIN": "Administrador",
+    "ROLES.SUPERADMIN": "SUPERADMIN",
     "PUBLISHER_REQUEST": "Candidate-se para se tornar um editor."
   },
   "HERO": {
@@ -347,6 +352,36 @@
       "MOVE_MARKET": "Clique no mapa para mover o marcador",
       "CANCEL": "Cancelar",
       "CONFIRM": "Confirmar localização"
+    }
+  },
+  "ADMIN_EVENTS":{
+    "TITLE": "Administração de Eventos",
+    "PLACEHOLDERS.SEARCH": "Pesquisar por título ou publicador...",
+    "FILTERS": {
+      "CLEAR": "Limpar filtros",
+      "ALL": "Todos",
+      "DATE_FROM": "De",
+      "DATE_TO": "Até"
+    },
+    "TABLE": {
+      "TITLE": "Título",
+      "PUBLISHER": "Publicador",
+      "CREATED_AT": "Criado em",
+      "DATE_START": "Data de início",
+      "CATEGORY": "Categoria",
+      "STATUS": "Status",
+      "ACTIONS": "Ações",
+      "EMPTY": "Nenhum evento encontrado com os filtros aplicados"
+    },
+    "ACTIONS": {
+      "VIEW": "Ver detalhes",
+      "APPROVE": "Aprovar",
+      "REJECT": "Rejeitar"
+    },
+    "TOAST": {
+      "APPROVED": "Evento aprovado com sucesso.",
+      "REJECTED": "Evento rejeitado com sucesso.",
+      "ERROR": "Ocorreu um erro. Por favor, tente novamente."
     }
   },
   "PUBLISHER_REQUEST_FORM": {

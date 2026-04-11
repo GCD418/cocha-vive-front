@@ -173,4 +173,14 @@ export class Navbar implements OnInit {
       })
       .filter((roleName): roleName is string => Boolean(roleName));
   }
+  
+  get roleLabel(): string {
+    const labels: Record<string, string> = {
+      ROLE_USER: 'NAV.ROLES.USER',
+      ROLE_PUBLISHER: 'NAV.ROLES.PUBLISHER',
+      ROLE_ADMIN: 'NAV.ROLES.ADMIN',
+      ROLE_SUPERADMIN: 'NAV.ROLES.SUPERADMIN'
+    };
+    return labels[this.authService.getRoleFromToken() ?? ''] ?? '';
+  }
 }

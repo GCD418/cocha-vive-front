@@ -4,6 +4,7 @@
     "EXPLORE": "Explore",
     "MY_EVENTS": "My Events",
     "ADMIN_PUBLISHER_REQUESTS": "Publisher Requests",
+    "ADMIN_EVENTS": "Admin Events",
     "PUBLISH_EVENT": "Publish Event",
     "LOGIN": "Log In",
     "LOGOUT": "Log Out",
@@ -12,7 +13,11 @@
       "EN": "EN (English)",
       "PT": "PT (Portuguese)"
     },
-    "PUBLISHER_REQUEST": "Request Publisher Role"
+    "ROLES.USER": "User",
+    "ROLES.PUBLISHER": "Publisher",
+    "ROLES.ADMIN": "Admin",
+    "ROLES.SUPERADMIN": "SUPERADMIN",
+    "PUBLISHER_REQUEST": "Request to be a Publisher"
   },
   "HERO": {
     "WELCOME": "Welcome to",
@@ -349,16 +354,44 @@
       "CONFIRM": "Confirm location"
     }
   },
+  "ADMIN_EVENTS":{
+    "TITLE": "Admin Events",
+    "PLACEHOLDERS.SEARCH": "Search by title or publisher...",
+    "FILTERS.CLEAR": "Clear filters",
+    "FILTERS.ALL": "All",
+    "FILTERS.DATE_FROM": "From",
+    "FILTERS.DATE_TO": "To",
+    "TABLE": {
+      "TITLE": "Title",
+      "PUBLISHER": "Publisher",
+      "CREATED_AT": "Created at",
+      "DATE_START": "Start date",
+      "CATEGORY": "Category",
+      "STATUS": "Status",
+      "ACTIONS": "Actions",
+      "EMPTY": "No events found with the applied filters"
+    },
+    "ACTIONS": {
+      "VIEW": "View details",
+      "APPROVE": "Approve",
+      "REJECT": "Reject"
+     },
+    "TOAST": {
+    "APPROVED": "Event approved successfully.",
+    "REJECTED": "Event rejected successfully.",
+    "ERROR": "An error occurred. Please try again."
+    }
+  },
   "PUBLISHER_REQUEST_FORM": {
-    "TITLE": "Apply for Publisher Role",
-    "SUBTITLE": "Fill out the form to request becoming an event publisher.",
+    "TITLE": "Request to be a Publisher",
+    "SUBTITLE": "Complete the form to request to become a event publisher.",
     "LABELS": {
-      "REQUEST_REASON": "Reason for request",
-      "LEGAL_ENTITY_NAME": "Legal entity name"
+      "REQUEST_REASON": "Reason for the request",
+      "LEGAL_ENTITY_NAME": "Legal Entity Name"
     },
     "PLACEHOLDERS": {
-      "REQUEST_REASON": "Ex: We organize weekly community cultural events.",
-      "LEGAL_ENTITY_NAME": "Ex: Cocha Cultura SRL"
+      "REQUEST_REASON": "E.g: We organize community cultural events weekly.",
+      "LEGAL_ENTITY_NAME": "E.g: Cocha Cultura SRL"
     },
     "IMAGES": {
       "LABEL": "Evidence images",
@@ -366,17 +399,17 @@
       "SELECT": "Select images"
     },
     "SUBMIT": "Submit Request",
-    "SUCCESS": "Your request was submitted successfully. We will notify you once it has been reviewed.",
+    "SUCCESS": "Your request has been submitted successfully. You will be notified when it is reviewed.",
     "ERRORS": {
       "COOLDOWN": "You must wait 1 day before submitting a new request.",
-      "ALREADY_APPROVED": "Your account already has the publisher role.",
+      "ALREADY_APPROVED": "Your account already has the role of publisher.",
       "SERVER": "An error occurred while submitting the request. Please try again.",
-      "GENERIC": "Could not complete the action. Please try again."
+      "GENERIC": "Failed to complete the action. Please try again."
     }
   },
   "MY_PUBLISHER_REQUEST": {
     "TITLE": "My Publisher Request",
-    "NO_REQUEST": "You have not submitted a request yet.",
-    "SEND_REQUEST": "Submit request"
+    "NO_REQUEST": "You haven't submitted a request yet.",
+    "SEND_REQUEST": "Send Request"
   }
 }
