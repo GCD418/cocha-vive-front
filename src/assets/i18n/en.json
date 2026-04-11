@@ -11,7 +11,8 @@
       "ES": "ES (Spanish)",
       "EN": "EN (English)",
       "PT": "PT (Portuguese)"
-    }
+    },
+    "PUBLISHER_REQUEST": "Request Publisher Role"
   },
   "HERO": {
     "WELCOME": "Welcome to",

@@ -31,6 +31,11 @@ export class Navbar implements OnInit {
     return (this.translate.getCurrentLang()|| 'es').toUpperCase();
   }
 
+  get canSeePublisherRequestLink(): boolean {
+    const isFeatureEnabled = this.featureToggleService.isEnabled(AppFeatures.MANAGE_PUBLISHER_REQUESTS);
+    return isFeatureEnabled && this.userHasRole('ROLE_USER');
+  }
+
   ngOnInit() {
     document.body.classList.add('scrolled');
     this.checkUserSession();

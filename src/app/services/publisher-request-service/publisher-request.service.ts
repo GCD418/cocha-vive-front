@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { PublisherRequest } from '../../models/publisher-request.model';
-
+import { PublisherRequestCreatePayload } from '../../models/publisher-request.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -30,5 +30,16 @@ export class PublisherRequestService {
 
   rejectRequest(id: number): Observable<void> {
     return this.httpClient.patch<void>(`${this.baseUrl}/${id}/reject`, {});
+  }
+  
+  createRequest(dto: PublisherRequestCreatePayload, images: File[]): Observable<PublisherRequest> {
+    const formData = new FormData();
+    formData.append('request', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
+    images.forEach(img => formData.append('images', img));
+    return this.httpClient.post<PublisherRequest>(`${this.baseUrl}`, formData);
+  }
+
+  getMyRequest(): Observable<PublisherRequest> {
+    return this.httpClient.get<PublisherRequest>(`${this.baseUrl}/my-request`);
   }
 }

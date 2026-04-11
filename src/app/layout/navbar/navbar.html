@@ -21,6 +21,13 @@
                 <a routerLink="/admin/publisher-requests" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'NAV.ADMIN_PUBLISHER_REQUESTS' | translate }}</a>
               </li>
             }
+            @if (canSeePublisherRequestLink) {
+              <li>
+                <a routerLink="/publisher-request" routerLinkActive="active" (click)="closeMobileMenu()">
+                  {{ 'NAV.PUBLISHER_REQUEST' | translate }}
+                </a>
+              </li>
+            }
         </ul>
 
         <i class="mobile-nav-toggle d-xl-none bi"

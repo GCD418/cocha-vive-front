@@ -11,7 +11,8 @@
       "ES": "ES (Español)",
       "EN": "EN (English)",
       "PT": "PT (Português)"
-    }
+    },
+    "PUBLISHER_REQUEST": "Candidate-se para se tornar um editor."
   },
   "HERO": {
     "WELCOME": "Bem-vindo ao",

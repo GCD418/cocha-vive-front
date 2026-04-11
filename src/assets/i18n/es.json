@@ -11,7 +11,8 @@
       "ES": "ES (Español)",
       "EN": "EN (English)",
       "PT": "PT (Português)"
-    }
+    },
+    "PUBLISHER_REQUEST": "Solicitar ser Publicador"
   },
   "HERO": {
     "WELCOME": "Bienvenido a",
