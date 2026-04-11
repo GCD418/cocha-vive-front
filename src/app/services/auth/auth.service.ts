@@ -16,6 +16,7 @@ export interface CurrentUser {
   secondLastName?: string;
   email: string;
   photoUrl?: string;
+  role: string;
 }
 
 type JwtRole = { authority?: string };
