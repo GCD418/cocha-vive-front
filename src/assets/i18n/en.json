@@ -348,5 +348,35 @@
       "CANCEL": "Cancel",
       "CONFIRM": "Confirm location"
     }
+  },
+  "PUBLISHER_REQUEST_FORM": {
+    "TITLE": "Apply for Publisher Role",
+    "SUBTITLE": "Fill out the form to request becoming an event publisher.",
+    "LABELS": {
+      "REQUEST_REASON": "Reason for request",
+      "LEGAL_ENTITY_NAME": "Legal entity name"
+    },
+    "PLACEHOLDERS": {
+      "REQUEST_REASON": "Ex: We organize weekly community cultural events.",
+      "LEGAL_ENTITY_NAME": "Ex: Cocha Cultura SRL"
+    },
+    "IMAGES": {
+      "LABEL": "Evidence images",
+      "HINT": "Upload images that support your request (max. 10).",
+      "SELECT": "Select images"
+    },
+    "SUBMIT": "Submit Request",
+    "SUCCESS": "Your request was submitted successfully. We will notify you once it has been reviewed.",
+    "ERRORS": {
+      "COOLDOWN": "You must wait 1 day before submitting a new request.",
+      "ALREADY_APPROVED": "Your account already has the publisher role.",
+      "SERVER": "An error occurred while submitting the request. Please try again.",
+      "GENERIC": "Could not complete the action. Please try again."
+    }
+  },
+  "MY_PUBLISHER_REQUEST": {
+    "TITLE": "My Publisher Request",
+    "NO_REQUEST": "You have not submitted a request yet.",
+    "SEND_REQUEST": "Submit request"
   }
 }

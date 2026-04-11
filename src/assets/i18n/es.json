@@ -349,5 +349,35 @@
         "CANCEL": "Cancelar",
         "CONFIRM": "Confirmar ubicación"
     }
+  },
+  "PUBLISHER_REQUEST_FORM": {
+    "TITLE": "Solicitar rol de Publicador",
+    "SUBTITLE": "Completa el formulario para solicitar ser publicador de eventos.",
+    "LABELS": {
+      "REQUEST_REASON": "Motivo de la solicitud",
+      "LEGAL_ENTITY_NAME": "Nombre de la entidad legal"
+    },
+    "PLACEHOLDERS": {
+      "REQUEST_REASON": "Ej: Organizamos eventos culturales comunitarios semanalmente.",
+      "LEGAL_ENTITY_NAME": "Ej: Cocha Cultura SRL"
+    },
+    "IMAGES": {
+      "LABEL": "Imágenes de evidencia",
+      "HINT": "Sube imágenes que respalden tu solicitud (máx. 10).",
+      "SELECT": "Seleccionar imágenes"
+    },
+    "SUBMIT": "Enviar Solicitud",
+    "SUCCESS": "Tu solicitud fue enviada correctamente. Te notificaremos cuando sea revisada.",
+    "ERRORS": {
+      "COOLDOWN": "Debes esperar 1 día antes de enviar una nueva solicitud.",
+      "ALREADY_APPROVED": "Tu cuenta ya tiene rol de publicador.",
+      "SERVER": "Ocurrió un error al enviar la solicitud. Intenta nuevamente.",
+      "GENERIC": "No se pudo completar la acción. Intenta nuevamente."
+    }
+  },
+  "MY_PUBLISHER_REQUEST": {
+    "TITLE": "Mi Solicitud de Publicador",
+    "NO_REQUEST": "Aún no has enviado una solicitud.",
+    "SEND_REQUEST": "Enviar solicitud"
   }
 }

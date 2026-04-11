@@ -348,5 +348,35 @@
       "CANCEL": "Cancelar",
       "CONFIRM": "Confirmar localização"
     }
+  },
+  "PUBLISHER_REQUEST_FORM": {
+    "TITLE": "Solicitar papel de Publicador",
+    "SUBTITLE": "Preencha o formulário para solicitar se tornar um publicador de eventos.",
+    "LABELS": {
+      "REQUEST_REASON": "Motivo da solicitação",
+      "LEGAL_ENTITY_NAME": "Nome da entidade legal"
+    },
+    "PLACEHOLDERS": {
+      "REQUEST_REASON": "Ex: Organizamos eventos culturais comunitários semanalmente.",
+      "LEGAL_ENTITY_NAME": "Ex: Cocha Cultura SRL"
+    },
+    "IMAGES": {
+      "LABEL": "Imagens de evidência",
+      "HINT": "Envie imagens que comprovem sua solicitação (máx. 10).",
+      "SELECT": "Selecionar imagens"
+    },
+    "SUBMIT": "Enviar Solicitação",
+    "SUCCESS": "Sua solicitação foi enviada com sucesso. Notificaremos você assim que for analisada.",
+    "ERRORS": {
+      "COOLDOWN": "Você deve aguardar 1 dia antes de enviar uma nova solicitação.",
+      "ALREADY_APPROVED": "Sua conta já possui o papel de publicador.",
+      "SERVER": "Ocorreu um erro ao enviar a solicitação. Tente novamente.",
+      "GENERIC": "Não foi possível concluir a ação. Tente novamente."
+    }
+  },
+  "MY_PUBLISHER_REQUEST": {
+    "TITLE": "Minha Solicitação de Publicador",
+    "NO_REQUEST": "Você ainda não enviou uma solicitação.",
+    "SEND_REQUEST": "Enviar solicitação"
   }
 }

@@ -1,0 +1,70 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7 pt-5 mt-3">
+
+      @if (loading()) {
+        <div class="card border-0 shadow-sm">
+          <div class="card-body text-center py-5">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="mt-2 text-muted">{{ 'MY_PUBLISHER_REQUEST.LOADING' | translate }}</div>
+          </div>
+        </div>
+      } @else if (errorMessageKey()) {
+        <div class="alert alert-danger" role="alert">
+          {{ errorMessageKey() | translate }}
+        </div>
+      } @else if (request()) {
+        <h2 class="mb-4">{{ 'MY_PUBLISHER_REQUEST.TITLE' | translate }}</h2>
+
+        <div class="card border-0 shadow-sm mb-3">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+              <span class="text-muted">{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.REQUEST_STATUS' | translate }}</span>
+              <span class="badge rounded-pill" [ngClass]="getStatusClass(request()!.requestStatus)">
+                {{ getStatusTranslationKey(request()!.requestStatus) | translate }}
+              </span>
+            </div>
+
+            <div class="py-2 border-bottom">
+              <div class="text-muted small mb-1">{{ 'PUBLISHER_REQUEST_FORM.LABELS.LEGAL_ENTITY_NAME' | translate }}</div>
+              <div class="fw-semibold">{{ request()!.legalEntityName }}</div>
+            </div>
+
+            <div class="py-2 border-bottom">
+              <div class="text-muted small mb-1">{{ 'PUBLISHER_REQUEST_FORM.LABELS.REQUEST_REASON' | translate }}</div>
+              <div>{{ request()!.requestReason }}</div>
+            </div>
+
+            <div class="d-flex justify-content-between py-2">
+              <span class="text-muted">{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.CREATED_AT' | translate }}</span>
+              <strong>{{ request()!.createdAt | date:'d/M/yyyy HH:mm' }}</strong>
+            </div>
+          </div>
+        </div>
+
+        @if (request()!.evidenceImages.length > 0) {
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <h5 class="mb-3">{{ 'PUBLISHER_REQUESTS.DETAIL.EVIDENCE_IMAGES' | translate }}</h5>
+              <div class="row g-2">
+                @for (image of request()!.evidenceImages; track $index) {
+                  <div class="col-4">
+                    <img
+                      [src]="image"
+                      class="img-fluid rounded w-100"
+                      [alt]="'PUBLISHER_REQUESTS.DETAIL.EVIDENCE_IMAGE_ALT' | translate"
+                      style="height: 120px; object-fit: cover;"
+                    >
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      }
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7 pt-5 mt-3">
+
+      <h2 class="mb-1">{{ 'PUBLISHER_REQUEST_FORM.TITLE' | translate }}</h2>
+      <p class="text-muted mb-4">{{ 'PUBLISHER_REQUEST_FORM.SUBTITLE' | translate }}</p>
+
+      @if (errorMessageKey()) {
+        <div class="alert alert-danger" role="alert">
+          {{ errorMessageKey() | translate }}
+        </div>
+      }
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              {{ 'PUBLISHER_REQUEST_FORM.LABELS.LEGAL_ENTITY_NAME' | translate }}
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="legalEntityName"
+              [placeholder]="'PUBLISHER_REQUEST_FORM.PLACEHOLDERS.LEGAL_ENTITY_NAME' | translate"
+              maxlength="150"
+            >
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              {{ 'PUBLISHER_REQUEST_FORM.LABELS.REQUEST_REASON' | translate }}
+            </label>
+            <textarea
+              class="form-control"
+              [(ngModel)]="requestReason"
+              [placeholder]="'PUBLISHER_REQUEST_FORM.PLACEHOLDERS.REQUEST_REASON' | translate"
+              rows="5"
+              maxlength="1000"
+            ></textarea>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">
+              {{ 'PUBLISHER_REQUEST_FORM.IMAGES.LABEL' | translate }}
+            </label>
+            <div class="text-muted small mb-2">{{ 'PUBLISHER_REQUEST_FORM.IMAGES.HINT' | translate }}</div>
+
+            <input
+              type="file"
+              class="form-control"
+              accept="image/*"
+              multiple
+              (change)="onImagesSelected($event)"
+            >
+
+            @if (previewUrls.length > 0) {
+              <div class="row g-2 mt-2">
+                @for (url of previewUrls; track $index) {
+                  <div class="col-4 position-relative">
+                    <img
+                      [src]="url"
+                      class="img-fluid rounded w-100"
+                      style="height: 100px; object-fit: cover;"
+                      alt="Preview"
+                    >
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1 p-0"
+                      style="width: 22px; height: 22px; font-size: 12px; line-height: 1;"
+                      (click)="removeImage($index)"
+                    >
+                      ×
+                    </button>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary w-100"
+            [disabled]="!isFormValid() || submitting()"
+            (click)="onSubmit()"
+          >
+            @if (submitting()) {
+              <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+            }
+            {{ 'PUBLISHER_REQUEST_FORM.SUBMIT' | translate }}
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
