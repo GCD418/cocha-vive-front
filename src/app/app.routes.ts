@@ -37,7 +37,6 @@ export const routes: Routes = [
     { path: 'forbidden', component: ForbiddenPageComponent },
     { path: 'explore-events', component: ExploreEvent },
     { path: 'onboarding', component: OnboardingComponent, canActivate: [authGuard] },
-    { path: 'admin/events', component: AdminEventListComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
     {
         path: 'publisher-apply-form',
         loadComponent: () =>
