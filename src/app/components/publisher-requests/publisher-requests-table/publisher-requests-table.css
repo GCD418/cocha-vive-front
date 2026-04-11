@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+.creator-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.creator-avatar-fallback {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 85%);
+  color: var(--accent-color);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.creator-text {
+  line-height: 1.1;
+}

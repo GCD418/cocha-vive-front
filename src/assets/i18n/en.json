@@ -3,6 +3,7 @@
     "START": "Home",
     "EXPLORE": "Explore",
     "MY_EVENTS": "My Events",
+    "ADMIN_PUBLISHER_REQUESTS": "Publisher Requests",
     "ADMIN_EVENTS": "Admin Events",
     "PUBLISH_EVENT": "Publish Event",
     "LOGIN": "Log In",
@@ -227,6 +228,77 @@
       "EMPTY_TITLE": "No results for your search",
       "EMPTY_DESC": "Try changing or clearing filters.",
       "VIEW_ALL": "View all events"
+    }
+  },
+  "PUBLISHER_REQUESTS": {
+    "TITLE": "Publisher Requests",
+    "LOADING": "Loading publisher requests...",
+    "STATS": {
+      "TOTAL": "Total requests",
+      "PENDING": "Pending",
+      "APPROVED": "Approved"
+    },
+    "FILTERS": {
+      "PENDING": "Pending",
+      "ALL": "All"
+    },
+    "STATUS": {
+      "PENDING": "Pending",
+      "APPROVED": "Approved",
+      "REJECTED": "Rejected"
+    },
+    "TABLE": {
+      "HEADERS": {
+        "ID": "ID",
+        "LEGAL_ENTITY_NAME": "Legal Entity Name",
+        "REQUEST_STATUS": "Request Status",
+        "CREATED_AT": "Created At",
+        "CREATED_BY_USER": "Created By User",
+        "QUICK_ACTIONS": "Quick Actions"
+      },
+      "ACTIONS": {
+        "APPROVE": "Approve",
+        "REJECT": "Reject",
+        "VIEW": "View"
+      },
+      "EMPTY_STATE": "No publisher requests found for this filter."
+    },
+    "DETAIL": {
+      "BACK_TO_LIST": "Back to list",
+      "LOADING": "Loading request details...",
+      "REQUEST_REASON": "Request Reason",
+      "EVIDENCE_IMAGES": "Evidence Images",
+      "EVIDENCE_IMAGE_ALT": "Evidence image",
+      "NO_EVIDENCE_IMAGES": "No evidence images uploaded.",
+      "DETAILS": "Request Details",
+      "LEGAL_ENTITY_NAME": "Legal Entity Name",
+      "MODIFIED_BY_USER_ID": "Modified By User ID",
+      "UPDATED_AT": "Updated At",
+      "IS_ACTIVE": "Is Active",
+      "YES": "Yes",
+      "NO": "No",
+      "APPROVE": "Approve Request",
+      "REJECT": "Reject Request"
+    },
+    "MODAL": {
+      "APPROVE_TITLE": "Approve publisher request?",
+      "APPROVE_MESSAGE": "The user will be promoted to publisher role. Do you want to continue?",
+      "APPROVE_BUTTON": "Yes, approve",
+      "REJECT_TITLE": "Reject publisher request?",
+      "REJECT_MESSAGE": "This request will be marked as rejected. Do you want to continue?",
+      "REJECT_BUTTON": "Yes, reject"
+    },
+    "TOAST": {
+      "APPROVE_SUCCESS": "Publisher request approved successfully.",
+      "REJECT_SUCCESS": "Publisher request rejected successfully."
+    },
+    "ERRORS": {
+      "UNAUTHORIZED": "Your session has expired. Please log in again.",
+      "FORBIDDEN": "You do not have access to this resource.",
+      "NOT_FOUND": "The requested publisher request was not found.",
+      "SERVER": "A server error occurred. Please try again.",
+      "INVALID_ID": "Invalid publisher request ID.",
+      "GENERIC": "Could not complete the action. Please try again."
     }
   },
   "FORBIDDEN": {

@@ -16,7 +16,7 @@ declare const bootstrap: any;
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink, 
+    RouterLink,
     EventFormComponent,
     ConfirmModalComponent,
     NgClass,

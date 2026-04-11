@@ -11,6 +11,8 @@ import { ExploreEvent } from './pages/explore-event/explore-event';
 import { OnboardingComponent } from './pages/onboarding/onboarding-component';
 import { requireFeature } from './core/guards/require-feature';
 import { AppFeatures } from './models/app-features';
+import { PublisherRequestsPageComponent } from './pages/publisher-requests/publisher-requests';
+import { PublisherRequestDetailsPageComponent } from './pages/publisher-request-details/publisher-request-details';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +21,18 @@ export const routes: Routes = [
     { path: 'events/create', component: EventCreate, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_PUBLISHER'] },},
     { path: 'admin/events', component: AdminEventListComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
     { path: 'event-details/:id', component: EventDetails },
+    {
+        path: 'admin/publisher-requests',
+        component: PublisherRequestsPageComponent,
+        canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
+        data: { roles: ['ROLE_ADMIN'] },
+    },
+    {
+        path: 'admin/publisher-requests/:id',
+        component: PublisherRequestDetailsPageComponent,
+        canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
+        data: { roles: ['ROLE_ADMIN'] },
+    },
     { path: 'category-events/:name', component: CategoryEventsComponent },
     { path: 'forbidden', component: ForbiddenPageComponent },
     { path: 'explore-events', component: ExploreEvent },
