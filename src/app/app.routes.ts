@@ -45,7 +45,6 @@ export const routes: Routes = [
         canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
         data: { roles: ['ROLE_USER'] },
     },
-    { path: 'admin/events', component: AdminEventListComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
     {
         path: 'my-publisher-request',
         loadComponent: () =>
