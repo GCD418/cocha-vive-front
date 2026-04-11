@@ -30,7 +30,7 @@
                         <th>#</th>
                         <th>{{ 'ADMIN_EVENTS.TABLE.TITLE' | translate }}</th>
 
-                        <th>{{ 'ADMIN_EVENTS.TABLE.CREATED_AT' | translate }}</th>
+                        <th>{{ 'ADMIN_EVENTS.TABLE.PUBLISHER' | translate }}</th>
 
                         <th class="p-0">
                         <div class="dropdown">
@@ -39,7 +39,7 @@
                                     data-bs-toggle="dropdown"
                                     data-bs-auto-close="outside"
                                     aria-expanded="false">
-                            {{ 'ADMIN_EVENTS.TABLE.DATE_START' | translate }}
+                            {{ 'ADMIN_EVENTS.TABLE.CREATED_AT' | translate }}
                             </button>
                             <div class="dropdown-menu p-3" style="min-width: 220px;">
                             <label class="form-label small text-muted mb-1">{{ 'ADMIN_EVENTS.FILTERS.DATE_FROM' | translate }}</label>
@@ -122,9 +122,9 @@
                             {{ (currentPage - 1) * pageSize + i + 1 }}
                         </td>
                         <td class="fw-semibold">{{ event.title }}</td>
+                        <td class="text-nowrap text-center">{{ getFullName(event.organizedByUser) }}</td>
                         <td class="text-nowrap text-center">{{ event.createdAt | date:'d/M/yyyy' }}</td>
-                        <td class="text-nowrap text-center">{{ event.dateStart | date:'d/M/yyyy' }}</td>
-                        <td>{{ event.category?.name }}</td>
+                        <td>{{ event.category.name }}</td>
                         <td class="text-center">
                             <span class="badge rounded-pill" [ngClass]="getStatusClass(event.eventStatus)">
                             {{ getStatusLabel(event.eventStatus) }}

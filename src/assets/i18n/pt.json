@@ -276,5 +276,30 @@
       "CANCEL": "Cancelar",
       "CONFIRM": "Confirmar localização"
     }
+  },
+  "ADMIN_EVENTS":{
+    "TITLE": "Administração de Eventos",
+    "PLACEHOLDERS.SEARCH": "Pesquisar por título ou publicador...",
+    "FILTERS": {
+      "CLEAR": "Limpar filtros",
+      "ALL": "Todos",
+      "DATE_FROM": "De",
+      "DATE_TO": "Até"
+    },
+    "TABLE": {
+      "TITLE": "Título",
+      "PUBLISHER": "Publicador",
+      "CREATED_AT": "Criado em",
+      "DATE_START": "Data de início",
+      "CATEGORY": "Categoria",
+      "STATUS": "Status",
+      "ACTIONS": "Ações",
+      "EMPTY": "Nenhum evento encontrado com os filtros aplicados"
+    },
+    "ACTIONS": {
+      "VIEW": "Ver detalhes",
+      "APPROVE": "Aprovar",
+      "REJECT": "Rejeitar"
+    }
   }
 }

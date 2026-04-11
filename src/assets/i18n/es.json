@@ -280,19 +280,20 @@
   },
   "ADMIN_EVENTS":{
     "TITLE": "Administrar Eventos",
-    "PLACEHOLDERS.SEARCH": "Buscar por título...",
+    "PLACEHOLDERS.SEARCH": "Buscar por título o anunciante...",
     "FILTERS.CLEAR": "Quitar filtros",
     "FILTERS.ALL": "Todos",
-    "ILTERS.DATE_FROM": "Desde",
+    "FILTERS.DATE_FROM": "Desde",
     "FILTERS.DATE_TO": "Hasta",
     "TABLE": {
       "TITLE": "Título",
+      "PUBLISHER": "Anunciante",
       "CREATED_AT": "Fecha de creación",
       "DATE_START": "Fecha de inicio",
       "CATEGORY": "Categoría",
       "STATUS": "Estado",
       "ACTIONS": "Acciones",
-      "EMPTY": ""
+      "EMPTY": "No se encontraron eventos con los filtros aplicados"
     },
     "ACTIONS": {
       "VIEW": "Ver detalles",

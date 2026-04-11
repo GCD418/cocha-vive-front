@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { EventService } from '../../../services/event-service/event.service';
 import { EventModel } from '../../../models/event-model';
-
+import { UserDTO } from '../../../models/event-model';
 
 @Component({
   selector: 'app-admin-event-list',
@@ -66,7 +66,10 @@ export class AdminEventListComponent implements OnInit{
 
     if (this.searchText.trim()) {
       const term = this.searchText.toLowerCase();
-      result = result.filter(e => e.title.toLowerCase().includes(term));
+      result = result.filter(e => 
+        e.title.toLowerCase().includes(term) ||
+        this.getFullName(e.organizedByUser).toLowerCase().includes(term)
+      );
     }
 
     if (this.filterDateFrom) {
@@ -167,5 +170,10 @@ export class AdminEventListComponent implements OnInit{
   min(a: number, b: number): number {
     return Math.min(a, b);
   }
-
+  
+  getFullName(user: UserDTO): string {
+    return [user.names, user.firstLastName, user.secondLastName]
+      .filter(Boolean)
+      .join(' ');
+  }
 }
