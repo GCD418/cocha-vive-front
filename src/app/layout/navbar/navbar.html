@@ -35,6 +35,15 @@
                 </a>
               </li>
             }
+            <li>
+            @if (authService.actualRole() === 'ROLE_ADMIN') {
+              <li>
+                <a routerLink="/admin/publisher-requests">
+                  {{ 'NAV.ADMIN_PUBLISHER_REQUESTS' | translate }}
+                </a>
+              </li>
+            }
+            </li>
         </ul>
 
         <i class="mobile-nav-toggle d-xl-none bi"
