@@ -156,18 +156,25 @@
                                     [title]="'ADMIN_EVENTS.ACTIONS.VIEW' | translate">
                                 <i class="bi bi-eye fs-5"></i>
                             </button>
-                            @if (event.eventStatus === 'PENDING') {
-                                <button (click)="approve(event.id)"
-                                        class="btn btn-link p-0 text-success"
-                                        [title]="'ADMIN_EVENTS.ACTIONS.APPROVE' | translate">
+                            <button (click)="event.eventStatus === 'PENDING' && approve(event.id)"
+                                    class="btn btn-link p-0"
+                                    [class.text-success]="event.eventStatus === 'PENDING'"
+                                    [class.text-muted]="event.eventStatus !== 'PENDING'"
+                                    [class.opacity-75-hover]="event.eventStatus === 'PENDING'"
+                                    [style.pointer-events]="event.eventStatus !== 'PENDING' ? 'none' : 'auto'"
+                                    [title]="'ADMIN_EVENTS.ACTIONS.APPROVE' | translate">
                                 <i class="bi bi-check-circle fs-5"></i>
-                                </button>
-                                <button (click)="reject(event.id)"
-                                        class="btn btn-link p-0 text-danger"
-                                        [title]="'ADMIN_EVENTS.ACTIONS.REJECT' | translate">
+                            </button>
+
+                            <button (click)="event.eventStatus === 'PENDING' && reject(event.id)"
+                                    class="btn btn-link p-0"
+                                    [class.text-danger]="event.eventStatus === 'PENDING'"
+                                    [class.text-muted]="event.eventStatus !== 'PENDING'"
+                                    [class.link-danger]="event.eventStatus === 'PENDING'"
+                                    [style.pointer-events]="event.eventStatus !== 'PENDING' ? 'none' : 'auto'"
+                                    [title]="'ADMIN_EVENTS.ACTIONS.REJECT' | translate">
                                 <i class="bi bi-x-circle fs-5"></i>
-                                </button>
-                            }
+                            </button>
                             </div>
                         </td>
                         </tr>

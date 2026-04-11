@@ -28,7 +28,7 @@
           <div class="card text-center border-0 shadow-sm">
             <div class="card-body">
               <div class="fs-2 fw-bold text-success">{{ countByStatus('APPROVED') }}</div>
-              <div class="text-muted small">{{ 'EVENT_LIST.STATS.TOTAL' | translate }}</div>
+              <div class="text-muted small">{{ 'EVENT_LIST.STATS.APPROVED' | translate }}</div>
             </div>
           </div>
         </div>
@@ -44,6 +44,9 @@
 
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0"> {{ 'EVENT_LIST.TITLE' | translate }} </h2>
+        @if (authService.actualRole()) {
+          <a class="cta-btn d-none d-sm-block" [routerLink]="['/events/create']">{{ 'NAV.PUBLISH_EVENT' | translate }}</a>
+        }
       </div>
 
       <div class="d-flex justify-content-between align-items-center mb-3">
@@ -68,6 +71,7 @@
           <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
               <tr class="text-center">
+                <th>#</th>
                 <th>{{ 'EVENT_LIST.TABLE.HEADERS.TITLE' | translate }}</th>
 
                 <th class="p-0">
@@ -208,8 +212,11 @@
               </tr>
             </thead>
             <tbody  class="text-muted small">
-              @for (event of pagedEvents; track event.id) {
+              @for (event of pagedEvents; track event.id; let i = $index) {
                 <tr>
+                  <td class="text-center text-muted">
+                    {{ (currentPage - 1) * pageSize + i + 1 }}
+                  </td>
                   <td class="fw-semibold">{{ event.title }}</td>
                   <td class="text-nowrap text-center">{{ event.dateStart | date:'d/M/yyyy' }}</td>
                   <td>{{ event.category.name }}</td>
@@ -256,7 +263,7 @@
             </tbody>
           </table>
 
-          <div class="d-flex justify-content-between align-items-center mt-3 px-2">
+          <div class="d-flex justify-content-between align-items-center mt-3 px-2 pb-3">
             <small class="text-muted">
               {{ 'EVENT_LIST.TABLE.PAGINATION_LABEL' | translate }}:
               {{ filteredEvents.length === 0 ? 0 : (currentPage - 1) * pageSize + 1 }}

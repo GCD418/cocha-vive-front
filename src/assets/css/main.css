@@ -1685,3 +1685,19 @@ section,
   font-size: 15px;
   margin-bottom: 10px;
 }
+
+.cta-btn,
+.cta-btn:focus {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  font-size: 14px;
+  padding: 8px 25px;
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
+.cta-btn:hover,
+.cta-btn:focus:hover {
+  color: var(--contrast-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+}

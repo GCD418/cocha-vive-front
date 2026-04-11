@@ -59,7 +59,7 @@ export class EventList implements OnInit {
   private editModal: any;
 
   constructor(private eventService: EventService,
-              private authService: AuthService,
+              public authService: AuthService,
               private router: Router) { }
 
   ngOnInit(): void {

@@ -11,7 +11,11 @@
       "ES": "ES (Spanish)",
       "EN": "EN (English)",
       "PT": "PT (Portuguese)"
-    }
+    },
+    "ROLES.USER": "User",
+    "ROLES.PUBLISHER": "Publisher",
+    "ROLES.ADMIN": "Admin",
+    "ROLES.SUPERADMIN": "SUPERADMIN"
   },
   "HERO": {
     "WELCOME": "Welcome to",
