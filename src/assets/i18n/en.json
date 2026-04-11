@@ -4,6 +4,7 @@
     "EXPLORE": "Explore",
     "MY_EVENTS": "My Events",
     "ADMIN_PUBLISHER_REQUESTS": "Publisher Requests",
+    "ADMIN_EVENTS": "Admin Events",
     "PUBLISH_EVENT": "Publish Event",
     "LOGIN": "Log In",
     "LOGOUT": "Log Out",
@@ -11,7 +12,11 @@
       "ES": "ES (Spanish)",
       "EN": "EN (English)",
       "PT": "PT (Portuguese)"
-    }
+    },
+    "ROLES.USER": "User",
+    "ROLES.PUBLISHER": "Publisher",
+    "ROLES.ADMIN": "Admin",
+    "ROLES.SUPERADMIN": "SUPERADMIN"
   },
   "HERO": {
     "WELCOME": "Welcome to",
@@ -346,6 +351,34 @@
       "MOVE_MARKET": "Click on the map to move the marker",
       "CANCEL": "Cancel",
       "CONFIRM": "Confirm location"
+    }
+  },
+  "ADMIN_EVENTS":{
+    "TITLE": "Admin Events",
+    "PLACEHOLDERS.SEARCH": "Search by title or publisher...",
+    "FILTERS.CLEAR": "Clear filters",
+    "FILTERS.ALL": "All",
+    "FILTERS.DATE_FROM": "From",
+    "FILTERS.DATE_TO": "To",
+    "TABLE": {
+      "TITLE": "Title",
+      "PUBLISHER": "Publisher",
+      "CREATED_AT": "Created at",
+      "DATE_START": "Start date",
+      "CATEGORY": "Category",
+      "STATUS": "Status",
+      "ACTIONS": "Actions",
+      "EMPTY": "No events found with the applied filters"
+    },
+    "ACTIONS": {
+      "VIEW": "View details",
+      "APPROVE": "Approve",
+      "REJECT": "Reject"
+     },
+    "TOAST": {
+    "APPROVED": "Event approved successfully.",
+    "REJECTED": "Event rejected successfully.",
+    "ERROR": "An error occurred. Please try again."
     }
   }
 }

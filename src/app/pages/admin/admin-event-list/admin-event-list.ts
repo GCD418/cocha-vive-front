@@ -1,52 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe, NgClass } from '@angular/common';
-import { EventService } from '../../services/event-service/event.service';
-import { Router, RouterLink } from '@angular/router';
-import { EventModel } from '../../models/event-model';
-import { AuthService, CurrentUser } from '../../services/auth/auth.service';
-import { EventFormResult, EventFormComponent } from '../../components/events/event-form-component/event-form-component';
-import { ConfirmModalComponent } from '../../shared/confirmModal-Component/confirmModal-component';
+import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
-
-declare const bootstrap: any;
+import { EventService } from '../../../services/event-service/event.service';
+import { EventModel } from '../../../models/event-model';
+import { UserDTO } from '../../../models/event-model';
 
 @Component({
-  selector: 'app-event-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    EventFormComponent,
-    ConfirmModalComponent,
-    NgClass,
-    DatePipe,
-    FormsModule,
-    NgClass,
-    DatePipe,
-    TranslateModule
-  ],
-  templateUrl: './event-list.html',
-  styleUrl: './event-list.css',
+  selector: 'app-admin-event-list',
+  imports: [CommonModule, NgClass, DatePipe, FormsModule, TranslateModule],
+  templateUrl: './admin-event-list.html',
+  styleUrl: './admin-event-list.css',
 })
-export class EventList implements OnInit {
-
+export class AdminEventListComponent implements OnInit{
   events: EventModel[] = [];
   filteredEvents: EventModel[] = [];
   pagedEvents: EventModel[] = [];
   availableCategories: string[] = [];
 
-  currentUser: CurrentUser | null = null;
   loading = true;
-  selectedEvent: EventModel | null = null;
-  showSuccessToast = false;
-  cancellingId: number | null = null;
-  pendingCancelId: number | null = null;
-
   searchText = '';
-  filterStatus = '';
+  filterStatus = 'PENDING'; // por defecto pendientes
   filterCategory = '';
-
   filterType = '';
   filterDateFrom = '';
   filterDateTo = '';
@@ -56,37 +32,31 @@ export class EventList implements OnInit {
   totalPages = 1;
   totalPagesArray: number[] = [];
 
-  private editModal: any;
+  toastMessage = '';
+  toastType: 'success' | 'danger' = 'success';
+  showToast = false;
 
-  constructor(private eventService: EventService,
-              public authService: AuthService,
-              private router: Router) { }
+  constructor(
+    private eventService: EventService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.authService.getCurrentUser().subscribe(user => {
-      this.currentUser = user;
-
-      if (!user) {
-        this.router.navigate(['/login']);
-        return;
-      }
-
-      this.loadMyEvents(user.id);
-    });
+    this.loadAllEvents();
   }
 
-  private loadMyEvents(userId: number): void {
+  private loadAllEvents(): void {
     this.loading = true;
-    this.eventService.getMyEvents().subscribe({
+    this.eventService.getAllEventsForAdmin().subscribe({
       next: (data) => {
         this.events = data;
-        this.availableCategories = [...new Set(this.events.map(e => e.category?.name).filter(Boolean))] as string[];
+        this.availableCategories = [
+          ...new Set(this.events.map(e => e.category?.name).filter(Boolean))
+        ] as string[];
         this.applyFilters();
         this.loading = false;
       },
-      error: () => {
-        this.loading = false;
-      }
+      error: () => { this.loading = false; }
     });
   }
 
@@ -100,7 +70,10 @@ export class EventList implements OnInit {
 
     if (this.searchText.trim()) {
       const term = this.searchText.toLowerCase();
-      result = result.filter(e => e.title.toLowerCase().includes(term));
+      result = result.filter(e => 
+        e.title.toLowerCase().includes(term) ||
+        this.getFullName(e.organizedByUser).toLowerCase().includes(term)
+      );
     }
 
     if (this.filterDateFrom) {
@@ -148,69 +121,35 @@ export class EventList implements OnInit {
     this.updatePagedEvents();
   }
 
-  min(a: number, b: number): number {
-    return Math.min(a, b);
+  private showNotification(message: string, type: 'success' | 'danger'): void {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.showToast = true;
+    setTimeout(() => { this.showToast = false; }, 4500);
   }
 
   eventDetails(id: number): void {
     this.router.navigate(['/event-details', id]);
   }
 
-  openEditModal(event: EventModel): void {
-    this.selectedEvent = event;
-    const modalEl = document.getElementById('editEventModal');
-    if (modalEl) {
-      this.editModal = new bootstrap.Modal(modalEl);
-      this.editModal.show();
-    }
-  }
-
-  onEditFormResult(result: EventFormResult): void {
-    if (this.editModal) {
-      this.editModal.hide();
-    }
-    this.selectedEvent = null;
-
-    if (result.success) {
-      this.showSuccessToast = true;
-      setTimeout(() => { this.showSuccessToast = false; }, 500);
-
-      if (this.currentUser) {
-        this.loadMyEvents(this.currentUser.id);
-      }
-    }
-  }
-
-  openCancelModal(id: number): void {      
-  this.pendingCancelId = id;
-}
-
-  onCancelConfirmed(): void {              
-    if (this.pendingCancelId === null) return;
-
-    this.cancellingId = this.pendingCancelId;
-
-    this.eventService.cancelEvent(this.pendingCancelId).subscribe({
+  approve(id: number): void {
+    this.eventService.approveEvent(id).subscribe({
       next: () => {
-        this.events = this.events.filter(e => e.id !== this.pendingCancelId);
-        this.cancellingId = null;
-        this.pendingCancelId = null;
+        this.loadAllEvents();
+        setTimeout(() => this.showNotification('ADMIN_EVENTS.TOAST.APPROVED', 'success'), 0);
       },
-      error: (err) => {
-        console.error('Error al cancelar el evento', err);
-        this.cancellingId = null;
-        this.pendingCancelId = null;
-      }
+      error: () => this.showNotification('ADMIN_EVENTS.TOAST.ERROR', 'danger')
     });
   }
 
-  onCancelDismissed(): void {              
-    this.pendingCancelId = null;
-    this.cancellingId = null;
-  }
-
-  countByStatus(status: string): number {
-    return this.events.filter(e => e.eventStatus === status).length;
+  reject(id: number): void {
+    this.eventService.rejectEvent(id).subscribe({
+      next: () => {
+        this.loadAllEvents();
+        setTimeout(() => this.showNotification('ADMIN_EVENTS.TOAST.REJECTED', 'danger'), 0);
+      },
+      error: () => this.showNotification('ADMIN_EVENTS.TOAST.ERROR', 'danger')
+    });
   }
 
   getStatusLabel(status: string): string {
@@ -247,4 +186,14 @@ export class EventList implements OnInit {
     this.onFilterChange();
   }
 
+  min(a: number, b: number): number {
+    return Math.min(a, b);
+  }
+  
+  getFullName(user: UserDTO): string {
+    return [user.names, user.firstLastName, user.secondLastName]
+      .filter(Boolean)
+      .join(' ');
+  }
+  
 }
