@@ -37,7 +37,22 @@ export const routes: Routes = [
     { path: 'forbidden', component: ForbiddenPageComponent },
     { path: 'explore-events', component: ExploreEvent },
     { path: 'onboarding', component: OnboardingComponent, canActivate: [authGuard] },
-    { path: 'admin/events', component: AdminEventListComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
+    {
+        path: 'publisher-apply-form',
+        loadComponent: () =>
+            import('./pages/publisher-apply-form/publisher-apply-form')
+            .then(m => m.PublisherApplyFormPageComponent),
+        canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
+        data: { roles: ['ROLE_USER'] },
+    },
+    {
+        path: 'my-publisher-request',
+        loadComponent: () =>
+            import('./pages/my-publisher-request/my-publisher-request')
+            .then(m => m.MyPublisherRequestPageComponent),
+        canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
+        data: { roles: ['ROLE_USER'] },
+    },
     // Example of a route protected by a feature flag. If anyone uses something different 10 Bs.
     // {path: 'make-payment', component: NonExistentComponent, canActivate: [requireFeature(AppFeatures.VIEW_FEATURED_EVENTS)]},
 ];

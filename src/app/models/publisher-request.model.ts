@@ -2,6 +2,11 @@ export type PublisherRequestStatus = 'APPROVED' | 'PENDING' | 'REJECTED';
 
 export type PublisherRequestFilterMode = 'pending' | 'all';
 
+export interface PublisherRequestCreatePayload {
+  requestReason: string;
+  legalEntityName: string;
+}
+
 export interface PublisherRequestCreatedByUser {
   id: number;
   names: string;

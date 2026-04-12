@@ -16,7 +16,8 @@
     "ROLES.USER": "User",
     "ROLES.PUBLISHER": "Publisher",
     "ROLES.ADMIN": "Admin",
-    "ROLES.SUPERADMIN": "SUPERADMIN"
+    "ROLES.SUPERADMIN": "SUPERADMIN",
+    "PUBLISHER_REQUEST": "Request to be a Publisher"
   },
   "HERO": {
     "WELCOME": "Welcome to",
@@ -380,5 +381,35 @@
     "REJECTED": "Event rejected successfully.",
     "ERROR": "An error occurred. Please try again."
     }
+  },
+  "PUBLISHER_REQUEST_FORM": {
+    "TITLE": "Request to be a Publisher",
+    "SUBTITLE": "Complete the form to request to become a event publisher.",
+    "LABELS": {
+      "REQUEST_REASON": "Reason for the request",
+      "LEGAL_ENTITY_NAME": "Legal Entity Name"
+    },
+    "PLACEHOLDERS": {
+      "REQUEST_REASON": "E.g: We organize community cultural events weekly.",
+      "LEGAL_ENTITY_NAME": "E.g: Cocha Cultura SRL"
+    },
+    "IMAGES": {
+      "LABEL": "Evidence images",
+      "HINT": "Upload images that support your request (max. 10).",
+      "SELECT": "Select images"
+    },
+    "SUBMIT": "Submit Request",
+    "SUCCESS": "Your request has been submitted successfully. You will be notified when it is reviewed.",
+    "ERRORS": {
+      "COOLDOWN": "You must wait 1 day before submitting a new request.",
+      "ALREADY_APPROVED": "Your account already has the role of publisher.",
+      "SERVER": "An error occurred while submitting the request. Please try again.",
+      "GENERIC": "Failed to complete the action. Please try again."
+    }
+  },
+  "MY_PUBLISHER_REQUEST": {
+    "TITLE": "My Publisher Request",
+    "NO_REQUEST": "You haven't submitted a request yet.",
+    "SEND_REQUEST": "Send Request"
   }
 }
