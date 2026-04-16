@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EventModel } from '../../models/event-model';
 import { CategoryDTO } from '../../models/event-model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
-  private baseUrl = 'http://localhost:8080/api/events';
-  private categoriesUrl = 'http://localhost:8080/api/categories';
+  private baseUrl = `${environment.apiUrl}/events`;
+  private categoriesUrl = `${environment.apiUrl}/categories`;
   constructor(private httpClient: HttpClient) { }
 
   getEvents(): Observable<EventModel[]> {
