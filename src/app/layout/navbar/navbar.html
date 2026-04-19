@@ -23,7 +23,7 @@
             } 
             @if (authService.actualRole() === 'ROLE_PUBLISHER') {
               <li>
-                <a routerLink="/publisher/events" routerLinkActive="active" (click)="closeMobileMenu()">
+                <a routerLink="/publisher/my-events" routerLinkActive="active" (click)="closeMobileMenu()">
                   {{ 'NAV.MY_EVENTS' | translate }}
                 </a>
               </li>

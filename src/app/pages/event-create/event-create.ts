@@ -17,9 +17,9 @@ export class EventCreate{
   onFormResult(result: EventFormResult): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (result.success) {
-      setTimeout(() => this.router.navigate(['/events']), 2000);
+      setTimeout(() => this.router.navigate(['/publisher/my-events']), 2000);
     } else {
-      this.router.navigate(['/events']);
+      this.router.navigate(['/publisher/my-events']);
     }
   }
 }
