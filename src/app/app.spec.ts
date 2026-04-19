@@ -6,7 +6,6 @@ import { Navbar } from './layout/navbar/navbar';
 
 @Component({
   selector: 'app-navbar',
-  standalone: true,
   template: '<nav data-testid="navbar-stub"></nav>'
 })
 class NavbarStubComponent {}
