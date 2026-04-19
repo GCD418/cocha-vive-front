@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
-import { EventMapModal } from './event-map-modal';
+import { EventMapModalComponent } from './event-map-modal';
 
-describe('EventMapModal', () => {
-  let component: EventMapModal;
-  let fixture: ComponentFixture<EventMapModal>;
+describe('EventMapModalComponent', () => {
+  let component: EventMapModalComponent;
+  let fixture: ComponentFixture<EventMapModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EventMapModal],
+      imports: [EventMapModalComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EventMapModal);
+    fixture = TestBed.createComponent(EventMapModalComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
