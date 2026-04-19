@@ -28,7 +28,7 @@
                 </a>
               </li>
             }
-            @if (canSeePublisherRequestLink) {
+            @if (canSeePublisherRequestLink()) {
               <li>
                 <a routerLink="/publisher-apply-form" routerLinkActive="active" (click)="closeMobileMenu()">
                   {{ 'NAV.PUBLISHER_REQUEST' | translate }}
@@ -47,8 +47,8 @@
         </ul>
 
         <i class="mobile-nav-toggle d-xl-none bi"
-            [class.bi-list]="!mobileMenuOpen"
-            [class.bi-x]="mobileMenuOpen"
+            [class.bi-list]="!mobileMenuOpen()"
+            [class.bi-x]="mobileMenuOpen()"
             (click)="toggleMobileMenu()">
         </i>
     </nav>
@@ -63,7 +63,7 @@
           <span>{{ currentLangLabel }}</span>
         </button>
 
-        <ul class="dropdown-menu dropdown-menu-end shadow" [class.show]="langDropdownOpen" style="min-width: 100px; margin-top: 10px;">
+        <ul class="dropdown-menu dropdown-menu-end shadow" [class.show]="langDropdownOpen()" style="min-width: 100px; margin-top: 10px;">
             <li>
               <button class="dropdown-item" (click)="changeLanguage('es')">{{ 'NAV.LANGUAGES.ES' | translate }}</button>
             </li>
@@ -75,36 +75,36 @@
             </li>
         </ul>
       </div>
-        @if (currentUser) {
+        @if (currentUser()) {
           <div class="dropdown">
             <button
               class="btn btn-link nav-user-btn d-flex align-items-center gap-2 dropdown-toggle text-decoration-none"
               type="button"
               (click)="toggleUserDropdown($event)">
-              <span class="nav-user-initials">{{ initials }}</span>
-              <span class="d-none d-md-inline text-white fw-bold">{{ displayName }}</span>
+              <span class="nav-user-initials">{{ initials() }}</span>
+              <span class="d-none d-md-inline text-white fw-bold">{{ displayName() }}</span>
             </button>
 
-            <ul class="dropdown-menu dropdown-menu-end shadow nav-user-dropdown" [class.show]="userDropdownOpen">
+            <ul class="dropdown-menu dropdown-menu-end shadow nav-user-dropdown" [class.show]="userDropdownOpen()">
               <li>
                 <div class="d-flex align-items-center gap-3 px-3 py-2">
-                  @if (currentUser.photoUrl) {
-                    <img [src]="currentUser!.photoUrl" 
-                        [alt]="displayName" 
+                  @if (currentUser()!.photoUrl) {
+                    <img [src]="currentUser()!.photoUrl" 
+                        [alt]="displayName()" 
                         class="nav-user-avatar"
                         referrerpolicy="no-referrer">
                   } @else {
                     <div class="nav-user-avatar nav-user-avatar-fallback d-flex align-items-center justify-content-center">
-                      <span>{{ initials }}</span>
+                      <span>{{ initials() }}</span>
                     </div>
                   }
                   <div class="overflow-hidden">
 
                     <p class="mb-0 text-muted text-truncate" style="font-size: 12px;">
-                      {{ currentUser.email }}
+                      {{ currentUser()!.email }}
                     </p>
                     <p class="mb-0 text-muted text-truncate" style="font-size: 12px;">
-                      {{ roleLabel | translate }}
+                      {{ roleLabel() | translate }}
                     </p>
                   </div>
                 </div>
@@ -130,6 +130,6 @@
   </div>
 </header>
 
-@if (showLoginModal) {
+@if (showLoginModal()) {
   <app-login-modal (closeModal)="closeLoginModal()"></app-login-modal>
 }

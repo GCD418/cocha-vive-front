@@ -1,6 +1,6 @@
 <div class="onboarding-wrapper">
   
-  @if (isSuccess) {
+  @if (isSuccess()) {
     <div class="success-message">
       <div class="check-icon"><i class="bi bi-check-lg"></i></div>
       <h2>{{ 'ONBOARDING.SUCCESS.TITLE' | translate }}</h2>
@@ -8,7 +8,7 @@
       <button class="btn-save mt-3" routerLink="/home">{{ 'ONBOARDING.SUCCESS.BUTTON' | translate }}</button>
     </div>
 
-  } @else if (isError) {
+  } @else if (isError()) {
     <div class="error-message">
       <div class="error-icon"><i class="bi bi-exclamation-lg"></i></div>
       <h2>{{ 'ONBOARDING.ERROR.TITLE' | translate }}</h2>

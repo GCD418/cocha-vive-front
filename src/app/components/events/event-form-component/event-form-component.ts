@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CategoryDTO, EventModel } from '../../../models/event-model';
@@ -24,17 +24,17 @@ export class EventFormComponent implements OnInit, OnChanges {
  
   @Output() formResult = new EventEmitter<EventFormResult>();
  
-  categories: CategoryDTO[] = [];
-  successMessage = false;
-  errorMessage = false;
+  categories = signal<CategoryDTO[]>([]);
+  successMessage = signal(false);
+  errorMessage = signal(false);
   selectedFiles: File[] = [];
-  isEditMode = false;
+  isEditMode = signal(false);
 
-  existingPhotos: string[] = [];
-  newFiles: { file: File; previewUrl: string }[] = [];
+  existingPhotos = signal<string[]>([]);
+  newFiles = signal<{ file: File; previewUrl: string }[]>([]);
 
-  dragIndex: number | null = null;
-  dragOver: number | null = null;
+  dragIndex = signal<number | null>(null);
+  dragOver = signal<number | null>(null);
  
   form = {
     title: '',
@@ -60,16 +60,16 @@ export class EventFormComponent implements OnInit, OnChanges {
  
   ngOnInit(): void {
     this.eventService.getCategories().subscribe(data => {
-      this.categories = data;
+      this.categories.set(data);
     });
   }
  
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['eventToEdit'] && this.eventToEdit) {
-      this.isEditMode = true;
+      this.isEditMode.set(true);
       this.populateForm(this.eventToEdit);
     } else if (changes['eventToEdit'] && !this.eventToEdit) {
-      this.isEditMode = false;
+      this.isEditMode.set(false);
       this.resetForm();
     }
   }
@@ -98,8 +98,8 @@ export class EventFormComponent implements OnInit, OnChanges {
       longitude: event.longitude,
     };
 
-    this.existingPhotos = [...(event.photoLinks || [])];
-    this.newFiles = [];
+    this.existingPhotos.set([...(event.photoLinks || [])]);
+    this.newFiles.set([]);
   }
  
   private toDateInput(date: Date): string {
@@ -130,8 +130,8 @@ export class EventFormComponent implements OnInit, OnChanges {
       latitude: 0,
       longitude: 0,
     };
-    this.existingPhotos = [];
-    this.newFiles = [];
+    this.existingPhotos.set([]);
+    this.newFiles.set([]);
   }
  
   addTag(): void {
@@ -154,36 +154,41 @@ export class EventFormComponent implements OnInit, OnChanges {
   }
 
   removeExistingPhoto(index: number): void {
-    this.existingPhotos.splice(index, 1);
+    this.existingPhotos.update((photos) => photos.filter((_, photoIndex) => photoIndex !== index));
   }
  
   onDragStart(index: number): void {
-    this.dragIndex = index;
+    this.dragIndex.set(index);
   }
  
   onDragOver(event: DragEvent, index: number): void {
     event.preventDefault();
-    this.dragOver = index;
+    this.dragOver.set(index);
   }
  
   onDrop(event: DragEvent, dropIndex: number): void {
     event.preventDefault();
-    if (this.dragIndex === null || this.dragIndex === dropIndex) {
-      this.dragIndex = null;
-      this.dragOver = null;
+    const dragIndex = this.dragIndex();
+    if (dragIndex === null || dragIndex === dropIndex) {
+      this.dragIndex.set(null);
+      this.dragOver.set(null);
       return;
     }
 
-    const moved = this.existingPhotos.splice(this.dragIndex, 1)[0];
-    this.existingPhotos.splice(dropIndex, 0, moved);
+    this.existingPhotos.update((photos) => {
+      const reorderedPhotos = [...photos];
+      const moved = reorderedPhotos.splice(dragIndex, 1)[0];
+      reorderedPhotos.splice(dropIndex, 0, moved);
+      return reorderedPhotos;
+    });
  
-    this.dragIndex = null;
-    this.dragOver = null;
+    this.dragIndex.set(null);
+    this.dragOver.set(null);
   }
  
   onDragEnd(): void {
-    this.dragIndex = null;
-    this.dragOver = null;
+    this.dragIndex.set(null);
+    this.dragOver.set(null);
   }
  
   onFilesSelected(event: Event): void {
@@ -193,10 +198,13 @@ export class EventFormComponent implements OnInit, OnChanges {
     Array.from(input.files).forEach(file => {
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.newFiles.push({
-          file,
-          previewUrl: e.target?.result as string
-        });
+        this.newFiles.update((newFiles) => [
+          ...newFiles,
+          {
+            file,
+            previewUrl: e.target?.result as string
+          }
+        ]);
       };
       reader.readAsDataURL(file);
     });
@@ -205,7 +213,7 @@ export class EventFormComponent implements OnInit, OnChanges {
   }
  
   removeNewFile(index: number): void {
-    this.newFiles.splice(index, 1);
+    this.newFiles.update((newFiles) => newFiles.filter((_, fileIndex) => fileIndex !== index));
   }
 
 
@@ -239,7 +247,7 @@ export class EventFormComponent implements OnInit, OnChanges {
       dateStart: `${this.form.startDate}T${this.form.startTime}:00`,
       dateEnd: `${this.form.endDate}T${this.form.endTime}:00`,
       tags: this.form.tags,
-      photoLinks: this.existingPhotos,
+      photoLinks: this.existingPhotos(),
     };
   }
 
@@ -254,19 +262,19 @@ export class EventFormComponent implements OnInit, OnChanges {
  
   onSubmit(): void {
     if (!this.isFormValid()) {
-      this.errorMessage = true;
-      setTimeout(() => (this.errorMessage = false), 4000);
+      this.errorMessage.set(true);
+      setTimeout(() => this.errorMessage.set(false), 4000);
       return;
     }
  
     const payload = this.buildPayload();
 
-    if (this.isEditMode && this.eventToEdit) {
-      this.eventService.updateEvent(this.eventToEdit.id, payload, this.newFiles.map(f => f.file)).subscribe({
+    if (this.isEditMode() && this.eventToEdit) {
+      this.eventService.updateEvent(this.eventToEdit.id, payload, this.newFiles().map(f => f.file)).subscribe({
         next: () => {
-          this.successMessage = true;
+          this.successMessage.set(true);
           setTimeout(() => {
-            this.successMessage = false;
+            this.successMessage.set(false);
             this.formResult.emit({ success: true, mode: 'edit' });
           }, 2000);
         },
@@ -275,11 +283,11 @@ export class EventFormComponent implements OnInit, OnChanges {
         },
       });
     } else {
-      this.eventService.createEvent(payload, this.newFiles.map(f => f.file)).subscribe({
+      this.eventService.createEvent(payload, this.newFiles().map(f => f.file)).subscribe({
         next: () => {
-          this.successMessage = true;
+          this.successMessage.set(true);
           setTimeout(() => {
-            this.successMessage = false;
+            this.successMessage.set(false);
             this.formResult.emit({ success: true, mode: 'create' });
           }, 2000);
         },

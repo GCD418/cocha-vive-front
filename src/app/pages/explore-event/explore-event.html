@@ -21,30 +21,30 @@
                 type="text"
                 class="form-control"
                 [placeholder]="'EXPLORE.SIDEBAR.SEARCH_PLACEHOLDER' | translate"
-                [(ngModel)]="searchQuery"
-                (ngModelChange)="applyFilters()"
+                [ngModel]="searchQuery()"
+                (ngModelChange)="searchQuery.set($event); onFilterChange()"
                 style="border-color: color-mix(in srgb, var(--default-color), transparent 75%); background-color: var(--surface-color); color: var(--default-color);"
             />
-            @if (searchQuery) {
+            @if (searchQuery()) {
             <button class="btn btn-outline-secondary" type="button" (click)="clearFilters()" [title]="'EXPLORE.SIDEBAR.CLEAR_TOOLTIP' | translate">
                 <i class="bi bi-x-lg"></i>
             </button>
             }
         </div>
-    
-        @if (!loading && !errorLoading) {
+
+        @if (!loading() && !errorLoading()) {
             <div class="p-3 mb-3" style="background-color: color-mix(in srgb, var(--accent-color), transparent 92%); border-left: 3px solid var(--accent-color); border-radius: 4px;">
-            <span class="fw-bold" style="font-size: 1.4rem; color: var(--accent-color);">{{ filteredEvents.length }}</span>
+            <span class="fw-bold" style="font-size: 1.4rem; color: var(--accent-color);">{{ filteredEvents().length }}</span>
             <span class="ms-2" style="font-size: 0.85rem; color: color-mix(in srgb, var(--default-color), transparent 30%);">
-                {{ filteredEvents.length === 1 ? ('EXPLORE.SIDEBAR.EVENT_FOUND_SINGULAR' | translate) : ('EXPLORE.SIDEBAR.EVENT_FOUND_PLURAL' | translate) }}
+                {{ filteredEvents().length === 1 ? ('EXPLORE.SIDEBAR.EVENT_FOUND_SINGULAR' | translate) : ('EXPLORE.SIDEBAR.EVENT_FOUND_PLURAL' | translate) }}
             </span>
             </div>
-    
-            @if (searchQuery) {
+
+            @if (searchQuery()) {
             <div class="d-flex align-items-center gap-2 mb-3 px-3 py-2"
                 style="background-color: var(--surface-color); border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%); border-radius: 50px; font-size: 0.82rem;">
                 <i class="bi bi-tag-fill" style="color: var(--accent-color);"></i>
-                <span class="text-truncate fw-semibold" style="color: var(--default-color);">{{ searchQuery }}</span>
+                <span class="text-truncate fw-semibold" style="color: var(--default-color);">{{ searchQuery() }}</span>
                 <button class="btn p-0 ms-auto" style="font-size: 0.75rem; color: color-mix(in srgb, var(--default-color), transparent 40%);" (click)="clearFilters()">
                 <i class="bi bi-x"></i>
                 </button>
@@ -63,11 +63,11 @@
             {{ 'EXPLORE.SIDEBAR.CATEGORY_LABEL' | translate }}
         </label>
         <select class="form-select mb-3"
-                [(ngModel)]="selectedCategoryId"
-                (ngModelChange)="applyFilters()"
+                [ngModel]="selectedCategoryId()"
+                (ngModelChange)="selectedCategoryId.set($event); onFilterChange()"
                 style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);">
             <option [ngValue]="null">{{ 'EXPLORE.SIDEBAR.CATEGORY_ALL' | translate }}</option>
-            @for (category of categories; track category.id) {
+            @for (category of categories(); track category.id) {
                 <option [ngValue]="category.id">{{ category.name }}</option>
             }
         </select>
@@ -76,8 +76,8 @@
             {{ 'EXPLORE.SIDEBAR.TYPE_LABEL' | translate }}
         </label>
         <select class="form-select mb-3" 
-                [(ngModel)]="eventType" 
-                (ngModelChange)="onTypeChange()" 
+                [ngModel]="eventType()" 
+                (ngModelChange)="eventType.set($event); onTypeChange()" 
                 style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);">
             <option value="ALL">{{ 'EXPLORE.SIDEBAR.TYPE_ALL' | translate }}</option>
             <option value="FREE">{{ 'EXPLORE.SIDEBAR.TYPE_FREE' | translate }}</option>
@@ -93,20 +93,20 @@
                        class="form-control"
                        [placeholder]="'EXPLORE.SIDEBAR.PRICE_MIN' | translate"
                        min="0"
-                       [(ngModel)]="minPrice"
-                       (ngModelChange)="onPriceChange()"
-                       [attr.disabled]="eventType === 'FREE' ? true : null"
-                       style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
+                       [ngModel]="minPrice()"
+                       (ngModelChange)="minPrice.set($event); onPriceChange()"
+                        [attr.disabled]="eventType() === 'FREE' ? true : null"
+                        style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
             </div>
             <div class="col-6">
                 <input type="number"
                        class="form-control"
                        [placeholder]="'EXPLORE.SIDEBAR.PRICE_MAX' | translate"
                        min="0"
-                       [(ngModel)]="maxPrice"
-                       (ngModelChange)="onPriceChange()"
-                       [attr.disabled]="eventType === 'FREE' ? true : null"
-                       style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
+                       [ngModel]="maxPrice()"
+                       (ngModelChange)="maxPrice.set($event); onPriceChange()"
+                        [attr.disabled]="eventType() === 'FREE' ? true : null"
+                        style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
             </div>
         </div>
 
@@ -116,15 +116,15 @@
         <div class="mb-2">
             <label style="font-size: 0.75rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EXPLORE.SIDEBAR.DATE_FROM' | translate }}</label>
             <input type="date" class="form-control" 
-                   [(ngModel)]="startDate" 
-                   (ngModelChange)="applyFilters()"
+                   [ngModel]="startDate()" 
+                   (ngModelChange)="startDate.set($event); onFilterChange()"
                    style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
         </div>
         <div class="mb-4">
             <label style="font-size: 0.75rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EXPLORE.SIDEBAR.DATE_TO' | translate }}</label>
             <input type="date" class="form-control" 
-                   [(ngModel)]="endDate" 
-                   (ngModelChange)="applyFilters()"
+                   [ngModel]="endDate()" 
+                   (ngModelChange)="endDate.set($event); onFilterChange()"
                    style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
         </div>
 
@@ -142,7 +142,7 @@
             <p>{{ 'EXPLORE.MAIN.SUBTITLE' | translate }}</p>
         </div>
     
-        @if (loading) {
+        @if (loading()) {
         <div class="text-center py-5">
             <div class="spinner-border" style="color: var(--accent-color);" role="status">
             <span class="visually-hidden">{{ 'EXPLORE.MAIN.LOADING' | translate }}</span>
@@ -151,7 +151,7 @@
         </div>
         }
     
-        @if (errorLoading) {
+        @if (errorLoading()) {
         <div class="text-center py-5">
             <i class="bi bi-wifi-off" style="font-size: 2.5rem; color: color-mix(in srgb, var(--default-color), transparent 60%);"></i>
             <p class="mt-3 fw-semibold">{{ 'EXPLORE.MAIN.ERROR_TITLE' | translate }}</p>
@@ -159,32 +159,32 @@
         </div>
         }
     
-        @if (!loading && !errorLoading) {
+        @if (!loading() && !errorLoading()) {
     
-        @if (paginatedEvents.length > 0) {
+        @if (paginatedEvents().length > 0) {
             <div class="row g-4">
-            @for (event of paginatedEvents; track event.id) {
+            @for (event of paginatedEvents(); track event.id) {
                 <div class="col-12 col-md-6 col-xl-4 d-flex">
                 <app-event-card-component [event]="event" class="w-100"></app-event-card-component>
                 </div>
             }
             </div>
-    
-            @if (totalPages > 1) {
+
+            @if (totalPages() > 1) {
             <nav class="d-flex justify-content-center mt-5" [attr.aria-label]="'EXPLORE.MAIN.PAGINATION_LABEL' | translate">
                 <ul class="pagination">
-                <li class="page-item" [class.disabled]="currentPage === 1">
-                    <button class="page-link" (click)="goToPage(currentPage - 1)" [attr.aria-label]="'EXPLORE.MAIN.PREV' | translate">
+                <li class="page-item" [class.disabled]="currentPage() === 1">
+                    <button class="page-link" (click)="goToPage(currentPage() - 1)" [attr.aria-label]="'EXPLORE.MAIN.PREV' | translate">
                     <i class="bi bi-chevron-left"></i>
                     </button>
                 </li>
-                @for (page of pageNumbers; track page) {
-                    <li class="page-item" [class.active]="page === currentPage">
+                @for (page of pageNumbers(); track page) {
+                    <li class="page-item" [class.active]="page === currentPage()">
                     <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
                     </li>
                 }
-                <li class="page-item" [class.disabled]="currentPage === totalPages">
-                    <button class="page-link" (click)="goToPage(currentPage + 1)" [attr.aria-label]="'EXPLORE.MAIN.NEXT' | translate">
+                <li class="page-item" [class.disabled]="currentPage() === totalPages()">
+                    <button class="page-link" (click)="goToPage(currentPage() + 1)" [attr.aria-label]="'EXPLORE.MAIN.NEXT' | translate">
                     <i class="bi bi-chevron-right"></i>
                     </button>
                 </li>

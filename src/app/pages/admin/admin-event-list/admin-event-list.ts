@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { CommonModule, DatePipe, NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,27 +14,95 @@ import { UserDTO } from '../../../models/event-model';
   styleUrl: './admin-event-list.css',
 })
 export class AdminEventListComponent implements OnInit{
-  events: EventModel[] = [];
-  filteredEvents: EventModel[] = [];
-  pagedEvents: EventModel[] = [];
-  availableCategories: string[] = [];
+  events = signal<EventModel[]>([]);
 
-  loading = true;
-  searchText = '';
-  filterStatus = 'PENDING'; // por defecto pendientes
-  filterCategory = '';
-  filterType = '';
-  filterDateFrom = '';
-  filterDateTo = '';
+  loading = signal(true);
+  searchText = signal('');
+  filterStatus = signal('PENDING');
+  filterCategory = signal('');
+  filterType = signal('');
+  filterDateFrom = signal('');
+  filterDateTo = signal('');
 
-  currentPage = 1;
-  pageSize = 15;
-  totalPages = 1;
-  totalPagesArray: number[] = [];
+  currentPage = signal(1);
+  readonly pageSize = 15;
 
-  toastMessage = '';
-  toastType: 'success' | 'danger' = 'success';
-  showToast = false;
+  toastMessage = signal('');
+  toastType = signal<'success' | 'danger'>('success');
+  showToast = signal(false);
+
+  readonly availableCategories = computed(() =>
+    [...new Set(this.events().map((event) => event.category?.name).filter(Boolean))] as string[]
+  );
+
+  readonly filteredEvents = computed(() => {
+    const searchText = this.searchText().trim().toLowerCase();
+    const filterDateFrom = this.filterDateFrom();
+    const filterDateTo = this.filterDateTo();
+    const filterType = this.filterType();
+    const filterStatus = this.filterStatus();
+    const filterCategory = this.filterCategory();
+
+    return this.events().filter((event) => {
+      if (searchText) {
+        const fullName = this.getFullName(event.organizedByUser).toLowerCase();
+        const matchesSearch =
+          event.title.toLowerCase().includes(searchText) ||
+          fullName.includes(searchText);
+
+        if (!matchesSearch) {
+          return false;
+        }
+      }
+
+      if (filterDateFrom && new Date(event.dateStart) < new Date(filterDateFrom)) {
+        return false;
+      }
+
+      if (filterDateTo && new Date(event.dateStart) > new Date(filterDateTo)) {
+        return false;
+      }
+
+      if (filterType) {
+        const typeMatch = filterType === 'gratis' ? event.cost === 0 : event.cost > 0;
+        if (!typeMatch) {
+          return false;
+        }
+      }
+
+      if (filterStatus && event.eventStatus !== filterStatus) {
+        return false;
+      }
+
+      if (filterCategory && event.category?.name !== filterCategory) {
+        return false;
+      }
+
+      return true;
+    });
+  });
+
+  readonly totalPages = computed(() => Math.max(1, Math.ceil(this.filteredEvents().length / this.pageSize)));
+
+  readonly totalPagesArray = computed(() =>
+    Array.from({ length: this.totalPages() }, (_, index) => index + 1)
+  );
+
+  readonly pagedEvents = computed(() => {
+    const start = (this.currentPage() - 1) * this.pageSize;
+    return this.filteredEvents().slice(start, start + this.pageSize);
+  });
+
+  readonly hasActiveFilters = computed(() =>
+    Boolean(
+      this.searchText() ||
+      this.filterStatus() ||
+      this.filterCategory() ||
+      this.filterType() ||
+      this.filterDateFrom() ||
+      this.filterDateTo()
+    )
+  );
 
   constructor(
     private eventService: EventService,
@@ -46,86 +114,30 @@ export class AdminEventListComponent implements OnInit{
   }
 
   private loadAllEvents(): void {
-    this.loading = true;
+    this.loading.set(true);
     this.eventService.getAllEventsForAdmin().subscribe({
       next: (data) => {
-        this.events = data;
-        this.availableCategories = [
-          ...new Set(this.events.map(e => e.category?.name).filter(Boolean))
-        ] as string[];
-        this.applyFilters();
-        this.loading = false;
+        this.events.set(data);
+        this.loading.set(false);
       },
-      error: () => { this.loading = false; }
+      error: () => { this.loading.set(false); }
     });
   }
 
   onFilterChange(): void {
-    this.currentPage = 1;
-    this.applyFilters();
-  }
-
-  applyFilters(): void {
-    let result = [...this.events];
-
-    if (this.searchText.trim()) {
-      const term = this.searchText.toLowerCase();
-      result = result.filter(e => 
-        e.title.toLowerCase().includes(term) ||
-        this.getFullName(e.organizedByUser).toLowerCase().includes(term)
-      );
-    }
-
-    if (this.filterDateFrom) {
-      const from = new Date(this.filterDateFrom);
-      result = result.filter(e => new Date(e.dateStart) >= from);
-    }
-
-    if (this.filterDateTo) {
-      const to = new Date(this.filterDateTo);
-      result = result.filter(e => new Date(e.dateStart) <= to);
-    }
-
-    if (this.filterType) {
-      result = result.filter(e =>
-        this.filterType === 'gratis' ? e.cost === 0 : e.cost > 0
-      );
-    }
-
-    if (this.filterStatus) {
-      result = result.filter(e => e.eventStatus === this.filterStatus);
-    }
-
-    if (this.filterCategory) {
-      result = result.filter(e => e.category?.name === this.filterCategory);
-    }
-
-    this.filteredEvents = result;
-    this.updatePagination();
-  }
-
-  updatePagination(): void {
-    this.totalPages = Math.max(1, Math.ceil(this.filteredEvents.length / this.pageSize));
-    this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-    this.updatePagedEvents();
-  }
-
-  updatePagedEvents(): void {
-    const start = (this.currentPage - 1) * this.pageSize;
-    this.pagedEvents = this.filteredEvents.slice(start, start + this.pageSize);
+    this.currentPage.set(1);
   }
 
   goToPage(page: number): void {
-    if (page < 1 || page > this.totalPages) return;
-    this.currentPage = page;
-    this.updatePagedEvents();
+    if (page < 1 || page > this.totalPages()) return;
+    this.currentPage.set(page);
   }
 
   private showNotification(message: string, type: 'success' | 'danger'): void {
-    this.toastMessage = message;
-    this.toastType = type;
-    this.showToast = true;
-    setTimeout(() => { this.showToast = false; }, 4500);
+    this.toastMessage.set(message);
+    this.toastType.set(type);
+    this.showToast.set(true);
+    setTimeout(() => { this.showToast.set(false); }, 4500);
   }
 
   eventDetails(id: number): void {
@@ -172,17 +184,13 @@ export class AdminEventListComponent implements OnInit{
     return classes[status] ?? 'bg-secondary';
   }
 
-  hasActiveFilters(): boolean {
-    return !!(this.searchText || this.filterStatus || this.filterCategory || this.filterType || this.filterDateFrom || this.filterDateTo);
-  }
-
   clearFilters(): void {
-    this.searchText = '';
-    this.filterStatus = '';
-    this.filterCategory = '';
-    this.filterType = '';
-    this.filterDateFrom = '';
-    this.filterDateTo = '';
+    this.searchText.set('');
+    this.filterStatus.set('');
+    this.filterCategory.set('');
+    this.filterType.set('');
+    this.filterDateFrom.set('');
+    this.filterDateTo.set('');
     this.onFilterChange();
   }
 

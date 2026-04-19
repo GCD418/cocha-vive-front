@@ -9,7 +9,7 @@
 
     <div class="row g-4">
 
-      @for (eventItem of events; track eventItem) {
+      @for (eventItem of events(); track eventItem.id) {
       <div class="col-12 col-md-6 col-lg-4">
         <app-event-card-component [event]="eventItem"></app-event-card-component>
       </div>
