@@ -33,7 +33,7 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance as App & { title: () => string };
 
-    expect(app.title()).toBe('frontend');
+    expect(app.title()).toBe('CochaVive');
   });
 
   it('should render app shell with navbar and router outlet', async () => {

@@ -12,7 +12,7 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('frontend');
+  protected readonly title = signal('CochaVive');
 }
 export class AppComponent {
   constructor(private translate: TranslateService) {
