@@ -1,0 +1,248 @@
+<div class="container mt-5">
+
+  @if (showToast) {
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+      <div class="toast show align-items-center border-0"
+        [class.text-bg-success]="toastType === 'success'"
+        [class.text-bg-danger]="toastType === 'danger'"
+        role="alert">
+        <div class="d-flex">
+          <div class="toast-body d-flex align-items-center gap-2">
+            <i class="bi"
+              [class.bi-check-circle-fill]="toastType === 'success'"
+              [class.bi-exclamation-circle-fill]="toastType === 'danger'">
+            </i>
+            <span>{{ toastMessage | translate }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Confirm Modal -->
+  @if (showConfirmModal && pendingUser) {
+    <div class="modal fade show d-block" tabindex="-1" style="background: rgba(0,0,0,0.5);">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0 pb-0">
+            <h5 class="modal-title fw-semibold">
+              @if (pendingAction === 'promote') {
+                {{ 'ADMIN_USERS.MODAL.PROMOTE_TITLE' | translate }}
+              } @else {
+                {{ 'ADMIN_USERS.MODAL.DEMOTE_TITLE' | translate }}
+              }
+            </h5>
+            <button type="button" class="btn-close" (click)="closeConfirmModal()"></button>
+          </div>
+          <div class="modal-body pt-2">
+            <p class="text-muted mb-1">
+              @if (pendingAction === 'promote') {
+                {{ 'ADMIN_USERS.MODAL.PROMOTE_MESSAGE' | translate }}
+              } @else {
+                {{ 'ADMIN_USERS.MODAL.DEMOTE_MESSAGE' | translate }}
+              }
+            </p>
+            <p class="mb-0">
+              <span class="fw-semibold">{{ getFullName(pendingUser) }}</span>
+              <span class="text-muted ms-1">({{ pendingUser.email }})</span>
+            </p>
+          </div>
+          <div class="modal-footer border-0 pt-0">
+            <button type="button" class="btn btn-outline-secondary btn-sm"
+              (click)="closeConfirmModal()">
+              {{ 'CONFIRM_MODAL.CANCEL' | translate }}
+            </button>
+            <button type="button" class="btn btn-sm"
+              [class.btn-primary]="pendingAction === 'promote'"
+              [class.btn-danger]="pendingAction === 'demote'"
+              (click)="confirmAction()">
+              @if (pendingAction === 'promote') {
+                {{ 'ADMIN_USERS.MODAL.PROMOTE_BUTTON' | translate }}
+              } @else {
+                {{ 'ADMIN_USERS.MODAL.DEMOTE_BUTTON' | translate }}
+              }
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <div class="row">
+    <div class="col pt-5 mt-3">
+
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">{{ 'ADMIN_USERS.TITLE' | translate }}</h2>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="input-group input-group-sm w-auto flex-grow-1 me-2">
+          <span class="input-group-text bg-white">
+            <i class="bi bi-search text-secondary"></i>
+          </span>
+          <input type="text"
+            class="form-control border-start-0"
+            placeholder="{{ 'ADMIN_USERS.PLACEHOLDERS.SEARCH' | translate }}"
+            [(ngModel)]="searchText"
+            (ngModelChange)="onFilterChange()">
+        </div>
+        @if (hasActiveFilters()) {
+          <button class="btn btn-sm btn-outline-secondary text-nowrap"
+            (click)="clearFilters()">
+            <i class="bi bi-x-lg me-1"></i>{{ 'ADMIN_USERS.FILTERS.CLEAR' | translate }}
+          </button>
+        }
+      </div>
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+              <tr class="text-center">
+                <th>#</th>
+                <th>{{ 'ADMIN_USERS.TABLE.FULL_NAME' | translate }}</th>
+                <th>{{ 'ADMIN_USERS.TABLE.EMAIL' | translate }}</th>
+
+                <th class="p-0">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-secondary fw-bold text-decoration-none w-100 text-start px-3 py-2 dropdown-toggle"
+                      [class.text-primary]="filterDateFrom || filterDateTo"
+                      data-bs-toggle="dropdown"
+                      data-bs-auto-close="outside"
+                      aria-expanded="false">
+                      {{ 'ADMIN_USERS.TABLE.CREATED_AT' | translate }}
+                    </button>
+                    <div class="dropdown-menu p-3" style="min-width: 220px;">
+                      <label class="form-label small text-muted mb-1">
+                        {{ 'ADMIN_USERS.FILTERS.DATE_FROM' | translate }}
+                      </label>
+                      <input type="date" class="form-control form-control-sm mb-2"
+                        [(ngModel)]="filterDateFrom" (ngModelChange)="onFilterChange()">
+                      <label class="form-label small text-muted mb-1">
+                        {{ 'ADMIN_USERS.FILTERS.DATE_TO' | translate }}
+                      </label>
+                      <input type="date" class="form-control form-control-sm"
+                        [(ngModel)]="filterDateTo" (ngModelChange)="onFilterChange()">
+                    </div>
+                  </div>
+                </th>
+
+                <th class="p-0">
+                  <div class="dropdown">
+                    <button class="btn btn-link text-secondary fw-bold text-decoration-none w-100 text-start px-3 py-2 dropdown-toggle"
+                      [class.text-primary]="filterRole"
+                      data-bs-toggle="dropdown"
+                      data-bs-auto-close="true"
+                      aria-expanded="false">
+                      {{ 'ADMIN_USERS.TABLE.ROLE' | translate }}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="dropdown-item d-flex justify-content-between align-items-center"
+                          (click)="filterRole = ''; onFilterChange()">
+                          {{ 'ADMIN_USERS.FILTERS.ALL' | translate }}
+                          @if (filterRole === '') { <i class="bi bi-check"></i> }
+                        </a>
+                      </li>
+                      @for (role of ['ROLE_SUPERADMIN','ROLE_ADMIN','ROLE_PUBLISHER','ROLE_USER']; track role) {
+                        <li>
+                          <a class="dropdown-item d-flex justify-content-between align-items-center"
+                            (click)="filterRole = role; onFilterChange()">
+                            {{ getRoleLabel(role) }}
+                            @if (filterRole === role) { <i class="bi bi-check"></i> }
+                          </a>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                </th>
+
+                <th>{{ 'ADMIN_USERS.TABLE.ACTIONS' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody class="text-muted small">
+              @for (user of pagedUsers; track user.id; let i = $index) {
+                <tr>
+                  <td class="text-center text-muted">
+                    {{ (currentPage - 1) * pageSize + i + 1 }}
+                  </td>
+                  <td class="fw-semibold">{{ getFullName(user) }}</td>
+                  <td>{{ user.email }}</td>
+                  <td class="text-nowrap text-center">
+                    {{ user.createdAt | date:'d/M/yyyy' }}
+                  </td>
+                  <td class="text-center">
+                    <span class="badge rounded-pill" [ngClass]="getRoleBadgeClass(user.role)">
+                      {{ getRoleLabel(user.role) }}
+                    </span>
+                  </td>
+                  <td class="text-center">
+                    <div class="d-flex gap-2 justify-content-center">
+                      @if (canPromote(user)) {
+                        <button
+                          class="btn btn-sm btn-outline-primary"
+                          (click)="openConfirmModal(user, 'promote')"
+                          [title]="'ADMIN_USERS.ACTIONS.PROMOTE' | translate">
+                          <i class="bi bi-arrow-up-circle me-1"></i>
+                          {{ 'ADMIN_USERS.ACTIONS.PROMOTE' | translate }}
+                        </button>
+                      }
+                      @if (canDemote(user)) {
+                        <button
+                          class="btn btn-sm btn-outline-danger"
+                          (click)="openConfirmModal(user, 'demote')"
+                          [title]="'ADMIN_USERS.ACTIONS.DEMOTE' | translate">
+                          <i class="bi bi-arrow-down-circle me-1"></i>
+                          {{ 'ADMIN_USERS.ACTIONS.DEMOTE' | translate }}
+                        </button>
+                      }
+                      @if (user.role === 'ROLE_PUBLISHER' || user.role === 'ROLE_SUPERADMIN') {
+                        <span class="text-muted fst-italic small">
+                          {{ 'ADMIN_USERS.ACTIONS.NO_ACTION' | translate }}
+                        </span>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="6" class="text-center text-muted">
+                    {{ 'ADMIN_USERS.TABLE.EMPTY' | translate }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+
+          <div class="d-flex justify-content-between align-items-center mt-3 px-2 pb-3">
+            <small class="text-muted">
+              {{ filteredUsers.length === 0 ? 0 : (currentPage - 1) * pageSize + 1 }}
+              – {{ min(currentPage * pageSize, filteredUsers.length) }}
+              / {{ filteredUsers.length }}
+            </small>
+            <nav>
+              <ul class="pagination pagination-sm mb-0">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <button class="page-link" (click)="goToPage(currentPage - 1)">
+                    <i class="bi bi-chevron-left"></i>
+                  </button>
+                </li>
+                @for (page of totalPagesArray; track page) {
+                  <li class="page-item" [class.active]="page === currentPage">
+                    <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+                  </li>
+                }
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <button class="page-link" (click)="goToPage(currentPage + 1)">
+                    <i class="bi bi-chevron-right"></i>
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
