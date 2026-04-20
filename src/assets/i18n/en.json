@@ -411,5 +411,43 @@
     "TITLE": "My Publisher Request",
     "NO_REQUEST": "You haven't submitted a request yet.",
     "SEND_REQUEST": "Send Request"
+  },
+  "ADMIN_USERS": {
+    "TITLE": "User Management",
+    "PLACEHOLDERS": {
+      "SEARCH": "Search by name or email..."
+    },
+    "FILTERS": {
+      "CLEAR": "Clear filters",
+      "ALL": "All",
+      "DATE_FROM": "From",
+      "DATE_TO": "To"
+    },
+    "TABLE": {
+      "FULL_NAME": "Full Name",
+      "EMAIL": "Email",
+      "CREATED_AT": "Created At",
+      "ROLE": "Role",
+      "ACTIONS": "Actions",
+      "EMPTY": "No users found with the applied filters."
+    },
+    "ACTIONS": {
+      "PROMOTE": "Promote to Admin",
+      "DEMOTE": "Demote to User",
+      "NO_ACTION": "No actions available"
+    },
+    "MODAL": {
+      "PROMOTE_TITLE": "Promote to Admin?",
+      "PROMOTE_MESSAGE": "The following user will be assigned the ADMIN role:",
+      "PROMOTE_BUTTON": "Yes, promote",
+      "DEMOTE_TITLE": "Demote to User?",
+      "DEMOTE_MESSAGE": "The following user will be assigned the USER role:",
+      "DEMOTE_BUTTON": "Yes, demote"
+    },
+    "TOAST": {
+      "PROMOTE_SUCCESS": "User promoted to Admin successfully.",
+      "DEMOTE_SUCCESS": "Admin demoted to User successfully.",
+      "ERROR": "An error occurred. Please try again."
+    }
   }
 }

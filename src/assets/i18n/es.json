@@ -412,5 +412,43 @@
     "TITLE": "Mi Solicitud de Publicador",
     "NO_REQUEST": "Aún no has enviado una solicitud.",
     "SEND_REQUEST": "Enviar solicitud"
+  },
+  "ADMIN_USERS": {
+    "TITLE": "Gestión de Usuarios",
+    "PLACEHOLDERS": {
+      "SEARCH": "Buscar por nombre o email..."
+    },
+    "FILTERS": {
+      "CLEAR": "Limpiar filtros",
+      "ALL": "Todos",
+      "DATE_FROM": "Desde",
+      "DATE_TO": "Hasta"
+    },
+    "TABLE": {
+      "FULL_NAME": "Nombre completo",
+      "EMAIL": "Correo electrónico",
+      "CREATED_AT": "Fecha de creación",
+      "ROLE": "Rol",
+      "ACTIONS": "Acciones",
+      "EMPTY": "No se encontraron usuarios con los filtros aplicados."
+    },
+    "ACTIONS": {
+      "PROMOTE": "Promover a Admin",
+      "DEMOTE": "Degradar a Usuario",
+      "NO_ACTION": "Sin acciones disponibles"
+    },
+    "MODAL": {
+      "PROMOTE_TITLE": "¿Promover a Admin?",
+      "PROMOTE_MESSAGE": "El siguiente usuario recibirá el rol ADMINISTRADOR:",
+      "PROMOTE_BUTTON": "Sí, promover",
+      "DEMOTE_TITLE": "¿Degradar a Usuario?",
+      "DEMOTE_MESSAGE": "El siguiente usuario recibirá el rol USUARIO:",
+      "DEMOTE_BUTTON": "Sí, degradar"
+    },
+    "TOAST": {
+      "PROMOTE_SUCCESS": "Usuario promovido a Admin correctamente.",
+      "DEMOTE_SUCCESS": "Admin degradado a Usuario correctamente.",
+      "ERROR": "Ocurrió un error. Por favor intente de nuevo."
+    }
   }
 }
