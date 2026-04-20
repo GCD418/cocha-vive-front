@@ -14,13 +14,20 @@
             <a routerLink="explore-events" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'NAV.EXPLORE' | translate }}</a>
             </li>
             <li>
-            @if (authService.actualRole() === 'ROLE_ADMIN') {
+            @if (canSeePublisherRequestsAdminLink) {
               <li>
-                <a routerLink="/admin/events" routerLinkActive="active" (click)="closeMobileMenu()">
-                  {{ 'NAV.ADMIN_EVENTS' | translate }}
+                <a routerLink="/admin/publisher-requests">
+                  {{ 'NAV.ADMIN_PUBLISHER_REQUESTS' | translate }}
                 </a>
               </li>
-            } 
+            }
+            @if (canSeeUserManagementLink) {
+              <li>
+                <a routerLink="/admin/users" routerLinkActive="active" (click)="closeMobileMenu()">
+                  {{ 'NAV.ADMIN_USERS' | translate }}
+                </a>
+              </li>
+            }
             @if (authService.actualRole() === 'ROLE_PUBLISHER') {
               <li>
                 <a routerLink="/publisher/events" routerLinkActive="active" (click)="closeMobileMenu()">

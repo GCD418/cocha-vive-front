@@ -8,6 +8,7 @@
     "PUBLISH_EVENT": "Publicar Evento",
     "LOGIN": "Fazer Login",
     "LOGOUT": "Sair",
+    "ADMIN_USERS": "Gestão de Usuários",
     "LANGUAGES": {
       "ES": "ES (Español)",
       "EN": "EN (English)",

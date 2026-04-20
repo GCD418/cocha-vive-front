@@ -8,6 +8,7 @@
     "PUBLISH_EVENT": "Publish Event",
     "LOGIN": "Log In",
     "LOGOUT": "Log Out",
+    "ADMIN_USERS": "User Management",
     "LANGUAGES": {
       "ES": "ES (Spanish)",
       "EN": "EN (English)",

@@ -83,6 +83,10 @@ export class Navbar implements OnInit {
     return isFeatureEnabled && this.userHasRole('ROLE_ADMIN');
   }
 
+  get canSeeUserManagementLink(): boolean {
+    return this.userHasRole('ROLE_SUPERADMIN');
+  }
+
   get displayName(): string {
     if (!this.currentUser) return '';
     return `${this.currentUser.names} ${this.currentUser.firstLastName}`;
