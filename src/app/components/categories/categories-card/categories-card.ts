@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CategoryService } from '../../../services/category-services/category.service';
@@ -14,9 +14,9 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class CategoriesCard implements OnInit {
 
-  categories: Category[] = [];
-  loading = true;
-  errorLoading = false;
+  categories = signal<Category[]>([]);
+  loading = signal(true);
+  errorLoading = signal(false);
 
   constructor(private categoryService: CategoryService) {}
 
@@ -24,13 +24,13 @@ export class CategoriesCard implements OnInit {
     this.categoryService.getCategories().subscribe({
       next: (data) => {
         console.log('✅ Categorías recibidas:', data);
-        this.categories = data;
-        this.loading = false;
+        this.categories.set(data);
+        this.loading.set(false);
       },
       error: (err) => {
         console.error("❌ Error al cargar categorías:", err);
-        this.loading = false;
-        this.errorLoading = true;
+        this.loading.set(false);
+        this.errorLoading.set(true);
       }
     });
   }

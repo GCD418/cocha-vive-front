@@ -1,18 +1,18 @@
 <div class="min-vh-100">
-    @if (successMessage) {
+    @if (successMessage()) {
         <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
             <div class="toast show align-items-center text-bg-success border-0" role="alert">
                 <div class="d-flex">
                     <div class="toast-body d-flex align-items-center gap-2">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>{{ isEditMode ? ('EVENT_FORM.MESSAGES.SUCCESS_UPDATE' | translate) : ('EVENT_FORM.MESSAGES.SUCCESS_CREATE' | translate) }}</span>
+                        <span>{{ isEditMode() ? ('EVENT_FORM.MESSAGES.SUCCESS_UPDATE' | translate) : ('EVENT_FORM.MESSAGES.SUCCESS_CREATE' | translate) }}</span>
                     </div>
                 </div>
             </div>
         </div>
     }
 
-    @if (errorMessage) {
+    @if (errorMessage()) {
         <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
             <div class="toast show align-items-center text-bg-danger border-0" role="alert">
                 <div class="d-flex">
@@ -43,7 +43,7 @@
                 <label class="form-label fw-semibold">{{ 'EVENT_FORM.LABELS.CATEGORY' | translate }} <span class="text-danger">*</span></label>
                 <select class="form-select" [(ngModel)]="form.categoryId" name="categoryId">
                     <option [ngValue]="null" disabled>{{ 'EVENT_FORM.LABELS.SELECT_CAT' | translate }}</option>
-                    @for (cat of categories; track cat.id) {
+                    @for (cat of categories(); track cat.id) {
                         <option [ngValue]="cat.id">{{ cat.name }}</option>
                     }
                 </select>
@@ -130,7 +130,7 @@
                     <input type="number" class="form-control" min="1"
                             [placeholder]="'EVENT_FORM.PLACEHOLDERS.COST' | translate"
                             [(ngModel)]="form.cost" name="cost"
-                            [class.is-invalid]="errorMessage && form.cost <= 0">
+                            [class.is-invalid]="errorMessage() && form.cost <= 0">
                     <div class="invalid-feedback">{{ 'EVENT_FORM.LABELS.COST_ERROR' | translate }}</div>
                 </div>
             }
@@ -197,7 +197,7 @@
             </div>
 
             <div class="d-flex flex-wrap gap-2">
-                @for (tag of form.tags; track tag) {
+            @for (tag of form.tags; track tag) {
                 <span class="badge rounded-pill px-3 py-2 fw-semibold"
                         style="background-color: var(--accent-color); color: var(--contrast-color); font-size: 13px;">
                     {{ tag }}
@@ -215,17 +215,17 @@
             {{ 'EVENT_FORM.SECTIONS.PHOTOS' | translate }}
             </h5>
 
-            @if (isEditMode) {
-            @if (existingPhotos.length > 0) {
+            @if (isEditMode()) {
+            @if (existingPhotos().length > 0) {
                 <p class="form-text mt-2 mb-2">
                 {{ 'EVENT_FORM.LABELS.DRAG_REORDER' | translate }} · {{ 'EVENT_FORM.LABELS.FIRST_COVER' | translate }} ·
                 <span style="color: var(--accent-color);">✕ {{ 'EVENT_FORM.LABELS.REMOVE_PHOTO' | translate }}</span>
                 </p>
                 <div class="d-flex flex-wrap gap-2 mb-3">
-                @for (photo of existingPhotos; track photo; let i = $index) {
+                @for (photo of existingPhotos(); track photo; let i = $index) {
                     <div class="photo-thumb"
-                        [class.dragging]="dragIndex === i"
-                        [class.drag-over]="dragOver === i"
+                        [class.dragging]="dragIndex() === i"
+                        [class.drag-over]="dragOver() === i"
                         draggable="true"
                         (dragstart)="onDragStart(i)"
                         (dragover)="onDragOver($event, i)"
@@ -252,13 +252,13 @@
             <p class="form-text mt-2 mb-2">{{ 'EVENT_FORM.LABELS.FIRST_COVER' | translate }}</p>
             }
 
-            @if (newFiles.length > 0) {
-            <p class="form-text mb-2">{{ isEditMode ? ('EVENT_FORM.LABELS.NEW_PHOTOS' | translate) : ('EVENT_FORM.LABELS.PREVIEW_PHOTOS' | translate) }}</p>
+            @if (newFiles().length > 0) {
+            <p class="form-text mb-2">{{ isEditMode() ? ('EVENT_FORM.LABELS.NEW_PHOTOS' | translate) : ('EVENT_FORM.LABELS.PREVIEW_PHOTOS' | translate) }}</p>
             <div class="d-flex flex-wrap gap-2 mb-3">
-                @for (file of newFiles; track file.previewUrl; let i = $index) {
+                @for (file of newFiles(); track file.previewUrl; let i = $index) {
                 <div class="photo-thumb new-thumb">
                     <img [src]="file.previewUrl" [alt]="file.file.name">
-                    @if (i === 0 && !isEditMode) {
+                    @if (i === 0 && !isEditMode()) {
                     <span class="cover-badge">{{ 'EVENT_FORM.LABELS.COVER_PHOTO' | translate }}</span>
                     }
                     <button class="remove-btn" type="button"
@@ -271,11 +271,11 @@
             }
 
             <label class="form-label fw-semibold">
-            {{ isEditMode ? ('EVENT_FORM.LABELS.ADD_NEW_PHOTOS' | translate) : ('EVENT_FORM.LABELS.SELECT_PHOTOS' | translate) }}
+            {{ isEditMode() ? ('EVENT_FORM.LABELS.ADD_NEW_PHOTOS' | translate) : ('EVENT_FORM.LABELS.SELECT_PHOTOS' | translate) }}
             </label>
             <input type="file" class="form-control"
                 (change)="onFilesSelected($event)" accept="image/*" multiple>
-            @if (isEditMode) {
+            @if (isEditMode()) {
             <div class="form-text">{{ 'EVENT_FORM.LABELS.NEW_PHOTOS_INFO' | translate }}</div>
             }
         </div>
@@ -285,7 +285,7 @@
     <div class="d-flex justify-content-end gap-3 mt-2">
         <button class="btn btn-outline-secondary" type="button" (click)="onCancel()">{{ 'EVENT_FORM.LABELS.CANCEL' | translate }}</button>
         <button class="btn btn-danger px-4" type="button" (click)="onSubmit()">
-        <i class="bi bi-send me-1"></i>{{ isEditMode ? ('EVENT_FORM.LABELS.SAVE_CHANGES' | translate) : ('EVENT_FORM.LABELS.PUBLISH_EVENT' | translate) }}
+        <i class="bi bi-send me-1"></i>{{ isEditMode() ? ('EVENT_FORM.LABELS.SAVE_CHANGES' | translate) : ('EVENT_FORM.LABELS.PUBLISH_EVENT' | translate) }}
         </button>
     </div>
 

@@ -21,7 +21,8 @@
             <input
               type="text"
               class="form-control"
-              [(ngModel)]="legalEntityName"
+              [ngModel]="legalEntityName()"
+              (ngModelChange)="legalEntityName.set($event)"
               [placeholder]="'PUBLISHER_REQUEST_FORM.PLACEHOLDERS.LEGAL_ENTITY_NAME' | translate"
               maxlength="150"
             >
@@ -33,7 +34,8 @@
             </label>
             <textarea
               class="form-control"
-              [(ngModel)]="requestReason"
+              [ngModel]="requestReason()"
+              (ngModelChange)="requestReason.set($event)"
               [placeholder]="'PUBLISHER_REQUEST_FORM.PLACEHOLDERS.REQUEST_REASON' | translate"
               rows="5"
               maxlength="1000"
@@ -54,9 +56,9 @@
               (change)="onImagesSelected($event)"
             >
 
-            @if (previewUrls.length > 0) {
+            @if (previewUrls().length > 0) {
               <div class="row g-2 mt-2">
-                @for (url of previewUrls; track $index) {
+                @for (url of previewUrls(); track $index) {
                   <div class="col-4 position-relative">
                     <img
                       [src]="url"

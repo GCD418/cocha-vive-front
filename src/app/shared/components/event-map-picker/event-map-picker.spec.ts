@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
-import { EventMapPicker } from './event-map-picker';
+import { EventMapPickerComponent } from './event-map-picker';
 
-describe('EventMapPicker', () => {
-  let component: EventMapPicker;
-  let fixture: ComponentFixture<EventMapPicker>;
+describe('EventMapPickerComponent', () => {
+  let component: EventMapPickerComponent;
+  let fixture: ComponentFixture<EventMapPickerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EventMapPicker],
+      imports: [EventMapPickerComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EventMapPicker);
+    fixture = TestBed.createComponent(EventMapPickerComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

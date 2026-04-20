@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { EventModel } from '../../../models/event-model';
 import { EventService } from '../../../services/event-service/event.service';
 import { EventCardComponent } from "../event-card-component/event-card-component";
@@ -13,7 +13,7 @@ import { AppFeatures } from '../../../models/app-features';
   styleUrl: './upcoming-events-list-component.css',
 })
 export class UpcomingEventsListComponent implements OnInit {
-  events: EventModel[] = [];
+  events = signal<EventModel[]>([]);
   public featureService = inject(FeatureToggleService);
   public readonly AppFeatures = AppFeatures;
 
@@ -25,7 +25,7 @@ export class UpcomingEventsListComponent implements OnInit {
 
   private getEvents() {
     this.eventService.getUpcomingEvents().subscribe(data => {
-      this.events = data;
+      this.events.set(data);
     });
   }
 }

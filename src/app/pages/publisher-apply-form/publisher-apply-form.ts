@@ -15,10 +15,10 @@ import { PublisherRequestService } from '../../services/publisher-request-servic
   styleUrl: './publisher-apply-form.css',
 })
 export class PublisherApplyFormPageComponent {
-  requestReason = '';
-  legalEntityName = '';
-  selectedImages: File[] = [];
-  previewUrls: string[] = [];
+  requestReason = signal('');
+  legalEntityName = signal('');
+  selectedImages = signal<File[]>([]);
+  previewUrls = signal<string[]>([]);
 
   submitting = signal(false);
   errorMessageKey = signal<string | null>(null);
@@ -33,21 +33,27 @@ export class PublisherApplyFormPageComponent {
     if (!input.files) return;
 
     const files = Array.from(input.files);
-    this.selectedImages = files;
-    this.previewUrls = files.map(file => URL.createObjectURL(file));
+    this.selectedImages.set(files);
+    this.previewUrls.set(files.map(file => URL.createObjectURL(file)));
   }
 
   removeImage(index: number): void {
-    URL.revokeObjectURL(this.previewUrls[index]);
-    this.selectedImages.splice(index, 1);
-    this.previewUrls.splice(index, 1);
+    const previews = this.previewUrls();
+    const selectedImages = this.selectedImages();
+
+    if (previews[index]) {
+      URL.revokeObjectURL(previews[index]);
+    }
+
+    this.selectedImages.set(selectedImages.filter((_, imageIndex) => imageIndex !== index));
+    this.previewUrls.set(previews.filter((_, previewIndex) => previewIndex !== index));
   }
 
   isFormValid(): boolean {
     return (
-      this.requestReason.trim().length > 0 &&
-      this.legalEntityName.trim().length > 0 &&
-      this.selectedImages.length > 0
+      this.requestReason().trim().length > 0 &&
+      this.legalEntityName().trim().length > 0 &&
+      this.selectedImages().length > 0
     );
   }
 
@@ -58,11 +64,11 @@ export class PublisherApplyFormPageComponent {
     this.errorMessageKey.set(null);
 
     const payload: PublisherRequestCreatePayload = {
-      requestReason: this.requestReason.trim(),
-      legalEntityName: this.legalEntityName.trim(),
+      requestReason: this.requestReason().trim(),
+      legalEntityName: this.legalEntityName().trim(),
     };
 
-    this.publisherRequestService.createRequest(payload, this.selectedImages).subscribe({
+    this.publisherRequestService.createRequest(payload, this.selectedImages()).subscribe({
       next: () => {
         this.submitting.set(false);
         this.router.navigate(['/my-publisher-request']);
