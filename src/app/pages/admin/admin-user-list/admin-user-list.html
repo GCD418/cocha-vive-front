@@ -53,14 +53,18 @@
               {{ 'CONFIRM_MODAL.CANCEL' | translate }}
             </button>
             <button type="button" class="btn btn-sm"
-              [class.btn-primary]="pendingAction === 'promote'"
-              [class.btn-danger]="pendingAction === 'demote'"
-              (click)="confirmAction()">
-              @if (pendingAction === 'promote') {
-                {{ 'ADMIN_USERS.MODAL.PROMOTE_BUTTON' | translate }}
-              } @else {
-                {{ 'ADMIN_USERS.MODAL.DEMOTE_BUTTON' | translate }}
-              }
+                [class.btn-primary]="pendingAction === 'promote'"
+                [class.btn-danger]="pendingAction === 'demote'"
+                [disabled]="isProcessing"
+                (click)="confirmAction()">
+                @if (isProcessing) {
+                    <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+                    {{ 'CONFIRM_MODAL.PROCESSING' | translate }}
+                } @else if (pendingAction === 'promote') {
+                    {{ 'ADMIN_USERS.MODAL.PROMOTE_BUTTON' | translate }}
+                } @else {
+                    {{ 'ADMIN_USERS.MODAL.DEMOTE_BUTTON' | translate }}
+                }
             </button>
           </div>
         </div>

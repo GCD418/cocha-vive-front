@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -18,6 +18,7 @@ export class AdminUserListComponent implements OnInit {
   pagedUsers: UserModel[] = [];
 
   loading = true;
+  isProcessing = false;
   searchText = '';
   filterRole = '';
   filterDateFrom = '';
@@ -40,7 +41,8 @@ export class AdminUserListComponent implements OnInit {
 
   constructor(
     private adminRoleService: AdminRoleService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -170,10 +172,14 @@ export class AdminUserListComponent implements OnInit {
     if (!this.pendingUser || !this.pendingAction) return;
 
     const userId = this.pendingUser.id;
+    const actionType = this.pendingAction;
     const action =
-      this.pendingAction === 'promote'
+      actionType === 'promote'
         ? this.adminRoleService.promoteToAdmin(userId)
         : this.adminRoleService.demoteToUser(userId);
+
+    this.isProcessing = true;
+    this.cdr.detectChanges();
 
     action.subscribe({
       next: (response) => {
@@ -182,17 +188,21 @@ export class AdminUserListComponent implements OnInit {
           this.users[idx] = { ...this.users[idx], role: response.role };
         }
         this.applyFilters();
-        this.showNotification(
-          this.pendingAction === 'promote'
-            ? 'ADMIN_USERS.TOAST.PROMOTE_SUCCESS'
-            : 'ADMIN_USERS.TOAST.DEMOTE_SUCCESS',
-          'success'
-        );
+        this.isProcessing = false;
         this.closeConfirmModal();
+        this.showNotification(
+        this.pendingAction === 'promote'
+          ? 'ADMIN_USERS.TOAST.PROMOTE_SUCCESS'
+          : 'ADMIN_USERS.TOAST.DEMOTE_SUCCESS',
+        'success'
+        );
+        this.cdr.detectChanges();
       },
       error: () => {
-        this.showNotification('ADMIN_USERS.TOAST.ERROR', 'danger');
+        this.isProcessing = false;
         this.closeConfirmModal();
+        this.showNotification('ADMIN_USERS.TOAST.ERROR', 'danger');
+        this.cdr.detectChanges();
       },
     });
   }
@@ -203,7 +213,7 @@ export class AdminUserListComponent implements OnInit {
     this.showToast = true;
     setTimeout(() => {
       this.showToast = false;
-    }, 4500);
+    }, 5000);
   }
 
   hasActiveFilters(): boolean {
