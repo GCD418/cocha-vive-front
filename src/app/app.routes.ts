@@ -13,6 +13,7 @@ import { requireFeature } from './core/guards/require-feature';
 import { AppFeatures } from './models/app-features';
 import { PublisherRequestsPageComponent } from './pages/publisher-requests/publisher-requests';
 import { PublisherRequestDetailsPageComponent } from './pages/publisher-request-details/publisher-request-details';
+import { AdminUserListComponent } from './pages/admin/admin-user-list/admin-user-list';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -20,6 +21,7 @@ export const routes: Routes = [
     { path: 'events', component: EventList, canActivate: [authGuard], data: { roles: ['ROLE_PUBLISHER'] } },
     { path: 'events/create', component: EventCreate, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_PUBLISHER'] },},
     { path: 'admin/events', component: AdminEventListComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
+    { path: 'admin/users', component: AdminUserListComponent, canActivate: [authGuard], data: { roles: ['ROLE_SUPERADMIN'] }},
     { path: 'event-details/:id', component: EventDetails },
     {
         path: 'admin/publisher-requests',
