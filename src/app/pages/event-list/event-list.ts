@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, DatePipe, NgClass } from '@angular/common';
 import { EventService } from '../../services/event-service/event.service';
 import { Router, RouterLink } from '@angular/router';
@@ -8,6 +8,7 @@ import { EventFormResult, EventFormComponent } from '../../components/events/eve
 import { ConfirmModalComponent } from '../../shared/confirmModal-Component/confirmModal-component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 declare const bootstrap: any;
 
@@ -30,41 +31,103 @@ declare const bootstrap: any;
   styleUrl: './event-list.css',
 })
 export class EventList implements OnInit {
+  private eventService = inject(EventService);
+  public authService = inject(AuthService);
+  private router = inject(Router);
 
-  events: EventModel[] = [];
-  filteredEvents: EventModel[] = [];
-  pagedEvents: EventModel[] = [];
-  availableCategories: string[] = [];
+  events = signal<EventModel[]>([]);
 
-  currentUser: CurrentUser | null = null;
-  loading = true;
-  selectedEvent: EventModel | null = null;
-  showSuccessToast = false;
-  cancellingId: number | null = null;
-  pendingCancelId: number | null = null;
+  loading = signal(true);
+  selectedEvent = signal<EventModel | null>(null);
+  showSuccessToast = signal(false);
+  cancellingId = signal<number | null>(null);
+  pendingCancelId = signal<number | null>(null);
 
-  searchText = '';
-  filterStatus = '';
-  filterCategory = '';
+  searchText = signal('');
+  filterStatus = signal('');
+  filterCategory = signal('');
+  filterType = signal('');
+  filterDateFrom = signal('');
+  filterDateTo = signal('');
 
-  filterType = '';
-  filterDateFrom = '';
-  filterDateTo = '';
+  currentPage = signal(1);
+  readonly pageSize = 15;
 
-  currentPage = 1;
-  pageSize = 15;
-  totalPages = 1;
-  totalPagesArray: number[] = [];
+  readonly currentUser = toSignal<CurrentUser | null>(this.authService.getCurrentUser(), {
+    initialValue: null,
+  });
+
+  readonly availableCategories = computed(() =>
+    [...new Set(this.events().map((event) => event.category?.name).filter(Boolean))] as string[]
+  );
+
+  readonly filteredEvents = computed(() => {
+    const searchText = this.searchText().trim().toLowerCase();
+    const filterDateFrom = this.filterDateFrom();
+    const filterDateTo = this.filterDateTo();
+    const filterType = this.filterType();
+    const filterStatus = this.filterStatus();
+    const filterCategory = this.filterCategory();
+
+    return this.events().filter((event) => {
+      if (searchText && !event.title.toLowerCase().includes(searchText)) {
+        return false;
+      }
+
+      if (filterDateFrom && new Date(event.dateStart) < new Date(filterDateFrom)) {
+        return false;
+      }
+
+      if (filterDateTo && new Date(event.dateStart) > new Date(filterDateTo)) {
+        return false;
+      }
+
+      if (filterType) {
+        const typeMatch = filterType === 'gratis' ? event.cost === 0 : event.cost > 0;
+        if (!typeMatch) {
+          return false;
+        }
+      }
+
+      if (filterStatus && event.eventStatus !== filterStatus) {
+        return false;
+      }
+
+      if (filterCategory && event.category?.name !== filterCategory) {
+        return false;
+      }
+
+      return true;
+    });
+  });
+
+  readonly totalPages = computed(() => Math.max(1, Math.ceil(this.filteredEvents().length / this.pageSize)));
+
+  readonly totalPagesArray = computed(() =>
+    Array.from({ length: this.totalPages() }, (_, index) => index + 1)
+  );
+
+  readonly pagedEvents = computed(() => {
+    const start = (this.currentPage() - 1) * this.pageSize;
+    return this.filteredEvents().slice(start, start + this.pageSize);
+  });
+
+  readonly hasActiveFilters = computed(() =>
+    Boolean(
+      this.searchText() ||
+      this.filterStatus() ||
+      this.filterCategory() ||
+      this.filterType() ||
+      this.filterDateFrom() ||
+      this.filterDateTo()
+    )
+  );
 
   private editModal: any;
 
-  constructor(private eventService: EventService,
-              public authService: AuthService,
-              private router: Router) { }
-
-  ngOnInit(): void {
-    this.authService.getCurrentUser().subscribe(user => {
-      this.currentUser = user;
+  constructor() {
+    effect(() => {
+      const user = this.currentUser();
 
       if (!user) {
         this.router.navigate(['/login']);
@@ -75,77 +138,28 @@ export class EventList implements OnInit {
     });
   }
 
-  private loadMyEvents(userId: number): void {
-    this.loading = true;
+  ngOnInit(): void {}
+
+  private loadMyEvents(_userId: number): void {
+    this.loading.set(true);
     this.eventService.getMyEvents().subscribe({
       next: (data) => {
-        this.events = data;
-        this.availableCategories = [...new Set(this.events.map(e => e.category?.name).filter(Boolean))] as string[];
-        this.applyFilters();
-        this.loading = false;
+        this.events.set(data);
+        this.loading.set(false);
       },
       error: () => {
-        this.loading = false;
+        this.loading.set(false);
       }
     });
   }
 
   onFilterChange(): void {
-    this.currentPage = 1;
-    this.applyFilters();
-  }
-
-  applyFilters(): void {
-    let result = [...this.events];
-
-    if (this.searchText.trim()) {
-      const term = this.searchText.toLowerCase();
-      result = result.filter(e => e.title.toLowerCase().includes(term));
-    }
-
-    if (this.filterDateFrom) {
-      const from = new Date(this.filterDateFrom);
-      result = result.filter(e => new Date(e.dateStart) >= from);
-    }
-
-    if (this.filterDateTo) {
-      const to = new Date(this.filterDateTo);
-      result = result.filter(e => new Date(e.dateStart) <= to);
-    }
-
-    if (this.filterType) {
-      result = result.filter(e =>
-        this.filterType === 'gratis' ? e.cost === 0 : e.cost > 0
-      );
-    }
-
-    if (this.filterStatus) {
-      result = result.filter(e => e.eventStatus === this.filterStatus);
-    }
-
-    if (this.filterCategory) {
-      result = result.filter(e => e.category?.name === this.filterCategory);
-    }
-
-    this.filteredEvents = result;
-    this.updatePagination();
-  }
-
-  updatePagination(): void {
-    this.totalPages = Math.max(1, Math.ceil(this.filteredEvents.length / this.pageSize));
-    this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-    this.updatePagedEvents();
-  }
-
-  updatePagedEvents(): void {
-    const start = (this.currentPage - 1) * this.pageSize;
-    this.pagedEvents = this.filteredEvents.slice(start, start + this.pageSize);
+    this.currentPage.set(1);
   }
 
   goToPage(page: number): void {
-    if (page < 1 || page > this.totalPages) return;
-    this.currentPage = page;
-    this.updatePagedEvents();
+    if (page < 1 || page > this.totalPages()) return;
+    this.currentPage.set(page);
   }
 
   min(a: number, b: number): number {
@@ -157,7 +171,7 @@ export class EventList implements OnInit {
   }
 
   openEditModal(event: EventModel): void {
-    this.selectedEvent = event;
+    this.selectedEvent.set(event);
     const modalEl = document.getElementById('editEventModal');
     if (modalEl) {
       this.editModal = new bootstrap.Modal(modalEl);
@@ -169,48 +183,50 @@ export class EventList implements OnInit {
     if (this.editModal) {
       this.editModal.hide();
     }
-    this.selectedEvent = null;
+    this.selectedEvent.set(null);
 
     if (result.success) {
-      this.showSuccessToast = true;
-      setTimeout(() => { this.showSuccessToast = false; }, 500);
+      this.showSuccessToast.set(true);
+      setTimeout(() => { this.showSuccessToast.set(false); }, 500);
 
-      if (this.currentUser) {
-        this.loadMyEvents(this.currentUser.id);
+      const user = this.currentUser();
+      if (user) {
+        this.loadMyEvents(user.id);
       }
     }
   }
 
   openCancelModal(id: number): void {      
-  this.pendingCancelId = id;
-}
+    this.pendingCancelId.set(id);
+  }
 
   onCancelConfirmed(): void {              
-    if (this.pendingCancelId === null) return;
+    const pendingCancelId = this.pendingCancelId();
+    if (pendingCancelId === null) return;
 
-    this.cancellingId = this.pendingCancelId;
+    this.cancellingId.set(pendingCancelId);
 
-    this.eventService.cancelEvent(this.pendingCancelId).subscribe({
+    this.eventService.cancelEvent(pendingCancelId).subscribe({
       next: () => {
-        this.events = this.events.filter(e => e.id !== this.pendingCancelId);
-        this.cancellingId = null;
-        this.pendingCancelId = null;
+        this.events.update((events) => events.filter((event) => event.id !== pendingCancelId));
+        this.cancellingId.set(null);
+        this.pendingCancelId.set(null);
       },
       error: (err) => {
         console.error('Error al cancelar el evento', err);
-        this.cancellingId = null;
-        this.pendingCancelId = null;
+        this.cancellingId.set(null);
+        this.pendingCancelId.set(null);
       }
     });
   }
 
   onCancelDismissed(): void {              
-    this.pendingCancelId = null;
-    this.cancellingId = null;
+    this.pendingCancelId.set(null);
+    this.cancellingId.set(null);
   }
 
   countByStatus(status: string): number {
-    return this.events.filter(e => e.eventStatus === status).length;
+    return this.events().filter((event) => event.eventStatus === status).length;
   }
 
   getStatusLabel(status: string): string {
@@ -233,17 +249,13 @@ export class EventList implements OnInit {
     return classes[status] ?? 'bg-secondary';
   }
 
-  hasActiveFilters(): boolean {
-    return !!(this.searchText || this.filterStatus || this.filterCategory || this.filterType || this.filterDateFrom || this.filterDateTo);
-  }
-
   clearFilters(): void {
-    this.searchText = '';
-    this.filterStatus = '';
-    this.filterCategory = '';
-    this.filterType = '';
-    this.filterDateFrom = '';
-    this.filterDateTo = '';
+    this.searchText.set('');
+    this.filterStatus.set('');
+    this.filterCategory.set('');
+    this.filterType.set('');
+    this.filterDateFrom.set('');
+    this.filterDateTo.set('');
     this.onFilterChange();
   }
 

@@ -13,14 +13,14 @@
       </div>
 
       <div class="modal-body p-0" style="position: relative;">
-        @if (apiLoaded) {
+        @if (apiLoaded()) {
           <google-map
-            [center]="center"
+            [center]="center()"
             [options]="mapOptions"
             width="100%"
             height="450px"
             (mapClick)="onMapClick($event)">
-            <map-advanced-marker [position]="markerPosition" />
+            <map-advanced-marker [position]="markerPosition()" />
           </google-map>
 
           <!-- Instrucción flotante -->
@@ -44,8 +44,8 @@
       <div class="modal-footer d-flex justify-content-between align-items-center">
         <small class="text-muted">
           <i class="bi bi-crosshair me-1"></i>
-          Lat: {{ markerPosition.lat | number:'1.6-6' }},
-          Lng: {{ markerPosition.lng | number:'1.6-6' }}
+          Lat: {{ markerPosition().lat | number:'1.6-6' }},
+          Lng: {{ markerPosition().lng | number:'1.6-6' }}
         </small>
         <div class="d-flex gap-2">
           <button type="button" class="btn btn-secondary"

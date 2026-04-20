@@ -9,23 +9,23 @@
 
   <div class="container">
     
-    @if (loading) {
+    @if (loading()) {
       <div class="text-center">
         <p>⏳ {{ 'FEATURED_EVENTS.LOADING' | translate }}</p>
       </div>
     }
 
-    @if (errorLoading) {
+    @if (errorLoading()) {
       <div class="text-center text-danger">
         <p>❌ {{ 'FEATURED_EVENTS.ERROR' | translate }}</p>
       </div>
     }
     
-    @if (!loading && !errorLoading) {
+    @if (!loading() && !errorLoading()) {
       
       <div class="row gy-4">
         
-        @for (event of events | slice:0:4; track event.id; let i = $index) {
+        @for (event of topEvents(); track event.id; let i = $index) {
           <div class="col-lg-4 col-md-6">
             <div class="member h-100">
               <img [src]="event.photoLinks && event.photoLinks.length > 0 ? event.photoLinks[0] : 'assets/img/no-image.jpg'" 

@@ -1,27 +1,27 @@
 <section class="category-events-page">
-  @if (!loading && categoryDetails) {
+  @if (!loading() && categoryDetails()) {
     <div class="container">
       
       <div class="category-info-header">
-        @if (categoryDetails.identifyingIcon) {
+        @if (categoryDetails().identifyingIcon) {
           <div class="category-icon-box">
-            <img [src]="categoryDetails.identifyingIcon" [alt]="categoryDetails.name">
+            <img [src]="categoryDetails().identifyingIcon" [alt]="categoryDetails().name">
           </div>
         }
         <div class="category-texts">
-          <h1 class="title-main">{{ categoryDetails.name }}</h1>
-          <p class="description-sub">{{ categoryDetails.description }}</p>
+          <h1 class="title-main">{{ categoryDetails().name }}</h1>
+          <p class="description-sub">{{ categoryDetails().description }}</p>
         </div>
       </div>
 
       <div class="count-container">
         <span class="events-badge">
-          {{ events.length }} {{ 'CATEGORY_EVENTS.EVENTS_FOUND' | translate:{ count: events.length } }}
+          {{ events().length }} {{ 'CATEGORY_EVENTS.EVENTS_FOUND' | translate:{ count: events().length } }}
         </span>
       </div>
 
       <div class="row g-4">
-        @for (event of paginatedEvents; track event.id) {
+        @for (event of paginatedEvents(); track event.id) {
           <div class="col-12 col-md-6 col-lg-4 d-flex">
             <app-event-card-component [event]="event" class="w-100"></app-event-card-component>
           </div>

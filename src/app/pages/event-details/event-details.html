@@ -1,16 +1,16 @@
 <div class="min-vh-100">
-  @if (event) {
+  @if (event()) {
     <div class="container pt-5 mt-5">
 
       <div class="row g-4">
         <div class="col-lg-8">
 
-          @if (event.photoLinks && event.photoLinks.length > 0) {
+          @if (event()!.photoLinks && event()!.photoLinks.length > 0) {
             <div id="eventPhotosCarousel" class="carousel slide rounded mb-4" data-bs-ride="carousel" 
                  style="border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%); overflow: hidden; height: 300px; background-color: var(--surface-color);">
               
               <div class="carousel-inner h-100">
-                @for (image of event.photoLinks; track $index) {
+                @for (image of event()!.photoLinks; track $index) {
                   <div class="carousel-item h-100" [class.active]="$index === 0">
                     <div class="w-100 h-100" style="overflow: hidden;">
                       <img [src]="image" class="d-block w-100 h-100" 
@@ -24,7 +24,7 @@
                 }
               </div>
 
-              @if (event.photoLinks.length > 1) {
+              @if (event()!.photoLinks.length > 1) {
                 <button class="carousel-control-prev" type="button" data-bs-target="#eventPhotosCarousel" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">{{ 'EVENT_DETAILS.PREV' | translate }}</span>
@@ -36,7 +36,7 @@
               }
             </div>
 
-            @for (image of event.photoLinks; track $index) {
+            @for (image of event()!.photoLinks; track $index) {
               <div class="modal fade" [id]="'imageModal' + $index" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl">
                   <div class="modal-content bg-transparent border-0">
@@ -59,22 +59,22 @@
             </div>
           }
 
-          <h1 class="fw-bold">{{ event.title }}</h1>
+          <h1 class="fw-bold">{{ event()!.title }}</h1>
           <p class="fst-italic" style="color: color-mix(in srgb, var(--default-color), transparent 30%);">
-            {{ event.shortDescription }}
+            {{ event()!.shortDescription }}
           </p>
 
           <hr style="border-color: color-mix(in srgb, var(--default-color), transparent 85%);">
 
           <h4 class="fw-bold mt-4">{{ 'EVENT_DETAILS.ABOUT' | translate }}</h4>
-          <p>{{ event.description }}</p>
+          <p>{{ event()!.description }}</p>
 
-          @if (event.tags && event.tags.length > 0) {
+          @if (event()!.tags && event()!.tags.length > 0) {
             <div class="mt-4">
               <p class="mb-2" style="font-size: 14px; color: color-mix(in srgb, var(--default-color), transparent 40%);">
                 {{ 'EVENT_DETAILS.TAGS' | translate }}
               </p>
-              @for (tag of event.tags; track tag) {
+              @for (tag of event()!.tags; track tag) {
                 <span class="badge rounded-pill me-2 mb-2 fw-normal px-3 py-2"
                       style="font-size: 13px; border: 1px solid color-mix(in srgb, var(--default-color), transparent 50%); color: var(--default-color); background: transparent;">
                   {{ tag }}
@@ -91,7 +91,7 @@
                    style="width:50px; height:50px; min-width:50px; background-color: color-mix(in srgb, var(--default-color), transparent 85%);">
                 <i class="bi bi-geo-alt-fill fs-4" style="color: var(--accent-color);"></i>
               </div>
-              <p class="mb-0">{{ event.shortPlaceDescription }}</p>
+              <p class="mb-0">{{ event()!.shortPlaceDescription }}</p>
             </div>
           </div>
 
@@ -105,8 +105,8 @@
               </div>
               <div>
                 <p class="mb-0 fw-semibold">
-                  {{ event.organizedByUser.names }} {{ event.organizedByUser.firstLastName }}
-                  {{ event.organizedByUser.secondLastName || '' }}
+                  {{ event()!.organizedByUser.names }} {{ event()!.organizedByUser.firstLastName }}
+                  {{ event()!.organizedByUser.secondLastName || '' }}
                 </p>
                 <p class="mb-0" style="font-size: 13px; color: color-mix(in srgb, var(--default-color), transparent 40%);">
                   {{ 'EVENT_DETAILS.ORGANIZER_ROLE' | translate }}
@@ -124,7 +124,7 @@
               <i class="bi bi-tag fs-5" style="color: var(--accent-color);"></i>
               <div>
                 <p class="mb-0" style="font-size: 13px; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EVENT_DETAILS.CATEGORY' | translate }}</p>
-                <p class="mb-0 fw-semibold">{{ event.category.name }}</p>
+                <p class="mb-0 fw-semibold">{{ event()!.category.name }}</p>
               </div>
             </div>
 
@@ -132,7 +132,7 @@
               <i class="bi bi-calendar-event fs-5" style="color: var(--accent-color);"></i>
               <div>
                 <p class="mb-0" style="font-size: 13px; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EVENT_DETAILS.START_DATE' | translate }}</p>
-                <p class="mb-0 fw-semibold">{{ event.dateStart | date:'dd/MM/yyyy HH:mm' }}</p>
+                <p class="mb-0 fw-semibold">{{ event()!.dateStart | date:'dd/MM/yyyy HH:mm' }}</p>
               </div>
             </div>
 
@@ -140,7 +140,7 @@
               <i class="bi bi-calendar-check fs-5" style="color: var(--accent-color);"></i>
               <div>
                 <p class="mb-0" style="font-size: 13px; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EVENT_DETAILS.END_DATE' | translate }}</p>
-                <p class="mb-0 fw-semibold">{{ event.dateEnd | date:'dd/MM/yyyy HH:mm' }}</p>
+                <p class="mb-0 fw-semibold">{{ event()!.dateEnd | date:'dd/MM/yyyy HH:mm' }}</p>
               </div>
             </div>
 
@@ -149,7 +149,7 @@
               <div>
                 <p class="mb-0" style="font-size: 13px; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EVENT_DETAILS.COST' | translate }}</p>
                 <p class="mb-0 fw-semibold">
-                  {{ event.cost | price }}
+                  {{ event()!.cost | price }}
                 </p>
               </div>
             </div>
@@ -159,7 +159,7 @@
                     style="background-color: #f82249; border-color: #f82249;"
                     data-bs-toggle="modal"
                     data-bs-target="#eventMapModal"
-                    [disabled]="!event.latitude || !event.longitude">
+                    [disabled]="!event()!.latitude || !event()!.longitude">
               <i class="bi bi-geo-alt me-1"></i> {{ 'EVENT_DETAILS.LOCATION_MAP' | translate }}
             </button>
             </div>
@@ -184,11 +184,11 @@
     </div>
   }
 
-  @if (event) {
+  @if (event()) {
     <app-event-map-modal
-      [latitude]="event.latitude"
-      [longitude]="event.longitude"
-      [locationName]="event.shortPlaceDescription">
+      [latitude]="event()!.latitude"
+      [longitude]="event()!.longitude"
+      [locationName]="event()!.shortPlaceDescription">
     </app-event-map-modal>
   }
 </div>
