@@ -39,14 +39,23 @@
         (rejectRequested)="onRejectRequested($event)"
       />
 
-      @if (pendingAction()) {
+      @if (pendingApproveId() !== null) {
         <app-confirm-modal
           [title]="getConfirmTitleKey() | translate"
           [message]="getConfirmMessageKey() | translate"
           [confirmText]="getConfirmButtonKey() | translate"
           [loading]="actionLoadingId() !== null"
-          (confirmed)="onActionConfirmed()"
-          (cancelled)="onActionDismissed()"
+          (confirmed)="onApproveConfirmed()"
+          (cancelled)="onApproveDismissed()"
+        />
+      }
+
+      @if (pendingRejectId() !== null) {
+        <app-reject-reason-modal
+          [title]="'PUBLISHER_REQUESTS.REJECT_MODAL.TITLE' | translate"
+          [loading]="actionLoadingId() !== null"
+          (confirmed)="onRejectConfirmed($event)"
+          (cancelled)="onRejectDismissed()"
         />
       }
     </div>
