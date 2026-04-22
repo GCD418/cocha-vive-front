@@ -9,7 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './reject-reason-modal.html',
   styleUrl: './reject-reason-modal.css',
 })
-export class RejectReasonModalComnponente {
+export class RejectReasonModalComnponent {
   @Input() title = '';
   @Input() loading = false;
   @Output() confirmed = new EventEmitter<string>();
