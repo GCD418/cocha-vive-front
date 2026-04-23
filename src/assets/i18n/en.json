@@ -279,7 +279,8 @@
       "YES": "Yes",
       "NO": "No",
       "APPROVE": "Approve Request",
-      "REJECT": "Reject Request"
+      "REJECT": "Reject Request",
+      "REJECT_REASON_TITTLE": "Reason for rejection"
     },
     "MODAL": {
       "APPROVE_TITLE": "Approve publisher request?",
@@ -299,7 +300,17 @@
       "NOT_FOUND": "The requested publisher request was not found.",
       "SERVER": "A server error occurred. Please try again.",
       "INVALID_ID": "Invalid publisher request ID.",
-      "GENERIC": "Could not complete the action. Please try again."
+      "GENERIC": "Could not complete the action. Please try again.",
+      "VALIDATION": "Validation error. Please check the input data.",
+      "INVALID_STATE": "Only pending requests can be approved or rejected."
+    },
+    "REJECT_MODAL": {
+      "TITLE": "Reject publisher request?",
+      "REASON_LABEL": "Reason for rejection",
+      "REASON_PLACEHOLDER": "E.g: The provided legal documentation is incomplete or invalid.",
+      "REASON_MIN_ERROR": "The reason must be at least 10 characters long.",
+      "CHARS_REMAINING": "characters remaining",
+      "CONFIRM_BUTTON": "Yes, reject"
     }
   },
   "FORBIDDEN": {
