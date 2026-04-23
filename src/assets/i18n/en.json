@@ -17,7 +17,8 @@
     "ROLES.PUBLISHER": "Publisher",
     "ROLES.ADMIN": "Admin",
     "ROLES.SUPERADMIN": "SUPERADMIN",
-    "PUBLISHER_REQUEST": "Request to be a Publisher"
+    "PUBLISHER_REQUEST": "Request to be a Publisher",
+    "SUPERADMIN_ROLE_MANAGEMENT": "Manage Admins"
   },
   "HERO": {
     "WELCOME": "Welcome to",
@@ -380,6 +381,45 @@
     "APPROVED": "Event approved successfully.",
     "REJECTED": "Event rejected successfully.",
     "ERROR": "An error occurred. Please try again."
+    }
+  },
+  "SUPERADMIN_ROLE_MANAGEMENT": {
+    "TITLE": "Administrator Role Management",
+    "SUBTITLE": "Supervise administrator privileges and change roles from a single place.",
+    "LOADING": "Loading role data...",
+    "TABLE": {
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "ACTIONS": "Actions"
+    },
+    "ADMINS": {
+      "TITLE": "Current administrators",
+      "EMPTY": "There are no administrators to display.",
+      "SELF_DEMOTION_BLOCKED": "You cannot demote your own superadmin account."
+    },
+    "ELIGIBLE_USERS": {
+      "TITLE": "Users eligible for promotion",
+      "EMPTY": "No eligible users right now."
+    },
+    "ACTIONS": {
+      "PROMOTE": "Promote to admin",
+      "DEMOTE": "Demote to user"
+    },
+    "MODAL": {
+      "PROMOTE_TITLE": "Promote user to administrator?",
+      "PROMOTE_MESSAGE": "{{name}} ({{email}}) will receive administrator privileges. Do you want to continue?",
+      "PROMOTE_BUTTON": "Yes, promote",
+      "DEMOTE_TITLE": "Demote administrator to user?",
+      "DEMOTE_MESSAGE": "{{name}} ({{email}}) will lose administrator privileges. Do you want to continue?",
+      "DEMOTE_BUTTON": "Yes, demote"
+    },
+    "TOAST": {
+      "PROMOTE_SUCCESS": "User promoted to administrator successfully.",
+      "DEMOTE_SUCCESS": "Administrator demoted to user successfully.",
+      "ACTION_ERROR": "Could not complete the role change."
+    },
+    "ERRORS": {
+      "LOAD": "Could not load administrator management data. Please try again."
     }
   },
   "PUBLISHER_REQUEST_FORM": {

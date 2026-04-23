@@ -13,6 +13,7 @@ import { requireFeature } from './core/guards/require-feature';
 import { AppFeatures } from './models/app-features';
 import { PublisherRequestsPageComponent } from './pages/publisher-requests/publisher-requests';
 import { PublisherRequestDetailsPageComponent } from './pages/publisher-request-details/publisher-request-details';
+import { SuperadminRoleManagementComponent } from './pages/admin/superadmin-role-management/superadmin-role-management';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -32,6 +33,12 @@ export const routes: Routes = [
         component: PublisherRequestDetailsPageComponent,
         canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
         data: { roles: ['ROLE_ADMIN'] },
+    },
+    {
+        path: 'superadmin/admin-management',
+        component: SuperadminRoleManagementComponent,
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_SUPERADMIN'] },
     },
     { path: 'category-events/:name', component: CategoryEventsComponent },
     { path: 'forbidden', component: ForbiddenPageComponent },

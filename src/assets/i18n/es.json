@@ -17,7 +17,8 @@
     "ROLES.PUBLISHER": "Anunciante",
     "ROLES.ADMIN": "Administrador",
     "ROLES.SUPERADMIN": "SUPERADMIN",
-    "PUBLISHER_REQUEST": "Solicitar ser Publicador"
+    "PUBLISHER_REQUEST": "Solicitar ser Publicador",
+    "SUPERADMIN_ROLE_MANAGEMENT": "Gestionar Administradores"
   },
   "HERO": {
     "WELCOME": "Bienvenido a",
@@ -383,6 +384,45 @@
       "ERROR": "Ocurrió un error. Por favor, intenta nuevamente."
      }
   },
+    "SUPERADMIN_ROLE_MANAGEMENT": {
+      "TITLE": "Gestión de Administradores",
+      "SUBTITLE": "Supervisa los privilegios de administración y asigna roles sin salir de esta vista.",
+      "LOADING": "Cargando datos de roles...",
+      "TABLE": {
+        "NAME": "Nombre",
+        "EMAIL": "Correo",
+        "ACTIONS": "Acciones"
+      },
+      "ADMINS": {
+        "TITLE": "Administradores actuales",
+        "EMPTY": "No hay administradores para mostrar.",
+        "SELF_DEMOTION_BLOCKED": "No puedes degradar tu propia cuenta superadmin."
+      },
+      "ELIGIBLE_USERS": {
+        "TITLE": "Usuarios elegibles para promoción",
+        "EMPTY": "No hay usuarios elegibles en este momento."
+      },
+      "ACTIONS": {
+        "PROMOTE": "Promover a admin",
+        "DEMOTE": "Degradar a usuario"
+      },
+      "MODAL": {
+        "PROMOTE_TITLE": "¿Promover usuario a administrador?",
+        "PROMOTE_MESSAGE": "{{name}} ({{email}}) recibirá privilegios de administrador. ¿Deseas continuar?",
+        "PROMOTE_BUTTON": "Sí, promover",
+        "DEMOTE_TITLE": "¿Degradar administrador a usuario?",
+        "DEMOTE_MESSAGE": "{{name}} ({{email}}) perderá privilegios de administrador. ¿Deseas continuar?",
+        "DEMOTE_BUTTON": "Sí, degradar"
+      },
+      "TOAST": {
+        "PROMOTE_SUCCESS": "Usuario promovido a administrador correctamente.",
+        "DEMOTE_SUCCESS": "Administrador degradado a usuario correctamente.",
+        "ACTION_ERROR": "No se pudo completar el cambio de rol."
+      },
+      "ERRORS": {
+        "LOAD": "No se pudo cargar la gestión de administradores. Intenta nuevamente."
+      }
+    },
   "PUBLISHER_REQUEST_FORM": {
     "TITLE": "Solicitar rol de Publicador",
     "SUBTITLE": "Completa el formulario para solicitar ser publicador de eventos.",

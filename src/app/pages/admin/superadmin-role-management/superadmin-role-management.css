@@ -1,0 +1,13 @@
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.card-header h3 {
+  color: #1f2937;
+}
+
+.badge.text-bg-light {
+  color: #374151;
+  border: 1px solid #e5e7eb;
+}

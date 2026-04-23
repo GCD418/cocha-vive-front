@@ -43,6 +43,13 @@
                 </a>
               </li>
             }
+            @if (canSeeSuperadminRoleManagementLink) {
+              <li>
+                <a routerLink="/superadmin/admin-management" routerLinkActive="active" (click)="closeMobileMenu()">
+                  {{ 'NAV.SUPERADMIN_ROLE_MANAGEMENT' | translate }}
+                </a>
+              </li>
+            }
             </li>
         </ul>
 

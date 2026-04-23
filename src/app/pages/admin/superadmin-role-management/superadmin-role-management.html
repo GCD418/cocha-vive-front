@@ -1,0 +1,160 @@
+<div class="container mt-5" aria-live="polite">
+  @if (showToast) {
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+      <div
+        class="toast show align-items-center border-0"
+        [class.text-bg-success]="toastType === 'success'"
+        [class.text-bg-danger]="toastType === 'danger'"
+        role="status"
+      >
+        <div class="d-flex">
+          <div class="toast-body d-flex align-items-center gap-2">
+            <i
+              class="bi"
+              [class.bi-check-circle-fill]="toastType === 'success'"
+              [class.bi-exclamation-circle-fill]="toastType === 'danger'"
+            ></i>
+            <span>{{ toastMessageKey | translate }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <div class="row">
+    <div class="col pt-5 mt-3">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TITLE' | translate }}</h2>
+      </div>
+
+      <p class="text-muted mb-4">{{ 'SUPERADMIN_ROLE_MANAGEMENT.SUBTITLE' | translate }}</p>
+
+      @if (loading) {
+        <div class="card border-0 shadow-sm mb-3">
+          <div class="card-body py-4 text-center text-muted">
+            <div class="spinner-border" role="status" aria-label="Loading"></div>
+            <div class="mt-2">{{ 'SUPERADMIN_ROLE_MANAGEMENT.LOADING' | translate }}</div>
+          </div>
+        </div>
+      } @else {
+        @if (errorMessageKey) {
+          <div class="alert alert-danger" role="alert">
+            {{ errorMessageKey | translate }}
+          </div>
+        }
+
+        <div class="card border-0 shadow-sm mb-4" aria-label="Current admins section">
+          <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+            <h3 class="h5 mb-0">{{ 'SUPERADMIN_ROLE_MANAGEMENT.ADMINS.TITLE' | translate }}</h3>
+            <span class="badge text-bg-light">{{ admins.length }}</span>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0" aria-label="Current admins table">
+                <thead class="table-light">
+                  <tr>
+                    <th>{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.NAME' | translate }}</th>
+                    <th>{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.EMAIL' | translate }}</th>
+                    <th class="text-center">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.ACTIONS' | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (admin of admins; track admin.id) {
+                    <tr>
+                      <td class="fw-semibold">{{ getFullName(admin) }}</td>
+                      <td class="text-muted">{{ admin.email }}</td>
+                      <td class="text-center">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-outline-danger"
+                          [attr.aria-label]="('SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.DEMOTE' | translate) + ': ' + getFullName(admin)"
+                          [disabled]="isSelf(admin) || isActionRunningFor(admin.id, 'demote')"
+                          (click)="openDemotionConfirmation(admin)"
+                        >
+                          @if (isActionRunningFor(admin.id, 'demote')) {
+                            <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
+                          }
+                          {{ 'SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.DEMOTE' | translate }}
+                        </button>
+                        @if (isSelf(admin)) {
+                          <div class="text-muted small mt-1">
+                            {{ 'SUPERADMIN_ROLE_MANAGEMENT.ADMINS.SELF_DEMOTION_BLOCKED' | translate }}
+                          </div>
+                        }
+                      </td>
+                    </tr>
+                  } @empty {
+                    <tr>
+                      <td colspan="3" class="text-center text-muted py-4">
+                        {{ 'SUPERADMIN_ROLE_MANAGEMENT.ADMINS.EMPTY' | translate }}
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card border-0 shadow-sm" aria-label="Eligible users section">
+          <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+            <h3 class="h5 mb-0">{{ 'SUPERADMIN_ROLE_MANAGEMENT.ELIGIBLE_USERS.TITLE' | translate }}</h3>
+            <span class="badge text-bg-light">{{ eligibleUsers.length }}</span>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0" aria-label="Eligible users table">
+                <thead class="table-light">
+                  <tr>
+                    <th>{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.NAME' | translate }}</th>
+                    <th>{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.EMAIL' | translate }}</th>
+                    <th class="text-center">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.ACTIONS' | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (user of eligibleUsers; track user.id) {
+                    <tr>
+                      <td class="fw-semibold">{{ getFullName(user) }}</td>
+                      <td class="text-muted">{{ user.email }}</td>
+                      <td class="text-center">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-outline-primary"
+                          [attr.aria-label]="('SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.PROMOTE' | translate) + ': ' + getFullName(user)"
+                          [disabled]="isActionRunningFor(user.id, 'promote')"
+                          (click)="openPromotionConfirmation(user)"
+                        >
+                          @if (isActionRunningFor(user.id, 'promote')) {
+                            <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
+                          }
+                          {{ 'SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.PROMOTE' | translate }}
+                        </button>
+                      </td>
+                    </tr>
+                  } @empty {
+                    <tr>
+                      <td colspan="3" class="text-center text-muted py-4">
+                        {{ 'SUPERADMIN_ROLE_MANAGEMENT.ELIGIBLE_USERS.EMPTY' | translate }}
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+@if (showConfirmModal && confirmTarget) {
+  <app-confirm-modal
+    [title]="getConfirmTitleKey() | translate"
+    [message]="(getConfirmMessageKey() | translate:{ name: getFullName(confirmTarget), email: confirmTarget.email })"
+    [confirmText]="getConfirmButtonKey() | translate"
+    [loading]="actionLoading"
+    (confirmed)="confirmRoleChange()"
+    (cancelled)="closeConfirmation()"
+  ></app-confirm-modal>
+}
