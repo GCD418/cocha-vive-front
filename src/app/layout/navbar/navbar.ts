@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject, OnInit } from '@angular/core';
+import { Component, computed, effect, HostListener, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { AuthService, CurrentUser } from '../../services/auth/auth.service';
 import { LoginModalComponent } from '../../components/auth/login-modal/login-modal';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FeatureToggleService } from '../../services/feature-toggle/feature-toggle.service';
 import { AppFeatures } from '../../models/app-features';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -15,11 +17,11 @@ import { AppFeatures } from '../../models/app-features';
   styleUrl: './navbar.css',
 })
 export class Navbar implements OnInit {
-  mobileMenuOpen = false;
-  userDropdownOpen = false; 
-  langDropdownOpen = false;
-  showLoginModal = false; 
-  currentUser: CurrentUser | null = null;
+  mobileMenuOpen = signal(false);
+  userDropdownOpen = signal(false); 
+  langDropdownOpen = signal(false);
+  showLoginModal = signal(false); 
+  currentUser = signal<CurrentUser | null>(null);
 
   protected authService = inject(AuthService);
   private router = inject(Router);
@@ -27,20 +29,55 @@ export class Navbar implements OnInit {
   private translate = inject(TranslateService);
   private featureToggleService = inject(FeatureToggleService);
 
-  get currentLangLabel(): string {
-    return (this.translate.getCurrentLang()|| 'es').toUpperCase();
-  }
+  private loginQueryParam = toSignal(
+    this.route.queryParamMap.pipe(map((params) => params.get('login'))),
+    { initialValue: null }
+  );
 
-  get canSeePublisherRequestLink(): boolean {
+  isLoggedIn = computed(() => this.authService.isAuthenticated());
+
+  canSeePublisherRequestLink = computed(() => {
     const isFeatureEnabled = this.featureToggleService.isEnabled(AppFeatures.MANAGE_PUBLISHER_REQUESTS);
     return isFeatureEnabled && this.userHasRole('ROLE_USER');
-  }
+  });
 
-  ngOnInit() {
-    document.body.classList.add('scrolled');
-    this.checkUserSession();
-    this.route.queryParamMap.subscribe((params) => {
-      if (params.get('login') === '1' && !this.showLoginModal) {
+  canSeePublisherRequestsAdminLink = computed(() => {
+    const isFeatureEnabled = this.featureToggleService.isEnabled(AppFeatures.MANAGE_PUBLISHER_REQUESTS);
+    return isFeatureEnabled && this.userHasRole('ROLE_ADMIN');
+  });
+
+  canSeeSuperadminRoleManagementLink = computed(() => {
+    return this.userHasRole('ROLE_SUPERADMIN');
+  });
+
+  displayName = computed(() => {
+    const user = this.currentUser();
+    if (!user) return '';
+    return `${user.names} ${user.firstLastName}`;
+  });
+
+  initials = computed(() => {
+    const user = this.currentUser();
+    if (!user) return '';
+    const first = user.names?.charAt(0) ?? '';
+    const last = user.firstLastName?.charAt(0) ?? '';
+    return (first + last).toUpperCase();
+  });
+
+  roleLabel = computed(() => {
+    const labels: Record<string, string> = {
+      ROLE_USER: 'NAV.ROLES.USER',
+      ROLE_PUBLISHER: 'NAV.ROLES.PUBLISHER',
+      ROLE_ADMIN: 'NAV.ROLES.ADMIN',
+      ROLE_SUPERADMIN: 'NAV.ROLES.SUPERADMIN'
+    };
+    return labels[this.authService.getRoleFromToken() ?? ''] ?? '';
+  });
+
+  constructor() {
+    effect(() => {
+      const login = this.loginQueryParam();
+      if (login === '1' && !this.showLoginModal()) {
         this.openLoginModal();
         this.router.navigate([], {
           queryParams: { login: null },
@@ -51,80 +88,64 @@ export class Navbar implements OnInit {
     });
   }
 
+  get currentLangLabel(): string {
+    return (this.translate.getCurrentLang()|| 'es').toUpperCase();
+  }
+
+  ngOnInit() {
+    document.body.classList.add('scrolled');
+    this.checkUserSession();
+  }
+
   toggleLangDropdown(event: Event): void {
     event.stopPropagation();
-    this.langDropdownOpen = !this.langDropdownOpen;
-    this.userDropdownOpen = false;
+    this.langDropdownOpen.update((open) => !open);
+    this.userDropdownOpen.set(false);
   }
 
   changeLanguage(lang: string) {
     this.translate.use(lang);
     localStorage.setItem('lang', lang);
-    this.langDropdownOpen = false;
+    this.langDropdownOpen.set(false);
   }
 
   checkUserSession() {
     if (this.authService.isLoggedIn()) {
       this.authService.getCurrentUser().subscribe({
-        next: (user) => { this.currentUser = user; },
-        error: () => { this.currentUser = null; }
+        next: (user) => { this.currentUser.set(user); },
+        error: () => { this.currentUser.set(null); }
       });
     } else {
-      this.currentUser = null;
+      this.currentUser.set(null);
     }
-  }
-
-  get isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
-  }
-
-  get canSeePublisherRequestsAdminLink(): boolean {
-    const isFeatureEnabled = this.featureToggleService.isEnabled(AppFeatures.MANAGE_PUBLISHER_REQUESTS);
-    return isFeatureEnabled && this.userHasRole('ROLE_ADMIN');
-  }
-
-  get canSeeSuperadminRoleManagementLink(): boolean {
-    return this.userHasRole('ROLE_SUPERADMIN');
-  }
-
-  get displayName(): string {
-    if (!this.currentUser) return '';
-    return `${this.currentUser.names} ${this.currentUser.firstLastName}`;
-  }
-
-  get initials(): string {
-    if (!this.currentUser) return '';
-    const first = this.currentUser.names?.charAt(0) ?? '';
-    const last = this.currentUser.firstLastName?.charAt(0) ?? '';
-    return (first + last).toUpperCase();
   }
 
   toggleUserDropdown(event: Event): void {
     event.stopPropagation();
-    this.userDropdownOpen = !this.userDropdownOpen;
-    this.langDropdownOpen = false; 
+    this.userDropdownOpen.update((open) => !open);
+    this.langDropdownOpen.set(false); 
   }
 
   @HostListener('document:click')
   onDocumentClick(): void {
-    this.userDropdownOpen = false;
-    this.langDropdownOpen = false; 
+    this.userDropdownOpen.set(false);
+    this.langDropdownOpen.set(false); 
   }
 
   openLoginModal() {
-    this.showLoginModal = true;
+    this.showLoginModal.set(true);
     this.closeMobileMenu();
   }
 
   closeLoginModal() {
-    this.showLoginModal = false;
+    this.showLoginModal.set(false);
     this.checkUserSession(); 
   }
 
   logout() {
     this.authService.logout();
-    this.currentUser = null;
-    this.userDropdownOpen = false;
+    this.currentUser.set(null);
+    this.userDropdownOpen.set(false);
     this.router.navigate(['/home']);
   }
 
@@ -134,8 +155,8 @@ export class Navbar implements OnInit {
   }
 
   toggleMobileMenu() {
-    this.mobileMenuOpen = !this.mobileMenuOpen;
-    if (this.mobileMenuOpen) {
+    this.mobileMenuOpen.update((open) => !open);
+    if (this.mobileMenuOpen()) {
       document.body.classList.add('mobile-nav-active');
     } else {
       document.body.classList.remove('mobile-nav-active');
@@ -143,7 +164,7 @@ export class Navbar implements OnInit {
   }
 
   closeMobileMenu() {
-    this.mobileMenuOpen = false;
+    this.mobileMenuOpen.set(false);
     document.body.classList.remove('mobile-nav-active');
   } 
 
@@ -178,13 +199,4 @@ export class Navbar implements OnInit {
       .filter((roleName): roleName is string => Boolean(roleName));
   }
   
-  get roleLabel(): string {
-    const labels: Record<string, string> = {
-      ROLE_USER: 'NAV.ROLES.USER',
-      ROLE_PUBLISHER: 'NAV.ROLES.PUBLISHER',
-      ROLE_ADMIN: 'NAV.ROLES.ADMIN',
-      ROLE_SUPERADMIN: 'NAV.ROLES.SUPERADMIN'
-    };
-    return labels[this.authService.getRoleFromToken() ?? ''] ?? '';
-  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../../services/category-services/category.service';
@@ -6,6 +6,8 @@ import { EventService } from '../../services/event-service/event.service';
 import { EventModel } from '../../models/event-model'; 
 import { EventCardComponent } from '../../components/events/event-card-component/event-card-component';
 import { TranslateModule } from '@ngx-translate/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-category-events',
@@ -14,91 +16,96 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './category-events.html',
   styleUrl: './category-events.css'
 })
-export class CategoryEventsComponent implements OnInit {
-  categoryName: string = '';
-  categoryDetails: any = null;
-  events: EventModel[] = []; 
+export class CategoryEventsComponent {
+  private route = inject(ActivatedRoute);
+  private categoryService = inject(CategoryService);
+  private eventService = inject(EventService);
+
+  categoryName = toSignal(
+    this.route.params.pipe(map((params) => params['name'] as string)),
+    { initialValue: '' }
+  );
+  categoryDetails = signal<any | null>(null);
+  events = signal<EventModel[]>([]); 
   
-  loading = true;
-  errorLoading = false;
-  currentPage: number = 1;
-  itemsPerPage: number = 16;
+  loading = signal(true);
+  errorLoading = signal(false);
+  currentPage = signal(1);
+  readonly itemsPerPage = 16;
 
-  constructor(
-    private route: ActivatedRoute,
-    private categoryService: CategoryService,
-    private eventService: EventService
-  ) {}
+  readonly totalPages = computed(() => Math.ceil(this.events().length / this.itemsPerPage));
 
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.categoryName = params['name'];
-      this.loadData();
+  readonly paginatedEvents = computed(() => {
+    const startIndex = (this.currentPage() - 1) * this.itemsPerPage;
+    return this.events().slice(startIndex, startIndex + this.itemsPerPage);
+  });
+
+  constructor() {
+    effect(() => {
+      const name = this.categoryName();
+      if (!name) {
+        return;
+      }
+
+      this.loadData(name);
     });
   }
 
-  loadData(): void {
-  this.loading = true;
-  this.errorLoading = false;
-  this.currentPage = 1;
+  loadData(categoryName: string): void {
+    this.loading.set(true);
+    this.errorLoading.set(false);
+    this.currentPage.set(1);
 
-  this.categoryService.getCategoryByName(this.categoryName).subscribe({
-    next: (categoryData) => {
-      this.categoryDetails = categoryData;
-      
-      if (this.categoryDetails && this.categoryDetails.id) {
-        this.eventService.getEventsByCategory(this.categoryDetails.id).subscribe({
-          next: (eventsData) => {
-            this.events = eventsData.sort((a, b) => {
-              const dateA = new Date(a.dateStart).getTime();
-              const dateB = new Date(b.dateStart).getTime();
-              return dateA - dateB;
-            });
+    this.categoryService.getCategoryByName(categoryName).subscribe({
+      next: (categoryData) => {
+        this.categoryDetails.set(categoryData);
 
-            this.loading = false;
-            
-            setTimeout(() => {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 100);
-          },
-          error: (err) => {
-            console.error('❌ Error al cargar los eventos:', err);
-            this.errorLoading = true;
-            this.loading = false;
-          }
-        });
-      } else {
-        this.errorLoading = true;
-        this.loading = false;
+        if (categoryData && categoryData.id) {
+          this.eventService.getEventsByCategory(categoryData.id).subscribe({
+            next: (eventsData) => {
+              this.events.set(
+                [...eventsData].sort((a, b) => {
+                  const dateA = new Date(a.dateStart).getTime();
+                  const dateB = new Date(b.dateStart).getTime();
+                  return dateA - dateB;
+                })
+              );
+
+              this.loading.set(false);
+
+              setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }, 100);
+            },
+            error: (err) => {
+              console.error('❌ Error al cargar los eventos:', err);
+              this.errorLoading.set(true);
+              this.loading.set(false);
+            }
+          });
+        } else {
+          this.errorLoading.set(true);
+          this.loading.set(false);
+        }
+      },
+      error: (err) => {
+        console.error('❌ Error al cargar la categoría:', err);
+        this.errorLoading.set(true);
+        this.loading.set(false);
       }
-    },
-    error: (err) => {
-      console.error('❌ Error al cargar la categoría:', err);
-      this.errorLoading = true;
-      this.loading = false;
-    }
-  });
-}
-
-  get paginatedEvents(): EventModel[] {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.events.slice(startIndex, startIndex + this.itemsPerPage);
-  }
-
-  get totalPages(): number {
-    return Math.ceil(this.events.length / this.itemsPerPage);
+    });
   }
 
   nextPage(): void {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
+    if (this.currentPage() < this.totalPages()) {
+      this.currentPage.update((page) => page + 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
   prevPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
+    if (this.currentPage() > 1) {
+      this.currentPage.update((page) => page - 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }

@@ -1,4 +1,4 @@
-import { Component, Input, NgZone  } from '@angular/core';
+import { Component, Input, NgZone, computed, signal  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { environment } from '../../../../environments/environment';
@@ -12,11 +12,31 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './event-map-modal.css',
 })
 export class EventMapModalComponent {
-  @Input() latitude: number = 0;
-  @Input() longitude: number = 0;
+  @Input() set latitude(value: number) {
+    this.latitudeSignal.set(value);
+  }
+
+  @Input() set longitude(value: number) {
+    this.longitudeSignal.set(value);
+  }
+
   @Input() locationName: string = '';
 
-  apiLoaded = false;
+  apiLoaded = signal(false);
+  private latitudeSignal = signal(0);
+  private longitudeSignal = signal(0);
+
+  readonly center = computed<google.maps.LatLngLiteral>(() => ({
+    lat: this.latitudeSignal(),
+    lng: this.longitudeSignal(),
+  }));
+
+  readonly markerPosition = computed<google.maps.LatLngLiteral>(() => ({
+    lat: this.latitudeSignal(),
+    lng: this.longitudeSignal(),
+  }));
+
+  readonly hasCoordinates = computed(() => this.latitudeSignal() !== 0 && this.longitudeSignal() !== 0);
 
   constructor(private ngZone: NgZone) {}
 
@@ -26,12 +46,12 @@ export class EventMapModalComponent {
 
   private loadGoogleMaps() {
     if (typeof (window as any).google !== 'undefined' && (window as any).google.maps?.importLibrary) {
-      this.ngZone.run(() => { this.apiLoaded = true; });
+      this.ngZone.run(() => { this.apiLoaded.set(true); });
       return;
     }
 
     (window as any).googleMapsCallback = () => {
-      this.ngZone.run(() => { this.apiLoaded = true; });
+      this.ngZone.run(() => { this.apiLoaded.set(true); });
     };
 
     const existingScript = document.querySelector(
@@ -44,14 +64,6 @@ export class EventMapModalComponent {
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
-  }
-
-  get center(): google.maps.LatLngLiteral {
-    return { lat: this.latitude, lng: this.longitude };
-  }
-
-  get markerPosition(): google.maps.LatLngLiteral {
-    return { lat: this.latitude, lng: this.longitude };
   }
 
   mapOptions: google.maps.MapOptions = {

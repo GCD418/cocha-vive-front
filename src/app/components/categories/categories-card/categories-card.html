@@ -5,23 +5,23 @@
     <p>{{ 'CATEGORIES.SUBTITLE' | translate }}</p>
   </div>
 
-  @if (loading) {
+  @if (loading()) {
     <div class="container text-center">
       <p style="color: black;">⏳ {{ 'CATEGORIES.LOADING' | translate }}</p>
     </div>
   }
 
-  @if (errorLoading) {
+  @if (errorLoading()) {
     <div class="container text-center text-danger">
       <p>❌ {{ 'CATEGORIES.ERROR' | translate }}</p>
     </div>
   }
 
-  @if (!loading && !errorLoading) {
+  @if (!loading() && !errorLoading()) {
     <div class="container">
       <div class="row justify-content-center">
         
-        @for (category of categories; track category.id) {
+        @for (category of categories(); track category.id) {
           <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
             
             <div class="card custom-card w-100 text-center border-0 shadow-sm p-4">

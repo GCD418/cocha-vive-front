@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, NgZone, Output, AfterViewInit  } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, NgZone, Output, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { environment } from '../../../../environments/environment';
@@ -19,14 +19,12 @@ export class EventMapPickerComponent implements OnInit {
 
   @Output() locationSelected = new EventEmitter<{ lat: number; lng: number }>();
 
-  apiLoaded = false;
-  markerPosition: google.maps.LatLngLiteral = { lat: -17.3895, lng: -66.1568 };
+  apiLoaded = signal(false);
+  markerPosition = signal<google.maps.LatLngLiteral>({ lat: -17.3895, lng: -66.1568 });
 
   private modalInstance: any;
 
-  get center(): google.maps.LatLngLiteral {
-    return this.markerPosition;
-  }
+  center = computed(() => this.markerPosition());
 
   mapOptions: google.maps.MapOptions = {
     zoom: 15,
@@ -41,20 +39,20 @@ export class EventMapPickerComponent implements OnInit {
 
   ngOnInit() {
     if (this.initialLatitude !== 0 && this.initialLongitude !== 0) {
-      this.markerPosition = {
+      this.markerPosition.set({
         lat: this.initialLatitude,
         lng: this.initialLongitude
-      };
+      });
     }
     this.loadGoogleMaps();
   }
 
   openModal() {
     if (this.initialLatitude !== 0 && this.initialLongitude !== 0) {
-      this.markerPosition = {
+      this.markerPosition.set({
         lat: this.initialLatitude,
         lng: this.initialLongitude
-      };
+      });
     }
 
     const modalEl = document.getElementById('mapPickerModal');
@@ -69,20 +67,20 @@ export class EventMapPickerComponent implements OnInit {
 
   private loadGoogleMaps() {
     if (typeof (window as any).google !== 'undefined' && (window as any).google.maps?.importLibrary) {
-      this.ngZone.run(() => { this.apiLoaded = true; });
+      this.ngZone.run(() => { this.apiLoaded.set(true); });
       return;
     }
 
     const existingScript = document.querySelector('script[src*="maps.googleapis.com"]');
     if (existingScript) {
       existingScript.addEventListener('load', () => {
-        this.ngZone.run(() => { this.apiLoaded = true; });
+        this.ngZone.run(() => { this.apiLoaded.set(true); });
       });
       return;
     }
 
     (window as any).googleMapsCallback = () => {
-      this.ngZone.run(() => { this.apiLoaded = true; });
+      this.ngZone.run(() => { this.apiLoaded.set(true); });
     };
 
     const script = document.createElement('script');
@@ -93,14 +91,14 @@ export class EventMapPickerComponent implements OnInit {
 
   onMapClick(event: google.maps.MapMouseEvent) {
     if (event.latLng) {
-      this.markerPosition = {
+      this.markerPosition.set({
         lat: event.latLng.lat(),
         lng: event.latLng.lng()
-      };
+      });
     }
   }
 
   confirmLocation() {
-    this.locationSelected.emit(this.markerPosition);
+    this.locationSelected.emit(this.markerPosition());
   }
 }

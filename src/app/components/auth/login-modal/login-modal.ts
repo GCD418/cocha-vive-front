@@ -39,7 +39,7 @@ export class LoginModalComponent implements OnInit {
             const userRole = this.authService.getRoleFromToken();
             switch (userRole) {
               case 'ROLE_PUBLISHER':
-                this.router.navigate(['/events']);
+                this.router.navigate(['/publisher/my-events']);
                 break;
               
               case 'ROLE_USER':

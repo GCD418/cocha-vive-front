@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DatePipe, SlicePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { EventModel } from '../../../models/event-model'; 
 import { EventService } from '../../../services/event-service/event.service'; 
 import * as AOS from 'aos';
@@ -12,7 +12,7 @@ import { AppFeatures } from '../../../models/app-features';
 @Component({
   selector: 'app-featured-event',
   standalone: true,
-  imports: [RouterLink, DatePipe, SlicePipe, PricePipe, TranslateModule],
+  imports: [RouterLink, DatePipe, PricePipe, TranslateModule],
   templateUrl: './featured-event.html',
   styleUrl: './featured-event.css'
 })
@@ -20,9 +20,11 @@ export class FeaturedEventComponent implements OnInit {
   public featureService = inject(FeatureToggleService);
   public readonly AppFeatures = AppFeatures;
 
-  events: EventModel[] = [];
-  loading = true;
-  errorLoading = false;
+  events = signal<EventModel[]>([]);
+  loading = signal(true);
+  errorLoading = signal(false);
+
+  readonly topEvents = computed(() => this.events().slice(0, 4));
 
   constructor(private eventService: EventService) {}
 
@@ -30,8 +32,8 @@ export class FeaturedEventComponent implements OnInit {
     this.eventService.getFeaturedEvents().subscribe({
       next: (data) => {
         console.log('✅ Eventos Destacados recibidos:', data);
-        this.events = data;
-        this.loading = false;
+        this.events.set(data);
+        this.loading.set(false);
         
         setTimeout(() => {
           AOS.refresh();
@@ -39,8 +41,8 @@ export class FeaturedEventComponent implements OnInit {
       },
       error: (err) => {
         console.error('❌ Error al cargar eventos destacados:', err);
-        this.loading = false;
-        this.errorLoading = true;
+        this.loading.set(false);
+        this.errorLoading.set(true);
       }
     });
   }
