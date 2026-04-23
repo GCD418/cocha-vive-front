@@ -17,7 +17,7 @@
   border-radius: 12px;
   position: relative;
   width: 90%;
-  max-width: 400px;
+  max-width: 460px;
   text-align: center;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   font-family: var(--default-font);
@@ -40,30 +40,47 @@
   color: var(--accent-color);
 }
 
-.confirm-icon {
-  font-size: 2.5rem;
-  color: #dc3545;
-  display: block;
-  margin-bottom: 0.75rem;
-}
-
-.modal-header {
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   margin-bottom: 1.5rem;
+  padding-top: 0.5rem;
 }
 
-.modal-header h2 {
+.modal-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.confirm-icon {
+  font-size: 2.4rem;
+  line-height: 1;
+  color: #dc3545;
+  flex-shrink: 0;
+}
+
+.modal-text h2 {
   margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
   color: var(--heading-color);
   font-family: var(--heading-font);
   font-size: 1.4rem;
   font-weight: 700;
+  max-width: 100%;
 }
 
-.modal-header p {
+.modal-text p {
   color: color-mix(in srgb, var(--default-color), transparent 30%);
   margin-bottom: 0;
   font-size: 0.92rem;
+  line-height: 1.5;
+  max-width: 100%;
+  padding-inline: 0.25rem;
 }
 
 .modal-actions {
@@ -71,6 +88,7 @@
   justify-content: center;
   gap: 12px;
   margin-top: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .btn-cancel-action {

@@ -43,7 +43,11 @@ export class Navbar implements OnInit {
 
   canSeePublisherRequestsAdminLink = computed(() => {
     const isFeatureEnabled = this.featureToggleService.isEnabled(AppFeatures.MANAGE_PUBLISHER_REQUESTS);
-    return isFeatureEnabled && this.userHasRole('ROLE_ADMIN');
+    return isFeatureEnabled && (this.userHasRole('ROLE_ADMIN'));
+  });
+
+  canSeeAdminEventsLink = computed(() => {
+    return this.userHasRole('ROLE_ADMIN');
   });
 
   canSeeSuperadminRoleManagementLink = computed(() => {
@@ -71,7 +75,8 @@ export class Navbar implements OnInit {
       ROLE_ADMIN: 'NAV.ROLES.ADMIN',
       ROLE_SUPERADMIN: 'NAV.ROLES.SUPERADMIN'
     };
-    return labels[this.authService.getRoleFromToken() ?? ''] ?? '';
+    const currentUserRole = this.currentUser()?.role;
+    return labels[currentUserRole ?? this.authService.getRoleFromToken() ?? ''] ?? '';
   });
 
   constructor() {
@@ -169,6 +174,11 @@ export class Navbar implements OnInit {
   } 
 
   private userHasRole(role: string): boolean {
+    const currentUserRole = this.currentUser()?.role;
+    if (currentUserRole === role) {
+      return true;
+    }
+
     const payload = this.authService.getDecodedPayload(this.authService.getToken());
     const roles = this.normalizeRoles(payload?.roles);
     return roles.includes(role);

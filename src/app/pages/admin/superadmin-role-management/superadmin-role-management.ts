@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { forkJoin } from 'rxjs';
 import { AuthService } from '../../../services/auth/auth.service';
 import { RoleManagedUser } from '../../../models/role-management.model';
 import { RoleManagementService } from '../../../services/role-management/role-management.service';
@@ -37,6 +36,7 @@ export class SuperadminRoleManagementComponent implements OnInit {
   confirmTarget: RoleManagedUser | null = null;
 
   activeSuperadminId: number | null = null;
+  private cdr = inject(ChangeDetectorRef);
 
   constructor(
     private roleManagementService: RoleManagementService,
@@ -47,6 +47,11 @@ export class SuperadminRoleManagementComponent implements OnInit {
     this.authService.getCurrentUser().subscribe({
       next: (currentUser) => {
         this.activeSuperadminId = currentUser?.id ?? null;
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.activeSuperadminId = null;
+        this.cdr.detectChanges();
       },
     });
 
@@ -57,18 +62,17 @@ export class SuperadminRoleManagementComponent implements OnInit {
     this.loading = true;
     this.errorMessageKey = '';
 
-    forkJoin({
-      admins: this.roleManagementService.getCurrentAdmins(),
-      eligibleUsers: this.roleManagementService.getEligibleUsers(),
-    }).subscribe({
+    this.roleManagementService.getRoleManagementLists().subscribe({
       next: ({ admins, eligibleUsers }) => {
         this.admins = admins;
         this.eligibleUsers = eligibleUsers;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.loading = false;
         this.errorMessageKey = 'SUPERADMIN_ROLE_MANAGEMENT.ERRORS.LOAD';
+        this.cdr.detectChanges();
       },
     });
   }
@@ -148,8 +152,10 @@ export class SuperadminRoleManagementComponent implements OnInit {
     this.toastMessageKey = messageKey;
     this.toastType = type;
     this.showToast = true;
+    this.cdr.detectChanges();
     setTimeout(() => {
       this.showToast = false;
+      this.cdr.detectChanges();
     }, 4000);
   }
 
