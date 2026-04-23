@@ -37,6 +37,16 @@
               <div>{{ request()!.requestReason }}</div>
             </div>
 
+            @if (request()!.requestStatus === 'REJECTED' && request()!.rejectionReason) {
+              <div class="py-2 border-bottom">
+                <div class="text-muted small mb-1 text-danger fw-semibold">
+                  <i class="bi bi-x-circle-fill me-1"></i>
+                  {{ 'PUBLISHER_REQUESTS.DETAIL.REJECTION_REASON_TITLE' | translate }}
+                </div>
+                <div class="text-danger">{{ request()!.rejectionReason }}</div>
+              </div>
+            }
+
             <div class="d-flex justify-content-between py-2">
               <span class="text-muted">{{ 'PUBLISHER_REQUESTS.TABLE.HEADERS.CREATED_AT' | translate }}</span>
               <strong>{{ request()!.createdAt | date:'d/M/yyyy HH:mm' }}</strong>
