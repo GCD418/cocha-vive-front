@@ -7,13 +7,13 @@ import { PublisherRequest, PublisherRequestFilterMode } from '../../models/publi
 import { PublisherRequestService } from '../../services/publisher-request-service/publisher-request.service';
 import { PublisherRequestsTableComponent } from '../../components/publisher-requests/publisher-requests-table/publisher-requests-table';
 import { ConfirmModalComponent } from '../../shared/confirmModal-Component/confirmModal-component';
-import { RejectReasonModalComnponent } from '../../shared/reject-reason-modal/reject-reason-modal';
+import { RejectReasonModalComponent } from '../../shared/reject-reason-modal/reject-reason-modal';
 
 type ModerationAction = 'approve' | 'reject';
 
 @Component({
   selector: 'app-publisher-requests-page',
-  imports: [CommonModule, TranslateModule, PublisherRequestsTableComponent, ConfirmModalComponent, RejectReasonModalComnponent],
+  imports: [CommonModule, TranslateModule, PublisherRequestsTableComponent, ConfirmModalComponent, RejectReasonModalComponent],
   templateUrl: './publisher-requests.html',
   styleUrl: './publisher-requests.css',
 })
