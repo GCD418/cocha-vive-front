@@ -1,7 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
-import { catchError, map, of } from 'rxjs';
 
 function normalizeRoles(rawRoles: unknown): string[] {
   if (!Array.isArray(rawRoles)) {
@@ -68,27 +67,9 @@ export const authGuard: CanActivateFn = (route, state) => {
     const hasRequiredRole = requiredRoles.some((role) => userRoles.includes(role));
 
     if (!hasRequiredRole) {
-      return authService.getCurrentUser().pipe(
-        map((currentUser) => {
-          const currentUserRoles = currentUser?.role ? [currentUser.role] : [];
-          const hasBackendRole = requiredRoles.some((role) => currentUserRoles.includes(role));
-
-          if (hasBackendRole) {
-            return true;
-          }
-
-          return router.createUrlTree(['/forbidden'], {
-            queryParams: { from: state.url },
-          });
-        }),
-        catchError(() =>
-          of(
-            router.createUrlTree(['/forbidden'], {
-              queryParams: { from: state.url },
-            })
-          )
-        )
-      );
+      return router.createUrlTree(['/forbidden'], {
+        queryParams: { from: state.url },
+      });
     }
   }
 
