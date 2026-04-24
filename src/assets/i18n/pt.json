@@ -17,7 +17,8 @@
     "ROLES.PUBLISHER": "Anunciante",
     "ROLES.ADMIN": "Administrador",
     "ROLES.SUPERADMIN": "SUPERADMIN",
-    "PUBLISHER_REQUEST": "Candidate-se para se tornar um editor."
+    "PUBLISHER_REQUEST": "Candidate-se para se tornar um editor.",
+    "SUPERADMIN_ROLE_MANAGEMENT": "Gerenciar Administradores"
   },
   "HERO": {
     "WELCOME": "Bem-vindo ao",
@@ -382,6 +383,45 @@
       "APPROVED": "Evento aprovado com sucesso.",
       "REJECTED": "Evento rejeitado com sucesso.",
       "ERROR": "Ocorreu um erro. Por favor, tente novamente."
+    }
+  },
+  "SUPERADMIN_ROLE_MANAGEMENT": {
+    "TITLE": "Gestão de Administradores",
+    "SUBTITLE": "Supervisione privilégios administrativos e altere funções em um único lugar.",
+    "LOADING": "Carregando dados de papéis...",
+    "TABLE": {
+      "NAME": "Nome",
+      "EMAIL": "E-mail",
+      "ACTIONS": "Ações"
+    },
+    "ADMINS": {
+      "TITLE": "Administradores atuais",
+      "EMPTY": "Não há administradores para exibir.",
+      "SELF_DEMOTION_BLOCKED": "Você não pode rebaixar sua própria conta superadmin."
+    },
+    "ELIGIBLE_USERS": {
+      "TITLE": "Usuários elegíveis para promoção",
+      "EMPTY": "Não há usuários elegíveis no momento."
+    },
+    "ACTIONS": {
+      "PROMOTE": "Promover para admin",
+      "DEMOTE": "Rebaixar para usuário"
+    },
+    "MODAL": {
+      "PROMOTE_TITLE": "Promover usuário para administrador?",
+      "PROMOTE_MESSAGE": "{{name}} ({{email}}) receberá privilégios de administrador. Deseja continuar?",
+      "PROMOTE_BUTTON": "Sim, promover",
+      "DEMOTE_TITLE": "Rebaixar administrador para usuário?",
+      "DEMOTE_MESSAGE": "{{name}} ({{email}}) perderá privilégios de administrador. Deseja continuar?",
+      "DEMOTE_BUTTON": "Sim, rebaixar"
+    },
+    "TOAST": {
+      "PROMOTE_SUCCESS": "Usuário promovido para administrador com sucesso.",
+      "DEMOTE_SUCCESS": "Administrador rebaixado para usuário com sucesso.",
+      "ACTION_ERROR": "Não foi possível concluir a alteração de papel."
+    },
+    "ERRORS": {
+      "LOAD": "Não foi possível carregar os dados da gestão de administradores. Tente novamente."
     }
   },
   "PUBLISHER_REQUEST_FORM": {

@@ -1,0 +1,44 @@
+/* Alineación vertical para todas las tablas */
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+/* Títulos de las tarjetas */
+.card-header h3 {
+  color: #1f2937;
+}
+
+/* Diseño de la cabecera de la tabla */
+.table-light th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #e9ecef;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+/* Círculo para los avatares de usuario */
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.05);
+  background-color: #f3f4f6 !important;
+}
+
+/* Efecto hover suave al pasar el ratón por las filas */
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Botones secundarios (Demote) más limpios */
+.btn-light {
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+.btn-light:hover:not(:disabled) {
+  background-color: #fee2e2; /* Fondo rojizo suave al hacer hover */
+  border-color: #fca5a5;
+  color: #dc2626 !important;
+}

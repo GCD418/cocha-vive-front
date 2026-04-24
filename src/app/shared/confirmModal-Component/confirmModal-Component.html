@@ -1,12 +1,14 @@
 <div class="modal-overlay" (click)="onCancel()">
   <div class="modal-content" (click)="$event.stopPropagation()">
 
-    <button class="close-btn" (click)="onCancel()">&times;</button>
+    <button type="button" class="close-btn" aria-label="Close" (click)="onCancel()">&times;</button>
 
-    <div class="modal-header">
-      <i class="bi bi-exclamation-triangle confirm-icon"></i>
-      <h2>{{ title }}</h2>
-      <p>{{ message }}</p>
+    <div class="modal-body">
+      <i class="bi bi-exclamation-triangle confirm-icon" aria-hidden="true"></i>
+      <div class="modal-text">
+        <h2>{{ title }}</h2>
+        <p>{{ message }}</p>
+      </div>
     </div>
 
     <div class="modal-actions">
