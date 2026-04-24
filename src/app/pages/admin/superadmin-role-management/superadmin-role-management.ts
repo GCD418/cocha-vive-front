@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { RoleManagedUser } from '../../../models/role-management.model';
@@ -11,32 +11,30 @@ type ToastType = 'success' | 'danger';
 
 @Component({
   selector: 'app-superadmin-role-management',
-  standalone: true,
   imports: [CommonModule, TranslateModule, ConfirmModalComponent],
   templateUrl: './superadmin-role-management.html',
   styleUrl: './superadmin-role-management.css',
 })
 export class SuperadminRoleManagementComponent implements OnInit {
-  admins: RoleManagedUser[] = [];
-  eligibleUsers: RoleManagedUser[] = [];
+  admins = signal<RoleManagedUser[]>([]);
+  eligibleUsers = signal<RoleManagedUser[]>([]);
 
-  loading = true;
-  actionLoading = false;
-  actionTargetUserId: number | null = null;
-  actionTypeInProgress: RoleActionType | null = null;
+  loading = signal(true);
+  actionLoading = signal(false);
+  actionTargetUserId = signal<number | null>(null);
+  actionTypeInProgress = signal<RoleActionType | null>(null);
 
-  showToast = false;
-  toastType: ToastType = 'success';
-  toastMessageKey = '';
+  showToast = signal(false);
+  toastType = signal<ToastType>('success');
+  toastMessageKey = signal('');
 
-  errorMessageKey = '';
+  errorMessageKey = signal('');
 
-  showConfirmModal = false;
-  confirmActionType: RoleActionType | null = null;
-  confirmTarget: RoleManagedUser | null = null;
+  showConfirmModal = signal(false);
+  confirmActionType = signal<RoleActionType | null>(null);
+  confirmTarget = signal<RoleManagedUser | null>(null);
 
-  activeSuperadminId: number | null = null;
-  private cdr = inject(ChangeDetectorRef);
+  activeSuperadminId = signal<number | null>(null);
 
   constructor(
     private roleManagementService: RoleManagementService,
@@ -44,17 +42,16 @@ export class SuperadminRoleManagementComponent implements OnInit {
   ) {}
 
   private blockRoleManagement(): void {
-    this.activeSuperadminId = null;
-    this.admins = [];
-    this.eligibleUsers = [];
-    this.loading = false;
-    this.errorMessageKey = 'SUPERADMIN_ROLE_MANAGEMENT.ERRORS.LOAD';
-    this.cdr.detectChanges();
+    this.activeSuperadminId.set(null);
+    this.admins.set([]);
+    this.eligibleUsers.set([]);
+    this.loading.set(false);
+    this.errorMessageKey.set('SUPERADMIN_ROLE_MANAGEMENT.ERRORS.LOAD');
   }
 
   ngOnInit(): void {
-    this.loading = true;
-    this.errorMessageKey = '';
+    this.loading.set(true);
+    this.errorMessageKey.set('');
 
     this.authService.getCurrentUser().subscribe({
       next: (currentUser) => {
@@ -63,7 +60,7 @@ export class SuperadminRoleManagementComponent implements OnInit {
           return;
         }
 
-        this.activeSuperadminId = currentUser.id;
+        this.activeSuperadminId.set(currentUser.id);
         this.loadData();
       },
       error: () => {
@@ -73,28 +70,26 @@ export class SuperadminRoleManagementComponent implements OnInit {
   }
 
   loadData(): void {
-    this.loading = true;
-    this.errorMessageKey = '';
+    this.loading.set(true);
+    this.errorMessageKey.set('');
 
     this.roleManagementService.getRoleManagementLists().subscribe({
       next: ({ admins, eligibleUsers }) => {
-        this.admins = admins;
-        this.eligibleUsers = eligibleUsers;
-        this.loading = false;
-        this.cdr.detectChanges();
+        this.admins.set(admins);
+        this.eligibleUsers.set(eligibleUsers);
+        this.loading.set(false);
       },
       error: () => {
-        this.loading = false;
-        this.errorMessageKey = 'SUPERADMIN_ROLE_MANAGEMENT.ERRORS.LOAD';
-        this.cdr.detectChanges();
+        this.loading.set(false);
+        this.errorMessageKey.set('SUPERADMIN_ROLE_MANAGEMENT.ERRORS.LOAD');
       },
     });
   }
 
   openPromotionConfirmation(user: RoleManagedUser): void {
-    this.confirmActionType = 'promote';
-    this.confirmTarget = user;
-    this.showConfirmModal = true;
+    this.confirmActionType.set('promote');
+    this.confirmTarget.set(user);
+    this.showConfirmModal.set(true);
   }
 
   openDemotionConfirmation(user: RoleManagedUser): void {
@@ -102,39 +97,42 @@ export class SuperadminRoleManagementComponent implements OnInit {
       return;
     }
 
-    this.confirmActionType = 'demote';
-    this.confirmTarget = user;
-    this.showConfirmModal = true;
+    this.confirmActionType.set('demote');
+    this.confirmTarget.set(user);
+    this.showConfirmModal.set(true);
   }
 
   closeConfirmation(): void {
-    if (this.actionLoading) {
+    if (this.actionLoading()) {
       return;
     }
 
-    this.showConfirmModal = false;
-    this.confirmTarget = null;
-    this.confirmActionType = null;
+    this.showConfirmModal.set(false);
+    this.confirmTarget.set(null);
+    this.confirmActionType.set(null);
   }
 
   confirmRoleChange(): void {
-    if (!this.confirmTarget || !this.confirmActionType) {
+    const confirmTarget = this.confirmTarget();
+    const confirmActionType = this.confirmActionType();
+
+    if (!confirmTarget || !confirmActionType) {
       return;
     }
 
-    if (this.confirmActionType === 'demote' && this.isSelf(this.confirmTarget)) {
+    if (confirmActionType === 'demote' && this.isSelf(confirmTarget)) {
       this.closeConfirmation();
       return;
     }
 
-    this.actionLoading = true;
-    this.actionTargetUserId = this.confirmTarget.id;
-    this.actionTypeInProgress = this.confirmActionType;
+    this.actionLoading.set(true);
+    this.actionTargetUserId.set(confirmTarget.id);
+    this.actionTypeInProgress.set(confirmActionType);
 
     const request$ =
-      this.confirmActionType === 'promote'
-        ? this.roleManagementService.promoteToAdmin(this.confirmTarget.id)
-        : this.roleManagementService.demoteToUser(this.confirmTarget.id);
+      confirmActionType === 'promote'
+        ? this.roleManagementService.promoteToAdmin(confirmTarget.id)
+        : this.roleManagementService.demoteToUser(confirmTarget.id);
 
     request$.subscribe({
       next: () => {
@@ -142,7 +140,7 @@ export class SuperadminRoleManagementComponent implements OnInit {
         this.closeConfirmation();
         this.loadData();
         this.showNotification(
-          this.confirmActionType === 'promote'
+          confirmActionType === 'promote'
             ? 'SUPERADMIN_ROLE_MANAGEMENT.TOAST.PROMOTE_SUCCESS'
             : 'SUPERADMIN_ROLE_MANAGEMENT.TOAST.DEMOTE_SUCCESS',
           'success'
@@ -157,19 +155,17 @@ export class SuperadminRoleManagementComponent implements OnInit {
   }
 
   private clearActionState(): void {
-    this.actionLoading = false;
-    this.actionTargetUserId = null;
-    this.actionTypeInProgress = null;
+    this.actionLoading.set(false);
+    this.actionTargetUserId.set(null);
+    this.actionTypeInProgress.set(null);
   }
 
   private showNotification(messageKey: string, type: ToastType): void {
-    this.toastMessageKey = messageKey;
-    this.toastType = type;
-    this.showToast = true;
-    this.cdr.detectChanges();
+    this.toastMessageKey.set(messageKey);
+    this.toastType.set(type);
+    this.showToast.set(true);
     setTimeout(() => {
-      this.showToast = false;
-      this.cdr.detectChanges();
+      this.showToast.set(false);
     }, 4000);
   }
 
@@ -180,15 +176,15 @@ export class SuperadminRoleManagementComponent implements OnInit {
   }
 
   isSelf(user: RoleManagedUser): boolean {
-    return this.activeSuperadminId !== null && user.id === this.activeSuperadminId;
+    return this.activeSuperadminId() !== null && user.id === this.activeSuperadminId();
   }
 
   isActionRunningFor(userId: number, action: RoleActionType): boolean {
-    return this.actionLoading && this.actionTargetUserId === userId && this.actionTypeInProgress === action;
+    return this.actionLoading() && this.actionTargetUserId() === userId && this.actionTypeInProgress() === action;
   }
 
   getConfirmTitleKey(): string {
-    if (this.confirmActionType === 'promote') {
+    if (this.confirmActionType() === 'promote') {
       return 'SUPERADMIN_ROLE_MANAGEMENT.MODAL.PROMOTE_TITLE';
     }
 
@@ -196,7 +192,7 @@ export class SuperadminRoleManagementComponent implements OnInit {
   }
 
   getConfirmMessageKey(): string {
-    if (this.confirmActionType === 'promote') {
+    if (this.confirmActionType() === 'promote') {
       return 'SUPERADMIN_ROLE_MANAGEMENT.MODAL.PROMOTE_MESSAGE';
     }
 
@@ -204,7 +200,7 @@ export class SuperadminRoleManagementComponent implements OnInit {
   }
 
   getConfirmButtonKey(): string {
-    if (this.confirmActionType === 'promote') {
+    if (this.confirmActionType() === 'promote') {
       return 'SUPERADMIN_ROLE_MANAGEMENT.MODAL.PROMOTE_BUTTON';
     }
 
