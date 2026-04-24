@@ -1,7 +1,7 @@
 <div class="modal-overlay" (click)="onCancel()">
   <div class="modal-content" (click)="$event.stopPropagation()">
 
-    <button class="close-btn" (click)="onCancel()">&times;</button>
+    <button type="button" class="close-btn" aria-label="Close" (click)="onCancel()">&times;</button>
 
     <div class="modal-body">
       <i class="bi bi-exclamation-triangle confirm-icon" aria-hidden="true"></i>

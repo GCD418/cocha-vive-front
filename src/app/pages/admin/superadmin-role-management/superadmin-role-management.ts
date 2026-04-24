@@ -43,19 +43,33 @@ export class SuperadminRoleManagementComponent implements OnInit {
     private authService: AuthService
   ) {}
 
+  private blockRoleManagement(): void {
+    this.activeSuperadminId = null;
+    this.admins = [];
+    this.eligibleUsers = [];
+    this.loading = false;
+    this.errorMessageKey = 'SUPERADMIN_ROLE_MANAGEMENT.ERRORS.LOAD';
+    this.cdr.detectChanges();
+  }
+
   ngOnInit(): void {
+    this.loading = true;
+    this.errorMessageKey = '';
+
     this.authService.getCurrentUser().subscribe({
       next: (currentUser) => {
-        this.activeSuperadminId = currentUser?.id ?? null;
-        this.cdr.detectChanges();
+        if (currentUser?.id == null) {
+          this.blockRoleManagement();
+          return;
+        }
+
+        this.activeSuperadminId = currentUser.id;
+        this.loadData();
       },
       error: () => {
-        this.activeSuperadminId = null;
-        this.cdr.detectChanges();
+        this.blockRoleManagement();
       },
     });
-
-    this.loadData();
   }
 
   loadData(): void {
