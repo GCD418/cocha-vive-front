@@ -20,19 +20,19 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'publisher/my-events', component: EventList, canActivate: [authGuard], data: { roles: ['ROLE_PUBLISHER'] } },
     { path: 'events/create', component: EventCreate, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_PUBLISHER'] },},
-    { path: 'admin/events', component: AdminEventListComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_SUPERADMIN'] }},
+    { path: 'admin/events', component: AdminEventListComponent, canActivate: [authGuard], data: { roles: ['ROLE_ADMIN'] }},
     { path: 'event-details/:id', component: EventDetails },
     {
         path: 'admin/publisher-requests',
         component: PublisherRequestsPageComponent,
         canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_SUPERADMIN'] },
+        data: { roles: ['ROLE_ADMIN'] },
     },
     {
         path: 'admin/publisher-requests/:id',
         component: PublisherRequestDetailsPageComponent,
         canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_SUPERADMIN'] },
+        data: { roles: ['ROLE_ADMIN'] },
     },
     {
         path: 'superadmin/admin-management',
@@ -60,6 +60,4 @@ export const routes: Routes = [
         canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
         data: { roles: ['ROLE_USER'] },
     },
-    // Example of a route protected by a feature flag. If anyone uses something different 10 Bs.
-    // {path: 'make-payment', component: NonExistentComponent, canActivate: [requireFeature(AppFeatures.VIEW_FEATURED_EVENTS)]},
 ];
