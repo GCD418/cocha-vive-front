@@ -279,8 +279,8 @@
       "YES": "Sim",
       "NO": "Não",
       "APPROVE": "Aprovar Solicitação",
-      "REJECT": "Rejeitar Solicitação"
-
+      "REJECT": "Rejeitar Solicitação",
+      "REJECTION_REASON_TITLE": "Motivo da rejeição"
     },
     "MODAL": {
       "APPROVE_TITLE": "Aprovar solicitação de publicador?",

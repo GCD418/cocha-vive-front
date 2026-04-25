@@ -280,7 +280,7 @@
       "NO": "No",
       "APPROVE": "Approve Request",
       "REJECT": "Reject Request",
-      "REJECT_REASON_TITTLE": "Reason for rejection"
+      "REJECTION_REASON_TITTLE": "Reason for rejection"
     },
     "MODAL": {
       "APPROVE_TITLE": "Approve publisher request?",
