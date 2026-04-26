@@ -1,0 +1,48 @@
+<footer class="footer-contact">
+  <div class="container py-5 py-lg-6">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-5">
+        <p class="footer-kicker mb-2 text-white-50">{{ 'FOOTER.KICKER' | translate }}</p>
+        <h2 class="footer-title mb-3 text-white fw-bold">{{ 'FOOTER.TITLE' | translate }}</h2>
+        <p class="footer-copy mb-4 text-white-50">{{ 'FOOTER.SUBTITLE' | translate }}</p>
+
+        <div class="footer-contact-pill d-inline-flex align-items-center gap-2">
+          <i class="bi bi-envelope-fill"></i>
+          <div>
+            <div class="footer-pill-label text-white-50">{{ 'FOOTER.EMAIL_LABEL' | translate }}</div>
+            <a class="footer-pill-email" [href]="'mailto:' + contactEmail">{{ contactEmail }}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7">
+        <div class="footer-card card border-0 shadow-lg">
+          <div class="card-body p-4 p-md-5">
+            <form (ngSubmit)="sendEmail()">
+              <label class="form-label fw-semibold mb-2">
+                {{ 'FOOTER.FORM.LABEL' | translate }}
+              </label>
+              <textarea
+                class="form-control footer-textarea"
+                [ngModel]="comment()"
+                (ngModelChange)="comment.set($event)"
+                [placeholder]="'FOOTER.FORM.PLACEHOLDER' | translate"
+                name="comment"
+                rows="5"
+                maxlength="1200"
+              ></textarea>
+
+              <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mt-3">
+                <p class="footer-help mb-0 text-body-secondary">{{ 'FOOTER.FORM.HELP' | translate }}</p>
+                <button type="submit" class="btn btn-primary px-4" [disabled]="!hasComment()">
+                  <i class="bi bi-send me-2"></i>
+                  {{ 'FOOTER.FORM.BUTTON' | translate }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

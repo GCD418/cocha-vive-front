@@ -1,13 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import { Navbar } from './layout/navbar/navbar';
+import { FooterComponent } from './layout/footer/footer';
 import { EventList } from './pages/event-list/event-list';
 import { EventDetails } from './pages/event-details/event-details';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterModule, Navbar, TranslateModule],
+  imports: [RouterOutlet, RouterModule, Navbar, FooterComponent, TranslateModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -20,6 +20,18 @@
     "PUBLISHER_REQUEST": "Solicitar ser Publicador",
     "SUPERADMIN_ROLE_MANAGEMENT": "Gestionar Administradores"
   },
+  "FOOTER": {
+    "KICKER": "Contacto",
+    "TITLE": "Cuéntanos tu comentario o duda",
+    "SUBTITLE": "Escribe tu mensaje y se abrirá tu aplicación de correo para enviarlo directamente a gforce4182@gmail.com.",
+    "EMAIL_LABEL": "Correo de contacto",
+    "FORM": {
+      "LABEL": "Comentario o duda",
+      "PLACEHOLDER": "Escribe aquí tu comentario o duda...",
+      "HELP": "Al enviar, se abrirá tu correo con el mensaje listo para mandar.",
+      "BUTTON": "Enviar por correo"
+    }
+  },
   "HERO": {
     "WELCOME": "Bienvenido a",
     "SUBTITLE": "Descubre los mejores eventos de Cochabamba"

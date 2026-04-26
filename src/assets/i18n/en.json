@@ -20,6 +20,18 @@
     "PUBLISHER_REQUEST": "Request to be a Publisher",
     "SUPERADMIN_ROLE_MANAGEMENT": "Manage Admins"
   },
+  "FOOTER": {
+    "KICKER": "Contact",
+    "TITLE": "Tell us your comment or question",
+    "SUBTITLE": "Write your message and your mail app will open so you can send it directly to gforce4182@gmail.com.",
+    "EMAIL_LABEL": "Contact email",
+    "FORM": {
+      "LABEL": "Comment or question",
+      "PLACEHOLDER": "Write your comment or question here...",
+      "HELP": "When you send it, your email client will open with the message ready.",
+      "BUTTON": "Send by email"
+    }
+  },
   "HERO": {
     "WELCOME": "Welcome to",
     "SUBTITLE": "Discover the best events in Cochabamba"
