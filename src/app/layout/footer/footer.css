@@ -1,0 +1,93 @@
+.footer-contact {
+  position: relative;
+  overflow: hidden;
+  margin-top: 3rem;
+  padding-top: 1rem;
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--accent-color), transparent 78%), transparent 35%),
+    linear-gradient(135deg, #0f172a 0%, #111827 52%, #0b1120 100%);
+  color: #f8fafc;
+}
+
+.footer-contact::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 90%);
+  pointer-events: none;
+}
+
+.footer-contact .container {
+  position: relative;
+  z-index: 1;
+}
+
+.py-lg-6 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.footer-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.footer-copy {
+  max-width: 30rem;
+  font-size: 1.02rem;
+}
+
+.footer-contact-pill {
+  padding: 1rem 1.15rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+}
+
+.footer-contact-pill i {
+  font-size: 1.25rem;
+  color: var(--accent-color);
+}
+
+.footer-pill-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.footer-pill-email {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.footer-pill-email:hover,
+.footer-pill-email:focus {
+  color: color-mix(in srgb, var(--accent-color), white 8%);
+}
+
+.footer-card {
+  border-radius: 1.4rem;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.footer-card .card-body {
+  color: #0f172a;
+}
+
+.footer-textarea {
+  min-height: 160px;
+  resize: vertical;
+  border-radius: 1rem;
+}
+
+@media (max-width: 991.98px) {
+  .footer-contact {
+    margin-top: 2rem;
+  }
+}

@@ -20,6 +20,18 @@
     "PUBLISHER_REQUEST": "Candidate-se para se tornar um editor.",
     "SUPERADMIN_ROLE_MANAGEMENT": "Gerenciar Administradores"
   },
+  "FOOTER": {
+    "KICKER": "Contato",
+    "TITLE": "Conte-nos seu comentário ou dúvida",
+    "SUBTITLE": "Escreva sua mensagem e seu aplicativo de e-mail será aberto para enviá-la diretamente para gforce4182@gmail.com.",
+    "EMAIL_LABEL": "E-mail de contato",
+    "FORM": {
+      "LABEL": "Comentário ou dúvida",
+      "PLACEHOLDER": "Escreva seu comentário ou dúvida aqui...",
+      "HELP": "Ao enviar, seu cliente de e-mail será aberto com a mensagem pronta.",
+      "BUTTON": "Enviar por e-mail"
+    }
+  },
   "HERO": {
     "WELCOME": "Bem-vindo ao",
     "SUBTITLE": "Descubra os melhores eventos de Cochabamba"
