@@ -7,6 +7,10 @@ export interface PublisherRequestCreatePayload {
   legalEntityName: string;
 }
 
+export interface PublisherRequestRejectPayload {
+  rejectionReason: string;
+}
+
 export interface PublisherRequestCreatedByUser {
   id: number;
   names: string;
@@ -20,6 +24,7 @@ export interface PublisherRequest {
   id: number;
   requestReason: string;
   legalEntityName: string;
+  rejectionReason: string | null;
   evidenceImages: string[];
   createdByUser: PublisherRequestCreatedByUser;
   requestStatus: PublisherRequestStatus;

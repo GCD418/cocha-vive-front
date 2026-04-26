@@ -1,0 +1,103 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(14, 27, 77, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: var(--surface-color, #ffffff);
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  position: relative;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  font-family: var(--default-font);
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--default-color);
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.close-btn:hover {
+  color: var(--accent-color);
+}
+
+.modal-header {
+  margin-bottom: 1.5rem;
+}
+
+.modal-header h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 1.5rem;
+}
+
+.btn-cancel-action {
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  background-color: transparent;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 50%);
+  color: var(--default-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-cancel-action:hover {
+  background-color: color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.btn-confirm-action {
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-confirm-action:hover:not(:disabled) {
+  background-color: #b02a37;
+}
+
+.btn-confirm-action:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.char-counter {
+  font-size: 0.8rem;
+}
+
+.reason-hint {
+  font-size: 0.8rem;
+}

@@ -31,6 +31,18 @@
               </div>
             </div>
 
+            @if (request?.requestStatus === 'REJECTED' && request?.rejectionReason) {
+            <div class="card border-0 border-start border-danger border-3 shadow-sm mb-4">
+              <div class="card-body">
+                <h4 class="mb-2 text-danger">
+                  <i class="bi bi-x-circle-fill me-2"></i>
+                  {{ 'PUBLISHER_REQUESTS.DETAIL.REJECTION_REASON_TITLE' | translate }}
+                </h4>
+                <p class="mb-0">{{ request.rejectionReason }}</p>
+              </div>
+            </div>
+          }
+
             <div class="card border-0 shadow-sm">
               <div class="card-body">
                 <h4 class="mb-3">{{ 'PUBLISHER_REQUESTS.DETAIL.EVIDENCE_IMAGES' | translate }}</h4>

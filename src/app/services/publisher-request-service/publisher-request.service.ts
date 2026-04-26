@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { PublisherRequest } from '../../models/publisher-request.model';
 import { PublisherRequestCreatePayload } from '../../models/publisher-request.model';
+import { PublisherRequestRejectPayload } from '../../models/publisher-request.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -28,8 +29,8 @@ export class PublisherRequestService {
     return this.httpClient.patch<void>(`${this.baseUrl}/${id}/approve`, {});
   }
 
-  rejectRequest(id: number): Observable<void> {
-    return this.httpClient.patch<void>(`${this.baseUrl}/${id}/reject`, {});
+  rejectRequest(id: number, payload: PublisherRequestRejectPayload): Observable<PublisherRequest> {
+    return this.httpClient.patch<PublisherRequest>(`${this.baseUrl}/${id}/reject`, payload);
   }
   
   createRequest(dto: PublisherRequestCreatePayload, images: File[]): Observable<PublisherRequest> {

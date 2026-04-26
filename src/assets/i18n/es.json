@@ -3,7 +3,7 @@
     "START": "Inicio",
     "EXPLORE": "Explorar",
     "MY_EVENTS": "Mis Eventos",
-    "ADMIN_PUBLISHER_REQUESTS": "Solicitudes de Publicador",
+    "ADMIN_PUBLISHER_REQUESTS": "Solicitudes de Anunciante",
     "ADMIN_EVENTS": "Administrar Eventos",
     "PUBLISH_EVENT": "Publicar Evento",
     "LOGIN": "Iniciar Sesión",
@@ -234,8 +234,8 @@
     }
   },
   "PUBLISHER_REQUESTS": {
-    "TITLE": "Solicitudes de Publicador",
-    "LOADING": "Cargando solicitudes de publicador...",
+    "TITLE": "Solicitudes de Anunciante",
+    "LOADING": "Cargando solicitudes de anunciante...",
     "STATS": {
       "TOTAL": "Total de solicitudes",
       "PENDING": "Pendientes",
@@ -264,7 +264,7 @@
         "REJECT": "Rechazar",
         "VIEW": "Ver"
       },
-      "EMPTY_STATE": "No se encontraron solicitudes de publicador para este filtro."
+      "EMPTY_STATE": "No se encontraron solicitudes de anunciante para este filtro."
     },
     "DETAIL": {
       "BACK_TO_LIST": "Volver a la lista",
@@ -281,27 +281,38 @@
       "YES": "Sí",
       "NO": "No",
       "APPROVE": "Aprobar Solicitud",
-      "REJECT": "Rechazar Solicitud"
+      "REJECT": "Rechazar Solicitud",
+      "REJECTION_REASON_TITLE": "Motivo de Rechazo"
     },
     "MODAL": {
-      "APPROVE_TITLE": "¿Aprobar solicitud de publicador?",
-      "APPROVE_MESSAGE": "El usuario será promovido al rol publicador. ¿Deseas continuar?",
+      "APPROVE_TITLE": "¿Aprobar solicitud de anunciante?",
+      "APPROVE_MESSAGE": "El usuario será promovido al rol anunciante. ¿Deseas continuar?",
       "APPROVE_BUTTON": "Sí, aprobar",
-      "REJECT_TITLE": "¿Rechazar solicitud de publicador?",
+      "REJECT_TITLE": "¿Rechazar solicitud de anunciante?",
       "REJECT_MESSAGE": "Esta solicitud será marcada como rechazada. ¿Deseas continuar?",
       "REJECT_BUTTON": "Sí, rechazar"
     },
     "TOAST": {
-      "APPROVE_SUCCESS": "Solicitud de publicador aprobada correctamente.",
-      "REJECT_SUCCESS": "Solicitud de publicador rechazada correctamente."
+      "APPROVE_SUCCESS": "Solicitud de anunciante aprobada correctamente.",
+      "REJECT_SUCCESS": "Solicitud de anunciante rechazada correctamente."
     },
     "ERRORS": {
       "UNAUTHORIZED": "Tu sesión ha expirado. Inicia sesión nuevamente.",
       "FORBIDDEN": "No tienes acceso a este recurso.",
-      "NOT_FOUND": "No se encontró la solicitud de publicador solicitada.",
+      "NOT_FOUND": "No se encontró la solicitud de anunciante solicitada.",
       "SERVER": "Ocurrió un error del servidor. Intenta nuevamente.",
-      "INVALID_ID": "ID de solicitud de publicador inválido.",
-      "GENERIC": "No se pudo completar la acción. Intenta nuevamente."
+      "INVALID_ID": "ID de solicitud de anunciante inválido.",
+      "GENERIC": "No se pudo completar la acción. Intenta nuevamente.",
+      "VALIDATION": "El motivo de rechazo es inválido o está incompleto.",
+      "INVALID_STATE": "Esta solicitud ya no puede ser rechazada en su estado actual."
+    },
+    "REJECT_MODAL": {
+      "TITLE": "Rechazar solicitud de anunciante",
+      "REASON_LABEL": "Motivo de rechazo",
+      "REASON_PLACEHOLDER": "Ej: La documentación legal proporcionada está incompleta o es inválida.",
+      "REASON_MIN_ERROR": "El motivo debe tener al menos 10 caracteres.",
+      "CHARS_REMAINING": "caracteres restantes",
+      "CONFIRM_BUTTON": "Sí, rechazar"
     }
   },
   "FORBIDDEN": {
@@ -425,7 +436,7 @@
     },
   "PUBLISHER_REQUEST_FORM": {
     "TITLE": "Solicitar rol de Publicador",
-    "SUBTITLE": "Completa el formulario para solicitar ser publicador de eventos.",
+    "SUBTITLE": "Completa el formulario para solicitar ser anunciante de eventos.",
     "LABELS": {
       "REQUEST_REASON": "Motivo de la solicitud",
       "LEGAL_ENTITY_NAME": "Nombre de la entidad legal"
@@ -443,7 +454,7 @@
     "SUCCESS": "Tu solicitud fue enviada correctamente. Te notificaremos cuando sea revisada.",
     "ERRORS": {
       "COOLDOWN": "Debes esperar 1 día antes de enviar una nueva solicitud.",
-      "ALREADY_APPROVED": "Tu cuenta ya tiene rol de publicador.",
+      "ALREADY_APPROVED": "Tu cuenta ya tiene rol de anunciante.",
       "SERVER": "Ocurrió un error al enviar la solicitud. Intenta nuevamente.",
       "GENERIC": "No se pudo completar la acción. Intenta nuevamente."
     }

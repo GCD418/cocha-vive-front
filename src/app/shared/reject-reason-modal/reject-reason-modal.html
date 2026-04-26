@@ -1,0 +1,56 @@
+<div class="modal-overlay" (click)="onCancel()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+
+    <button class="close-btn" (click)="onCancel()">&times;</button>
+
+    <div class="modal-header">
+      <i class="bi bi-x-circle confirm-icon text-danger d-block mb-1" style="font-size: 1.8rem; margin-right: 0.4rem;"></i>
+      <h2>{{ title }}</h2>
+    </div>
+
+    <label class="form-label fw-semibold" for="rejectionReasonInput">
+      {{ 'PUBLISHER_REQUESTS.REJECT_MODAL.REASON_LABEL' | translate }}
+    </label>
+    <textarea
+      id="rejectionReasonInput"
+      class="form-control"
+      rows="4"
+      [maxlength]="MAX_LENGTH"
+      [ngModel]="rejectionReason()"
+      (ngModelChange)="rejectionReason.set($event)"
+      [placeholder]="'PUBLISHER_REQUESTS.REJECT_MODAL.REASON_PLACEHOLDER' | translate"
+    ></textarea>
+
+    <div class="d-flex justify-content-between mt-1" style="min-height: 1.2rem;">
+      <span
+        class="reason-hint text-danger"
+        [class.invisible]="rejectionReason().trim().length === 0 || isValid">
+        {{ 'PUBLISHER_REQUESTS.REJECT_MODAL.REASON_MIN_ERROR' | translate }}
+      </span>
+      <span
+        class="char-counter text-nowrap ms-2"
+        [class.text-danger]="remainingChars < 50"
+        [class.text-muted]="remainingChars >= 50">
+        {{ remainingChars }} {{ 'PUBLISHER_REQUESTS.REJECT_MODAL.CHARS_REMAINING' | translate }}
+      </span>
+    </div>
+
+    <div class="modal-actions">
+      <button
+        class="btn-cancel-action"
+        [disabled]="loading"
+        (click)="onCancel()">
+        <i class="bi bi-x-circle me-1"></i>
+        {{ 'CONFIRM_MODAL.CANCEL' | translate }}
+      </button>
+      <button
+        class="btn-confirm-action"
+        [disabled]="!isValid || loading"
+        (click)="onConfirm()">
+        <i class="bi bi-check-circle me-1"></i>
+        {{ loading ? ('CONFIRM_MODAL.PROCESSING' | translate) : ('PUBLISHER_REQUESTS.REJECT_MODAL.CONFIRM_BUTTON' | translate) }}
+      </button>
+    </div>
+
+  </div>
+</div>
