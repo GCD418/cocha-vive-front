@@ -18,7 +18,18 @@
     "ROLES.ADMIN": "Admin",
     "ROLES.SUPERADMIN": "SUPERADMIN",
     "PUBLISHER_REQUEST": "Request to be a Publisher",
-    "SUPERADMIN_ROLE_MANAGEMENT": "Manage Admins"
+    "SUPERADMIN_ROLE_MANAGEMENT": "Manage Admins",
+    "NOTIFICATIONS": {
+      "TITLE": "Notifications",
+      "OPEN": "Open notifications",
+      "MARK_ALL_READ": "Mark all as read",
+      "LOADING": "Loading notifications...",
+      "ERROR": "Notifications could not be loaded.",
+      "RETRY": "Retry",
+      "EMPTY": "You have no notifications yet.",
+      "UNREAD": "Unread",
+      "ITEM": "Notification"
+    }
   },
   "FOOTER": {
     "KICKER": "Contact",
