@@ -483,6 +483,7 @@
   },
   "MY_PUBLISHER_REQUEST": {
     "TITLE": "My Publisher Request",
+    "LOADING": "Loading your request...",
     "NO_REQUEST": "You haven't submitted a request yet.",
     "SEND_REQUEST": "Send Request"
   }

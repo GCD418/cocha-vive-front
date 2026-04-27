@@ -484,6 +484,7 @@
   },
   "MY_PUBLISHER_REQUEST": {
     "TITLE": "Mi Solicitud de Publicador",
+    "LOADING": "Cargando tu solicitud...",
     "NO_REQUEST": "Aún no has enviado una solicitud.",
     "SEND_REQUEST": "Enviar solicitud"
   }
