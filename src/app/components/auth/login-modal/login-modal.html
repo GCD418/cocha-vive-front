@@ -5,13 +5,34 @@
     
     <div class="modal-header">
       <h2>{{ 'AUTH.MODAL_TITLE' | translate }}</h2>
-      
       <p>{{ 'AUTH.MODAL_WELCOME' | translate }}</p>
     </div>
 
-    <div class="google-btn-container">
-      <asl-google-signin-button type="standard" size="large"></asl-google-signin-button>
+    <    <div class="auth-buttons">
+      <div class="google-btn-container">
+        <asl-google-signin-button type="standard" size="large"></asl-google-signin-button>
+      </div>
+
+      <div class="divider">
+        <span>or</span>
+      </div>
+
+      <button 
+        class="btn btn-outline-primary w-100 facebook-btn"
+        (click)="loginWithFacebook()"
+        [disabled]="isLoading()">
+        <i class="bi bi-facebook me-2"></i>
+        {{ isLoading() ? 'Connecting...' : 'Login with Facebook' }}
+      </button>
     </div>
-    
   </div>
 </div>
+
+<app-email-registration-modal 
+  *ngIf="showEmailModal()"
+  [facebookName]="facebookName()"
+  [facebookPhotoUrl]="facebookPhotoUrl()"
+  [isLoading]="isLoading()"
+  (submitEmail)="onEmailSubmit($event)"
+  (close)="showEmailModal.set(false)">
+</app-email-registration-modal>
