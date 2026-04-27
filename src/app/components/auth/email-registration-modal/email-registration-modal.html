@@ -1,0 +1,36 @@
+<div class="modal-overlay" (click)="close.emit()">
+  <div class="modal-content email-modal" (click)="$event.stopPropagation()">
+    
+    <button class="close-btn" (click)="close.emit()">&times;</button>
+    
+    <div class="modal-header">
+      <h2>Complete your registration</h2>
+      <p>Please enter your email to finish creating your account</p>
+    </div>
+
+    <div class="email-form">
+      <form (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <input 
+            type="email" 
+            class="form-control" 
+            placeholder="Enter your email"
+            [(ngModel)]="email"
+            name="email"
+            [disabled]="isLoading">
+          
+          <small class="text-danger d-block mt-1" *ngIf="emailError">
+            {{ emailError }}
+          </small>
+        </div>
+
+        <button 
+          type="submit" 
+          class="btn btn-primary w-100"
+          [disabled]="isLoading">
+          {{ isLoading ? 'Sending...' : 'Verify Email' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
