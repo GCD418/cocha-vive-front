@@ -59,3 +59,41 @@
   justify-content: center;
   margin-top: 1rem;
 }
+
+auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.divider {
+  text-align: center;
+  position: relative;
+  margin: 0.5rem 0;
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
+  font-size: 0.9rem;
+}
+
+.facebook-btn {
+  font-weight: 600;
+  padding: 0.75rem;
+  border-color: #0a66c2;
+  color: #0a66c2;
+  transition: all 0.3s ease;
+}
+
+.facebook-btn:hover:not(:disabled) {
+  background-color: #0a66c2;
+  color: white;
+  border-color: #0a66c2;
+}
+
+.facebook-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.facebook-btn i {
+  font-size: 1.1rem;
+}
