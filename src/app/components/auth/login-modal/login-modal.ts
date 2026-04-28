@@ -5,7 +5,6 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { FacebookAuthService } from '../../../services/auth/facebook-auth.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { EmailRegistrationModal } from '../email-registration-modal/email-registration-modal';
 import { CommonModule } from '@angular/common';
 
 declare global {
@@ -15,7 +14,7 @@ declare global {
 }
 @Component({
   selector: 'app-login-modal',
-  imports: [GoogleSigninButtonModule, TranslateModule,  EmailRegistrationModal, CommonModule],
+  imports: [GoogleSigninButtonModule, TranslateModule, CommonModule],
   templateUrl: './login-modal.html',
   styleUrls: ['./login-modal.css']
 })
@@ -28,11 +27,13 @@ export class LoginModalComponent implements OnInit {
 
   @Output() closeModal = new EventEmitter<void>();
 
-  showEmailModal = signal(false);
+  @Output() pendingEmailRegistration = new EventEmitter<{
+    registrationToken: string;
+    facebookName: string;
+    facebookPhotoUrl: string;
+  }>();
+ 
   isLoading = signal(false);
-  registrationToken = signal<string | null>(null);
-  facebookName = signal('');
-  facebookPhotoUrl = signal('');
 
   ngOnInit(): void {
     this.setupGoogleAuth();
@@ -40,43 +41,19 @@ export class LoginModalComponent implements OnInit {
   }
 
   private setupGoogleAuth(): void {
-    this.socialAuthService.authState.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((googleUser) => {
-      if (googleUser && googleUser.idToken) {
-        this.authService.verifyGoogleToken(googleUser.idToken).subscribe({
-          next: (response) => {
-            this.close(); 
-            if (response.requiresOnboarding) {
-              this.router.navigate(['/onboarding']);
-              return;
-            } 
-
-            const returnUrl = this.getReturnUrl();
-            if (returnUrl) {
-              this.router.navigateByUrl(returnUrl);
-              return;
-            }
-            
-            const userRole = this.authService.getRoleFromToken();
-            switch (userRole) {
-              case 'ROLE_PUBLISHER':
-                this.router.navigate(['/publisher/my-events']);
-                break;
-              
-              case 'ROLE_USER':
-                this.router.navigate(['/home']);
-                break;
-              
-              default:
-                this.router.navigate(['/home']);
-                break;
-            }
-          },
-          error: (err) => {
-            console.error('Error al iniciar sesión con Google', err);
-          },
-        });
-      }
-    });
+    this.socialAuthService.authState
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((googleUser) => {
+        if (googleUser?.idToken) {
+          this.authService.verifyGoogleToken(googleUser.idToken).subscribe({
+            next: (response) => {
+              this.close();
+              this.navigateAfterLogin(response.requiresOnboarding);
+            },
+            error: (err) => console.error('Google login error', err),
+          });
+        }
+      });
   }
 
   private initializeFacebook(): void {
@@ -92,6 +69,7 @@ export class LoginModalComponent implements OnInit {
   loginWithFacebook(): void {
     if (!window.FB) {
       console.error('Facebook SDK not loaded');
+      alert('Facebook SDK not loaded. Please refresh the page.');
       return;
     }
 
@@ -103,21 +81,26 @@ export class LoginModalComponent implements OnInit {
         this.verifyFacebookToken(accessToken);
       } else {
         this.isLoading.set(false);
-        console.error('Facebook login failed');
       }
     }, { scope: 'public_profile,email' });
   }
 
   private verifyFacebookToken(token: string): void {
+
     this.facebookAuthService.loginWithFacebook(token).subscribe({
       next: (response) => {
         if (response.status === 'AUTHENTICATED') {
-          this.handleLoginSuccess(response.requiresOnboarding || false);
+          localStorage.setItem('cocha_vive_token', response.internalToken!);
+          this.authService.initAuthFromStorage();
+          this.close();
+          this.navigateAfterLogin(response.requiresOnboarding ?? false);
         } else if (response.status === 'PENDING_EMAIL_REGISTRATION') {
-          this.registrationToken.set(response.registrationToken || null);
-          this.facebookName.set(response.facebookName || '');
-          this.facebookPhotoUrl.set(response.facebookPhotoUrl || '');
-          this.showEmailModal.set(true);
+            this.pendingEmailRegistration.emit({
+            registrationToken: response.registrationToken!,
+            facebookName: response.facebookName ?? '',
+            facebookPhotoUrl: response.facebookPhotoUrl ?? '',
+          });
+          this.close();
         }
         this.isLoading.set(false);
       },
@@ -129,68 +112,37 @@ export class LoginModalComponent implements OnInit {
     });
   }
 
-  onEmailSubmit(email: string): void {
-    const token = this.registrationToken();
-    if (!token) return;
-
-    this.isLoading.set(true);
-
-    this.facebookAuthService.registerEmail(token, email).subscribe({
-      next: () => {
-        alert(`Verification email sent to ${email}. Please check your inbox.`);
-        this.showEmailModal.set(false);
-        this.close();
-        this.isLoading.set(false);
-      },
-      error: (err) => {
-        console.error('Email registration error', err);
-        alert('Failed to register email. Please try again.');
-        this.isLoading.set(false);
-      }
-    });
-  }
-
-  private handleLoginSuccess(requiresOnboarding: boolean): void {
-    this.close();
-
+  private navigateAfterLogin(requiresOnboarding: boolean): void {
     if (requiresOnboarding) {
       this.router.navigate(['/onboarding']);
       return;
     }
-
+ 
     const returnUrl = this.getReturnUrl();
     if (returnUrl) {
       this.router.navigateByUrl(returnUrl);
       return;
     }
-
-    const userRole = this.authService.getRoleFromToken();
-    switch (userRole) {
-      case 'ROLE_PUBLISHER':
-        this.router.navigate(['/publisher/my-events']);
-        break;
-      case 'ROLE_USER':
-        this.router.navigate(['/home']);
-        break;
-      default:
-        this.router.navigate(['/home']);
-        break;
+ 
+    const role = this.authService.getRoleFromToken();
+    if (role === 'ROLE_PUBLISHER') {
+      this.router.navigate(['/publisher/my-events']);
+    } else {
+      this.router.navigate(['/home']);
     }
-  }
-
-  close() {
-    this.closeModal.emit();
   }
 
   private getReturnUrl(): string | null {
     const queryParams = this.router.parseUrl(this.router.url).queryParams;
     const returnUrl = queryParams['returnUrl'];
-
     if (typeof returnUrl === 'string' && returnUrl.startsWith('/')) {
       return returnUrl;
     }
-
     return null;
+  }
+
+  close() {
+    this.closeModal.emit();
   }
 
   private getFacebookAppId(): string {

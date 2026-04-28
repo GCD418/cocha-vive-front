@@ -135,5 +135,18 @@
 </header>
 
 @if (showLoginModal()) {
-  <app-login-modal (closeModal)="closeLoginModal()"></app-login-modal>
+  <app-login-modal
+   (closeModal)="closeLoginModal()"
+   (pendingEmailRegistration)="onPendingEmailRegistration($event)">
+  </app-login-modal>
+}
+
+@if (showEmailModal()) {
+  <app-email-registration-modal
+    [facebookName]="fbName()"
+    [facebookPhotoUrl]="fbPhotoUrl()"
+    [isLoading]="isEmailLoading()"
+    (submitEmail)="onEmailSubmit($event)"
+    (close)="showEmailModal.set(false)">
+  </app-email-registration-modal>
 }

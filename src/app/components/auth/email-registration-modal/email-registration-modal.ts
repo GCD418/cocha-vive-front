@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output, Input  } from '@angular/core';
+import { Component, EventEmitter, Output, Input, inject  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -11,6 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './email-registration-modal.css',
 })
 export class EmailRegistrationModal {
+  private translate = inject(TranslateService);
   @Input() facebookName: string = '';
   @Input() facebookPhotoUrl: string = '';
   @Input() isLoading: boolean = false;
@@ -24,12 +25,12 @@ export class EmailRegistrationModal {
     this.emailError = '';
     
     if (!this.email) {
-      this.emailError = 'Email is required';
+      this.emailError = this.translate.instant('AUTH.EMAIL_ERROR_REQUIRED');
       return;
     }
 
     if (!this.validateEmail(this.email)) {
-      this.emailError = 'Invalid email format';
+      this.emailError = this.translate.instant('AUTH.EMAIL_ERROR_INVALID');
       return;
     }
 

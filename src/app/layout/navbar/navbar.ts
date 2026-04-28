@@ -3,6 +3,8 @@ import { Component, computed, effect, HostListener, inject, OnInit, signal } fro
 import { ActivatedRoute, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { AuthService, CurrentUser } from '../../services/auth/auth.service';
 import { LoginModalComponent } from '../../components/auth/login-modal/login-modal';
+import { EmailRegistrationModal } from '../../components/auth/email-registration-modal/email-registration-modal';
+import { FacebookAuthService } from '../../services/auth/facebook-auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { FeatureToggleService } from '../../services/feature-toggle/feature-toggle.service';
 import { AppFeatures } from '../../models/app-features';
@@ -12,7 +14,7 @@ import { map } from 'rxjs';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, LoginModalComponent, TranslateModule],
+  imports: [RouterLink, RouterLinkActive, CommonModule, LoginModalComponent, EmailRegistrationModal, TranslateModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
@@ -23,7 +25,14 @@ export class Navbar implements OnInit {
   showLoginModal = signal(false); 
   currentUser = signal<CurrentUser | null>(null);
 
+  showEmailModal = signal(false);
+  fbRegistrationToken = signal<string | null>(null);
+  fbName = signal('');
+  fbPhotoUrl = signal('');
+  isEmailLoading = signal(false);
+
   protected authService = inject(AuthService);
+  private facebookAuthService = inject(FacebookAuthService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private translate = inject(TranslateService);
@@ -102,6 +111,52 @@ export class Navbar implements OnInit {
     this.checkUserSession();
   }
 
+  openLoginModal() {
+    this.showLoginModal.set(true);
+    this.closeMobileMenu();
+  }
+ 
+  closeLoginModal() {
+    this.showLoginModal.set(false);
+    this.checkUserSession();
+  }
+
+  onPendingEmailRegistration(data: {
+    registrationToken: string;
+    facebookName: string;
+    facebookPhotoUrl: string;
+  }): void {
+    this.showLoginModal.set(false);
+ 
+    this.fbRegistrationToken.set(data.registrationToken);
+    this.fbName.set(data.facebookName);
+    this.fbPhotoUrl.set(data.facebookPhotoUrl);
+ 
+    this.router.navigate(['/home']).then(() => {
+      this.showEmailModal.set(true);
+    });
+  }
+
+  onEmailSubmit(email: string): void {
+    const token = this.fbRegistrationToken();
+    if (!token) return;
+ 
+    this.isEmailLoading.set(true);
+ 
+    this.facebookAuthService.registerEmail(token, email).subscribe({
+      next: () => {
+        this.isEmailLoading.set(false);
+        this.showEmailModal.set(false);
+        this.fbRegistrationToken.set(null);
+        alert(`Verification email sent to ${email}. Please check your inbox.`);
+      },
+      error: (err) => {
+        console.error('Email registration error', err);
+        this.isEmailLoading.set(false);
+      }
+    });
+  }
+
   toggleLangDropdown(event: Event): void {
     event.stopPropagation();
     this.langDropdownOpen.update((open) => !open);
@@ -135,17 +190,7 @@ export class Navbar implements OnInit {
   onDocumentClick(): void {
     this.userDropdownOpen.set(false);
     this.langDropdownOpen.set(false); 
-  }
-
-  openLoginModal() {
-    this.showLoginModal.set(true);
-    this.closeMobileMenu();
-  }
-
-  closeLoginModal() {
-    this.showLoginModal.set(false);
-    this.checkUserSession(); 
-  }
+  } 
 
   logout() {
     this.authService.logout();

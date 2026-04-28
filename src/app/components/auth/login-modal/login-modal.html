@@ -1,38 +1,32 @@
-<div class="modal-overlay" (click)="close()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    
-    <button class="close-btn" (click)="close()">&times;</button>
-    
-    <div class="modal-header">
-      <h2>{{ 'AUTH.MODAL_TITLE' | translate }}</h2>
-      <p>{{ 'AUTH.MODAL_WELCOME' | translate }}</p>
+<div class="auth-modal-overlay" (click)="close()">
+  <div class="auth-modal-card" (click)="$event.stopPropagation()">
+
+    <button class="auth-modal-close" (click)="close()" aria-label="Cerrar">&times;</button>
+
+    <div class="text-center mb-4">
+      <h2 class="mb-1">{{ 'AUTH.MODAL_TITLE' | translate }}</h2>
+      <p class="text-muted small mb-0">{{ 'AUTH.MODAL_WELCOME' | translate }}</p>
     </div>
 
-    <    <div class="auth-buttons">
-      <div class="google-btn-container">
+    <div class="d-flex flex-column gap-2">
+
+      <div class="google-btn-wrapper">
         <asl-google-signin-button type="standard" size="large"></asl-google-signin-button>
       </div>
 
-      <div class="divider">
-        <span>or</span>
+      <div class="auth-divider">
+        <span>{{ 'AUTH.OR' | translate }}</span>
       </div>
 
-      <button 
-        class="btn btn-outline-primary w-100 facebook-btn"
+      <button
+        class="btn-facebook"
         (click)="loginWithFacebook()"
         [disabled]="isLoading()">
-        <i class="bi bi-facebook me-2"></i>
-        {{ isLoading() ? 'Connecting...' : 'Login with Facebook' }}
+        <i class="bi bi-facebook"></i>
+        {{ isLoading() ? ('AUTH.FACEBOOK_CONNECTING' | translate) : ('AUTH.FACEBOOK_BUTTON' | translate) }}
       </button>
+
     </div>
+
   </div>
 </div>
-
-<app-email-registration-modal 
-  *ngIf="showEmailModal()"
-  [facebookName]="facebookName()"
-  [facebookPhotoUrl]="facebookPhotoUrl()"
-  [isLoading]="isLoading()"
-  (submitEmail)="onEmailSubmit($event)"
-  (close)="showEmailModal.set(false)">
-</app-email-registration-modal>
