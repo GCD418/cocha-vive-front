@@ -52,6 +52,7 @@
     "EMAIL_SENDING": "Enviando...",
     "EMAIL_ERROR_REQUIRED": "O e-mail é obrigatório",
     "EMAIL_ERROR_INVALID": "Formato de e-mail inválido",
+    "EMAIL_SENT_TOAST": "E-mail de verificação enviado! Verifique sua caixa de entrada.",
     "FACEBOOK_VERIFY": {
       "LOADING_TITLE": "Verificando seu e-mail...",
       "LOADING_SUBTITLE": "Isso pode levar alguns segundos, obrigado pela paciência!",

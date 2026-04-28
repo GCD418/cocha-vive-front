@@ -150,3 +150,21 @@
     (close)="showEmailModal.set(false)">
   </app-email-registration-modal>
 }
+
+@if (showSuccessToast()) {
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 10000;">
+    <div class="toast show align-items-center text-bg-success border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body">
+          <i class="bi bi-check-circle-fill me-2"></i>
+          {{ toastMessage() }}
+        </div>
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          (click)="showSuccessToast.set(false)">
+        </button>
+      </div>
+    </div>
+  </div>
+}

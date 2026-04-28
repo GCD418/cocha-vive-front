@@ -31,6 +31,9 @@ export class Navbar implements OnInit {
   fbPhotoUrl = signal('');
   isEmailLoading = signal(false);
 
+  showSuccessToast = signal(false);
+  toastMessage = signal('');
+
   protected authService = inject(AuthService);
   private facebookAuthService = inject(FacebookAuthService);
   private router = inject(Router);
@@ -148,7 +151,9 @@ export class Navbar implements OnInit {
         this.isEmailLoading.set(false);
         this.showEmailModal.set(false);
         this.fbRegistrationToken.set(null);
-        alert(`Verification email sent to ${email}. Please check your inbox.`);
+        this.toastMessage.set(this.translate.instant('AUTH.EMAIL_SENT_TOAST'));
+        this.showSuccessToast.set(true);
+        setTimeout(() => this.showSuccessToast.set(false), 4000);
       },
       error: (err) => {
         console.error('Email registration error', err);

@@ -52,6 +52,7 @@
     "EMAIL_SENDING": "Sending...",
     "EMAIL_ERROR_REQUIRED": "Email is required",
     "EMAIL_ERROR_INVALID": "Invalid email format",
+    "EMAIL_SENT_TOAST": "Verification email sent! Please check your inbox.",
     "FACEBOOK_VERIFY": {
       "LOADING_TITLE": "Verifying email...",
       "LOADING_SUBTITLE": "Please wait while we verify your email address.",
