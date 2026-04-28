@@ -79,6 +79,84 @@
             </li>
         </ul>
       </div>
+      @if (currentUser()) {
+        <div class="notification-wrapper position-relative">
+          <button
+            class="btn btn-link nav-notification-btn position-relative"
+            type="button"
+            [attr.aria-label]="'NAV.NOTIFICATIONS.OPEN' | translate"
+            [attr.aria-expanded]="notificationsPanelOpen()"
+            (click)="toggleNotificationsPanel($event)">
+            <i class="bi bi-bell fs-5" aria-hidden="true"></i>
+            @if (hasUnreadNotifications()) {
+              <span class="nav-notification-badge" aria-live="polite">{{ unreadCount() }}</span>
+            }
+          </button>
+
+          @if (notificationsPanelOpen()) {
+            <section
+              class="dropdown-menu dropdown-menu-end shadow show nav-notification-panel"
+              role="dialog"
+              aria-modal="false"
+              [attr.aria-label]="'NAV.NOTIFICATIONS.TITLE' | translate"
+              (click)="$event.stopPropagation()">
+              <header class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom">
+                <h6 class="mb-0">{{ 'NAV.NOTIFICATIONS.TITLE' | translate }}</h6>
+                <button
+                  class="btn btn-link btn-sm text-decoration-none"
+                  type="button"
+                  [disabled]="!hasUnreadNotifications()"
+                  [attr.aria-label]="'NAV.NOTIFICATIONS.MARK_ALL_READ' | translate"
+                  (click)="markAllNotificationsAsRead()">
+                  {{ 'NAV.NOTIFICATIONS.MARK_ALL_READ' | translate }}
+                </button>
+              </header>
+
+              <div class="nav-notification-body">
+                @if (notificationsLoading()) {
+                  <div class="d-flex align-items-center justify-content-center py-4 text-muted gap-2">
+                    <div class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></div>
+                    <span>{{ 'NAV.NOTIFICATIONS.LOADING' | translate }}</span>
+                  </div>
+                } @else if (notificationsError()) {
+                  <div class="px-3 py-3">
+                    <p class="mb-2 text-danger">{{ 'NAV.NOTIFICATIONS.ERROR' | translate }}</p>
+                    <button class="btn btn-outline-secondary btn-sm" type="button" (click)="retryNotificationsLoad($event)">
+                      {{ 'NAV.NOTIFICATIONS.RETRY' | translate }}
+                    </button>
+                  </div>
+                } @else if (notifications().length === 0) {
+                  <p class="text-muted mb-0 px-3 py-3">{{ 'NAV.NOTIFICATIONS.EMPTY' | translate }}</p>
+                } @else {
+                  <ul class="list-group list-group-flush" role="list">
+                    @for (notification of notifications(); track notification.id) {
+                      <li class="list-group-item p-0 border-0" role="listitem">
+                        <button
+                          class="notification-item w-100 text-start border-0 bg-transparent"
+                          [class.notification-item-unread]="notification.unread"
+                          type="button"
+                          [attr.aria-label]="(notification.title || ('NAV.NOTIFICATIONS.ITEM' | translate)) + ' - ' + (notification.createdAt | date:'d/M/yyyy HH:mm')"
+                          (click)="onNotificationOpen(notification)">
+                          <div class="d-flex align-items-start justify-content-between gap-2">
+                            <p class="mb-1 fw-semibold text-wrap">{{ notification.title }}</p>
+                            @if (notification.unread) {
+                              <span class="notification-unread-dot" [attr.aria-label]="'NAV.NOTIFICATIONS.UNREAD' | translate"></span>
+                            }
+                          </div>
+                          @if (notification.shortDescription) {
+                            <p class="mb-1 text-muted small text-wrap">{{ notification.shortDescription }}</p>
+                          }
+                          <small class="text-muted">{{ notification.createdAt | date:'d/M/yyyy HH:mm' }}</small>
+                        </button>
+                      </li>
+                    }
+                  </ul>
+                }
+              </div>
+            </section>
+          }
+        </div>
+      }
         @if (currentUser()) {
           <div class="dropdown">
             <button
