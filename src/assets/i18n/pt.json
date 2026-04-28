@@ -18,7 +18,18 @@
     "ROLES.ADMIN": "Administrador",
     "ROLES.SUPERADMIN": "SUPERADMIN",
     "PUBLISHER_REQUEST": "Candidate-se para se tornar um editor.",
-    "SUPERADMIN_ROLE_MANAGEMENT": "Gerenciar Administradores"
+    "SUPERADMIN_ROLE_MANAGEMENT": "Gerenciar Administradores",
+    "NOTIFICATIONS": {
+      "TITLE": "Notificações",
+      "OPEN": "Abrir notificações",
+      "MARK_ALL_READ": "Marcar todas como lidas",
+      "LOADING": "Carregando notificações...",
+      "ERROR": "Não foi possível carregar as notificações.",
+      "RETRY": "Tentar novamente",
+      "EMPTY": "Você não tem notificações por enquanto.",
+      "UNREAD": "Não lida",
+      "ITEM": "Notificação"
+    }
   },
   "FOOTER": {
     "KICKER": "Contato",
@@ -496,6 +507,7 @@
   },
   "MY_PUBLISHER_REQUEST": {
     "TITLE": "Minha Solicitação de Publicador",
+    "LOADING": "Carregando sua solicitação...",
     "NO_REQUEST": "Você ainda não enviou uma solicitação.",
     "SEND_REQUEST": "Enviar solicitação"
   }

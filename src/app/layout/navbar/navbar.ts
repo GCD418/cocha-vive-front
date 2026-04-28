@@ -10,6 +10,8 @@ import { FeatureToggleService } from '../../services/feature-toggle/feature-togg
 import { AppFeatures } from '../../models/app-features';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import { NotificationService } from '../../services/notification-service/notification.service';
+import { NotificationItem } from '../../models/notification.model';
 
 @Component({
   selector: 'app-navbar',
@@ -22,6 +24,7 @@ export class Navbar implements OnInit {
   mobileMenuOpen = signal(false);
   userDropdownOpen = signal(false); 
   langDropdownOpen = signal(false);
+  notificationsPanelOpen = signal(false);
   showLoginModal = signal(false); 
   currentUser = signal<CurrentUser | null>(null);
 
@@ -33,6 +36,10 @@ export class Navbar implements OnInit {
 
   showSuccessToast = signal(false);
   toastMessage = signal('');
+  notifications = signal<NotificationItem[]>([]);
+  notificationsLoading = signal(false);
+  notificationsError = signal(false);
+  unreadCount = signal(0);
 
   protected authService = inject(AuthService);
   private facebookAuthService = inject(FacebookAuthService);
@@ -40,6 +47,7 @@ export class Navbar implements OnInit {
   private route = inject(ActivatedRoute);
   private translate = inject(TranslateService);
   private featureToggleService = inject(FeatureToggleService);
+  private notificationService = inject(NotificationService);
 
   private loginQueryParam = toSignal(
     this.route.queryParamMap.pipe(map((params) => params.get('login'))),
@@ -105,22 +113,14 @@ export class Navbar implements OnInit {
     });
   }
 
+  hasUnreadNotifications = computed(() => this.unreadCount() > 0);
+
   get currentLangLabel(): string {
     return (this.translate.getCurrentLang()|| 'es').toUpperCase();
   }
 
   ngOnInit() {
     document.body.classList.add('scrolled');
-    this.checkUserSession();
-  }
-
-  openLoginModal() {
-    this.showLoginModal.set(true);
-    this.closeMobileMenu();
-  }
- 
-  closeLoginModal() {
-    this.showLoginModal.set(false);
     this.checkUserSession();
   }
 
@@ -177,11 +177,22 @@ export class Navbar implements OnInit {
   checkUserSession() {
     if (this.authService.isLoggedIn()) {
       this.authService.getCurrentUser().subscribe({
-        next: (user) => { this.currentUser.set(user); },
-        error: () => { this.currentUser.set(null); }
+        next: (user) => {
+          this.currentUser.set(user);
+          if (user) {
+            this.loadUnreadCount();
+          } else {
+            this.resetNotificationsState();
+          }
+        },
+        error: () => {
+          this.currentUser.set(null);
+          this.resetNotificationsState();
+        }
       });
     } else {
       this.currentUser.set(null);
+      this.resetNotificationsState();
     }
   }
 
@@ -189,18 +200,104 @@ export class Navbar implements OnInit {
     event.stopPropagation();
     this.userDropdownOpen.update((open) => !open);
     this.langDropdownOpen.set(false); 
+    this.notificationsPanelOpen.set(false);
+  }
+
+  toggleNotificationsPanel(event: Event): void {
+    event.stopPropagation();
+
+    const willOpen = !this.notificationsPanelOpen();
+    this.notificationsPanelOpen.set(willOpen);
+    this.userDropdownOpen.set(false);
+    this.langDropdownOpen.set(false);
+
+    if (willOpen) {
+      this.loadNotifications();
+    }
+  }
+
+  onNotificationOpen(notification: NotificationItem): void {
+    if (!notification.unread) {
+      return;
+    }
+
+    const previousNotifications = this.notifications();
+    const previousUnreadCount = this.unreadCount();
+
+    this.notifications.update((current) =>
+      current.map((item) =>
+        item.id === notification.id
+          ? { ...item, unread: false }
+          : item
+      )
+    );
+    this.unreadCount.set(Math.max(0, previousUnreadCount - 1));
+
+    this.notificationService.markAsRead(notification.id).subscribe({
+      error: () => {
+        this.notifications.set(previousNotifications);
+        this.unreadCount.set(previousUnreadCount);
+        this.notificationsError.set(true);
+      },
+    });
+  }
+
+  markAllNotificationsAsRead(): void {
+    if (!this.notifications().some((notification) => notification.unread)) {
+      return;
+    }
+
+    const previousNotifications = this.notifications();
+    const previousUnreadCount = this.unreadCount();
+
+    this.notifications.update((current) =>
+      current.map((notification) => ({ ...notification, unread: false }))
+    );
+    this.unreadCount.set(0);
+
+    this.notificationService.markAllAsRead().subscribe({
+      error: () => {
+        this.notifications.set(previousNotifications);
+        this.unreadCount.set(previousUnreadCount);
+        this.notificationsError.set(true);
+      },
+    });
+  }
+
+  retryNotificationsLoad(event?: Event): void {
+    event?.stopPropagation();
+    this.loadNotifications();
   }
 
   @HostListener('document:click')
   onDocumentClick(): void {
     this.userDropdownOpen.set(false);
     this.langDropdownOpen.set(false); 
-  } 
+    this.notificationsPanelOpen.set(false);
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscapePress(): void {
+    this.userDropdownOpen.set(false);
+    this.langDropdownOpen.set(false);
+    this.notificationsPanelOpen.set(false);
+  }
+
+  openLoginModal() {
+    this.showLoginModal.set(true);
+    this.closeMobileMenu();
+  }
+
+  closeLoginModal() {
+    this.showLoginModal.set(false);
+    this.checkUserSession(); 
+  }
 
   logout() {
     this.authService.logout();
     this.currentUser.set(null);
     this.userDropdownOpen.set(false);
+    this.resetNotificationsState();
     this.router.navigate(['/home']);
   }
 
@@ -257,6 +354,48 @@ export class Navbar implements OnInit {
         return null;
       })
       .filter((roleName): roleName is string => Boolean(roleName));
+  }
+
+  private loadUnreadCount(): void {
+    this.notificationService.getUnreadCount().subscribe({
+      next: (count) => {
+        this.unreadCount.set(Math.max(0, Number(count) || 0));
+      },
+      error: () => {
+        this.unreadCount.set(0);
+      },
+    });
+  }
+
+  private loadNotifications(): void {
+    this.notificationsLoading.set(true);
+    this.notificationsError.set(false);
+
+    this.notificationService.getMyNotifications().subscribe({
+      next: (notifications) => {
+        const sorted = [...notifications].sort((a, b) => {
+          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        });
+
+        this.notifications.set(sorted);
+        this.notificationsLoading.set(false);
+        this.notificationsError.set(false);
+        this.unreadCount.set(sorted.filter((notification) => notification.unread).length);
+      },
+      error: () => {
+        this.notifications.set([]);
+        this.notificationsLoading.set(false);
+        this.notificationsError.set(true);
+      },
+    });
+  }
+
+  private resetNotificationsState(): void {
+    this.notifications.set([]);
+    this.notificationsLoading.set(false);
+    this.notificationsError.set(false);
+    this.notificationsPanelOpen.set(false);
+    this.unreadCount.set(0);
   }
   
 }

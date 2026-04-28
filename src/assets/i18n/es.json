@@ -18,7 +18,18 @@
     "ROLES.ADMIN": "Administrador",
     "ROLES.SUPERADMIN": "SUPERADMIN",
     "PUBLISHER_REQUEST": "Solicitar ser Publicador",
-    "SUPERADMIN_ROLE_MANAGEMENT": "Gestionar Administradores"
+    "SUPERADMIN_ROLE_MANAGEMENT": "Gestionar Administradores",
+    "NOTIFICATIONS": {
+      "TITLE": "Notificaciones",
+      "OPEN": "Abrir notificaciones",
+      "MARK_ALL_READ": "Marcar todas leídas",
+      "LOADING": "Cargando notificaciones...",
+      "ERROR": "No se pudieron cargar las notificaciones.",
+      "RETRY": "Reintentar",
+      "EMPTY": "No tienes notificaciones por ahora.",
+      "UNREAD": "No leída",
+      "ITEM": "Notificación"
+    }
   },
   "FOOTER": {
     "KICKER": "Contacto",
@@ -494,6 +505,7 @@
   },
   "MY_PUBLISHER_REQUEST": {
     "TITLE": "Mi Solicitud de Publicador",
+    "LOADING": "Cargando tu solicitud...",
     "NO_REQUEST": "Aún no has enviado una solicitud.",
     "SEND_REQUEST": "Enviar solicitud"
   }

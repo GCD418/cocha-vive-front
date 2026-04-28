@@ -50,3 +50,67 @@
   font-weight: 700;
   font-family: var(--heading-font);
 }
+
+.nav-notification-btn {
+  color: var(--nav-color);
+  padding: 0 4px;
+  text-decoration: none;
+}
+
+.nav-notification-btn:hover,
+.nav-notification-btn:focus {
+  color: var(--nav-hover-color);
+  box-shadow: none;
+}
+
+.nav-notification-badge {
+  position: absolute;
+  top: -2px;
+  right: -8px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
+.nav-notification-panel {
+  width: min(92vw, 360px);
+  margin-top: 10px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.nav-notification-body {
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 12px 14px;
+  transition: background-color 0.2s ease;
+}
+
+.notification-item:hover,
+.notification-item:focus {
+  background-color: color-mix(in srgb, var(--accent-color), white 93%);
+  outline: none;
+}
+
+.notification-item-unread {
+  background-color: color-mix(in srgb, var(--accent-color), white 95%);
+}
+
+.notification-unread-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  margin-top: 7px;
+  flex-shrink: 0;
+}
