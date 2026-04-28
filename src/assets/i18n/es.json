@@ -41,7 +41,27 @@
     "LOGIN_SUBTITLE": "Inicia sesión con tu cuenta de Google",
     "GOOGLE_BUTTON": "Continuar con Google",
     "MODAL_TITLE": "Iniciar Sesión",
-    "MODAL_WELCOME": "Bienvenido a Cocha Vive"
+    "MODAL_WELCOME": "Bienvenido a Cocha Vive",
+    "OR": "o",
+    "FACEBOOK_BUTTON": "Continuar con Facebook",
+    "FACEBOOK_CONNECTING": "Conectando...",
+    "EMAIL_MODAL_TITLE": "Un último paso",
+    "EMAIL_MODAL_SUBTITLE": "Ingresa tu correo para activar tu cuenta",
+    "EMAIL_PLACEHOLDER": "tu@correo.com",
+    "EMAIL_SUBMIT": "Enviar correo de verificación",
+    "EMAIL_SENDING": "Enviando...",
+    "EMAIL_ERROR_REQUIRED": "El correo es obligatorio",
+    "EMAIL_ERROR_INVALID": "Formato de correo inválido",
+    "FACEBOOK_VERIFY": {
+      "LOADING_TITLE": "Verificando tu email...",
+      "LOADING_SUBTITLE": "Por favor espera un momento.",
+      "SUCCESS_TITLE": "¡Email verificado!",
+      "SUCCESS_SUBTITLE": "Tu cuenta ha sido creada. Redirigiendo...",
+      "ERROR_TITLE": "Error de verificación",
+      "ERROR_NO_TOKEN": "Token de verificación no encontrado.",
+      "ERROR_INVALID": "El enlace de verificación es inválido o ha expirado.",
+      "BACK_HOME": "Volver al inicio"
+    }
   },
   "CATEGORIES": {
     "TITLE": "Categorías",

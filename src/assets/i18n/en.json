@@ -41,7 +41,27 @@
     "LOGIN_SUBTITLE": "Log in with your Google account",
     "GOOGLE_BUTTON": "Continue with Google",
     "MODAL_TITLE": "Log In",
-    "MODAL_WELCOME": "Welcome to CochaVive"
+    "MODAL_WELCOME": "Welcome to CochaVive",
+    "OR": "or",
+    "FACEBOOK_BUTTON": "Continue with Facebook",
+    "FACEBOOK_CONNECTING": "Connecting...",
+    "EMAIL_MODAL_TITLE": "One last step",
+    "EMAIL_MODAL_SUBTITLE": "Enter your email to activate your account",
+    "EMAIL_PLACEHOLDER": "your@email.com",
+    "EMAIL_SUBMIT": "Send verification email",
+    "EMAIL_SENDING": "Sending...",
+    "EMAIL_ERROR_REQUIRED": "Email is required",
+    "EMAIL_ERROR_INVALID": "Invalid email format",
+    "FACEBOOK_VERIFY": {
+      "LOADING_TITLE": "Verifying email...",
+      "LOADING_SUBTITLE": "Please wait while we verify your email address.",
+      "SUCCESS_TITLE": "Email verified successfully!",
+      "SUCCESS_SUBTITLE": "Your email has been verified. Redirecting to home page...",
+      "ERROR_TITLE": "Verification failed",
+      "ERROR_NO_TOKEN": "Verification token not found.",
+      "ERROR_INVALID": "The verification link is invalid or has expired.",
+      "BACK_HOME": "Back to Home"
+    }
   },
   "CATEGORIES": {
     "TITLE": "Categories",
