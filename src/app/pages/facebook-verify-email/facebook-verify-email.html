@@ -1,0 +1,47 @@
+<div class="container d-flex justify-content-center align-items-center"
+     style="min-height: 80vh;">
+  <div class="text-center p-4">
+
+    @if (status() === 'loading') {
+      <div class="spinner-border mb-3" 
+           style="color: var(--accent-color);" 
+           role="status">
+        <span class="visually-hidden">
+          {{ 'AUTH.FACEBOOK_VERIFY.LOADING_TITLE' | translate }}
+        </span>
+      </div>
+      <h4 class="mb-2" style="color: var(--heading-color);">
+        {{ 'AUTH.FACEBOOK_VERIFY.LOADING_TITLE' | translate }}
+      </h4>
+      <p style="color: color-mix(in srgb, var(--default-color), transparent 30%);">
+        {{ 'AUTH.FACEBOOK_VERIFY.LOADING_SUBTITLE' | translate }}
+      </p>
+    }
+
+    @if (status() === 'success') {
+      <i class="bi bi-check-circle-fill mb-3" 
+         style="font-size: 4rem; color: #059652;"></i>
+      <h4 class="mb-2" style="color: var(--heading-color);">
+        {{ 'AUTH.FACEBOOK_VERIFY.SUCCESS_TITLE' | translate }}
+      </h4>
+      <p style="color: color-mix(in srgb, var(--default-color), transparent 30%);">
+        {{ 'AUTH.FACEBOOK_VERIFY.SUCCESS_SUBTITLE' | translate }}
+      </p>
+    }
+
+    @if (status() === 'error') {
+      <i class="bi bi-x-circle-fill mb-3" 
+         style="font-size: 4rem; color: var(--accent-color);"></i>
+      <h4 class="mb-2" style="color: var(--heading-color);">
+        {{ 'AUTH.FACEBOOK_VERIFY.ERROR_TITLE' | translate }}
+      </h4>
+      <p style="color: color-mix(in srgb, var(--default-color), transparent 30%);">
+        {{ 'AUTH.FACEBOOK_VERIFY.LOADING_SUBTITLE' | translate }}
+      </p>
+      <button class="cta-btn border-0 mt-3" (click)="router.navigate(['/home'])">
+        {{ 'AUTH.FACEBOOK_VERIFY.BACK_HOME' | translate }}
+      </button>
+    }
+
+  </div>
+</div>
