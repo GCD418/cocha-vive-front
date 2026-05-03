@@ -15,6 +15,7 @@ export class EmailRegistrationModal {
   @Input() facebookName: string = '';
   @Input() facebookPhotoUrl: string = '';
   @Input() isLoading: boolean = false;
+  @Input() serverError: string = '';
   @Output() submitEmail = new EventEmitter<string>();
   @Output() close = new EventEmitter<void>();
 

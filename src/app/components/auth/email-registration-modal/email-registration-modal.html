@@ -37,6 +37,9 @@
         @if (emailError) {
           <div class="text-danger mt-1" style="font-size: 0.8rem;">{{ emailError }}</div>
         }
+        @if (serverError) {
+          <div class="text-danger mt-1" style="font-size: 0.8rem;">{{ serverError }}</div>
+        }
       </div>
 
       <button

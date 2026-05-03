@@ -33,6 +33,7 @@ export class Navbar implements OnInit {
   fbName = signal('');
   fbPhotoUrl = signal('');
   isEmailLoading = signal(false);
+  fbServerError = signal('');
 
   showSuccessToast = signal(false);
   toastMessage = signal('');
@@ -134,6 +135,7 @@ export class Navbar implements OnInit {
     this.fbRegistrationToken.set(data.registrationToken);
     this.fbName.set(data.facebookName);
     this.fbPhotoUrl.set(data.facebookPhotoUrl);
+    this.fbServerError.set('');
  
     this.router.navigate(['/home']).then(() => {
       this.showEmailModal.set(true);
@@ -151,6 +153,7 @@ export class Navbar implements OnInit {
         this.isEmailLoading.set(false);
         this.showEmailModal.set(false);
         this.fbRegistrationToken.set(null);
+        this.fbServerError.set('');  
         this.toastMessage.set(this.translate.instant('AUTH.EMAIL_SENT_TOAST'));
         this.showSuccessToast.set(true);
         setTimeout(() => this.showSuccessToast.set(false), 4000);
@@ -158,6 +161,11 @@ export class Navbar implements OnInit {
       error: (err) => {
         console.error('Email registration error', err);
         this.isEmailLoading.set(false);
+        if (err.status === 400) {
+          this.fbServerError.set(
+            this.translate.instant('AUTH.EMAIL_ERROR_ALREADY_REGISTERED')
+          );
+        }
       }
     });
   }

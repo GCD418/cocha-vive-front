@@ -224,6 +224,7 @@
     [facebookName]="fbName()"
     [facebookPhotoUrl]="fbPhotoUrl()"
     [isLoading]="isEmailLoading()"
+    [serverError]="fbServerError()"
     (submitEmail)="onEmailSubmit($event)"
     (close)="showEmailModal.set(false)">
   </app-email-registration-modal>

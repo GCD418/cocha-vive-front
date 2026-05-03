@@ -64,6 +64,7 @@
     "EMAIL_ERROR_REQUIRED": "El correo es obligatorio",
     "EMAIL_ERROR_INVALID": "Formato de correo inválido",
     "EMAIL_SENT_TOAST": "¡Correo enviado! Revisa tu bandeja de entrada.",
+    "EMAIL_ERROR_ALREADY_REGISTERED": "Este correo ya está registrado, intenta con otro.",
     "FACEBOOK_VERIFY": {
       "LOADING_TITLE": "Verificando tu email...",
       "LOADING_SUBTITLE": "Por favor espera un momento.",
