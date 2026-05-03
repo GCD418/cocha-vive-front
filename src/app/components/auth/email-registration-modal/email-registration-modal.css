@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 10000;
   animation: authOverlayIn 0.2s ease;
 }
 
@@ -15,13 +15,12 @@
   to   { opacity: 1; }
 }
 
-
 .auth-modal-card {
   background: var(--surface-color);
   border-radius: 12px;
   padding: 2rem 2rem 1.75rem;
   width: 90%;
-  max-width: 380px;
+  max-width: 400px;
   position: relative;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
   animation: authModalIn 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
@@ -47,54 +46,43 @@
 }
 .auth-modal-close:hover { color: var(--accent-color); }
 
-.btn-facebook {
+.fb-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-color);
+}
+
+.fb-avatar-placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-color), transparent 85%);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  width: 100%;
-  height: 40px;
+  font-size: 1.4rem;
+  color: var(--accent-color);
+}
+
+.email-input {
+  font-size: 14px;
+  padding: 10px 15px;
+  box-shadow: none;
   border-radius: 4px;
-  border: 1px solid #1877f2;
-  background: #fff;
-  color: #1877f2;
-  font-size: 0.875rem;
-  font-weight: 600;
-  font-family: var(--default-font);
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-  white-space: nowrap;
-}
-.btn-facebook:hover:not(:disabled) {
-  background: #1877f2;
-  color: #fff;
-}
-.btn-facebook:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-.google-btn-wrapper {
+  color: var(--default-color);
+  background-color: var(--surface-color);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
   width: 100%;
-  display: flex;
-  justify-content: center;
+  transition: border-color 0.2s;
+  outline: none;
 }
-.google-btn-wrapper asl-google-signin-button { width: 100% !important; }
-.google-btn-wrapper ::ng-deep > div,
-.google-btn-wrapper ::ng-deep iframe { width: 100% !important; min-width: unset !important; }
-
-.auth-divider {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin: 0.75rem 0;
-  color: color-mix(in srgb, var(--default-color), transparent 55%);
-  font-size: 0.8rem;
+.email-input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color), transparent 85%);
 }
-.auth-divider::before,
-.auth-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: color-mix(in srgb, var(--default-color), transparent 82%);
+.email-input:disabled {
+  background: color-mix(in srgb, var(--surface-color), transparent 20%);
+  cursor: not-allowed;
 }
