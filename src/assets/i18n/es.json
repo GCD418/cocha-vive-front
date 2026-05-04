@@ -41,7 +41,8 @@
       "PLACEHOLDER": "Escribe aquí tu comentario o duda...",
       "HELP": "Al enviar, se abrirá tu correo con el mensaje listo para mandar.",
       "BUTTON": "Enviar por correo"
-    }
+    },
+    "PRIVACY_POLICY_LINK": "Política de Privacidad"
   },
   "HERO": {
     "WELCOME": "Bienvenido a",
@@ -509,5 +510,19 @@
     "LOADING": "Cargando tu solicitud...",
     "NO_REQUEST": "Aún no has enviado una solicitud.",
     "SEND_REQUEST": "Enviar solicitud"
+  },
+  "PRIVACY_POLICY": {
+    "TITLE": "Política de Privacidad",
+    "LAST_UPDATED": "Última actualización: Mayo 2026",
+    "SECTION_1_TITLE": "1. Información que recopilamos",
+    "SECTION_1_CONTENT": "Al iniciar sesión con Facebook, recopilamos tu nombre y foto de perfil públicos. También recopilamos tu correo electrónico para crear tu cuenta en CochaVive.",
+    "SECTION_2_TITLE": "2. Cómo usamos tu información",
+    "SECTION_2_CONTENT": "Usamos tu información únicamente para crear y gestionar tu cuenta en CochaVive y para mostrarte eventos relevantes en Cochabamba, Bolivia.",
+    "SECTION_3_TITLE": "3. Compartir información",
+    "SECTION_3_CONTENT": "No vendemos ni compartimos tu información personal con terceros.",
+    "SECTION_4_TITLE": "4. Eliminación de datos",
+    "SECTION_4_CONTENT": "Puedes solicitar la eliminación de tus datos contactándonos en gforce4182@gmail.com.",
+    "SECTION_5_TITLE": "5. Contacto",
+    "SECTION_5_CONTENT": "Para cualquier consulta sobre privacidad escríbenos a gforce4182@gmail.com."
   }
 }

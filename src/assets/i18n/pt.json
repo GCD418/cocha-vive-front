@@ -41,7 +41,8 @@
       "PLACEHOLDER": "Escreva seu comentário ou dúvida aqui...",
       "HELP": "Ao enviar, seu cliente de e-mail será aberto com a mensagem pronta.",
       "BUTTON": "Enviar por e-mail"
-    }
+    },
+    "PRIVACY_POLICY_LINK": "Política de Privacidade"
   },
   "HERO": {
     "WELCOME": "Bem-vindo ao",
@@ -510,5 +511,19 @@
     "LOADING": "Carregando sua solicitação...",
     "NO_REQUEST": "Você ainda não enviou uma solicitação.",
     "SEND_REQUEST": "Enviar solicitação"
+  },
+  "PRIVACY_POLICY": {
+    "TITLE": "Política de Privacidade",
+    "LAST_UPDATED": "Última atualização: Maio 2026",
+    "SECTION_1_TITLE": "1. Informações que coletamos",
+    "SECTION_1_CONTENT": "Ao fazer login com o Facebook, coletamos seu nome público e foto de perfil. Também coletamos seu endereço de e-mail para criar sua conta no CochaVive.",
+    "SECTION_2_TITLE": "2. Como usamos suas informações",
+    "SECTION_2_CONTENT": "Usamos suas informações apenas para criar e gerenciar sua conta no CochaVive e para mostrar eventos relevantes em Cochabamba, Bolívia.",
+    "SECTION_3_TITLE": "3. Compartilhamento de informações",
+    "SECTION_3_CONTENT": "Não vendemos nem compartilhamos suas informações pessoais com terceiros.",
+    "SECTION_4_TITLE": "4. Exclusão de dados",
+    "SECTION_4_CONTENT": "Você pode solicitar a exclusão dos seus dados entrando em contato pelo e-mail gforce4182@gmail.com.",
+    "SECTION_5_TITLE": "5. Contato",
+    "SECTION_5_CONTENT": "Para qualquer dúvida sobre privacidade, escreva para gforce4182@gmail.com."
   }
 }

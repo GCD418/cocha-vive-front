@@ -66,5 +66,11 @@ export const routes: Routes = [
     loadComponent: () =>
         import('./pages/facebook-verify-email/facebook-verify-email')
         .then(m => m.FacebookVerifyEmail)
-},
+    },
+    {
+    path: 'privacy-policy',
+    loadComponent: () =>
+        import('./pages/privacy-policy/privacy-policy')
+        .then(m => m.PrivacyPolicy)
+    },
 ];

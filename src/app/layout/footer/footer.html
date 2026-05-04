@@ -13,6 +13,13 @@
             <a class="footer-pill-email" [href]="'mailto:' + contactEmail">{{ contactEmail }}</a>
           </div>
         </div>
+
+        <div class="mt-4">
+          <a routerLink="/privacy-policy" class="text-white-50 small">
+            <i class="bi bi-shield-check me-1"></i>
+            {{ 'FOOTER.PRIVACY_POLICY_LINK' | translate }}
+          </a>
+        </div>
       </div>
 
       <div class="col-lg-7">
