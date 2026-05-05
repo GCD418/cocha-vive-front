@@ -19,7 +19,7 @@
                   {{ 'NAV.ADMIN_EVENTS' | translate }}
                 </a>
               </li>
-            } 
+            }
             @if (authService.actualRole() === 'ROLE_PUBLISHER') {
               <li>
                 <a routerLink="/publisher/my-events" routerLinkActive="active" (click)="closeMobileMenu()">
@@ -57,10 +57,10 @@
         </i>
     </nav>
 
-    <div class="d-flex align-items-center ms-auto gap-3">
-      <div class="dropdown">
-        <button 
-          class="cta-btn border-0 d-flex align-items-center gap-2 dropdown-toggle" 
+    <div class="d-flex align-items-center nav-actions">
+      <div class="dropdown ">
+        <button
+          class="cta-btn border-0 d-flex align-items-center gap-2 dropdown-toggle"
           type="button"
           (click)="toggleLangDropdown($event)">
           <i class="bi bi-globe"></i>
@@ -171,8 +171,8 @@
               <li>
                 <div class="d-flex align-items-center gap-3 px-3 py-2">
                   @if (currentUser()!.photoUrl) {
-                    <img [src]="currentUser()!.photoUrl" 
-                        [alt]="displayName()" 
+                    <img [src]="currentUser()!.photoUrl"
+                        [alt]="displayName()"
                         class="nav-user-avatar"
                         referrerpolicy="no-referrer">
                   } @else {
