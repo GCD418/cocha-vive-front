@@ -1,10 +1,10 @@
 <section id="events" class="events-section section-with-bg py-5">
   <div class="container">
-    <div class="section-header text-center mb-5">
+    <div class="section-header section-title text-center">
       <h2>{{ 'UPCOMING_EVENTS.TITLE' | translate }}</h2>
       <p>{{ 'UPCOMING_EVENTS.SUBTITLE' | translate }}</p>
     </div>
-    
+
     @if (featureService.isEnabled(AppFeatures.VIEW_UPCOMING_EVENTS)) {
 
     <div class="row g-4">

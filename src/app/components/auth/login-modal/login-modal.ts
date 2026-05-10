@@ -6,6 +6,8 @@ import { FacebookAuthService } from '../../../services/auth/facebook-auth.servic
 import { TranslateModule } from '@ngx-translate/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
+import { FeatureToggleService } from '../../../services/feature-toggle/feature-toggle.service';
+import { AppFeatures } from '../../../models/app-features';
 
 declare global {
   interface Window {
@@ -24,6 +26,8 @@ export class LoginModalComponent implements OnInit {
   private facebookAuthService = inject(FacebookAuthService);
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
+  public featureService = inject(FeatureToggleService);
+  public readonly AppFeatures = AppFeatures;
 
   @Output() closeModal = new EventEmitter<void>();
 

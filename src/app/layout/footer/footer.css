@@ -91,3 +91,62 @@
     margin-top: 2rem;
   }
 }
+
+@media (max-width: 576px) {
+
+  .footer-title {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  .footer-copy {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .footer-kicker {
+    font-size: 0.7rem;
+  }
+
+  .footer-contact {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    padding-top: 0;
+  }
+
+  .footer-contact .row {
+    gap: 1rem;
+  }
+
+  .footer-contact .container {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  .footer-contact-pill {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border-radius: 0.9rem;
+  }
+
+  .footer-contact-pill i {
+    font-size: 1rem;
+  }
+
+  .footer-pill-email {
+    font-size: 0.92rem;
+  }
+
+  .footer-textarea {
+    min-height: 120px;
+    font-size: 0.95rem;
+  }
+
+  .footer-help {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .footer-card .btn {
+    width: 100%;
+  }
+}
