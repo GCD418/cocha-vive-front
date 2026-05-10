@@ -841,10 +841,10 @@ section,
 }
 
 .section-title h2 {
-  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
   font-weight: 700;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
   position: relative;
   line-height: 1.2;
 }
@@ -866,8 +866,33 @@ section,
   font-size: clamp(1rem, 1.5vw, 1.2rem);
   line-height: 1.6;
   max-width: 700px;
-  margin: 0 auto;
+  margin: auto;
   color: rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 576px) {
+
+  .section-title {
+    padding-bottom: 24px;
+    margin-bottom: 5px !important;
+  }
+
+  .section-title h2 {
+    font-size: 1.35rem;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+  }
+
+  .section-title h2::after {
+    width: 40px;
+    height: 2px;
+  }
+
+  .section-title p {
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
 }
 
 /*--------------------------------------------------------------
