@@ -32,7 +32,6 @@
       "ITEM": "Notificación"
     }
   },
-
   "TICKETS": {
     "LIST": {
       "TITLE": "Mis tickets",
@@ -57,7 +56,7 @@
         "RETRY": "Reintentar"
       },
       "EMPTY": {
-        "TITLE": "Todavía no tenés tickets",
+        "TITLE": "Todavía no tienes tickets",
         "SUBTITLE": "Cuando compres una entrada, la vas a ver acá.",
         "CTA": "Explorar eventos"
       },
@@ -217,7 +216,6 @@
       "CLICK_TO_CHANGE": "Clic para cambiar",
       "SELECT_ON_MAP": "Seleccionar en el mapa",
       "TAGS": "Etiquetas"
-        
     },
     "PLACEHOLDERS": {
       "TITLE": "Ej: Festival de Danza Contemporánea",
@@ -481,17 +479,17 @@
   },
   "EVENT_MAP_MODAL": {
     "LABELS": {
-        "LOCATION": "Ubicación del evento",
-        "CHARGING_MAP": "Cargando mapa...",
-        "UNAVAILABLE_LOCATION": "No hay ubicación disponible para este evento.",
-        "CLOSE": "Cerrar",
-        "SELECT_LOCATION": "Seleccionar ubicación",
-        "MOVE_MARKET": "Haz clic en el mapa para mover el marcador",
-        "CANCEL": "Cancelar",
-        "CONFIRM": "Confirmar ubicación"
+      "LOCATION": "Ubicación del evento",
+      "CHARGING_MAP": "Cargando mapa...",
+      "UNAVAILABLE_LOCATION": "No hay ubicación disponible para este evento.",
+      "CLOSE": "Cerrar",
+      "SELECT_LOCATION": "Seleccionar ubicación",
+      "MOVE_MARKET": "Haz clic en el mapa para mover el marcador",
+      "CANCEL": "Cancelar",
+      "CONFIRM": "Confirmar ubicación"
     }
   },
-  "ADMIN_EVENTS":{
+  "ADMIN_EVENTS": {
     "TITLE": "Administrar Eventos",
     "PLACEHOLDERS.SEARCH": "Buscar por título o anunciante...",
     "FILTERS.CLEAR": "Quitar filtros",
@@ -512,52 +510,52 @@
       "VIEW": "Ver detalles",
       "APPROVE": "Aprobar",
       "REJECT": "Rechazar"
-     },
-     "TOAST": {
+    },
+    "TOAST": {
       "APPROVED": "Evento aprobado exitosamente.",
       "REJECTED": "Evento rechazado exitosamente.",
       "ERROR": "Ocurrió un error. Por favor, intenta nuevamente."
-     }
+    }
   },
-    "SUPERADMIN_ROLE_MANAGEMENT": {
-      "TITLE": "Gestión de Administradores",
-      "SUBTITLE": "Supervisa los privilegios de administración y asigna roles sin salir de esta vista.",
-      "LOADING": "Cargando datos de roles...",
-      "TABLE": {
-        "NAME": "Nombre",
-        "EMAIL": "Correo",
-        "ACTIONS": "Acciones"
-      },
-      "ADMINS": {
-        "TITLE": "Administradores actuales",
-        "EMPTY": "No hay administradores para mostrar.",
-        "SELF_DEMOTION_BLOCKED": "No puedes degradar tu propia cuenta superadmin."
-      },
-      "ELIGIBLE_USERS": {
-        "TITLE": "Usuarios elegibles para promoción",
-        "EMPTY": "No hay usuarios elegibles en este momento."
-      },
-      "ACTIONS": {
-        "PROMOTE": "Promover a admin",
-        "DEMOTE": "Degradar a usuario"
-      },
-      "MODAL": {
-        "PROMOTE_TITLE": "¿Promover usuario a administrador?",
-        "PROMOTE_MESSAGE": "{{name}} ({{email}}) recibirá privilegios de administrador. ¿Deseas continuar?",
-        "PROMOTE_BUTTON": "Sí, promover",
-        "DEMOTE_TITLE": "¿Degradar administrador a usuario?",
-        "DEMOTE_MESSAGE": "{{name}} ({{email}}) perderá privilegios de administrador. ¿Deseas continuar?",
-        "DEMOTE_BUTTON": "Sí, degradar"
-      },
-      "TOAST": {
-        "PROMOTE_SUCCESS": "Usuario promovido a administrador correctamente.",
-        "DEMOTE_SUCCESS": "Administrador degradado a usuario correctamente.",
-        "ACTION_ERROR": "No se pudo completar el cambio de rol."
-      },
-      "ERRORS": {
-        "LOAD": "No se pudo cargar la gestión de administradores. Intenta nuevamente."
-      }
+  "SUPERADMIN_ROLE_MANAGEMENT": {
+    "TITLE": "Gestión de Administradores",
+    "SUBTITLE": "Supervisa los privilegios de administración y asigna roles sin salir de esta vista.",
+    "LOADING": "Cargando datos de roles...",
+    "TABLE": {
+      "NAME": "Nombre",
+      "EMAIL": "Correo",
+      "ACTIONS": "Acciones"
     },
+    "ADMINS": {
+      "TITLE": "Administradores actuales",
+      "EMPTY": "No hay administradores para mostrar.",
+      "SELF_DEMOTION_BLOCKED": "No puedes degradar tu propia cuenta superadmin."
+    },
+    "ELIGIBLE_USERS": {
+      "TITLE": "Usuarios elegibles para promoción",
+      "EMPTY": "No hay usuarios elegibles en este momento."
+    },
+    "ACTIONS": {
+      "PROMOTE": "Promover a admin",
+      "DEMOTE": "Degradar a usuario"
+    },
+    "MODAL": {
+      "PROMOTE_TITLE": "¿Promover usuario a administrador?",
+      "PROMOTE_MESSAGE": "{{name}} ({{email}}) recibirá privilegios de administrador. ¿Deseas continuar?",
+      "PROMOTE_BUTTON": "Sí, promover",
+      "DEMOTE_TITLE": "¿Degradar administrador a usuario?",
+      "DEMOTE_MESSAGE": "{{name}} ({{email}}) perderá privilegios de administrador. ¿Deseas continuar?",
+      "DEMOTE_BUTTON": "Sí, degradar"
+    },
+    "TOAST": {
+      "PROMOTE_SUCCESS": "Usuario promovido a administrador correctamente.",
+      "DEMOTE_SUCCESS": "Administrador degradado a usuario correctamente.",
+      "ACTION_ERROR": "No se pudo completar el cambio de rol."
+    },
+    "ERRORS": {
+      "LOAD": "No se pudo cargar la gestión de administradores. Intenta nuevamente."
+    }
+  },
   "PUBLISHER_REQUEST_FORM": {
     "TITLE": "Solicitar rol de Publicador",
     "SUBTITLE": "Completa el formulario para solicitar ser anunciante de eventos.",
