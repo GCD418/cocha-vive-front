@@ -7,6 +7,7 @@
     "ADMIN_PUBLISHER_REQUESTS": "Solicitudes de Anunciante",
     "ADMIN_EVENTS": "Administrar Eventos",
     "PUBLISH_EVENT": "Publicar Evento",
+    "ROLE_MANAGEMENT": "Gestión de usuarios",
     "LOGIN": "Iniciar Sesión",
     "LOGOUT": "Cerrar sesión",
     "LANGUAGES": {
@@ -537,7 +538,8 @@
     },
     "ACTIONS": {
       "PROMOTE": "Promover a admin",
-      "DEMOTE": "Degradar a usuario"
+      "DEMOTE": "Degradar a usuario",
+      "DEMOTE_PUBLISHER": "Degradar a usuario"
     },
     "MODAL": {
       "PROMOTE_TITLE": "¿Promover usuario a administrador?",
@@ -554,6 +556,10 @@
     },
     "ERRORS": {
       "LOAD": "No se pudo cargar la gestión de administradores. Intenta nuevamente."
+    },
+    "PUBLISHERS": {
+      "TITLE": "Anunciantes actuales",
+      "EMPTY": "No hay publishers registrados en este momento."
     }
   },
   "PUBLISHER_REQUEST_FORM": {
@@ -600,5 +606,14 @@
     "SECTION_4_CONTENT": "Puedes solicitar la eliminación de tus datos contactándonos en gforce4182@gmail.com.",
     "SECTION_5_TITLE": "5. Contacto",
     "SECTION_5_CONTENT": "Para cualquier consulta sobre privacidad escríbenos a gforce4182@gmail.com."
+  },
+  "PUBLISHER_DEMOTION_MODAL": {
+    "TITLE": "¿Degradar publisher a usuario?",
+    "MESSAGE": "{{name}} ({{email}}) perderá su acceso como publisher. Esta acción enviará una notificación al usuario.",
+    "REASON_LABEL": "Motivo de degradación",
+    "REASON_PLACEHOLDER": "Ej: El publisher incumplió repetidamente las normas de contenido.",
+    "REASON_MIN_ERROR": "El motivo debe tener al menos 10 caracteres.",
+    "CHARS_REMAINING": "caracteres restantes",
+    "CONFIRM_BUTTON": "Sí, degradar"
   }
 }

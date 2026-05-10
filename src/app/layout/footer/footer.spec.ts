@@ -5,6 +5,7 @@ import { provideRouter } from '@angular/router';
 import { FooterComponent } from './footer';
 
 describe('FooterComponent', () => {
+  
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
 

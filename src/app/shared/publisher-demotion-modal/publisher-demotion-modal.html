@@ -1,0 +1,92 @@
+<div
+  class="modal d-block"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="'publisher-demotion-modal-title'"
+  (keydown.escape)="onCancel()">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="publisher-demotion-modal-title">
+          {{ 'PUBLISHER_DEMOTION_MODAL.TITLE' | translate }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          [disabled]="loading"
+          [attr.aria-label]="'CONFIRM_MODAL.CANCEL' | translate"
+          (click)="onCancel()">
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p class="text-muted mb-3">
+          {{
+            'PUBLISHER_DEMOTION_MODAL.MESSAGE'
+              | translate: { name: target.names + ' ' + target.firstLastName, email: target.email }
+          }}
+        </p>
+
+        <div class="mb-1">
+          <label for="demotionReason" class="form-label fw-semibold">
+            {{ 'PUBLISHER_DEMOTION_MODAL.REASON_LABEL' | translate }}
+            <span class="text-danger" aria-hidden="true">*</span>
+          </label>
+          <textarea
+            id="demotionReason"
+            class="form-control"
+            [class.is-invalid]="submitted() && isReasonInvalid()"
+            rows="3"
+            [placeholder]="'PUBLISHER_DEMOTION_MODAL.REASON_PLACEHOLDER' | translate"
+            [maxlength]="MAX_LENGTH"
+            [disabled]="loading"
+            [ngModel]="demotionReason()"
+            (ngModelChange)="onReasonChange($event)"
+            aria-required="true"
+            [attr.aria-describedby]="'reason-hint reason-error'">
+          </textarea>
+
+          @if (submitted() && isReasonInvalid()) {
+            <div id="reason-error" class="invalid-feedback" role="alert">
+              {{ 'PUBLISHER_DEMOTION_MODAL.REASON_MIN_ERROR' | translate }}
+            </div>
+          }
+
+          <div id="reason-hint" class="form-text text-end">
+            {{ charsRemaining() }} {{ 'PUBLISHER_DEMOTION_MODAL.CHARS_REMAINING' | translate }}
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          [disabled]="loading"
+          (click)="onCancel()">
+          {{ 'CONFIRM_MODAL.CANCEL' | translate }}
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger d-flex align-items-center gap-2"
+          [disabled]="loading"
+          (click)="onConfirm()"
+          [attr.aria-label]="'PUBLISHER_DEMOTION_MODAL.CONFIRM_BUTTON' | translate">
+          @if (loading) {
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true">
+            </span>
+            {{ 'CONFIRM_MODAL.PROCESSING' | translate }}
+          } @else {
+            {{ 'PUBLISHER_DEMOTION_MODAL.CONFIRM_BUTTON' | translate }}
+          }
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop fade show"></div>

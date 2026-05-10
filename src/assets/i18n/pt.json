@@ -7,6 +7,7 @@
     "ADMIN_PUBLISHER_REQUESTS": "Solicitações de Publicador",
     "ADMIN_EVENTS": "Administrar Eventos",
     "PUBLISH_EVENT": "Publicar Evento",
+    "ROLE_MANAGEMENT": "Gestão de Administradores",
     "LOGIN": "Fazer Login",
     "LOGOUT": "Sair",
     "LANGUAGES": {
@@ -522,7 +523,6 @@
   },
   "SUPERADMIN_ROLE_MANAGEMENT": {
     "TITLE": "Gestão de Administradores",
-    "SUBTITLE": "Supervisione privilégios administrativos e altere funções em um único lugar.",
     "LOADING": "Carregando dados de papéis...",
     "TABLE": {
       "NAME": "Nome",
@@ -540,7 +540,8 @@
     },
     "ACTIONS": {
       "PROMOTE": "Promover para admin",
-      "DEMOTE": "Rebaixar para usuário"
+      "DEMOTE": "Rebaixar para usuário",
+      "DEMOTE_PUBLISHER": "Rebaixar para usuário"
     },
     "MODAL": {
       "PROMOTE_TITLE": "Promover usuário para administrador?",
@@ -557,6 +558,10 @@
     },
     "ERRORS": {
       "LOAD": "Não foi possível carregar os dados da gestão de administradores. Tente novamente."
+    },
+    "PUBLISHERS": {
+      "TITLE": "Anunciantes actuales",
+      "EMPTY": "No hay publishers registrados en este momento."
     }
   },
   "PUBLISHER_REQUEST_FORM": {
@@ -603,5 +608,14 @@
     "SECTION_4_CONTENT": "Você pode solicitar a exclusão dos seus dados entrando em contato pelo e-mail gforce4182@gmail.com.",
     "SECTION_5_TITLE": "5. Contato",
     "SECTION_5_CONTENT": "Para qualquer dúvida sobre privacidade, escreva para gforce4182@gmail.com."
+  },
+  "PUBLISHER_DEMOTION_MODAL": {
+    "TITLE": "Rebaixar publisher a utilizador?",
+    "MESSAGE": "{{name}} ({{email}}) perderá o acesso como publisher. Esta ação enviará uma notificação ao utilizador.",
+    "REASON_LABEL": "Motivo do rebaixamento",
+    "REASON_PLACEHOLDER": "Ex.: O publisher violou repetidamente as normas de conteúdo.",
+    "REASON_MIN_ERROR": "O motivo deve ter pelo menos 10 caracteres.",
+    "CHARS_REMAINING": "caracteres restantes",
+    "CONFIRM_BUTTON": "Sim, rebaixar"
   }
 }

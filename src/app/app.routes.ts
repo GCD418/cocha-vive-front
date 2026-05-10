@@ -39,7 +39,7 @@ export const routes: Routes = [
         path: 'superadmin/admin-management',
         component: SuperadminRoleManagementComponent,
         canActivate: [authGuard],
-        data: { roles: ['ROLE_SUPERADMIN'] },
+        data: { roles: ['ROLE_SUPERADMIN', 'ROLE_ADMIN'] },
     },
     { path: 'category-events/:name', component: CategoryEventsComponent },
     { path: 'forbidden', component: ForbiddenPageComponent },

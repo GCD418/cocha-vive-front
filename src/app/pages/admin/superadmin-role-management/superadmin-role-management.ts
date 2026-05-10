@@ -5,19 +5,27 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { RoleManagedUser } from '../../../models/role-management.model';
 import { RoleManagementService } from '../../../services/role-management/role-management.service';
 import { ConfirmModalComponent } from '../../../shared/confirmModal-Component/confirmModal-component';
+import { PublisherDemotionModal } from '../../../shared/publisher-demotion-modal/publisher-demotion-modal';
 
 type RoleActionType = 'promote' | 'demote';
 type ToastType = 'success' | 'danger';
 
 @Component({
   selector: 'app-superadmin-role-management',
-  imports: [CommonModule, TranslateModule, ConfirmModalComponent],
+  imports: [CommonModule, TranslateModule, ConfirmModalComponent, PublisherDemotionModal],
   templateUrl: './superadmin-role-management.html',
   styleUrl: './superadmin-role-management.css',
 })
 export class SuperadminRoleManagementComponent implements OnInit {
   admins = signal<RoleManagedUser[]>([]);
   eligibleUsers = signal<RoleManagedUser[]>([]);
+
+  publishers = signal<RoleManagedUser[]>([]);
+  isAdminView = signal(false);
+
+  showDemotionModal = signal(false);
+  demotionTarget = signal<RoleManagedUser | null>(null);
+  demotionLoading = signal(false);
 
   loading = signal(true);
   actionLoading = signal(false);
@@ -61,6 +69,7 @@ export class SuperadminRoleManagementComponent implements OnInit {
         }
 
         this.activeSuperadminId.set(currentUser.id);
+        this.isAdminView.set(currentUser.role === 'ROLE_ADMIN');
         this.loadData();
       },
       error: () => {
@@ -74,14 +83,14 @@ export class SuperadminRoleManagementComponent implements OnInit {
     this.errorMessageKey.set('');
 
     this.roleManagementService.getRoleManagementLists().subscribe({
-      next: ({ admins, eligibleUsers }) => {
+      next: ({ admins, eligibleUsers, publishers }) => {
+      if (this.isAdminView()) {
+        this.publishers.set(publishers);
+      } else {
         this.admins.set(admins);
         this.eligibleUsers.set(eligibleUsers);
-        this.loading.set(false);
-      },
-      error: () => {
-        this.loading.set(false);
-        this.errorMessageKey.set('SUPERADMIN_ROLE_MANAGEMENT.ERRORS.LOAD');
+      }
+      this.loading.set(false);  
       },
     });
   }
@@ -205,5 +214,43 @@ export class SuperadminRoleManagementComponent implements OnInit {
     }
 
     return 'SUPERADMIN_ROLE_MANAGEMENT.MODAL.DEMOTE_BUTTON';
+  }
+
+  openPublisherDemotionModal(user: RoleManagedUser): void {
+    this.demotionTarget.set(user);
+    this.showDemotionModal.set(true);
+  }
+
+  closePublisherDemotionModal(): void {
+    if (this.demotionLoading()) return;
+    this.showDemotionModal.set(false);
+    this.demotionTarget.set(null);
+  }
+
+  confirmPublisherDemotion(demotionReason: string): void {
+    const target = this.demotionTarget();
+    if (!target) return;
+
+    this.demotionLoading.set(true);
+
+    this.roleManagementService.demotePublisher(target.id, { demotionReason }).subscribe({
+      next: () => {
+        this.demotionLoading.set(false);
+        this.closePublisherDemotionModal();
+        this.loadData();
+        this.showNotification(
+          'SUPERADMIN_ROLE_MANAGEMENT.TOAST.PUBLISHER_DEMOTE_SUCCESS',
+          'success'
+        );
+      },
+      error: () => {
+        this.demotionLoading.set(false);
+        this.closePublisherDemotionModal();
+        this.showNotification(
+          'SUPERADMIN_ROLE_MANAGEMENT.TOAST.ACTION_ERROR',
+          'danger'
+        );
+      },
+    });
   }
 }
