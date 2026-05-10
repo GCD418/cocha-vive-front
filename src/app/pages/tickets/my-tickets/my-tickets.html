@@ -110,16 +110,16 @@
 
                     <div>
                       <div class="d-flex align-items-center gap-2 flex-wrap">
-                        <span class="fw-bold" style="color: var(--heading-color);">{{ 'TICKETS.LIST.ITEM.TICKET' | translate }} #{{ ticket.id.slice(0, 8) }}</span>
+                        <span class="fw-bold" style="color: var(--heading-color);">{{ ticket.eventTitle }}</span>
                         @let status = ticketStatus(ticket);
                         <span class="badge rounded-pill" [class]="statusBadgeClass(status)">{{ ('TICKETS.STATUS.' + status) | translate }}</span>
                       </div>
                       <div class="text-muted small mt-1">
-                        <i class="bi bi-calendar-event me-1"></i>{{ ticket.createdAt | date:'d/M/yyyy HH:mm' }}
+                        <i class="bi bi-calendar-event me-1"></i>{{ ticket.eventDateStart | date:'d/M/yyyy HH:mm' }} - {{ ticket.eventDateEnd | date:'d/M/yyyy HH:mm' }}
                         <span class="mx-2">•</span>
                         <i class="bi bi-collection me-1"></i>{{ 'TICKETS.LIST.ITEM.QUANTITY' | translate }}: {{ ticket.quantity }}
                         <span class="mx-2">•</span>
-                        <i class="bi bi-calendar2-week me-1"></i>{{ 'TICKETS.LIST.ITEM.EVENT' | translate }} #{{ ticket.eventId }}
+                        <i class="bi bi-tag me-1"></i>{{ ticket.eventCategoryName }}
                       </div>
                     </div>
                   </div>
