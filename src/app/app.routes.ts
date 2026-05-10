@@ -73,4 +73,21 @@ export const routes: Routes = [
         import('./pages/privacy-policy/privacy-policy')
         .then(m => m.PrivacyPolicy)
     },
+
+    {
+        path: 'my-tickets',
+        loadComponent: () =>
+            import('./pages/tickets/my-tickets/my-tickets')
+            .then(m => m.MyTicketsPageComponent),
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_PUBLISHER', 'ROLE_SUPERADMIN'] },
+    },
+    {
+        path: 'my-tickets/:id',
+        loadComponent: () =>
+            import('./pages/tickets/ticket-details/ticket-details')
+            .then(m => m.TicketDetailsPageComponent),
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_PUBLISHER', 'ROLE_SUPERADMIN'] },
+    },
 ];

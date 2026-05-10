@@ -2,6 +2,7 @@
   "NAV": {
     "START": "Home",
     "EXPLORE": "Explore",
+    "MY_TICKETS": "My Tickets",
     "MY_EVENTS": "My Events",
     "ADMIN_PUBLISHER_REQUESTS": "Publisher Requests",
     "ADMIN_EVENTS": "Admin Events",
@@ -29,6 +30,79 @@
       "EMPTY": "You have no notifications yet.",
       "UNREAD": "Unread",
       "ITEM": "Notification"
+    }
+  },
+
+  "TICKETS": {
+    "LIST": {
+      "TITLE": "My tickets",
+      "SUBTITLE": "Quick access to your entries and QR.",
+      "REFRESH": "Refresh",
+      "LOADING": "Loading tickets...",
+      "STATS": {
+        "TOTAL": "Total",
+        "ACTIVE": "Active",
+        "USED": "Used",
+        "EXPIRED": "Expired"
+      },
+      "FILTERS": {
+        "TITLE": "Filters",
+        "INCLUDE_USED": "Include used",
+        "INCLUDE_EXPIRED": "Include expired",
+        "SHOWING": "Showing"
+      },
+      "ERROR": {
+        "TITLE": "We couldn't load your tickets",
+        "SUBTITLE": "Try again in a few seconds.",
+        "RETRY": "Retry"
+      },
+      "EMPTY": {
+        "TITLE": "You don't have tickets yet",
+        "SUBTITLE": "Once you buy an entry, you'll see it here.",
+        "CTA": "Explore events"
+      },
+      "ITEM": {
+        "TICKET": "Ticket",
+        "QUANTITY": "Quantity",
+        "EVENT": "Event",
+        "TOTAL": "Total",
+        "VIEW": "View",
+        "VIEW_EVENT": "View event"
+      }
+    },
+    "DETAILS": {
+      "BACK": "Back",
+      "LOADING": "Loading ticket...",
+      "TITLE": "Ticket details",
+      "ID": "ID:",
+      "VIEW_EVENT": "View event",
+      "CREATED_AT": "Purchased",
+      "QUANTITY": "Quantity",
+      "UNIT_PRICE": "Unit price",
+      "TOTAL_PRICE": "Total",
+      "BADGES": {
+        "USED": "Used",
+        "NOT_USED": "Not used",
+        "EXPIRED": "Expired",
+        "ACTIVE": "Active"
+      },
+      "QR": {
+        "TITLE": "Ticket QR",
+        "ALT": "Ticket QR",
+        "HINT": "Show it when entering the event.",
+        "UNAVAILABLE": "The QR is only available when the ticket is active and not used.",
+        "ERROR": "QR generation failed."
+      },
+      "NOT_FOUND": {
+        "TITLE": "Ticket not found",
+        "SUBTITLE": "It may not exist or it may not be yours.",
+        "CTA": "Back to my tickets"
+      }
+    },
+    "STATUS": {
+      "ACTIVE": "Active",
+      "USED": "Used",
+      "EXPIRED": "Expired"
     }
   },
   "FOOTER": {

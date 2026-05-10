@@ -1,0 +1,161 @@
+<div class="min-vh-100">
+  <div class="container pt-5 mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h2 class="mb-1">{{ 'TICKETS.LIST.TITLE' | translate }}</h2>
+        <p class="text-muted mb-0">{{ 'TICKETS.LIST.SUBTITLE' | translate }}</p>
+      </div>
+      <button class="btn btn-sm btn-outline-secondary" type="button" (click)="refresh()">
+        <i class="bi bi-arrow-clockwise me-1"></i>{{ 'TICKETS.LIST.REFRESH' | translate }}
+      </button>
+    </div>
+
+    <div class="row g-3 mb-4">
+      <div class="col-md-3">
+        <div class="card text-center border-0 shadow-sm">
+          <div class="card-body">
+            <div class="fs-2 fw-bold" style="color: var(--heading-color);">{{ totalCount() }}</div>
+            <div class="text-muted small">{{ 'TICKETS.LIST.STATS.TOTAL' | translate }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center border-0 shadow-sm">
+          <div class="card-body">
+            <div class="fs-2 fw-bold text-success">{{ activeCount() }}</div>
+            <div class="text-muted small">{{ 'TICKETS.LIST.STATS.ACTIVE' | translate }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center border-0 shadow-sm">
+          <div class="card-body">
+            <div class="fs-2 fw-bold text-secondary">{{ usedCount() }}</div>
+            <div class="text-muted small">{{ 'TICKETS.LIST.STATS.USED' | translate }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center border-0 shadow-sm">
+          <div class="card-body">
+            <div class="fs-2 fw-bold text-danger">{{ expiredCount() }}</div>
+            <div class="text-muted small">{{ 'TICKETS.LIST.STATS.EXPIRED' | translate }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+      <div class="card-body">
+        <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between">
+          <div class="d-flex flex-wrap gap-2 align-items-center">
+            <span class="small text-muted me-2">{{ 'TICKETS.LIST.FILTERS.TITLE' | translate }}</span>
+
+            <button
+              type="button"
+              class="btn btn-sm"
+              [class.btn-outline-secondary]="!includeUsed()"
+              [class.btn-secondary]="includeUsed()"
+              (click)="includeUsed.update(v => !v)">
+              <i class="bi bi-check2-circle me-1"></i>{{ 'TICKETS.LIST.FILTERS.INCLUDE_USED' | translate }}
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-sm"
+              [class.btn-outline-danger]="!includeExpired()"
+              [class.btn-danger]="includeExpired()"
+              (click)="includeExpired.update(v => !v)">
+              <i class="bi bi-clock-history me-1"></i>{{ 'TICKETS.LIST.FILTERS.INCLUDE_EXPIRED' | translate }}
+            </button>
+          </div>
+
+          <div class="text-muted small">
+            {{ 'TICKETS.LIST.FILTERS.SHOWING' | translate }}
+            <span class="fw-semibold">{{ filteredTickets().length }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    @if (loading()) {
+      <div class="d-flex justify-content-center align-items-center py-5">
+        <div class="spinner-border" style="color: var(--accent-color);" role="status">
+          <span class="visually-hidden">{{ 'TICKETS.LIST.LOADING' | translate }}</span>
+        </div>
+      </div>
+    } @else if (error()) {
+      <div class="alert alert-danger border-0 shadow-sm" role="alert">
+        <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+          <div>
+            <div class="fw-semibold">{{ 'TICKETS.LIST.ERROR.TITLE' | translate }}</div>
+            <div class="small">{{ 'TICKETS.LIST.ERROR.SUBTITLE' | translate }}</div>
+          </div>
+          <button class="btn btn-sm btn-outline-light" type="button" (click)="refresh()">
+            {{ 'TICKETS.LIST.ERROR.RETRY' | translate }}
+          </button>
+        </div>
+      </div>
+    } @else {
+      <div class="row g-3">
+        @for (ticket of filteredTickets(); track ticket.id) {
+          <div class="col-12">
+            <a class="ticket-card d-block" [routerLink]="['/my-tickets', ticket.id]">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body d-flex align-items-center justify-content-between gap-3 flex-wrap">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="ticket-icon">
+                      <i class="bi bi-ticket-perforated"></i>
+                    </div>
+
+                    <div>
+                      <div class="d-flex align-items-center gap-2 flex-wrap">
+                        <span class="fw-bold" style="color: var(--heading-color);">{{ 'TICKETS.LIST.ITEM.TICKET' | translate }} #{{ ticket.id.slice(0, 8) }}</span>
+                        @let status = ticketStatus(ticket);
+                        <span class="badge rounded-pill" [class]="statusBadgeClass(status)">{{ ('TICKETS.STATUS.' + status) | translate }}</span>
+                      </div>
+                      <div class="text-muted small mt-1">
+                        <i class="bi bi-calendar-event me-1"></i>{{ ticket.createdAt | date:'d/M/yyyy HH:mm' }}
+                        <span class="mx-2">•</span>
+                        <i class="bi bi-collection me-1"></i>{{ 'TICKETS.LIST.ITEM.QUANTITY' | translate }}: {{ ticket.quantity }}
+                        <span class="mx-2">•</span>
+                        <i class="bi bi-calendar2-week me-1"></i>{{ 'TICKETS.LIST.ITEM.EVENT' | translate }} #{{ ticket.eventId }}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="text-end ms-auto">
+                    <div class="fw-bold" style="color: var(--accent-color);">{{ ticket.totalPrice | price }}</div>
+                    <div class="text-muted small">{{ 'TICKETS.LIST.ITEM.TOTAL' | translate }}</div>
+                  </div>
+
+                  <div class="d-flex gap-2">
+                    <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/event-details', ticket.eventId]" (click)="$event.stopPropagation()">
+                      <i class="bi bi-eye me-1"></i>{{ 'TICKETS.LIST.ITEM.VIEW_EVENT' | translate }}
+                    </a>
+                    <span class="btn btn-sm btn-outline-primary">
+                      <i class="bi bi-qr-code me-1"></i>{{ 'TICKETS.LIST.ITEM.VIEW' | translate }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        } @empty {
+          <div class="col-12">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body py-5 text-center">
+                <div class="empty-icon mb-3">
+                  <i class="bi bi-ticket"></i>
+                </div>
+                <h5 class="fw-bold mb-2">{{ 'TICKETS.LIST.EMPTY.TITLE' | translate }}</h5>
+                <p class="text-muted mb-4">{{ 'TICKETS.LIST.EMPTY.SUBTITLE' | translate }}</p>
+                <a class="cta-btn" routerLink="/explore-events">{{ 'TICKETS.LIST.EMPTY.CTA' | translate }}</a>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

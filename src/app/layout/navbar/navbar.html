@@ -13,6 +13,13 @@
             <li>
             <a routerLink="explore-events" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'NAV.EXPLORE' | translate }}</a>
             </li>
+            @if (currentUser()?.role === 'ROLE_USER') {
+              <li>
+                <a routerLink="/my-tickets" routerLinkActive="active" (click)="closeMobileMenu()">
+                  {{ 'NAV.MY_TICKETS' | translate }}
+                </a>
+              </li>
+            }
             @if (canSeeAdminEventsLink()) {
               <li>
                 <a routerLink="/admin/events" routerLinkActive="active" (click)="closeMobileMenu()">

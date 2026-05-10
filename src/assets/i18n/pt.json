@@ -2,6 +2,7 @@
   "NAV": {
     "START": "Início",
     "EXPLORE": "Explorar",
+    "MY_TICKETS": "Meus ingressos",
     "MY_EVENTS": "Meus Eventos",
     "ADMIN_PUBLISHER_REQUESTS": "Solicitações de Publicador",
     "ADMIN_EVENTS": "Administrar Eventos",
@@ -29,6 +30,79 @@
       "EMPTY": "Você não tem notificações por enquanto.",
       "UNREAD": "Não lida",
       "ITEM": "Notificação"
+    }
+  },
+
+  "TICKETS": {
+    "LIST": {
+      "TITLE": "Meus ingressos",
+      "SUBTITLE": "Acesso rápido aos seus ingressos e QR.",
+      "REFRESH": "Atualizar",
+      "LOADING": "Carregando ingressos...",
+      "STATS": {
+        "TOTAL": "Total",
+        "ACTIVE": "Ativos",
+        "USED": "Usados",
+        "EXPIRED": "Expirados"
+      },
+      "FILTERS": {
+        "TITLE": "Filtros",
+        "INCLUDE_USED": "Incluir usados",
+        "INCLUDE_EXPIRED": "Incluir expirados",
+        "SHOWING": "Mostrando"
+      },
+      "ERROR": {
+        "TITLE": "Não foi possível carregar seus ingressos",
+        "SUBTITLE": "Tente novamente em alguns segundos.",
+        "RETRY": "Tentar novamente"
+      },
+      "EMPTY": {
+        "TITLE": "Você ainda não tem ingressos",
+        "SUBTITLE": "Quando comprar um ingresso, ele aparecerá aqui.",
+        "CTA": "Explorar eventos"
+      },
+      "ITEM": {
+        "TICKET": "Ingresso",
+        "QUANTITY": "Quantidade",
+        "EVENT": "Evento",
+        "TOTAL": "Total",
+        "VIEW": "Ver",
+        "VIEW_EVENT": "Ver evento"
+      }
+    },
+    "DETAILS": {
+      "BACK": "Voltar",
+      "LOADING": "Carregando ingresso...",
+      "TITLE": "Detalhe do ingresso",
+      "ID": "ID:",
+      "VIEW_EVENT": "Ver evento",
+      "CREATED_AT": "Comprado",
+      "QUANTITY": "Quantidade",
+      "UNIT_PRICE": "Preço unitário",
+      "TOTAL_PRICE": "Total",
+      "BADGES": {
+        "USED": "Usado",
+        "NOT_USED": "Não usado",
+        "EXPIRED": "Expirado",
+        "ACTIVE": "Ativo"
+      },
+      "QR": {
+        "TITLE": "QR do ingresso",
+        "ALT": "QR do ingresso",
+        "HINT": "Mostre ao entrar no evento.",
+        "UNAVAILABLE": "O QR só está disponível se o ingresso estiver ativo e não tiver sido usado.",
+        "ERROR": "Não foi possível gerar o QR."
+      },
+      "NOT_FOUND": {
+        "TITLE": "Ingresso não encontrado",
+        "SUBTITLE": "Pode não existir ou não ser seu.",
+        "CTA": "Voltar aos meus ingressos"
+      }
+    },
+    "STATUS": {
+      "ACTIVE": "Ativo",
+      "USED": "Usado",
+      "EXPIRED": "Expirado"
     }
   },
   "FOOTER": {

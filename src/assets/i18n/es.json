@@ -2,6 +2,7 @@
   "NAV": {
     "START": "Inicio",
     "EXPLORE": "Explorar",
+    "MY_TICKETS": "Mis Tickets",
     "MY_EVENTS": "Mis Eventos",
     "ADMIN_PUBLISHER_REQUESTS": "Solicitudes de Anunciante",
     "ADMIN_EVENTS": "Administrar Eventos",
@@ -29,6 +30,79 @@
       "EMPTY": "No tienes notificaciones por ahora.",
       "UNREAD": "No leída",
       "ITEM": "Notificación"
+    }
+  },
+
+  "TICKETS": {
+    "LIST": {
+      "TITLE": "Mis tickets",
+      "SUBTITLE": "Accedé rápido a tus entradas y su QR.",
+      "REFRESH": "Actualizar",
+      "LOADING": "Cargando tickets...",
+      "STATS": {
+        "TOTAL": "Total",
+        "ACTIVE": "Activos",
+        "USED": "Usados",
+        "EXPIRED": "Expirados"
+      },
+      "FILTERS": {
+        "TITLE": "Filtros",
+        "INCLUDE_USED": "Incluir usados",
+        "INCLUDE_EXPIRED": "Incluir expirados",
+        "SHOWING": "Mostrando"
+      },
+      "ERROR": {
+        "TITLE": "No pudimos cargar tus tickets",
+        "SUBTITLE": "Probá de nuevo en unos segundos.",
+        "RETRY": "Reintentar"
+      },
+      "EMPTY": {
+        "TITLE": "Todavía no tenés tickets",
+        "SUBTITLE": "Cuando compres una entrada, la vas a ver acá.",
+        "CTA": "Explorar eventos"
+      },
+      "ITEM": {
+        "TICKET": "Ticket",
+        "QUANTITY": "Cantidad",
+        "EVENT": "Evento",
+        "TOTAL": "Total",
+        "VIEW": "Ver",
+        "VIEW_EVENT": "Ver evento"
+      }
+    },
+    "DETAILS": {
+      "BACK": "Volver",
+      "LOADING": "Cargando ticket...",
+      "TITLE": "Detalle del ticket",
+      "ID": "ID:",
+      "VIEW_EVENT": "Ver evento",
+      "CREATED_AT": "Comprado",
+      "QUANTITY": "Cantidad",
+      "UNIT_PRICE": "Precio unitario",
+      "TOTAL_PRICE": "Total",
+      "BADGES": {
+        "USED": "Usado",
+        "NOT_USED": "No usado",
+        "EXPIRED": "Expirado",
+        "ACTIVE": "Activo"
+      },
+      "QR": {
+        "TITLE": "QR del ticket",
+        "ALT": "QR del ticket",
+        "HINT": "Mostralo al ingresar al evento.",
+        "UNAVAILABLE": "El QR sólo está disponible si el ticket está activo y no fue usado.",
+        "ERROR": "No se pudo generar el QR."
+      },
+      "NOT_FOUND": {
+        "TITLE": "Ticket no encontrado",
+        "SUBTITLE": "Puede que no exista o no sea tuyo.",
+        "CTA": "Volver a mis tickets"
+      }
+    },
+    "STATUS": {
+      "ACTIVE": "Activo",
+      "USED": "Usado",
+      "EXPIRED": "Expirado"
     }
   },
   "FOOTER": {
