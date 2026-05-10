@@ -1,5 +1,5 @@
 <section id="categories" class="schedule section py-5">
-  
+
   <div class="container section-title">
     <h2>{{ 'CATEGORIES.TITLE' | translate }}</h2>
     <p>{{ 'CATEGORIES.SUBTITLE' | translate }}</p>
@@ -20,20 +20,20 @@
   @if (!loading() && !errorLoading()) {
     <div class="container">
       <div class="row justify-content-center">
-        
+
         @for (category of categories(); track category.id) {
           <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
-            
+
             <div class="card custom-card w-100 text-center border-0 shadow-sm p-4">
-              
+
               <div class="d-flex justify-content-center mb-3">
                 @if (category.identifyingIcon) {
                   <img [src]="category.identifyingIcon" [alt]="category.name" class="category-icon">
                 }
               </div>
-              
+
               <p class="category-desc mb-4">{{ category.description }}</p>
-              
+
               <div class="mt-auto">
                 <ul class="nav nav-tabs border-0 justify-content-center">
                   <li class="nav-item">

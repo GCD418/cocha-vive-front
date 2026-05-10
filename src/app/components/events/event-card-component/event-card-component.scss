@@ -1,10 +1,10 @@
-$brand-color: #f82249; 
+$brand-color: #f82249;
 
 .event-card {
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+  line-height: 1.3rem;
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
@@ -20,12 +20,12 @@ $brand-color: #f82249;
     .card-img-top {
       height: 100%;
       width: 100%;
-      object-fit: cover; 
+      object-fit: cover;
     }
   }
 
   .category-badge {
-    background-color: #198754; 
+    background-color: #198754;
     font-weight: 500;
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
@@ -47,6 +47,21 @@ $brand-color: #f82249;
     .event-icon {
       color: $brand-color;
       font-size: 1.1rem;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .event-card {
+    padding: 1rem;
+    .event-details {
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .category-badge,
+    .price-badge {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.85rem;
     }
   }
 }
