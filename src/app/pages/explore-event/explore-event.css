@@ -8,9 +8,9 @@
   width: 280px;
   min-width: 280px;
   height: calc(100vh - 80px);
-  overflow-y: auto; 
-  position: sticky; 
-  top: 90px; 
+  overflow-y: auto;
+  position: sticky;
+  top: 90px;
 }
 
 .explore-main {
@@ -27,12 +27,71 @@
   .explore-sidebar {
     width: 100%;
     min-width: unset;
-    position: static; 
+    position: static;
     height: auto;
     overflow-y: visible;
   }
 
   .explore-main {
     padding: 24px 16px 48px;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .explore-layout {
+    min-height: auto;
+  }
+
+  .explore-sidebar .p-4 {
+    padding: 1rem !important;
+  }
+
+  .explore-main {
+    padding: 20px 14px 32px;
+  }
+
+  .explore-main .section-title h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.2;
+  }
+
+  .explore-main .section-title p {
+    font-size: 0.95rem;
+  }
+
+  .explore-sidebar .mb-3 {
+    margin-bottom: 0.8rem !important;
+  }
+
+  .explore-sidebar .mb-4 {
+    margin-bottom: 1rem !important;
+  }
+
+  .explore-sidebar .mt-4 {
+    margin-top: 1rem !important;
+  }
+
+  .explore-sidebar .form-control,
+  .explore-sidebar .form-select {
+    font-size: 0.92rem;
+    padding: 0.55rem 0.75rem;
+  }
+
+  .explore-sidebar .input-group-text {
+    padding: 0.55rem 0.75rem;
+  }
+
+  .explore-sidebar .fw-bold {
+    font-size: 1.1rem !important;
+  }
+
+  .explore-main .row {
+    gap: 1rem;
+  }
+
+  .pagination .page-link {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.9rem;
   }
 }
