@@ -53,7 +53,7 @@
       },
       "ERROR": {
         "TITLE": "No pudimos cargar tus tickets",
-        "SUBTITLE": "Probá de nuevo en unos segundos.",
+        "SUBTITLE": "Intenta de nuevo en unos segundos.",
         "RETRY": "Reintentar"
       },
       "EMPTY": {
