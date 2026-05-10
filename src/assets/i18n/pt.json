@@ -80,6 +80,10 @@
       "QUANTITY": "Quantidade",
       "UNIT_PRICE": "Preço unitário",
       "TOTAL_PRICE": "Total",
+      "EVENT_TITLE": "Evento",
+      "EVENT_CATEGORY": "Categoria",
+      "EVENT_START": "Data de início",
+      "EVENT_END": "Data de término",
       "BADGES": {
         "USED": "Usado",
         "NOT_USED": "Não usado",

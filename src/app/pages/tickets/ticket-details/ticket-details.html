@@ -29,7 +29,7 @@
                   <h3 class="fw-bold mb-1" style="color: var(--heading-color);">{{ 'TICKETS.DETAILS.TITLE' | translate }}</h3>
                   <div class="text-muted small">
                     {{ 'TICKETS.DETAILS.ID' | translate }}
-                    <span class="font-monospace">{{ ticket()!.id }}</span>
+                    <span class="font-monospace">{{ ticket()!.id.slice(0, 8) }}</span>
                   </div>
                 </div>
                 <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/event-details', ticket()!.eventId]">
@@ -38,6 +38,30 @@
               </div>
 
               <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <div class="label">{{ 'TICKETS.DETAILS.EVENT_TITLE' | translate }}</div>
+                    <div class="value">{{ ticket()!.eventTitle }}</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <div class="label">{{ 'TICKETS.DETAILS.EVENT_CATEGORY' | translate }}</div>
+                    <div class="value">{{ ticket()!.eventCategoryName }}</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <div class="label">{{ 'TICKETS.DETAILS.EVENT_START' | translate }}</div>
+                    <div class="value">{{ ticket()!.eventDateStart | date:'d/M/yyyy HH:mm' }}</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <div class="label">{{ 'TICKETS.DETAILS.EVENT_END' | translate }}</div>
+                    <div class="value">{{ ticket()!.eventDateEnd | date:'d/M/yyyy HH:mm' }}</div>
+                  </div>
+                </div>
                 <div class="col-md-6">
                   <div class="info-box">
                     <div class="label">{{ 'TICKETS.DETAILS.CREATED_AT' | translate }}</div>
