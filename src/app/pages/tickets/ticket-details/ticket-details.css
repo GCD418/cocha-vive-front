@@ -29,11 +29,11 @@
   border: 1px solid color-mix(in srgb, var(--accent-color), transparent 70%);
 }
 
-.qr {
+.qr,
+.qr canvas {
   width: 240px;
   height: 240px;
   border-radius: 10px;
-  background: #fff;
 }
 
 .empty-icon {

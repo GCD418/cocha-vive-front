@@ -88,19 +88,21 @@
                     {{ 'TICKETS.DETAILS.QR.UNAVAILABLE' | translate }}
                   </div>
                 </div>
-              } @else if (qrError()) {
-                <div class="alert alert-danger border-0" role="alert">
-                  <div class="small">{{ 'TICKETS.DETAILS.QR.ERROR' | translate }}</div>
-                </div>
-              } @else if (qrDataUrl()) {
+              } @else {
                 <div class="qr-wrapper">
-                  <img class="qr" [src]="qrDataUrl()!" [alt]="'TICKETS.DETAILS.QR.ALT' | translate">
+                  <qrcode
+                    [qrdata]="ticket()!.id"
+                    [width]="240"
+                    [margin]="1"
+                    [errorCorrectionLevel]="'M'"
+                    [colorDark]="'#0e1b4d'"
+                    [colorLight]="'#ffffff'"
+                    elementType="canvas"
+                    cssClass="qr"
+                    [alt]="'TICKETS.DETAILS.QR.ALT' | translate"
+                  ></qrcode>
                 </div>
                 <p class="text-muted small mb-0 mt-3">{{ 'TICKETS.DETAILS.QR.HINT' | translate }}</p>
-              } @else {
-                <div class="d-flex justify-content-center align-items-center py-4">
-                  <div class="spinner-border spinner-border-sm" style="color: var(--accent-color);" role="status"></div>
-                </div>
               }
             </div>
           </div>

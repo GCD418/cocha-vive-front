@@ -25,9 +25,6 @@ export class TicketDetailsPageComponent {
   readonly error = signal(false);
   readonly ticket = signal<TicketResponseDTO | null>(null);
 
-  readonly qrDataUrl = signal<string | null>(null);
-  readonly qrError = signal(false);
-
   private readonly ticketId = toSignal(
     this.route.paramMap.pipe(map((params) => params.get('id'))),
     { initialValue: null }
@@ -43,17 +40,6 @@ export class TicketDetailsPageComponent {
       const id = this.ticketId();
       if (!id) return;
       this.loadTicket(id);
-    });
-
-    effect(() => {
-      const t = this.ticket();
-      if (!t || !this.canShowQr()) {
-        this.qrDataUrl.set(null);
-        this.qrError.set(false);
-        return;
-      }
-
-      this.generateQr(t.id);
     });
   }
 
@@ -81,22 +67,5 @@ export class TicketDetailsPageComponent {
     });
   }
 
-  private async generateQr(value: string): Promise<void> {
-    this.qrError.set(false);
-    try {
-      const url = await QRCode.toDataURL(value, {
-        margin: 1,
-        width: 240,
-        errorCorrectionLevel: 'M',
-        color: {
-          dark: '#0e1b4d',
-          light: '#ffffff',
-        },
-      });
-      this.qrDataUrl.set(url);
-    } catch {
-      this.qrDataUrl.set(null);
-      this.qrError.set(true);
-    }
-  }
+
 }

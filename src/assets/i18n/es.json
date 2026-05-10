@@ -89,7 +89,7 @@
       "QR": {
         "TITLE": "QR del ticket",
         "ALT": "QR del ticket",
-        "HINT": "Mostralo al ingresar al evento.",
+        "HINT": "Muéstralo para ingresar al evento.",
         "UNAVAILABLE": "El QR sólo está disponible si el ticket está activo y no fue usado.",
         "ERROR": "No se pudo generar el QR."
       },
