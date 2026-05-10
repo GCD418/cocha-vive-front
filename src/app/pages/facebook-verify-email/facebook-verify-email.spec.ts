@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { provideHttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
 import { FacebookVerifyEmail } from './facebook-verify-email';
 
 describe('FacebookVerifyEmail', () => {
@@ -8,7 +11,17 @@ describe('FacebookVerifyEmail', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FacebookVerifyEmail],
+      imports: [FacebookVerifyEmail,  TranslateModule.forRoot()],
+      providers: [
+        provideHttpClient(),
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { queryParamMap: convertToParamMap({}) },
+            queryParamMap: of(convertToParamMap({})),
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FacebookVerifyEmail);

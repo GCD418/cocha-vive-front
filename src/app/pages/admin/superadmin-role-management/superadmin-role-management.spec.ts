@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 import { SuperadminRoleManagementComponent } from './superadmin-role-management';
 import { RoleManagementService } from '../../../services/role-management/role-management.service';
@@ -12,8 +13,11 @@ describe('SuperadminRoleManagementComponent', () => {
     const roleManagementServiceMock = {
       getCurrentAdmins: () => of([]),
       getEligibleUsers: () => of([]),
+      getCurrentPublishers: () => of([]),
+      getRoleManagementLists: () => of({ admins: [], eligibleUsers: [], publishers: [] }),
       promoteToAdmin: () => of(void 0),
       demoteToUser: () => of(void 0),
+      demotePublisher: () => of(void 0),
     };
 
     const authServiceMock = {
@@ -21,7 +25,7 @@ describe('SuperadminRoleManagementComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [SuperadminRoleManagementComponent],
+      imports: [SuperadminRoleManagementComponent, TranslateModule.forRoot()],
       providers: [
         { provide: RoleManagementService, useValue: roleManagementServiceMock },
         { provide: AuthService, useValue: authServiceMock },

@@ -71,7 +71,7 @@ export class Navbar implements OnInit {
     return this.userHasRole('ROLE_ADMIN');
   });
 
-  canSeeSuperadminRoleManagementLink = computed(() => {
+  canSeeRoleManagementLink = computed(() => {
     return this.userHasRole('ROLE_SUPERADMIN');
   });
 

@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { App } from './app';
 import { Navbar } from './layout/navbar/navbar';
 
@@ -13,7 +14,7 @@ class NavbarStubComponent {}
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
+      imports: [App, TranslateModule.forRoot()],
       providers: [provideRouter([])],
     }).compileComponents();
 

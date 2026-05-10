@@ -4,9 +4,13 @@ import { Observable, map } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { RoleManagedUser } from '../../models/role-management.model';
 
+export interface PublisherDemotionPayload {
+  demotionReason: string;
+}
 export interface RoleManagementLists {
   admins: RoleManagedUser[];
   eligibleUsers: RoleManagedUser[];
+  publishers: RoleManagedUser[];
 }
 
 @Injectable({
@@ -29,11 +33,18 @@ export class RoleManagementService {
     );
   }
 
+  getCurrentPublishers(): Observable<RoleManagedUser[]> {
+    return this.getAllUsers().pipe(
+      map((users) => users.filter((user) => user.role === 'ROLE_PUBLISHER'))
+    );
+  }
+
   getRoleManagementLists(): Observable<RoleManagementLists> {
     return this.getAllUsers().pipe(
       map((users) => ({
         admins: users.filter((user) => user.role === 'ROLE_ADMIN'),
         eligibleUsers: users.filter((user) => user.role === 'ROLE_USER'),
+        publishers: users.filter((user) => user.role === 'ROLE_PUBLISHER'),
       }))
     );
   }
@@ -44,6 +55,13 @@ export class RoleManagementService {
 
   demoteToUser(userId: number): Observable<void> {
     return this.httpClient.patch<void>(`${this.baseUrl}/${userId}/demote`, null);
+  }
+
+  demotePublisher(userId: number, payload: PublisherDemotionPayload): Observable<void> {
+    return this.httpClient.patch<void>(
+      `${this.baseUrl}/${userId}/demote-publisher`,
+      payload
+    );
   }
 
   private getAllUsers(): Observable<RoleManagedUser[]> {

@@ -6,6 +6,7 @@
     "ADMIN_PUBLISHER_REQUESTS": "Publisher Requests",
     "ADMIN_EVENTS": "Admin Events",
     "PUBLISH_EVENT": "Publish Event",
+    "ROLE_MANAGEMENT": "Role Management",
     "LOGIN": "Log In",
     "LOGOUT": "Log Out",
     "LANGUAGES": {
@@ -441,7 +442,6 @@
   },
   "SUPERADMIN_ROLE_MANAGEMENT": {
     "TITLE": "Administrator Role Management",
-    "SUBTITLE": "Supervise administrator privileges and change roles from a single place.",
     "LOADING": "Loading role data...",
     "TABLE": {
       "NAME": "Name",
@@ -459,7 +459,8 @@
     },
     "ACTIONS": {
       "PROMOTE": "Promote to admin",
-      "DEMOTE": "Demote to user"
+      "DEMOTE": "Demote to user",
+      "DEMOTE_PUBLISHER": "Degradar a usuario"
     },
     "MODAL": {
       "PROMOTE_TITLE": "Promote user to administrator?",
@@ -476,6 +477,10 @@
     },
     "ERRORS": {
       "LOAD": "Could not load administrator management data. Please try again."
+    },
+    "PUBLISHERS": {
+      "TITLE": "Anunciantes actuales",
+      "EMPTY": "No hay publishers registrados en este momento."
     }
   },
   "PUBLISHER_REQUEST_FORM": {
@@ -522,5 +527,14 @@
     "SECTION_4_CONTENT": "You can request deletion of your data by contacting us at gforce4182@gmail.com.",
     "SECTION_5_TITLE": "5. Contact",
     "SECTION_5_CONTENT": "For any privacy-related questions, write to us at gforce4182@gmail.com."
-}
+  },
+  "PUBLISHER_DEMOTION_MODAL": {
+    "TITLE": "Demote publisher to user?",
+    "MESSAGE": "{{name}} ({{email}}) will lose publisher privileges and will be demoted to a regular user. Do you want to continue?",
+    "REASON_LABEL": "Demotion reason",
+    "REASON_PLACEHOLDER": "E.g.: The publisher repeatedly violated content guidelines.",
+    "REASON_MIN_ERROR": "Reason must be at least 10 characters long.",
+    "CHARS_REMAINING": "characters remaining",
+    "CONFIRM_BUTTON": "Yes, demote"
+  }
 }

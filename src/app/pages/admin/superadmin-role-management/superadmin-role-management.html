@@ -27,7 +27,6 @@
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0 text-dark fw-bold">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TITLE' | translate }}</h2>
       </div>
-      <p class="text-muted mb-4 fs-5">{{ 'SUPERADMIN_ROLE_MANAGEMENT.SUBTITLE' | translate }}</p>
 
       @if (loading()) {
         <div class="card border-0 shadow-sm mb-3">
@@ -44,132 +43,187 @@
           </div>
         }
 
-        <div class="card border-0 shadow-sm mb-5" aria-label="Current admins section">
-          <div class="card-header bg-white border-bottom-0 d-flex justify-content-between align-items-center py-3">
-            <h3 class="h5 mb-0 fw-bold text-dark">
-              <i class="bi bi-shield-lock-fill text-primary me-2"></i>
-              {{ 'SUPERADMIN_ROLE_MANAGEMENT.ADMINS.TITLE' | translate }}
-            </h3>
-            <span class="badge bg-primary text-white rounded-pill px-3 py-2">{{ admins().length }}</span>
-          </div>
-          <div class="card-body p-0">
-            <div class="table-responsive">
-              <table class="table table-hover align-middle mb-0" aria-label="Current admins table">
-                <thead class="table-light text-muted small text-uppercase">
-                  <tr>
-                    <th class="ps-4 rounded-start">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.NAME' | translate }}</th>
-                    <th>{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.EMAIL' | translate }}</th>
-                    <th class="text-center pe-4 rounded-end">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.ACTIONS' | translate }}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @for (admin of admins(); track admin.id) {
+        @if (isAdminView()) {
+          <div class="card border-0 shadow-sm mb-5" aria-label="Publishers section">
+            <div class="card-header bg-white border-bottom-0 d-flex justify-content-between align-items-center py-3">
+              <h3 class="h5 mb-0 fw-bold text-dark">
+                {{ 'SUPERADMIN_ROLE_MANAGEMENT.PUBLISHERS.TITLE' | translate }}
+              </h3>
+              <span class="badge bg-warning text-dark rounded-pill px-3 py-2">{{ publishers().length }}</span>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" aria-label="Publishers table">
+                  <thead class="table-light text-muted small text-uppercase">
                     <tr>
-                      <td class="ps-4">
-                        <div class="d-flex align-items-center gap-3">
-                          <div class="avatar-circle bg-light text-primary d-flex justify-content-center align-items-center rounded-circle">
-                            <i class="bi bi-person-fill fs-5"></i>
-                          </div>
-                          <div>
-                            <span class="fw-semibold text-dark d-block">{{ getFullName(admin) }}</span>
-                            @if (isSelf(admin)) {
-                              <span class="badge bg-secondary opacity-75 mt-1" style="font-size: 0.7rem;">{{ 'SUPERADMIN_ROLE_MANAGEMENT.ADMINS.SELF_DEMOTION_BLOCKED' | translate }}</span>
-                            }
-                          </div>
-                        </div>
-                      </td>
-                      <td class="text-muted">{{ admin.email }}</td>
-                      <td class="text-center pe-4">
-                        <button
-                          type="button"
-                          class="btn btn-sm btn-light text-danger fw-medium d-inline-flex align-items-center gap-2"
-                          [attr.aria-label]="('SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.DEMOTE' | translate) + ': ' + getFullName(admin)"
-                          [disabled]="isSelf(admin) || isActionRunningFor(admin.id, 'demote')"
-                          (click)="openDemotionConfirmation(admin)"
-                        >
-                          @if (isActionRunningFor(admin.id, 'demote')) {
-                            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-                          } @else {
-                            <i class="bi bi-shield-slash"></i>
-                          }
-                          {{ 'SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.DEMOTE' | translate }}
-                        </button>
-                      </td>
+                      <th class="ps-4 rounded-start">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.NAME' | translate }}</th>
+                      <th>{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.EMAIL' | translate }}</th>
+                      <th class="text-center pe-4 rounded-end">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.ACTIONS' | translate }}</th>
                     </tr>
-                  } @empty {
-                    <tr>
-                      <td colspan="3" class="text-center text-muted py-5">
-                        <i class="bi bi-shield-x text-light opacity-50 d-block mb-3" style="font-size: 3rem;"></i>
-                        <span class="fs-6">{{ 'SUPERADMIN_ROLE_MANAGEMENT.ADMINS.EMPTY' | translate }}</span>
-                      </td>
-                    </tr>
-                  }
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    @for (publisher of publishers(); track publisher.id) {
+                      <tr>
+                        <td class="ps-4">
+                          <div class="d-flex align-items-center gap-3">
+                            <span class="fw-semibold text-dark">{{ getFullName(publisher) }}</span>
+                          </div>
+                        </td>
+                        <td class="text-muted">{{ publisher.email }}</td>
+                        <td class="text-center pe-4">
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-light text-danger fw-medium d-inline-flex align-items-center gap-2"
+                            [attr.aria-label]="('SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.DEMOTE_PUBLISHER' | translate) + ': ' + getFullName(publisher)"
+                            (click)="openPublisherDemotionModal(publisher)">
+                            <i class="bi bi-person-dash"></i>
+                            {{ 'SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.DEMOTE_PUBLISHER' | translate }}
+                          </button>
+                        </td>
+                      </tr>
+                    } @empty {
+                      <tr>
+                        <td colspan="3" class="text-center text-muted py-5">
+                          <i class="bi bi-megaphone text-light opacity-50 d-block mb-3" style="font-size: 3rem;"></i>
+                          <span class="fs-6">{{ 'SUPERADMIN_ROLE_MANAGEMENT.PUBLISHERS.EMPTY' | translate }}</span>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
+        }
 
-        <div class="card border-0 shadow-sm mb-4" aria-label="Eligible users section">
-          <div class="card-header bg-white border-bottom-0 d-flex justify-content-between align-items-center py-3">
-            <h3 class="h5 mb-0 fw-bold text-dark">
-              <i class="bi bi-people-fill text-success me-2"></i>
-              {{ 'SUPERADMIN_ROLE_MANAGEMENT.ELIGIBLE_USERS.TITLE' | translate }}
-            </h3>
-            <span class="badge bg-success text-white rounded-pill px-3 py-2">{{ eligibleUsers().length }}</span>
-          </div>
-          <div class="card-body p-0">
-            <div class="table-responsive">
-              <table class="table table-hover align-middle mb-0" aria-label="Eligible users table">
-                <thead class="table-light text-muted small text-uppercase">
-                  <tr>
-                    <th class="ps-4 rounded-start">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.NAME' | translate }}</th>
-                    <th>{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.EMAIL' | translate }}</th>
-                    <th class="text-center pe-4 rounded-end">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.ACTIONS' | translate }}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @for (user of eligibleUsers(); track user.id) {
+        @if (!isAdminView()) {
+          <div class="card border-0 shadow-sm mb-5" aria-label="Current admins section">
+            <div class="card-header bg-white border-bottom-0 d-flex justify-content-between align-items-center py-3">
+              <h3 class="h5 mb-0 fw-bold text-dark">
+                <i class="bi bi-shield-lock-fill text-primary me-2"></i>
+                {{ 'SUPERADMIN_ROLE_MANAGEMENT.ADMINS.TITLE' | translate }}
+              </h3>
+              <span class="badge bg-primary text-white rounded-pill px-3 py-2">{{ admins().length }}</span>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" aria-label="Current admins table">
+                  <thead class="table-light text-muted small text-uppercase">
                     <tr>
-                      <td class="ps-4">
-                        <div class="d-flex align-items-center gap-3">
-                          <div class="avatar-circle bg-light text-success d-flex justify-content-center align-items-center rounded-circle">
-                            <i class="bi bi-person fs-5"></i>
+                      <th class="ps-4 rounded-start">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.NAME' | translate }}</th>
+                      <th>{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.EMAIL' | translate }}</th>
+                      <th class="text-center pe-4 rounded-end">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.ACTIONS' | translate }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (admin of admins(); track admin.id) {
+                      <tr>
+                        <td class="ps-4">
+                          <div class="d-flex align-items-center gap-3">
+                            <div class="avatar-circle bg-light text-primary d-flex justify-content-center align-items-center rounded-circle">
+                              <i class="bi bi-person-fill fs-5"></i>
+                            </div>
+                            <div>
+                              <span class="fw-semibold text-dark d-block">{{ getFullName(admin) }}</span>
+                              @if (isSelf(admin)) {
+                                <span class="badge bg-secondary opacity-75 mt-1" style="font-size: 0.7rem;">{{ 'SUPERADMIN_ROLE_MANAGEMENT.ADMINS.SELF_DEMOTION_BLOCKED' | translate }}</span>
+                              }
+                            </div>
                           </div>
-                          <span class="fw-semibold text-dark">{{ getFullName(user) }}</span>
-                        </div>
-                      </td>
-                      <td class="text-muted">{{ user.email }}</td>
-                      <td class="text-center pe-4">
-                        <button
-                          type="button"
-                          class="btn btn-sm btn-success fw-medium d-inline-flex align-items-center gap-2"
-                          [attr.aria-label]="('SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.PROMOTE' | translate) + ': ' + getFullName(user)"
-                          [disabled]="isActionRunningFor(user.id, 'promote')"
-                          (click)="openPromotionConfirmation(user)"
-                        >
-                          @if (isActionRunningFor(user.id, 'promote')) {
-                            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
-                          } @else {
-                            <i class="bi bi-shield-arrow-up"></i>
-                          }
-                          {{ 'SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.PROMOTE' | translate }}
-                        </button>
-                      </td>
-                    </tr>
-                  } @empty {
-                    <tr>
-                      <td colspan="3" class="text-center text-muted py-5">
-                        <i class="bi bi-inbox text-light opacity-50 d-block mb-3" style="font-size: 3rem;"></i>
-                        <span class="fs-6">{{ 'SUPERADMIN_ROLE_MANAGEMENT.ELIGIBLE_USERS.EMPTY' | translate }}</span>
-                      </td>
-                    </tr>
-                  }
-                </tbody>
-              </table>
+                        </td>
+                        <td class="text-muted">{{ admin.email }}</td>
+                        <td class="text-center pe-4">
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-light text-danger fw-medium d-inline-flex align-items-center gap-2"
+                            [attr.aria-label]="('SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.DEMOTE' | translate) + ': ' + getFullName(admin)"
+                            [disabled]="isSelf(admin) || isActionRunningFor(admin.id, 'demote')"
+                            (click)="openDemotionConfirmation(admin)"
+                          >
+                            @if (isActionRunningFor(admin.id, 'demote')) {
+                              <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                            } @else {
+                              <i class="bi bi-shield-slash"></i>
+                            }
+                            {{ 'SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.DEMOTE' | translate }}
+                          </button>
+                        </td>
+                      </tr>
+                    } @empty {
+                      <tr>
+                        <td colspan="3" class="text-center text-muted py-5">
+                          <i class="bi bi-shield-x text-light opacity-50 d-block mb-3" style="font-size: 3rem;"></i>
+                          <span class="fs-6">{{ 'SUPERADMIN_ROLE_MANAGEMENT.ADMINS.EMPTY' | translate }}</span>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
+
+          <div class="card border-0 shadow-sm mb-4" aria-label="Eligible users section">
+            <div class="card-header bg-white border-bottom-0 d-flex justify-content-between align-items-center py-3">
+              <h3 class="h5 mb-0 fw-bold text-dark">
+                <i class="bi bi-people-fill text-success me-2"></i>
+                {{ 'SUPERADMIN_ROLE_MANAGEMENT.ELIGIBLE_USERS.TITLE' | translate }}
+              </h3>
+              <span class="badge bg-success text-white rounded-pill px-3 py-2">{{ eligibleUsers().length }}</span>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" aria-label="Eligible users table">
+                  <thead class="table-light text-muted small text-uppercase">
+                    <tr>
+                      <th class="ps-4 rounded-start">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.NAME' | translate }}</th>
+                      <th>{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.EMAIL' | translate }}</th>
+                      <th class="text-center pe-4 rounded-end">{{ 'SUPERADMIN_ROLE_MANAGEMENT.TABLE.ACTIONS' | translate }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (user of eligibleUsers(); track user.id) {
+                      <tr>
+                        <td class="ps-4">
+                          <div class="d-flex align-items-center gap-3">
+                            <div class="avatar-circle bg-light text-success d-flex justify-content-center align-items-center rounded-circle">
+                              <i class="bi bi-person fs-5"></i>
+                            </div>
+                            <span class="fw-semibold text-dark">{{ getFullName(user) }}</span>
+                          </div>
+                        </td>
+                        <td class="text-muted">{{ user.email }}</td>
+                        <td class="text-center pe-4">
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-success fw-medium d-inline-flex align-items-center gap-2"
+                            [attr.aria-label]="('SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.PROMOTE' | translate) + ': ' + getFullName(user)"
+                            [disabled]="isActionRunningFor(user.id, 'promote')"
+                            (click)="openPromotionConfirmation(user)"
+                          >
+                            @if (isActionRunningFor(user.id, 'promote')) {
+                              <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                            } @else {
+                              <i class="bi bi-shield-arrow-up"></i>
+                            }
+                            {{ 'SUPERADMIN_ROLE_MANAGEMENT.ACTIONS.PROMOTE' | translate }}
+                          </button>
+                        </td>
+                      </tr>
+                    } @empty {
+                      <tr>
+                        <td colspan="3" class="text-center text-muted py-5">
+                          <i class="bi bi-inbox text-light opacity-50 d-block mb-3" style="font-size: 3rem;"></i>
+                          <span class="fs-6">{{ 'SUPERADMIN_ROLE_MANAGEMENT.ELIGIBLE_USERS.EMPTY' | translate }}</span>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        }
       }
     </div>
   </div>
@@ -184,4 +238,13 @@
     (confirmed)="confirmRoleChange()"
     (cancelled)="closeConfirmation()"
   ></app-confirm-modal>
+}
+
+@if (showDemotionModal() && demotionTarget()) {
+  <app-publisher-demotion-modal
+    [target]="demotionTarget()!"
+    [loading]="demotionLoading()"
+    (confirmed)="confirmPublisherDemotion($event)"
+    (cancelled)="closePublisherDemotionModal()">
+  </app-publisher-demotion-modal>
 }
