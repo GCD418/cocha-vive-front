@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   review-counter:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - name: Verify approvals
         uses: actions/github-script@v6
