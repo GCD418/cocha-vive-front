@@ -80,7 +80,7 @@ export const routes: Routes = [
             import('./pages/tickets/my-tickets/my-tickets')
             .then(m => m.MyTicketsPageComponent),
         canActivate: [authGuard],
-        data: { roles: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_PUBLISHER', 'ROLE_SUPERADMIN'] },
+        data: { roles: ['ROLE_USER'] },
     },
     {
         path: 'my-tickets/:id',
@@ -88,7 +88,7 @@ export const routes: Routes = [
             import('./pages/tickets/ticket-details/ticket-details')
             .then(m => m.TicketDetailsPageComponent),
         canActivate: [authGuard],
-        data: { roles: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_PUBLISHER', 'ROLE_SUPERADMIN'] },
+        data: { roles: ['ROLE_USER'] },
     },
     {
         path: 'buy-ticket/:eventId',
