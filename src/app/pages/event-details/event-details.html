@@ -1,23 +1,23 @@
-<div class="min-vh-100">
+<div class="min-vh-100 pt-3">
   @if (event()) {
-    <div class="container pt-5 mt-5">
+    <div class="container pt-5 mt-5 mb-4">
 
       <div class="row g-4">
         <div class="col-lg-8">
 
           @if (event()!.photoLinks && event()!.photoLinks.length > 0) {
-            <div id="eventPhotosCarousel" class="carousel slide rounded mb-4" data-bs-ride="carousel" 
+            <div id="eventPhotosCarousel" class="carousel slide rounded mb-4" data-bs-ride="carousel"
                  style="border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%); overflow: hidden; height: 300px; background-color: var(--surface-color);">
-              
+
               <div class="carousel-inner h-100">
                 @for (image of event()!.photoLinks; track $index) {
                   <div class="carousel-item h-100" [class.active]="$index === 0">
                     <div class="w-100 h-100" style="overflow: hidden;">
-                      <img [src]="image" class="d-block w-100 h-100" 
-                           style="object-fit: cover; cursor: pointer; transition: transform 0.3s ease-in-out;" 
-                           [alt]="'EVENT_DETAILS.PHOTO_ALT' | translate" data-bs-toggle="modal" 
-                           [attr.data-bs-target]="'#imageModal' + $index" 
-                           onmouseover="this.style.transform='scale(1.05)'" 
+                      <img [src]="image" class="d-block w-100 h-100"
+                           style="object-fit: cover; cursor: pointer; transition: transform 0.3s ease-in-out;"
+                           [alt]="'EVENT_DETAILS.PHOTO_ALT' | translate" data-bs-toggle="modal"
+                           [attr.data-bs-target]="'#imageModal' + $index"
+                           onmouseover="this.style.transform='scale(1.05)'"
                            onmouseout="this.style.transform='scale(1)'">
                     </div>
                   </div>
