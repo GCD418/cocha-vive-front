@@ -90,4 +90,12 @@ export const routes: Routes = [
         canActivate: [authGuard],
         data: { roles: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_PUBLISHER', 'ROLE_SUPERADMIN'] },
     },
+    {
+        path: 'buy-ticket/:eventId',
+        loadComponent: () =>
+            import('./pages/tickets/buy-ticket/buy-ticket')
+            .then(m => m.BuyTicketPageComponent),
+        canActivate: [authGuard],
+        data: { roles: ['ROLE_USER'] },
+    },
 ];

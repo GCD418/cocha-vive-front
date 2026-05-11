@@ -266,7 +266,17 @@
     "LOCATION_SOON": "Location available soon",
     "SHARE": "Share Event",
     "LOADING": "Loading...",
-    "LOCATION_MAP": "View location on map"
+    "LOCATION_MAP": "View location on map",
+    "BUY_TICKETS": "Buy Tickets"
+  },
+  "BUY_TICKET": {
+    "BACK": "Back",
+    "TITLE": "Buy Tickets",
+    "UNIT_PRICE": "Unit price",
+    "QUANTITY": "Quantity",
+    "TOTAL_PRICE": "Total to pay",
+    "CONFIRM": "Confirm Purchase",
+    "PROCESSING": "Processing..."
   },
   "EVENT_LIST": {
     "TITLE": "My Events",

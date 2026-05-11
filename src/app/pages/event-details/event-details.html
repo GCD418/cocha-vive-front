@@ -164,6 +164,16 @@
             </button>
             </div>
 
+            @if (event()!.cost > 0) {
+              <div class="d-grid mb-3">
+                <button class="btn btn-outline-primary"
+                      [routerLink]="['/buy-ticket', event()!.id]"
+                      style="border-color: var(--accent-color); color: var(--accent-color);">
+                <i class="bi bi-ticket-perforated me-1"></i> {{ 'EVENT_DETAILS.BUY_TICKETS' | translate }}
+              </button>
+              </div>
+            }
+
             <hr style="border-color: color-mix(in srgb, var(--default-color), transparent 85%);">
 
             <div class="d-flex align-items-center justify-content-center gap-2"

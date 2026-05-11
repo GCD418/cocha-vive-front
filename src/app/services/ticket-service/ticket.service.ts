@@ -14,4 +14,8 @@ export class TicketService {
   getMyTickets(): Observable<TicketResponseDTO[]> {
     return this.http.get<TicketResponseDTO[]>(this.baseUrl);
   }
+
+  buyTickets(request: { eventId: number; quantity: number }): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/buy`, request);
+  }
 }

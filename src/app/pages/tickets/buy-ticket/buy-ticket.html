@@ -1,0 +1,84 @@
+<div class="min-vh-100 d-flex flex-column" style="background-color: var(--background-color);">
+  <div class="container pt-5 mt-5 flex-grow-1">
+
+    <div class="mb-4">
+      <button class="btn btn-outline-secondary btn-sm" (click)="goBack()">
+        <i class="bi bi-arrow-left me-2"></i>{{ 'BUY_TICKET.BACK' | translate }}
+      </button>
+    </div>
+
+    @if (event()) {
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="card border-0 shadow-sm rounded-4" style="background-color: var(--surface-color);">
+          <div class="card-body p-4 p-md-5">
+            <h2 class="fw-bold mb-4 text-center" style="color: var(--heading-color);">{{ 'BUY_TICKET.TITLE' | translate
+              }}</h2>
+
+            <div class="p-3 mb-4 rounded-3 d-flex align-items-center gap-3"
+              style="background-color: color-mix(in srgb, var(--default-color), transparent 95%); border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);">
+              <div class="rounded d-flex align-items-center justify-content-center"
+                style="width: 60px; height: 60px; background-color: color-mix(in srgb, var(--accent-color), transparent 85%);">
+                <i class="bi bi-ticket-perforated fs-3" style="color: var(--accent-color);"></i>
+              </div>
+              <div>
+                <h5 class="mb-1 fw-bold" style="color: var(--heading-color);">{{ event()!.title }}</h5>
+                <p class="mb-0 text-muted small"><i class="bi bi-calendar-event me-1"></i> {{ event()!.dateStart |
+                  date:'dd/MM/yyyy HH:mm' }}</p>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+                <span class="text-muted">{{ 'BUY_TICKET.UNIT_PRICE' | translate }}</span>
+                <span class="fw-medium">{{ event()!.cost | price }}</span>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+                <span class="text-muted d-flex align-items-center">{{ 'BUY_TICKET.QUANTITY' | translate }}</span>
+                <div class="d-flex align-items-center">
+                  <button class="btn btn-outline-secondary btn-sm rounded-circle"
+                    style="width: 32px; height: 32px; padding: 0;" (click)="decrement()" [disabled]="quantity() <= 1">
+                    <i class="bi bi-dash"></i>
+                  </button>
+                  <span class="mx-3 fw-bold fs-5" style="min-width: 24px; text-align: center;">{{ quantity() }}</span>
+                  <button class="btn btn-outline-secondary btn-sm rounded-circle"
+                    style="width: 32px; height: 32px; padding: 0;" (click)="increment()" [disabled]="quantity() >= 20">
+                    <i class="bi bi-plus"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span class="fw-bold fs-5" style="color: var(--heading-color);">{{ 'BUY_TICKET.TOTAL_PRICE' | translate
+                  }}</span>
+                <span class="fw-bold fs-3" style="color: var(--accent-color);">{{ totalPrice() | price }}</span>
+              </div>
+            </div>
+
+            <div class="d-grid mt-5">
+              <button class="btn btn-lg text-white rounded-pill fw-bold"
+                style="background-color: var(--accent-color); border: none;" [disabled]="isSubmitting()"
+                (click)="confirmPurchase()">
+                @if (isSubmitting()) {
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                {{ 'BUY_TICKET.PROCESSING' | translate }}
+                } @else {
+                <i class="bi bi-cart-check me-2"></i>{{ 'BUY_TICKET.CONFIRM' | translate }}
+                }
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    } @else {
+    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+      <div class="spinner-border" style="color: var(--accent-color);" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    }
+  </div>
+</div>
