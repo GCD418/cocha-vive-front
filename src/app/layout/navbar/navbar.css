@@ -222,3 +222,135 @@
     right: -45px !important;
   }
 }
+
+/* ── User button & dropdown ── */
+.nav-user-btn {
+  color: var(--nav-color);
+  font-family: var(--nav-font);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0 2px;
+}
+
+.nav-user-btn:hover,
+.nav-user-btn:focus {
+  color: var(--nav-hover-color);
+  box-shadow: none;
+}
+
+.nav-user-initials {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--heading-font);
+}
+
+.nav-user-dropdown {
+  right: 0 !important;
+  left: auto !important;
+  min-width: 240px;
+}
+
+.nav-user-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-color);
+  flex-shrink: 0;
+}
+
+.nav-user-avatar-fallback {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 85%);
+  color: var(--accent-color);
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--heading-font);
+}
+
+/* ── Language dropdown responsive ── */
+@media (max-width: 1199px) {
+  /* En móvil, los dropdowns de lang y user se posicionan bien */
+  .header .d-flex.align-items-center.ms-auto {
+    position: relative;
+    z-index: 9999;
+  }
+
+  .nav-user-dropdown,
+  .dropdown-menu.dropdown-menu-end {
+    position: fixed !important;
+    top: 70px !important;
+    right: 10px !important;
+    left: auto !important;
+    z-index: 99999;
+  }
+}
+
+/* ── Pantallas pequeñas (≤480px) ── */
+@media (max-width: 480px) {
+  /* Ocultar el label de idioma, dejar solo el ícono */
+  .header .cta-btn span {
+    display: none;
+  }
+
+  /* Dropdown de usuario ocupa casi todo el ancho */
+  .nav-user-dropdown {
+    min-width: calc(100vw - 20px) !important;
+    right: 10px !important;
+  }
+
+  /* Dropdown de idioma más compacto */
+  .dropdown-menu.dropdown-menu-end {
+    min-width: 120px !important;
+  }
+
+  /* Botón de login más compacto */
+  .header .cta-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+    margin-left: 10px;
+  }
+
+  /* Iniciales un poco más pequeñas */
+  .nav-user-initials {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+}
+
+/* ── Tablet (481px – 768px) ── */
+@media (min-width: 481px) and (max-width: 768px) {
+  .nav-user-dropdown {
+    min-width: 220px !important;
+  }
+
+  .header .cta-btn {
+    padding: 8px 18px;
+    margin-left: 15px;
+  }
+}
+
+/* ── Asegurar que el gap entre botones no rompa el layout ── */
+@media (max-width: 360px) {
+  .header .d-flex.gap-3 {
+    gap: 0.4rem !important;
+  }
+
+  .header .cta-btn span {
+    display: none;
+  }
+
+  .nav-user-btn .d-none.d-md-inline {
+    display: none !important;
+  }
+}
