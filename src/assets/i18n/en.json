@@ -2,6 +2,7 @@
   "NAV": {
     "START": "Home",
     "EXPLORE": "Explore",
+    "MY_TICKETS": "My Tickets",
     "MY_EVENTS": "My Events",
     "ADMIN_PUBLISHER_REQUESTS": "Publisher Requests",
     "ADMIN_EVENTS": "Admin Events",
@@ -30,6 +31,83 @@
       "EMPTY": "You have no notifications yet.",
       "UNREAD": "Unread",
       "ITEM": "Notification"
+    }
+  },
+
+  "TICKETS": {
+    "LIST": {
+      "TITLE": "My tickets",
+      "SUBTITLE": "Quick access to your entries and QR.",
+      "REFRESH": "Refresh",
+      "LOADING": "Loading tickets...",
+      "STATS": {
+        "TOTAL": "Total",
+        "ACTIVE": "Active",
+        "USED": "Used",
+        "EXPIRED": "Expired"
+      },
+      "FILTERS": {
+        "TITLE": "Filters",
+        "INCLUDE_USED": "Include used",
+        "INCLUDE_EXPIRED": "Include expired",
+        "SHOWING": "Showing"
+      },
+      "ERROR": {
+        "TITLE": "We couldn't load your tickets",
+        "SUBTITLE": "Try again in a few seconds.",
+        "RETRY": "Retry"
+      },
+      "EMPTY": {
+        "TITLE": "You don't have tickets yet",
+        "SUBTITLE": "Once you buy an entry, you'll see it here.",
+        "CTA": "Explore events"
+      },
+      "ITEM": {
+        "TICKET": "Ticket",
+        "QUANTITY": "Quantity",
+        "EVENT": "Event",
+        "TOTAL": "Total",
+        "VIEW": "View",
+        "VIEW_EVENT": "View event"
+      }
+    },
+    "DETAILS": {
+      "BACK": "Back",
+      "LOADING": "Loading ticket...",
+      "TITLE": "Ticket details",
+      "ID": "ID:",
+      "VIEW_EVENT": "View event",
+      "CREATED_AT": "Purchased",
+      "QUANTITY": "Quantity",
+      "UNIT_PRICE": "Unit price",
+      "TOTAL_PRICE": "Total",
+      "EVENT_TITLE": "Event",
+      "EVENT_CATEGORY": "Category",
+      "EVENT_START": "Start date",
+      "EVENT_END": "End date",
+      "BADGES": {
+        "USED": "Used",
+        "NOT_USED": "Not used",
+        "EXPIRED": "Expired",
+        "ACTIVE": "Active"
+      },
+      "QR": {
+        "TITLE": "Ticket QR",
+        "ALT": "Ticket QR",
+        "HINT": "Show it when entering the event.",
+        "UNAVAILABLE": "The QR is only available when the ticket is active and not used.",
+        "ERROR": "QR generation failed."
+      },
+      "NOT_FOUND": {
+        "TITLE": "Ticket not found",
+        "SUBTITLE": "It may not exist or it may not be yours.",
+        "CTA": "Back to my tickets"
+      }
+    },
+    "STATUS": {
+      "ACTIVE": "Active",
+      "USED": "Used",
+      "EXPIRED": "Expired"
     }
   },
   "FOOTER": {
@@ -188,7 +266,17 @@
     "LOCATION_SOON": "Location available soon",
     "SHARE": "Share Event",
     "LOADING": "Loading...",
-    "LOCATION_MAP": "View location on map"
+    "LOCATION_MAP": "View location on map",
+    "BUY_TICKETS": "Buy Tickets"
+  },
+  "BUY_TICKET": {
+    "BACK": "Back",
+    "TITLE": "Buy Tickets",
+    "UNIT_PRICE": "Unit price",
+    "QUANTITY": "Quantity",
+    "TOTAL_PRICE": "Total to pay",
+    "CONFIRM": "Confirm Purchase",
+    "PROCESSING": "Processing..."
   },
   "EVENT_LIST": {
     "TITLE": "My Events",

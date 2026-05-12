@@ -73,3 +73,17 @@
     gap: 0.4rem !important;
   }
 }
+
+/* Accent outline button: keep accent color and show white text on hover */
+.accent-outline-btn {
+  border-color: var(--accent-color) !important;
+  color: var(--accent-color) !important;
+  background-color: transparent !important;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+.accent-outline-btn:hover,
+.accent-outline-btn:focus {
+  color: #ffffff !important;
+  background-color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+}

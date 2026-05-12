@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 import { EventModel } from '../../models/event-model';
 import { EventService } from '../../services/event-service/event.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PricePipe } from '../../shared/pipes/price.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { EventMapModalComponent } from '../../components/events/event-map-modal/event-map-modal';
@@ -12,7 +12,7 @@ import { map } from 'rxjs';
 
 @Component({
   selector: 'app-event-details',
-  imports: [CommonModule, PricePipe, TranslateModule, EventMapModalComponent],
+  imports: [CommonModule, PricePipe, TranslateModule, EventMapModalComponent, RouterModule],
   templateUrl: './event-details.html',
   styleUrl: './event-details.css',
 })

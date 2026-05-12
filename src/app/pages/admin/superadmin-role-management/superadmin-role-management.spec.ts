@@ -22,6 +22,10 @@ describe('SuperadminRoleManagementComponent', () => {
 
     const authServiceMock = {
       getCurrentUser: () => of(null),
+      isLoggedIn: () => false,
+      isAuthenticated: () => false,
+      actualRole: null,
+      getToken: () => null,
     };
 
     await TestBed.configureTestingModule({

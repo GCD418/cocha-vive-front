@@ -1,0 +1,137 @@
+<div class="min-vh-100">
+  <div class="container pt-5 mt-5">
+    <button class="btn btn-sm btn-link text-decoration-none px-0 mb-3" type="button" (click)="goBack()">
+      <i class="bi bi-arrow-left me-1"></i>{{ 'TICKETS.DETAILS.BACK' | translate }}
+    </button>
+
+    @if (loading()) {
+      <div class="d-flex justify-content-center align-items-center py-5">
+        <div class="spinner-border" style="color: var(--accent-color);" role="status">
+          <span class="visually-hidden">{{ 'TICKETS.DETAILS.LOADING' | translate }}</span>
+        </div>
+      </div>
+    } @else if (error()) {
+      <div class="card border-0 shadow-sm">
+        <div class="card-body py-5 text-center">
+          <div class="empty-icon mb-3"><i class="bi bi-exclamation-triangle"></i></div>
+          <h5 class="fw-bold mb-2">{{ 'TICKETS.DETAILS.NOT_FOUND.TITLE' | translate }}</h5>
+          <p class="text-muted mb-4">{{ 'TICKETS.DETAILS.NOT_FOUND.SUBTITLE' | translate }}</p>
+          <a class="cta-btn" routerLink="/my-tickets">{{ 'TICKETS.DETAILS.NOT_FOUND.CTA' | translate }}</a>
+        </div>
+      </div>
+    } @else if (ticket()) {
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap mb-3">
+                <div>
+                  <h3 class="fw-bold mb-1" style="color: var(--heading-color);">{{ 'TICKETS.DETAILS.TITLE' | translate }}</h3>
+                  <div class="text-muted small">
+                    {{ 'TICKETS.DETAILS.ID' | translate }}
+                    <span class="font-monospace">{{ ticket()!.id.slice(0, 8) }}</span>
+                  </div>
+                </div>
+                <a class="btn btn-sm btn-outline-secondary" [routerLink]="['/event-details', ticket()!.eventId]">
+                  <i class="bi bi-calendar2-week me-1"></i>{{ 'TICKETS.DETAILS.VIEW_EVENT' | translate }}
+                </a>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <div class="label">{{ 'TICKETS.DETAILS.EVENT_TITLE' | translate }}</div>
+                    <div class="value">{{ ticket()!.eventTitle }}</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <div class="label">{{ 'TICKETS.DETAILS.EVENT_CATEGORY' | translate }}</div>
+                    <div class="value">{{ ticket()!.eventCategoryName }}</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <div class="label">{{ 'TICKETS.DETAILS.EVENT_START' | translate }}</div>
+                    <div class="value">{{ ticket()!.eventDateStart | date:'d/M/yyyy HH:mm' }}</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <div class="label">{{ 'TICKETS.DETAILS.EVENT_END' | translate }}</div>
+                    <div class="value">{{ ticket()!.eventDateEnd | date:'d/M/yyyy HH:mm' }}</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <div class="label">{{ 'TICKETS.DETAILS.CREATED_AT' | translate }}</div>
+                    <div class="value">{{ ticket()!.createdAt | date:'d/M/yyyy HH:mm' }}</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <div class="label">{{ 'TICKETS.DETAILS.QUANTITY' | translate }}</div>
+                    <div class="value">{{ ticket()!.quantity }}</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <div class="label">{{ 'TICKETS.DETAILS.UNIT_PRICE' | translate }}</div>
+                    <div class="value">{{ ticket()!.unitPrice | price }}</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="info-box">
+                    <div class="label">{{ 'TICKETS.DETAILS.TOTAL_PRICE' | translate }}</div>
+                    <div class="value value-accent">{{ ticket()!.totalPrice | price }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <hr class="my-4" style="border-color: color-mix(in srgb, var(--default-color), transparent 85%);">
+
+              <div class="d-flex gap-2 flex-wrap">
+                <span class="badge rounded-pill" [class.bg-secondary]="ticket()!.used" [class.bg-success]="!ticket()!.used">{{ ticket()!.used ? ('TICKETS.DETAILS.BADGES.USED' | translate) : ('TICKETS.DETAILS.BADGES.NOT_USED' | translate) }}</span>
+                <span class="badge rounded-pill" [class.bg-danger]="ticket()!.expired" [class.bg-success]="!ticket()!.expired">{{ ticket()!.expired ? ('TICKETS.DETAILS.BADGES.EXPIRED' | translate) : ('TICKETS.DETAILS.BADGES.ACTIVE' | translate) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <i class="bi bi-qr-code" style="color: var(--accent-color);"></i>
+                <h5 class="fw-bold mb-0">{{ 'TICKETS.DETAILS.QR.TITLE' | translate }}</h5>
+              </div>
+
+              @if (!canShowQr()) {
+                <div class="alert alert-secondary border-0" role="status">
+                  <div class="small">
+                    {{ 'TICKETS.DETAILS.QR.UNAVAILABLE' | translate }}
+                  </div>
+                </div>
+              } @else {
+                <div class="qr-wrapper">
+                  <qrcode
+                    [qrdata]="ticket()!.id"
+                    [width]="240"
+                    [margin]="1"
+                    [errorCorrectionLevel]="'M'"
+                    [colorDark]="'#0e1b4d'"
+                    [colorLight]="'#ffffff'"
+                    elementType="canvas"
+                    cssClass="qr"
+                    [alt]="'TICKETS.DETAILS.QR.ALT' | translate"
+                  ></qrcode>
+                </div>
+                <p class="text-muted small mb-0 mt-3">{{ 'TICKETS.DETAILS.QR.HINT' | translate }}</p>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
