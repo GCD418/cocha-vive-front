@@ -9,6 +9,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader, TRANSLATE_HTTP_LOADER_CONFIG } from '@ngx-translate/http-loader';
 import { FeatureToggleService } from './services/feature-toggle/feature-toggle.service';
 import { AuthService } from './services/auth/auth.service';
+import { A11yModule } from '@angular/cdk/a11y';
 
 export function HttpLoaderFactory() {
   return new TranslateHttpLoader();
@@ -37,6 +38,9 @@ export const appConfig: ApplicationConfig = {
         fallbackLang: 'es' 
       })
     ),
+
+    // ✅ A11yModule va SOLO, fuera del TranslateModule
+    importProvidersFrom(A11yModule),
 
     {
       provide: SOCIAL_AUTH_CONFIG,

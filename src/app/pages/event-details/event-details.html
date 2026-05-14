@@ -164,6 +164,16 @@
             </button>
             </div>
 
+            @if (canCancel()) {
+              <div class="d-grid mb-3">
+                <button class="btn text-white"
+                        style="background-color: #dc3545; border-color: #dc3545;"
+                        (click)="openCancelModal()">
+                  <i class="bi bi-x-circle me-1"></i> Cancelar Evento
+                </button>
+              </div>
+            }
+
             <hr style="border-color: color-mix(in srgb, var(--default-color), transparent 85%);">
 
             <div class="d-flex align-items-center justify-content-center gap-2"
@@ -190,5 +200,16 @@
       [longitude]="event()!.longitude"
       [locationName]="event()!.shortPlaceDescription">
     </app-event-map-modal>
+  }
+
+  @if (showCancelModal()) {
+    <app-confirm-modal
+      title="Cancelar Evento"
+      message="¿Estás seguro de que deseas cancelar este evento? Esta acción no se puede deshacer."
+      confirmText="Sí, cancelar evento"
+      [loading]="isCancelling()"
+      (confirmed)="confirmCancel()"
+      (cancelled)="closeCancelModal()">
+    </app-confirm-modal>
   }
 </div>

@@ -23,10 +23,11 @@
                 [placeholder]="'EXPLORE.SIDEBAR.SEARCH_PLACEHOLDER' | translate"
                 [ngModel]="searchQuery()"
                 (ngModelChange)="searchQuery.set($event); onFilterChange()"
+                [attr.aria-label]="'EXPLORE.SIDEBAR.SEARCH_PLACEHOLDER' | translate"
                 style="border-color: color-mix(in srgb, var(--default-color), transparent 75%); background-color: var(--surface-color); color: var(--default-color);"
             />
             @if (searchQuery()) {
-            <button class="btn btn-outline-secondary" type="button" (click)="clearFilters()" [title]="'EXPLORE.SIDEBAR.CLEAR_TOOLTIP' | translate">
+            <button class="btn btn-outline-secondary" type="button" (click)="clearFilters()" [attr.aria-label]="'EXPLORE.SIDEBAR.CLEAR_TOOLTIP' | translate">
                 <i class="bi bi-x-lg"></i>
             </button>
             }
@@ -65,6 +66,7 @@
         <select class="form-select mb-3"
                 [ngModel]="selectedCategoryId()"
                 (ngModelChange)="selectedCategoryId.set($event); onFilterChange()"
+                [attr.aria-label]="'EXPLORE.SIDEBAR.CATEGORY_LABEL' | translate"
                 style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);">
             <option [ngValue]="null">{{ 'EXPLORE.SIDEBAR.CATEGORY_ALL' | translate }}</option>
             @for (category of categories(); track category.id) {
@@ -78,6 +80,7 @@
         <select class="form-select mb-3" 
                 [ngModel]="eventType()" 
                 (ngModelChange)="eventType.set($event); onTypeChange()" 
+                [attr.aria-label]="'EXPLORE.SIDEBAR.TYPE_LABEL' | translate"
                 style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);">
             <option value="ALL">{{ 'EXPLORE.SIDEBAR.TYPE_ALL' | translate }}</option>
             <option value="FREE">{{ 'EXPLORE.SIDEBAR.TYPE_FREE' | translate }}</option>
@@ -128,8 +131,9 @@
                    style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
         </div>
 
-        <button class="btn btn-outline-secondary w-100" (click)="clearFilters()">
-            <i class="bi bi-trash me-2"></i>{{ 'EXPLORE.SIDEBAR.CLEAR_FILTERS' | translate }}
+        <button class="btn btn-outline-secondary w-100" (click)="clearFilters()"
+                [attr.aria-label]="'Eliminar todos los filtros'">
+            <i class="bi bi-trash me-2" aria-hidden="true"></i>{{ 'EXPLORE.SIDEBAR.CLEAR_FILTERS' | translate }}
         </button>
 
         </div>
@@ -174,18 +178,24 @@
             <nav class="d-flex justify-content-center mt-5" [attr.aria-label]="'EXPLORE.MAIN.PAGINATION_LABEL' | translate">
                 <ul class="pagination">
                 <li class="page-item" [class.disabled]="currentPage() === 1">
-                    <button class="page-link" (click)="goToPage(currentPage() - 1)" [attr.aria-label]="'EXPLORE.MAIN.PREV' | translate">
-                    <i class="bi bi-chevron-left"></i>
+                    <button class="page-link" (click)="goToPage(currentPage() - 1)" 
+                            [attr.aria-label]="'Página anterior'">
+                    <i class="bi bi-chevron-left" aria-hidden="true"></i>
                     </button>
                 </li>
                 @for (page of pageNumbers(); track page) {
                     <li class="page-item" [class.active]="page === currentPage()">
-                    <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
+                    <button class="page-link" (click)="goToPage(page)" 
+                            [attr.aria-label]="'Ir a página ' + page"
+                            [attr.aria-current]="page === currentPage() ? 'page' : null">
+                        {{ page }}
+                    </button>
                     </li>
                 }
                 <li class="page-item" [class.disabled]="currentPage() === totalPages()">
-                    <button class="page-link" (click)="goToPage(currentPage() + 1)" [attr.aria-label]="'EXPLORE.MAIN.NEXT' | translate">
-                    <i class="bi bi-chevron-right"></i>
+                    <button class="page-link" (click)="goToPage(currentPage() + 1)" 
+                            [attr.aria-label]="'Página siguiente'">
+                    <i class="bi bi-chevron-right" aria-hidden="true"></i>
                     </button>
                 </li>
                 </ul>

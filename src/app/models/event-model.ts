@@ -1,3 +1,8 @@
+export enum EventStatus {
+  ACTIVE = 'ACTIVE',
+  CANCELLED = 'CANCELLED',
+  FINISHED = 'FINISHED'
+}
 export interface CategoryDTO {
     id: number;
     name: string;

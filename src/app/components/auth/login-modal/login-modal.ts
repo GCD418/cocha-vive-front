@@ -8,6 +8,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FeatureToggleService } from '../../../services/feature-toggle/feature-toggle.service';
 import { AppFeatures } from '../../../models/app-features';
+import { A11yModule } from '@angular/cdk/a11y';
 
 declare global {
   interface Window {
@@ -16,7 +17,7 @@ declare global {
 }
 @Component({
   selector: 'app-login-modal',
-  imports: [GoogleSigninButtonModule, TranslateModule, CommonModule],
+  imports: [GoogleSigninButtonModule, TranslateModule, CommonModule, A11yModule ],
   templateUrl: './login-modal.html',
   styleUrls: ['./login-modal.css']
 })

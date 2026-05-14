@@ -1,5 +1,6 @@
 <div class="auth-modal-overlay" (click)="close()">
-  <div class="auth-modal-card" (click)="$event.stopPropagation()">
+  
+  <div class="auth-modal-card" (click)="$event.stopPropagation()" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
 
     <button class="auth-modal-close" (click)="close()" aria-label="Cerrar">&times;</button>
 
@@ -10,8 +11,9 @@
 
     <div class="d-flex flex-column gap-2">
 
+     
       <div class="google-btn-wrapper">
-        <asl-google-signin-button type="standard" size="large"></asl-google-signin-button>
+        <asl-google-signin-button cdkFocusInitial type="standard" size="large"></asl-google-signin-button>
       </div>
 
       @if (featureService.isEnabled(AppFeatures.FACEBOOK_LOGIN)){
@@ -29,8 +31,6 @@
         </button>
 
       }
-
-      
 
     </div>
 
