@@ -1,4 +1,4 @@
-import { Component, computed, OnInit, signal } from '@angular/core';
+import { Component, computed, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EventService } from '../../services/event-service/event.service';
@@ -7,6 +7,7 @@ import { EventModel } from '../../models/event-model';
 import { Category } from '../../models/category.model';
 import { EventCardComponent } from '../../components/events/event-card-component/event-card-component';
 import { TranslateModule } from '@ngx-translate/core';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-explore-event',
@@ -34,6 +35,8 @@ export class ExploreEvent implements OnInit {
   readonly itemsPerPage = 12;
   private appliedMinPrice = signal<number | null>(null);
   private appliedMaxPrice = signal<number | null>(null);
+
+  private liveAnnouncer = inject(LiveAnnouncer);
 
   readonly filteredEvents = computed(() => {
     const query = this.searchQuery().trim().toLowerCase();
@@ -152,6 +155,7 @@ export class ExploreEvent implements OnInit {
 
   onFilterChange(): void {
     this.currentPage.set(1);
+    this.announceResults();
   }
 
   onTypeChange(): void {
@@ -162,6 +166,7 @@ export class ExploreEvent implements OnInit {
       this.appliedMaxPrice.set(null);
     }
     this.currentPage.set(1);
+    this.announceResults();
   }
 
   clearFilters(): void {
@@ -175,12 +180,15 @@ export class ExploreEvent implements OnInit {
     this.appliedMaxPrice.set(null);
     this.selectedCategoryId.set(null);
     this.currentPage.set(1);
+    
+    this.liveAnnouncer.announce('Filtros eliminados. Mostrando todos los eventos.', 'polite');
   }
 
   goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages()) {
       this.currentPage.set(page);
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      this.liveAnnouncer.announce(`Página ${page} de ${this.totalPages()}`, 'polite');
     }
   }
 
@@ -193,5 +201,21 @@ export class ExploreEvent implements OnInit {
 
     this.appliedMinPrice.set(parsedMin !== null && isFinite(parsedMin) ? parsedMin * 100 : null);
     this.appliedMaxPrice.set(parsedMax !== null && isFinite(parsedMax) ? parsedMax * 100 : null);
+    
+    this.announceResults();
+  }
+
+  private announceResults(): void {
+    const count = this.filteredEvents().length;
+    const query = this.searchQuery();
+    const category = this.categories().find(c => c.id === this.selectedCategoryId());
+    
+    if (query) {
+      this.liveAnnouncer.announce(`Se encontraron ${count} eventos para la búsqueda "${query}"`, 'polite');
+    } else if (category) {
+      this.liveAnnouncer.announce(`Mostrando ${count} eventos de la categoría ${category.name}`, 'polite');
+    } else {
+      this.liveAnnouncer.announce(`Mostrando ${count} eventos disponibles`, 'polite');
+    }
   }
 }

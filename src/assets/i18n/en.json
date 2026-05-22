@@ -650,6 +650,45 @@
     "SUBTITLE": "Discover what's happening in the city",
     "FEATURE_DISABLED": "This feature is currently disabled.",
     "LOADING": "Loading upcoming events..."
+  },
+  "EXPLORE": {
+    "SIDEBAR": {
+      "TITLE": "Explore",
+      "SUBTITLE": "Filter through all available events",
+      "SEARCH_LABEL": "Search",
+      "SEARCH_PLACEHOLDER": "Title, description, place...",
+      "CLEAR_TOOLTIP": "Clear",
+      "EVENT_FOUND_SINGULAR": "event found",
+      "EVENT_FOUND_PLURAL": "events found",
+      "SEARCH_HINT": "Search by title, description, tags, or location.",
+      "CATEGORY_LABEL": "Category",
+      "CATEGORY_ALL": "All categories",
+      "TYPE_LABEL": "Type",
+      "TYPE_ALL": "All",
+      "TYPE_FREE": "Free",
+      "TYPE_PAID": "Paid",
+      "PRICE_LABEL": "Price Range",
+      "PRICE_MIN": "Min",
+      "PRICE_MAX": "Max",
+      "DATES_LABEL": "Dates",
+      "DATE_FROM": "From",
+      "DATE_TO": "To",
+      "CLEAR_FILTERS": "Clear Filters"
+    },
+  "MAIN": {
+      "TITLE": "Explore Events",
+      "SUBTITLE": "Discover what's happening in Cochabamba",
+      "LOADING": "Loading...",
+      "LOADING_EVENTS": "Loading events...",
+      "ERROR_TITLE": "Could not load events.",
+      "ERROR_DESC": "Please check your connection and try again.",
+      "PAGINATION_LABEL": "Pagination",
+      "PREV": "Prev",
+      "NEXT": "Next",
+      "EMPTY_TITLE": "No results for your search",
+      "EMPTY_DESC": "Try changing or clearing filters.",
+      "VIEW_ALL": "View all events"
+    }
   }
   
 }
