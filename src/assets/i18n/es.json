@@ -625,5 +625,31 @@
     "REASON_MIN_ERROR": "El motivo debe tener al menos 10 caracteres.",
     "CHARS_REMAINING": "caracteres restantes",
     "CONFIRM_BUTTON": "Sí, degradar"
+  },
+  "HERO": {
+    "WELCOME": "Bienvenido a",
+    "BRAND": "Cocha Vive",
+    "SUBTITLE": "Descubre los mejores eventos de Cochabamba"
+  },
+  "CATEGORIES": {
+    "TITLE": "Categorías",
+    "SUBTITLE": "Explora eventos culturales según tus intereses",
+    "LOADING": "Cargando categorías...",
+    "ERROR": "Hubo un error al cargar las categorías.",
+    "EMPTY": "No se encontraron categorías disponibles.",
+    "VIEW_CATEGORY": "Ver eventos de {{name}}"
+  },
+  "FEATURED_EVENTS": {
+    "TITLE": "Eventos Destacados",
+    "LOADING": "Cargando eventos destacados...",
+    "ERROR": "Hubo un error al cargar los eventos.",
+    "EMPTY": "No hay eventos destacados en este momento.",
+    "VIEW_EVENT": "Ver detalles de {{title}}"
+  },
+  "UPCOMING_EVENTS": {
+    "TITLE": "Próximos Eventos",
+    "SUBTITLE": "Descubre lo que está pasando en la ciudad",
+    "FEATURE_DISABLED": "Esta función está actualmente deshabilitada.",
+    "LOADING": "Cargando próximos eventos..."
   }
 }

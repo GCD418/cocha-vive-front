@@ -1,29 +1,30 @@
-<section id="events" class="events-section section-with-bg py-5">
+<section id="upcoming-events" class="events-section section-with-bg py-5" aria-labelledby="upcoming-title">
   <div class="container">
     <div class="section-header section-title text-center">
-      <h2>{{ 'UPCOMING_EVENTS.TITLE' | translate }}</h2>
+      <h2 id="upcoming-title">{{ 'UPCOMING_EVENTS.TITLE' | translate }}</h2>
       <p>{{ 'UPCOMING_EVENTS.SUBTITLE' | translate }}</p>
     </div>
 
     @if (featureService.isEnabled(AppFeatures.VIEW_UPCOMING_EVENTS)) {
 
-    <div class="row g-4">
-
-      @for (eventItem of events(); track eventItem.id) {
-      <div class="col-12 col-md-6 col-lg-4">
-        <app-event-card-component [event]="eventItem"></app-event-card-component>
-      </div>
+      @if (events().length === 0 && !loading()) {
+        <div class="text-center py-4" role="status">
+          <p>{{ 'FEATURED_EVENTS.EMPTY' | translate }}</p>
+        </div>
       }
 
-    </div>
+      <div class="row g-4">
+        @for (eventItem of events(); track eventItem.id) {
+          <div class="col-12 col-md-6 col-lg-4">
+            <app-event-card-component [event]="eventItem"></app-event-card-component>
+          </div>
+        }
+      </div>
     }
-
     @else {
-    <div class="alert alert-info text-center" role="alert">
-      {{ 'UPCOMING_EVENTS.FEATURE_DISABLED' | translate }}
-    </div>
+      <div class="alert alert-info text-center" role="alert">
+        {{ 'UPCOMING_EVENTS.FEATURE_DISABLED' | translate }}
+      </div>
     }
-
-
   </div>
 </section>
