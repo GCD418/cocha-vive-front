@@ -104,10 +104,7 @@
                 <i class="bi bi-person-fill fs-4" style="color: var(--contrast-color);"></i>
               </div>
               <div>
-                <p class="mb-0 fw-semibold">
-                  {{ event()!.organizedByUser.names }} {{ event()!.organizedByUser.firstLastName }}
-                  {{ event()!.organizedByUser.secondLastName || '' }}
-                </p>
+                <p class="mb-0 fw-semibold">{{ event()!.organizedByUserName }}</p>
                 <p class="mb-0" style="font-size: 13px; color: color-mix(in srgb, var(--default-color), transparent 40%);">
                   {{ 'EVENT_DETAILS.ORGANIZER_ROLE' | translate }}
                 </p>
@@ -124,7 +121,7 @@
               <i class="bi bi-tag fs-5" style="color: var(--accent-color);"></i>
               <div>
                 <p class="mb-0" style="font-size: 13px; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EVENT_DETAILS.CATEGORY' | translate }}</p>
-                <p class="mb-0 fw-semibold">{{ event()!.category.name }}</p>
+                <p class="mb-0 fw-semibold">{{ event()!.categoryName }}</p>
               </div>
             </div>
 
