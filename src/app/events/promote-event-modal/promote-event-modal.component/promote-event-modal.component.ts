@@ -11,7 +11,7 @@ import {
 declare const bootstrap: any;
 
 @Component({
-  selector: 'app-promote-event-modal.component',
+  selector: 'app-promote-event-modal',
   imports: [CommonModule, TranslateModule, QRCodeComponent],
   templateUrl: './promote-event-modal.component.html',
   styleUrl: './promote-event-modal.component.css',

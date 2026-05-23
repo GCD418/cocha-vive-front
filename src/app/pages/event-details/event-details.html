@@ -161,6 +161,16 @@
             </button>
             </div>
 
+            <div class="d-grid mb-3">
+              <button class="btn text-white"
+                    style="background-color: #f82249; border-color: #f82249;"
+                    data-bs-toggle="modal"
+                    data-bs-target="#eventMapModal"
+                    [disabled]="!event()!.latitude || !event()!.longitude">
+              <i class="bi bi-geo-alt me-1"></i> {{ 'EVENT_DETAILS.LOCATION_MAP' | translate }}
+            </button>
+            </div>
+
             @if (event()!.cost > 0) {
               <div class="d-grid mb-3">
                 <button class="btn btn-outline-primary accent-outline-btn"
@@ -197,5 +207,13 @@
       [longitude]="event()!.longitude"
       [locationName]="event()!.shortPlaceDescription">
     </app-event-map-modal>
+  }
+
+  @if (canPromote()) {
+    <app-promote-event-modal
+      #promoteModal
+      [eventId]="event()!.id"
+      (promoted)="onPromoted()">
+    </app-promote-event-modal>
   }
 </div>
