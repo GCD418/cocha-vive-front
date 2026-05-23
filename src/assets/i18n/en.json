@@ -232,7 +232,8 @@
     "TITLE": "Featured Events",
     "LOADING": "Loading upcoming events...",
     "ERROR": "There was an error loading events.",
-    "EMPTY": "No scheduled events."
+    "EMPTY": "No scheduled events.",
+    "SPONSORED": "Sponsored"
   },
   "UPCOMING_EVENTS": {
     "TITLE": "Upcoming Events",
@@ -277,6 +278,35 @@
     "TOTAL_PRICE": "Total to pay",
     "CONFIRM": "Confirm Purchase",
     "PROCESSING": "Processing..."
+  },
+  "PROMOTE": {
+    "TITLE": "Promote my event",
+    "SUBTITLE": "Choose the plan that best fits your event.",
+    "BUTTON": "Promote event",
+    "CHOOSE": "Choose",
+    "PLANS": {
+      "ONE_DAY": {
+        "LABEL": "1 Day",
+        "DESC": "Featured visibility for 24 hours."
+      },
+      "THREE_DAYS": {
+        "LABEL": "3 Days",
+        "DESC": "Three days in the platform's featured spots."
+      },
+      "ONE_WEEK": {
+        "LABEL": "1 Week",
+        "DESC": "Maximum exposure for a full week."
+      }
+    },
+    "QR": {
+      "SELECTED_PLAN": "Selected plan:",
+      "HINT": "Scan the QR to simulate payment, then confirm.",
+      "ALT": "Simulated payment QR",
+      "BACK": "Back to plans",
+      "CONFIRM": "I already paid",
+      "PROCESSING": "Processing...",
+      "ERROR": "An error occurred while processing the payment. Please try again."
+    }
   },
   "EVENT_LIST": {
     "TITLE": "My Events",

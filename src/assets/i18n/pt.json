@@ -232,7 +232,8 @@
     "TITLE": "Eventos em Destaque",
     "LOADING": "Carregando os próximos eventos...",
     "ERROR": "Ocorreu um erro ao carregar os eventos.",
-    "EMPTY": "Não há eventos programados."
+    "EMPTY": "Não há eventos programados.",
+    "SPONSORED": "Patrocinado"
   },
   "UPCOMING_EVENTS": {
     "TITLE": "Próximos Eventos",
@@ -277,6 +278,35 @@
     "TOTAL_PRICE": "Total a pagar",
     "CONFIRM": "Confirmar Compra",
     "PROCESSING": "Processando..."
+  },
+  "PROMOTE": {
+    "TITLE": "Destacar meu evento",
+    "SUBTITLE": "Escolha o plano que melhor se adapta ao seu evento.",
+    "BUTTON": "Destacar evento",
+    "CHOOSE": "Escolher",
+    "PLANS": {
+      "ONE_DAY": {
+        "LABEL": "1 Dia",
+        "DESC": "Visibilidade em destaque por 24 horas."
+      },
+      "THREE_DAYS": {
+        "LABEL": "3 Dias",
+        "DESC": "Três dias nos espaços em destaque da plataforma."
+      },
+      "ONE_WEEK": {
+        "LABEL": "1 Semana",
+        "DESC": "Máxima exposição por uma semana completa."
+      }
+    },
+    "QR": {
+      "SELECTED_PLAN": "Plano selecionado:",
+      "HINT": "Escaneie o QR para simular o pagamento e depois confirme.",
+      "ALT": "QR de pagamento simulado",
+      "BACK": "Voltar aos planos",
+      "CONFIRM": "Já paguei",
+      "PROCESSING": "Processando...",
+      "ERROR": "Ocorreu um erro ao processar o pagamento. Tente novamente."
+    }
   },
   "EVENT_LIST": {
     "TITLE": "Meus Eventos",
