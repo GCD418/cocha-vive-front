@@ -161,15 +161,14 @@
             </button>
             </div>
 
-            <div class="d-grid mb-3">
-              <button class="btn text-white"
-                    style="background-color: #f82249; border-color: #f82249;"
-                    data-bs-toggle="modal"
-                    data-bs-target="#eventMapModal"
-                    [disabled]="!event()!.latitude || !event()!.longitude">
-              <i class="bi bi-geo-alt me-1"></i> {{ 'EVENT_DETAILS.LOCATION_MAP' | translate }}
-            </button>
-            </div>
+            @if (canPromote()) {
+              <div class="d-grid mb-3">
+                <button class="btn btn-warning fw-semibold"
+                        (click)="openPromoteModal()">
+                  <i class="bi bi-stars me-1"></i> {{ 'PROMOTE.BUTTON' | translate }}
+                </button>
+              </div>
+            }
 
             @if (event()!.cost > 0) {
               <div class="d-grid mb-3">
