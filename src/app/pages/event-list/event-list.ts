@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, signal, viewChild } from '@angular/core';
 import { CommonModule, DatePipe, NgClass } from '@angular/common';
 import { EventService } from '../../services/event-service/event.service';
 import { Router, RouterLink } from '@angular/router';
@@ -9,6 +9,7 @@ import { ConfirmModalComponent } from '../../shared/confirmModal-Component/confi
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { PromoteEventModalComponent } from '../../events/promote-event-modal/promote-event-modal.component/promote-event-modal.component';
 
 declare const bootstrap: any;
 
@@ -23,10 +24,9 @@ declare const bootstrap: any;
     NgClass,
     DatePipe,
     FormsModule,
-    NgClass,
-    DatePipe,
-    TranslateModule
-  ],
+    TranslateModule,
+    PromoteEventModalComponent
+],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css',
 })
@@ -36,12 +36,12 @@ export class EventList implements OnInit {
   private router = inject(Router);
 
   events = signal<EventModel[]>([]);
-
   loading = signal(true);
   selectedEvent = signal<EventModel | null>(null);
   showSuccessToast = signal(false);
   cancellingId = signal<number | null>(null);
   pendingCancelId = signal<number | null>(null);
+  pendingPromoteEventId = signal<number | null>(null);
 
   searchText = signal('');
   filterStatus = signal('');
@@ -56,6 +56,8 @@ export class EventList implements OnInit {
   readonly currentUser = toSignal<CurrentUser | null>(this.authService.getCurrentUser(), {
     initialValue: null,
   });
+
+  private promoteModal = viewChild<PromoteEventModalComponent>('promoteModal');
 
   readonly availableCategories = computed(() =>
     [...new Set(this.events().map((event) => event.categoryName).filter(Boolean))] as string[]
@@ -223,6 +225,20 @@ export class EventList implements OnInit {
   onCancelDismissed(): void {              
     this.pendingCancelId.set(null);
     this.cancellingId.set(null);
+  }
+
+  openPromoteModal(eventId: number): void {
+    this.pendingPromoteEventId.set(eventId);
+    setTimeout(() => {
+      this.promoteModal()?.open();
+    });
+  }
+
+  onPromoted(): void {
+    const user = this.currentUser();
+    if (user) {
+      this.loadMyEvents(user.id);
+    }
   }
 
   countByStatus(status: string): number {

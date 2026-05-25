@@ -300,7 +300,7 @@
     },
     "QR": {
       "SELECTED_PLAN": "Plan seleccionado:",
-      "HINT": "Escanea el QR para simular el pago y luego confirma.",
+      "HINT": "Escanea el QR para realizar el pago y luego confirma.",
       "ALT": "QR de pago simulado",
       "BACK": "Volver a planes",
       "CONFIRM": "Ya pagué",

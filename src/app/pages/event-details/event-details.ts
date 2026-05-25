@@ -7,14 +7,13 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PricePipe } from '../../shared/pipes/price.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { EventMapModalComponent } from '../../components/events/event-map-modal/event-map-modal';
-import { PromoteEventModalComponent } from '../../events/promote-event-modal/promote-event-modal.component/promote-event-modal.component';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 
 
 @Component({
   selector: 'app-event-details',
-  imports: [CommonModule, PricePipe, TranslateModule, EventMapModalComponent, PromoteEventModalComponent, RouterModule],
+  imports: [CommonModule, PricePipe, TranslateModule, EventMapModalComponent, RouterModule],
   templateUrl: './event-details.html',
   styleUrl: './event-details.css',
 })
@@ -25,8 +24,6 @@ export class EventDetails {
   private router = inject(Router);
 
   event = signal<EventModel | null>(null);
-
-  private promoteModal = viewChild<PromoteEventModalComponent>('promoteModal');
 
   private currentUser = toSignal(this.authService.getCurrentUser(), { initialValue: null });
 
@@ -61,17 +58,6 @@ export class EventDetails {
     this.eventService.getEventById(eventId).subscribe((data) => {
       this.event.set(data);
     });
-  }
-
-  openPromoteModal(): void {
-    this.promoteModal()?.open();
-  }
-
-  onPromoted(): void {
-    const eventId = this.eventId();
-    if (eventId) {
-      this.loadEvent(eventId);
-    }
   }
 
   goBack(): void {

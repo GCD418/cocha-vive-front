@@ -161,15 +161,6 @@
             </button>
             </div>
 
-            @if (canPromote()) {
-              <div class="d-grid mb-3">
-                <button class="btn btn-warning fw-semibold"
-                        (click)="openPromoteModal()">
-                  <i class="bi bi-stars me-1"></i> {{ 'PROMOTE.BUTTON' | translate }}
-                </button>
-              </div>
-            }
-
             @if (event()!.cost > 0) {
               <div class="d-grid mb-3">
                 <button class="btn btn-outline-primary accent-outline-btn"
@@ -208,11 +199,4 @@
     </app-event-map-modal>
   }
 
-  @if (canPromote()) {
-    <app-promote-event-modal
-      #promoteModal
-      [eventId]="event()!.id"
-      (promoted)="onPromoted()">
-    </app-promote-event-modal>
-  }
 </div>
