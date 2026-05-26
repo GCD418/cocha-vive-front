@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { EventMapModalComponent } from '../../components/events/event-map-modal/event-map-modal';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
-
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-event-details',
@@ -20,6 +20,7 @@ export class EventDetails {
   private route = inject(ActivatedRoute);
   private eventService = inject(EventService);
   private router = inject(Router);
+  private liveAnnouncer = inject(LiveAnnouncer);
 
   event = signal<EventModel | null>(null);
 
@@ -37,12 +38,14 @@ export class EventDetails {
 
       this.eventService.getEventById(eventId).subscribe((data) => {
         this.event.set(data);
+        // Anunciar carga del evento para lectores de pantalla
+        this.liveAnnouncer.announce(`Evento cargado: ${data.title}. ${data.shortDescription}`, 'polite');
       });
     });
   }
 
   goBack(): void {
     this.router.navigate(['/explore-events']);
+    this.liveAnnouncer.announce('Volviendo a la página de explorar eventos', 'polite');
   }
-
 }
