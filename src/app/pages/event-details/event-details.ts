@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, inject, signal, viewChild } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { EventModel } from '../../models/event-model';
 import { EventService } from '../../services/event-service/event.service';
 import { AuthService } from '../../services/auth/auth.service';
@@ -32,15 +32,6 @@ export class EventDetails {
     { initialValue: 0 }
   );
 
-  readonly canPromote = computed(() => {
-    const user = this.currentUser();
-    const ev = this.event();
-    if (!user || !ev) {
-      return false;
-    }
-    return user.id === ev.organizedByUserId && user.role === 'ROLE_PUBLISHER';
-  });
-
   constructor() {
     effect(() => {
       const eventId = this.eventId();
@@ -51,12 +42,6 @@ export class EventDetails {
       this.eventService.getEventById(eventId).subscribe((data) => {
         this.event.set(data);
       });
-    });
-  }
-
-  private loadEvent(eventId: number): void {
-    this.eventService.getEventById(eventId).subscribe((data) => {
-      this.event.set(data);
     });
   }
 
