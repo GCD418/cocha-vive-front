@@ -353,4 +353,80 @@
   .nav-user-btn .d-none.d-md-inline {
     display: none !important;
   }
+
+}
+
+/* ── Icono dentro de los enlaces del navmenu ── */
+.nav-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* En desktop el icono es discreto, junto al texto */
+@media (min-width: 1200px) {
+  .navmenu a .nav-icon {
+    margin-right: 6px;
+  }
+}
+
+/* ── Sidebar lateral en móvil/tablet (≤1199px) ── */
+@media (max-width: 1199px) {
+  /* El panel deja de ser overlay centrado y pasa a barra lateral */
+  .mobile-nav-active .navmenu > ul {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0 auto 0 0;          /* pegado al borde izquierdo */
+    width: min(78vw, 320px);
+    margin: 0;
+    padding: 80px 0 20px 0;
+    border-radius: 0;
+    background-color: var(--nav-dropdown-background-color);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
+    animation: nav-slide-in 0.28s ease;
+  }
+
+  @keyframes nav-slide-in {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(0); }
+  }
+
+  /* Cada enlace: icono + texto alineados, con área táctil cómoda */
+  .navmenu a,
+  .navmenu a:focus {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 22px;
+    font-size: 16px;
+    border-left: 3px solid transparent;
+  }
+
+  .navmenu a .nav-icon {
+    width: 22px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  /* Hover y focus visibles y accesibles */
+  .navmenu a:hover,
+  .navmenu a:focus-visible {
+    background-color: color-mix(in srgb, var(--accent-color), transparent 92%);
+    color: var(--nav-dropdown-hover-color);
+    outline: none;
+  }
+
+  .navmenu a:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
+  }
+
+  /* Página activa: barra de acento + fondo tenue */
+  .navmenu a.active {
+    border-left-color: var(--accent-color);
+    background-color: color-mix(in srgb, var(--accent-color), transparent 88%);
+    color: var(--nav-dropdown-hover-color);
+    font-weight: 600;
+  }
 }
