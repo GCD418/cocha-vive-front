@@ -58,7 +58,7 @@ export class EventList implements OnInit {
   });
 
   readonly availableCategories = computed(() =>
-    [...new Set(this.events().map((event) => event.category?.name).filter(Boolean))] as string[]
+    [...new Set(this.events().map((event) => event.categoryName).filter(Boolean))] as string[]
   );
 
   readonly filteredEvents = computed(() => {
@@ -93,7 +93,7 @@ export class EventList implements OnInit {
         return false;
       }
 
-      if (filterCategory && event.category?.name !== filterCategory) {
+      if (filterCategory && event.categoryName !== filterCategory) {
         return false;
       }
 
