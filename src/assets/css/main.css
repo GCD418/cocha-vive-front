@@ -1830,3 +1830,106 @@ section,
   color: var(--contrast-color);
   background: color-mix(in srgb, var(--accent-color), transparent 15%);
 }
+
+/*--------------------------------------------------------------
+# Home — alternancia de secciones
+--------------------------------------------------------------*/
+
+/* Transición suave entre el hero y el contenido */
+.home-section--light:first-of-type {
+  background:
+    linear-gradient(to bottom, #ffffff 0%, #ffffff 100%);
+}
+
+/* Sección con fondo claro (blanco) */
+.home-section--light {
+  background-color: #ffffff
+}
+
+/* Sección con fondo gris suave — Eventos Destacados */
+.home-section--tinted {
+  background-color: #f2f2f3;
+}
+
+/* Las secciones internas no deben repintar su propio fondo blanco */
+.home-section .section,
+.home-section section {
+  background-color: transparent;
+}
+
+/* Pequeño respiro visual: línea de acento sutil al inicio de la zona tintada */
+.home-section--tinted::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  border-radius: 0 0 4px 4px;
+  background: var(--accent-color);
+}
+
+/*--------------------------------------------------------------
+# Event cards — realce visual
+--------------------------------------------------------------*/
+.event-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(14, 27, 77, 0.14) !important;
+}
+
+.event-card .image-wrapper img {
+  transition: transform 0.4s ease;
+}
+
+.event-card:hover .image-wrapper img {
+  transform: scale(1.06);
+}
+
+/* Badge de categoría con el color de marca */
+.event-card .category-badge {
+  background-color: var(--accent-color);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* Badge de precio en azul oscuro de marca para contraste */
+.event-card .price-badge {
+  background-color: var(--heading-color);
+  color: #fff;
+  font-weight: 600;
+}
+
+#upcoming-events.speakers {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Estado vacío para secciones de eventos */
+.empty-state {
+  padding: 2.5rem 1.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.empty-state-icon {
+  font-size: 2.75rem;
+  color: color-mix(in srgb, var(--heading-color), transparent 65%);
+  display: block;
+  margin-bottom: 0.85rem;
+}
+
+.empty-state-text {
+  color: color-mix(in srgb, var(--heading-color), transparent 35%);
+  font-size: 1rem;
+  font-style: italic;
+}

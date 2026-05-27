@@ -230,6 +230,7 @@
   },
   "FEATURED_EVENTS": {
     "TITLE": "Eventos em Destaque",
+    "SUBTITLE": "Os eventos mais relevantes da temporada",
     "LOADING": "Carregando os próximos eventos...",
     "ERROR": "Ocorreu um erro ao carregar os eventos.",
     "EMPTY": "Não há eventos programados."
@@ -237,6 +238,7 @@
   "UPCOMING_EVENTS": {
     "TITLE": "Próximos Eventos",
     "SUBTITLE": "Descubra o que está acontecendo na cidade",
+    "EMPTY": "Não há eventos próximos por enquanto",
     "FEATURE_DISABLED": "Esta função está atualmente desabilitada."
   },
   "CATEGORY_EVENTS": {

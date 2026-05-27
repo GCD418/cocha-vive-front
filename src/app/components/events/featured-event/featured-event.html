@@ -2,6 +2,7 @@
 
   <div class="container section-title">
     <h2>{{ 'FEATURED_EVENTS.TITLE' | translate }}<br></h2>
+    <p>{{ 'FEATURED_EVENTS.SUBTITLE' | translate }}</p>
   </div>
 
 
@@ -58,8 +59,9 @@
             </div>
           </div>
         } @empty {
-          <div class="text-center text-warning fw-bold">
-            <p>⚠️ {{ 'FEATURED_EVENTS.EMPTY' | translate }}</p>
+          <div class="empty-state text-center">
+            <i class="bi bi-calendar-x empty-state-icon"></i>
+            <p class="empty-state-text mb-0">{{ 'FEATURED_EVENTS.EMPTY' | translate }}</p>
           </div>
         }
 
