@@ -220,7 +220,7 @@
                   </td>
                   <td class="fw-semibold">{{ event.title }}</td>
                   <td class="text-nowrap text-center">{{ event.dateStart | date:'d/M/yyyy' }}</td>
-                  <td>{{ event.category.name }}</td>
+                  <td>{{ event.categoryName }}</td>
                   <td class="text-center">
                     <span class="badge rounded-pill"
                       [class.bg-warning]="event.cost === 0"
