@@ -17,7 +17,7 @@ export interface EventModel {
     shortDescription: string;
     description: string;
     cost: number;
-    category: CategoryDTO;
+    category: CategoryDTO | null;
     organizedByUser: UserDTO;
     latitude: number;
     longitude: number;
