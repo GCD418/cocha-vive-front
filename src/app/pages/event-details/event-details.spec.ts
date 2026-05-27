@@ -13,9 +13,7 @@ describe('EventDetails', () => {
   let eventServiceSpy: { getEventById: ReturnType<typeof vi.fn> };
   let paramMap$: BehaviorSubject<ParamMap>;
 
-  const routerMock = {
-    navigate: vi.fn()
-  };
+  const routerMock = { navigate: vi.fn() };
 
   const eventMock: EventModel = {
     id: 42,
@@ -23,23 +21,30 @@ describe('EventDetails', () => {
     shortDescription: 'Short',
     description: 'Long',
     cost: 10,
-    category: { id: 1, name: 'Música', description: '', identifyingIcon: '' },
-    organizedByUser: { id: 5, names: 'Luis', firstLastName: 'Rojas' },
+    categoryId: 1,
+    categoryName: 'Música',
+    organizedByUserId: 5,
+    organizedByUserName: 'Luis Rojas',
     latitude: -17.39,
     longitude: -66.15,
     shortPlaceDescription: 'Cochabamba',
+    peopleCapacity: 200,
     tags: [],
     photoLinks: [],
     eventStatus: 'APPROVED',
     createdAt: '2026-01-01T00:00:00Z',
     isActive: true,
     dateStart: '2026-06-01T18:00:00Z',
-    dateEnd: '2026-06-01T20:00:00Z'
+    dateEnd: '2026-06-01T20:00:00Z',
+    isFeatured: false,
+    promotionType: null,
+    promotionSlot: null,
+    expiresAt: null,
   };
 
   beforeEach(async () => {
     eventServiceSpy = {
-      getEventById: vi.fn().mockReturnValue(of(eventMock))
+      getEventById: vi.fn().mockReturnValue(of(eventMock)),
     };
     paramMap$ = new BehaviorSubject<ParamMap>(convertToParamMap({}));
 
@@ -47,19 +52,12 @@ describe('EventDetails', () => {
       imports: [EventDetails],
       providers: [
         { provide: EventService, useValue: eventServiceSpy },
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            paramMap: paramMap$.asObservable()
-          }
-        },
-        { provide: Router, useValue: routerMock }
-      ]
+        { provide: ActivatedRoute, useValue: { paramMap: paramMap$.asObservable() } },
+        { provide: Router, useValue: routerMock },
+      ],
     }).compileComponents();
 
-    TestBed.overrideComponent(EventDetails, {
-      set: { template: '' }
-    });
+    TestBed.overrideComponent(EventDetails, { set: { template: '' } });
 
     fixture = TestBed.createComponent(EventDetails);
     component = fixture.componentInstance;
@@ -83,7 +81,6 @@ describe('EventDetails', () => {
 
   it('should navigate back to explore events page', () => {
     component.goBack();
-
     expect(routerMock.navigate).toHaveBeenCalledWith(['/explore-events']);
   });
 });

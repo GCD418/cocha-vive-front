@@ -20,18 +20,25 @@ describe('CategoryEventsComponent', () => {
     shortDescription: 'Short',
     description: 'Long',
     cost: 0,
-    category: { id: 1, name: 'Music', description: 'desc', identifyingIcon: 'icon' },
-    organizedByUser: { id: 1, names: 'Ana', firstLastName: 'Diaz' },
+    categoryId: 1,
+    categoryName: 'Music',
+    organizedByUserId: 1,
+    organizedByUserName: 'Ana Diaz',
     latitude: -17.4,
     longitude: -66.1,
     shortPlaceDescription: 'Cochabamba',
+    peopleCapacity: 100,
     tags: [],
     photoLinks: [],
     eventStatus: 'APPROVED',
     createdAt: '2026-01-01T00:00:00Z',
     isActive: true,
     dateStart,
-    dateEnd: '2026-05-10T12:00:00Z'
+    dateEnd: '2026-05-10T12:00:00Z',
+    isFeatured: false,
+    promotionType: null,
+    promotionSlot: null,
+    expiresAt: null
   });
 
   beforeEach(async () => {

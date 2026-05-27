@@ -17,19 +17,24 @@ export interface EventModel {
     shortDescription: string;
     description: string;
     cost: number;
-    category: CategoryDTO;
-    organizedByUser: UserDTO;
+    categoryId: number;
+    categoryName: string;
+    organizedByUserId: number;
+    organizedByUserName: string;
     latitude: number;
     longitude: number;
     shortPlaceDescription: string;
+    peopleCapacity: number;
     tags: string[];
     photoLinks: string[];
     eventStatus: string;
-    reviewedByAdminId?: number;
-    createdAt: string;
-    updatedAt?: string;
     isActive: boolean;
-    modifiedByUserId?: number;
+    createdAt: string;
     dateStart: string;
-    dateEnd: string; 
+    dateEnd: string;
+
+    isFeatured: boolean;
+    promotionType: string | null;
+    promotionSlot: string | null;
+    expiresAt: string | null;
 }

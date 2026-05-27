@@ -86,7 +86,7 @@ export class EventFormComponent implements OnInit, OnChanges {
       peopleCapacity: 0,
       shortPlaceDescription: event.shortPlaceDescription || '',
       costType: event.cost === 0 ? 'gratuito' : 'depago',
-      categoryId: event.category.id,
+      categoryId: event.categoryId,
       tags: [...(event.tags || [])],
       tagInput: '',
       photoLinks: [...(event.photoLinks || [])],

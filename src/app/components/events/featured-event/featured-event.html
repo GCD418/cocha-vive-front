@@ -27,7 +27,10 @@
         
         @for (event of topEvents(); track event.id; let i = $index) {
           <div class="col-lg-4 col-md-6">
-            <div class="member h-100">
+            <div class="member h-100 position-relative">
+              <span class="sponsored-banner">
+                <i class="bi bi-megaphone-fill me-1"></i>{{ 'FEATURED_EVENTS.SPONSORED' | translate }}
+              </span>
               <img [src]="event.photoLinks && event.photoLinks.length > 0 ? event.photoLinks[0] : 'assets/img/no-image.jpg'" 
                    class="img-fluid event-img" 
                    [alt]="event.title">
@@ -36,7 +39,7 @@
                 <div class="member-info-content w-100">
                   
                   <div class="text-center">
-                    <span class="badge category-badge mb-2">{{ event.category.name }}</span>
+                    <span class="badge category-badge mb-2">{{ event.categoryName }}</span>
                     <h4><a [routerLink]="['/evento', event.id]" class="text-white">{{ event.title }}</a></h4>
                   </div>
                   

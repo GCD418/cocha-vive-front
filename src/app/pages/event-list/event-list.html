@@ -220,7 +220,7 @@
                   </td>
                   <td class="fw-semibold">{{ event.title }}</td>
                   <td class="text-nowrap text-center">{{ event.dateStart | date:'d/M/yyyy' }}</td>
-                  <td>{{ event.category.name }}</td>
+                  <td>{{ event.categoryName }}</td>
                   <td class="text-center">
                     <span class="badge rounded-pill"
                       [class.bg-warning]="event.cost === 0"
@@ -250,6 +250,15 @@
                               class="btn btn-link p-0 text-body-tertiary link-dark"
                               [title]="'EVENT_LIST.TABLE.ACTIONS.CANCEL' | translate">
                         <i class="bi bi-trash fs-5"></i>
+                      </button>
+                      <button (click)="openPromoteModal(event.id)"
+                              class="btn btn-link p-0"
+                              [class.text-warning]="event.eventStatus === 'APPROVED'"
+                              [class.text-muted]="event.eventStatus !== 'APPROVED'"
+                              [disabled]="event.eventStatus !== 'APPROVED'"
+                              [style.pointer-events]="event.eventStatus !== 'APPROVED' ? 'none' : 'auto'"
+                              [title]="'PROMOTE.BUTTON' | translate">
+                        <i class="bi bi-stars fs-5"></i>
                       </button>
                     </div>
                   </td>
@@ -333,4 +342,12 @@
     (confirmed)="onCancelConfirmed()"
     (cancelled)="onCancelDismissed()">
   </app-confirm-modal>
+}
+
+@if (pendingPromoteEventId() !== null) {
+  <app-promote-event-modal
+    #promoteModal
+    [eventId]="pendingPromoteEventId()!"
+    (promoted)="onPromoted()">
+  </app-promote-event-modal>
 }

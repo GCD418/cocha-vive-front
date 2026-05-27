@@ -13,9 +13,7 @@ describe('EventList', () => {
   let fixture: ComponentFixture<EventList>;
   let eventServiceSpy: { getMyEvents: ReturnType<typeof vi.fn>; cancelEvent: ReturnType<typeof vi.fn> };
 
-  const routerSpy = {
-    navigate: vi.fn()
-  };
+  const routerSpy = { navigate: vi.fn() };
 
   const authServiceMock = {
     actualRole: () => 'ROLE_PUBLISHER',
@@ -24,10 +22,10 @@ describe('EventList', () => {
       names: 'Ana',
       firstLastName: 'Perez',
       email: 'ana@test.com',
-      role: 'ROLE_PUBLISHER'
+      role: 'ROLE_PUBLISHER',
     }),
     isAuthenticated: () => true,
-    isLoggedIn: () => true
+    isLoggedIn: () => true,
   };
 
   const createEvent = (id: number, overrides: Partial<EventModel> = {}): EventModel => ({
@@ -36,20 +34,14 @@ describe('EventList', () => {
     shortDescription: 'Desc corta',
     description: 'Desc larga',
     cost: 0,
-    category: {
-      id: 1,
-      name: 'Música',
-      description: 'Categoría música',
-      identifyingIcon: 'icon'
-    },
-    organizedByUser: {
-      id: 1,
-      names: 'User',
-      firstLastName: 'Test'
-    },
+    categoryId: 1,
+    categoryName: 'Música',
+    organizedByUserId: 1,
+    organizedByUserName: 'User Test',
     latitude: -17.39,
     longitude: -66.15,
     shortPlaceDescription: 'Cochabamba',
+    peopleCapacity: 100,
     tags: [],
     photoLinks: [],
     eventStatus: 'APPROVED',
@@ -57,13 +49,17 @@ describe('EventList', () => {
     isActive: true,
     dateStart: '2026-04-01T00:00:00Z',
     dateEnd: '2026-04-01T02:00:00Z',
-    ...overrides
+    isFeatured: false,
+    promotionType: null,
+    promotionSlot: null,
+    expiresAt: null,
+    ...overrides,
   });
 
   beforeEach(async () => {
     eventServiceSpy = {
       getMyEvents: vi.fn().mockReturnValue(of([])),
-      cancelEvent: vi.fn().mockReturnValue(of(void 0))
+      cancelEvent: vi.fn().mockReturnValue(of(void 0)),
     };
 
     await TestBed.configureTestingModule({
@@ -71,13 +67,11 @@ describe('EventList', () => {
       providers: [
         { provide: EventService, useValue: eventServiceSpy },
         { provide: AuthService, useValue: authServiceMock },
-        { provide: Router, useValue: routerSpy }
-      ]
+        { provide: Router, useValue: routerSpy },
+      ],
     }).compileComponents();
 
-    TestBed.overrideComponent(EventList, {
-      set: { template: '' }
-    });
+    TestBed.overrideComponent(EventList, { set: { template: '' } });
 
     fixture = TestBed.createComponent(EventList);
     component = fixture.componentInstance;
@@ -94,16 +88,16 @@ describe('EventList', () => {
         title: 'Festival de Rock',
         cost: 20,
         eventStatus: 'APPROVED',
-        category: { id: 10, name: 'Música', description: '', identifyingIcon: '' },
-        dateStart: '2026-05-10T10:00:00Z'
+        categoryName: 'Música',
+        dateStart: '2026-05-10T10:00:00Z',
       }),
       createEvent(2, {
         title: 'Feria Tech',
         cost: 0,
         eventStatus: 'PENDING',
-        category: { id: 11, name: 'Tecnología', description: '', identifyingIcon: '' },
-        dateStart: '2026-05-11T10:00:00Z'
-      })
+        categoryName: 'Tecnología',
+        dateStart: '2026-05-11T10:00:00Z',
+      }),
     ];
 
     component.events.set(events);
@@ -115,7 +109,6 @@ describe('EventList', () => {
     component.filterCategory.set('Música');
     component.filterDateFrom.set('2026-05-01');
     component.filterDateTo.set('2026-05-15');
-
     component.onFilterChange();
 
     expect(component.currentPage()).toBe(1);
@@ -126,7 +119,7 @@ describe('EventList', () => {
   it('should clear all filters and keep all events visible', () => {
     component.events.set([
       createEvent(1, { eventStatus: 'APPROVED' }),
-      createEvent(2, { eventStatus: 'PENDING', category: { id: 2, name: 'Tech', description: '', identifyingIcon: '' } })
+      createEvent(2, { eventStatus: 'PENDING', categoryName: 'Tech' }),
     ]);
 
     component.searchText.set('abc');
@@ -136,7 +129,6 @@ describe('EventList', () => {
     component.filterDateFrom.set('2026-04-01');
     component.filterDateTo.set('2026-04-30');
     component.currentPage.set(2);
-
     component.clearFilters();
 
     expect(component.searchText()).toBe('');
@@ -171,11 +163,22 @@ describe('EventList', () => {
     component.events.set([
       createEvent(1, { eventStatus: 'APPROVED' }),
       createEvent(2, { eventStatus: 'APPROVED' }),
-      createEvent(3, { eventStatus: 'PENDING' })
+      createEvent(3, { eventStatus: 'PENDING' }),
     ]);
 
     expect(component.countByStatus('APPROVED')).toBe(2);
     expect(component.countByStatus('PENDING')).toBe(1);
     expect(component.countByStatus('REJECTED')).toBe(0);
+  });
+
+  it('openPromoteModal should set pendingPromoteEventId', () => {
+    component.openPromoteModal(5);
+    expect(component.pendingPromoteEventId()).toBe(5);
+  });
+
+  it('onPromoted should reload events', () => {
+    eventServiceSpy.getMyEvents.mockReturnValue(of([createEvent(1)]));
+    component.onPromoted();
+    expect(eventServiceSpy.getMyEvents).toHaveBeenCalled();
   });
 });
