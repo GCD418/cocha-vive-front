@@ -1052,7 +1052,7 @@ section,
 
 @media (max-width: 855px) {
   .hero {
-    padding: 60px 20px;
+    padding: 30px 20px 60px 20px;
     min-height: 55vh;
     background-position: top center;
     background-image: url("/assets/img/hero-bg-mobile.jpg");
@@ -1066,19 +1066,22 @@ section,
 @media (max-width: 576px) {
   .hero {
     min-height: 60vh;
-    padding: 30px 16px;
+    padding: 20px 16px 40px 16px;
     background-position: center;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    padding-top: 90px;
   }
 
   .hero h2 {
-    line-height: 1.1;
-    font-size: clamp(1.8rem, 7vw, 2.6rem);
+    line-height: 1.15;
+    font-size: clamp(1.55rem, 3vw, 1.1rem);
   }
 
   .hero p {
+    font-size: clamp(1.05rem, 3vw, 1.1rem);
     line-height: 1.4;
+    margin-top: 10px;
   }
 }
 
