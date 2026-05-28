@@ -13,7 +13,15 @@
       <div class="col-12 col-md-6 col-lg-4">
         <app-event-card-component [event]="eventItem"></app-event-card-component>
       </div>
-      }
+      } @empty {
+          <div class="col-12">
+            <div class="empty-state text-center">
+              <i class="bi bi-calendar-x empty-state-icon"></i>
+              <p class="empty-state-text mb-0">{{ 'UPCOMING_EVENTS.EMPTY' | translate }}</p>
+            </div>
+          </div>
+        }
+      
 
     </div>
     }

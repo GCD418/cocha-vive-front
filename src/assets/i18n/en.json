@@ -230,6 +230,7 @@
   },
   "FEATURED_EVENTS": {
     "TITLE": "Featured Events",
+    "SUBTITLE": "The most relevant events of the season",
     "LOADING": "Loading upcoming events...",
     "ERROR": "There was an error loading events.",
     "EMPTY": "No scheduled events.",
@@ -238,6 +239,7 @@
   "UPCOMING_EVENTS": {
     "TITLE": "Upcoming Events",
     "SUBTITLE": "Discover what's happening in the city",
+    "EMPTY": "No upcoming events for now",
     "FEATURE_DISABLED": "This feature is currently disabled."
   },
   "CATEGORY_EVENTS": {

@@ -1,3 +1,6 @@
+/* ══════════════════════════════════════════
+   User button & initials
+══════════════════════════════════════════ */
 .nav-user-btn {
   color: var(--nav-color);
   font-family: var(--nav-font);
@@ -28,6 +31,9 @@
   font-family: var(--heading-font);
 }
 
+/* ══════════════════════════════════════════
+   Dropdowns
+══════════════════════════════════════════ */
 .nav-user-dropdown {
   right: 0 !important;
   left: auto !important;
@@ -51,6 +57,9 @@
   font-family: var(--heading-font);
 }
 
+/* ══════════════════════════════════════════
+   Notifications
+══════════════════════════════════════════ */
 .nav-notification-btn {
   color: var(--nav-color);
   padding: 0 4px;
@@ -115,6 +124,9 @@
   flex-shrink: 0;
 }
 
+/* ══════════════════════════════════════════
+   Header layout
+══════════════════════════════════════════ */
 .header .container-fluid,
 .header .container-xl {
   flex-wrap: nowrap;
@@ -138,7 +150,24 @@
   min-width: 0;
 }
 
-@media (max-width: 1199.98px) {
+/* ══════════════════════════════════════════
+   Nav icons — desktop: ocultos
+══════════════════════════════════════════ */
+.nav-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1200px) {
+  .navmenu a .nav-icon {
+    display: none;
+  }
+}
+
+/* ══════════════════════════════════════════
+   Tablet (≤1199px) — header compacto
+══════════════════════════════════════════ */
+@media (max-width: 1199px) {
   .header .container-fluid,
   .header .container-xl {
     gap: 8px;
@@ -181,8 +210,124 @@
     line-height: 1;
     margin-left: 4px;
   }
+
+  /* Dropdowns fijos para que no queden cortados */
+  .nav-user-dropdown{
+    position: fixed !important;
+    top: 70px !important;
+    right: 10px !important;
+    left: auto !important;
+    z-index: 99999;
+  }
+  .dropdown-menu.dropdown-menu-end {
+    position: absolute !important;
+    top: auto !important;
+    right: 0 !important;
+    left: auto !important;
+  }
 }
 
+/* ══════════════════════════════════════════
+   SIDEBAR — se activa con .mobile-nav-active
+   Especificidad alta para ganar a main.css
+══════════════════════════════════════════ */
+@media (max-width: 1199px) {
+
+  /* El panel: fondo oscuro, lateral izquierdo, ancho al contenido */
+  .mobile-nav-active .navmenu > ul {
+    display: flex !important;           /* gana al display:none y display:block de main.css */
+    flex-direction: column;
+    list-style: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: 0 !important;
+    width: auto;
+    min-width: 220px;
+    max-width: min(75vw, 300px);
+    margin: 0;
+    padding: 80px 0 24px 0;
+    border-radius: 0 16px 16px 0;
+    background-color: rgba(1, 8, 33, 0.97) !important;
+    box-shadow: 6px 0 28px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    z-index: 9998 !important;
+    animation: nav-slide-in 0.26s ease;
+    /* Resetear el inset que usa main.css */
+    inset: unset;
+  }
+
+  @keyframes nav-slide-in {
+    from { transform: translateX(-100%); opacity: 0; }
+    to   { transform: translateX(0);     opacity: 1; }
+  }
+
+  /* Cada enlace */
+  .mobile-nav-active .navmenu > ul > li > a,
+  .mobile-nav-active .navmenu > ul > li > a:focus {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+    padding: 14px 28px;
+    font-size: 17px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.78) !important;
+    border-left: 3px solid transparent;
+    white-space: nowrap;
+    background-color: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    /* Anular border-radius que pueda venir de Bootstrap */
+    border-radius: 0;
+  }
+
+  /* Icono: tamaño fijo, sin el círculo de main.css */
+  .mobile-nav-active .navmenu > ul > li > a .nav-icon,
+  .mobile-nav-active .navmenu > ul > li > a:focus .nav-icon {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: auto !important;
+    font-size: 19px;
+    color: inherit;
+    flex-shrink: 0;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+
+  /* Hover */
+  .mobile-nav-active .navmenu > ul > li > a:hover {
+    background-color: rgba(255, 255, 255, 0.07) !important;
+    color: #ffffff !important;
+    border-left-color: color-mix(in srgb, var(--accent-color), transparent 40%);
+  }
+
+  /* Focus accesible */
+  .mobile-nav-active .navmenu > ul > li > a:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: -2px;
+    color: #ffffff !important;
+  }
+
+  /* Página activa */
+  .mobile-nav-active .navmenu > ul > li > a.active {
+    border-left-color: var(--accent-color) !important;
+    background-color: rgba(248, 34, 73, 0.14) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+  }
+
+  .mobile-nav-active .navmenu > ul > li > a.active .nav-icon {
+    color: var(--accent-color) !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   Móvil pequeño (≤575px)
+══════════════════════════════════════════ */
 @media (max-width: 575.98px) {
   .header .container-fluid,
   .header .container-xl {
@@ -223,104 +368,29 @@
   }
 }
 
-/* ── User button & dropdown ── */
-.nav-user-btn {
-  color: var(--nav-color);
-  font-family: var(--nav-font);
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 0 2px;
-}
-
-.nav-user-btn:hover,
-.nav-user-btn:focus {
-  color: var(--nav-hover-color);
-  box-shadow: none;
-}
-
-.nav-user-initials {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: var(--accent-color);
-  color: var(--contrast-color);
-  font-size: 13px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-family: var(--heading-font);
-}
-
-.nav-user-dropdown {
-  right: 0 !important;
-  left: auto !important;
-  min-width: 240px;
-}
-
-.nav-user-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--accent-color);
-  flex-shrink: 0;
-}
-
-.nav-user-avatar-fallback {
-  background-color: color-mix(in srgb, var(--accent-color), transparent 85%);
-  color: var(--accent-color);
-  font-size: 16px;
-  font-weight: 700;
-  font-family: var(--heading-font);
-}
-
-/* ── Language dropdown responsive ── */
-@media (max-width: 1199px) {
-  /* En móvil, los dropdowns de lang y user se posicionan bien */
-  .header .d-flex.align-items-center.ms-auto {
-    position: relative;
-    z-index: 9999;
-  }
-
-  .nav-user-dropdown,
-  .dropdown-menu.dropdown-menu-end {
-    position: fixed !important;
-    top: 70px !important;
-    right: 10px !important;
-    left: auto !important;
-    z-index: 99999;
-  }
-}
-
-/* ── Pantallas pequeñas (≤480px) ── */
+/* ══════════════════════════════════════════
+   Pantallas muy pequeñas (≤480px)
+══════════════════════════════════════════ */
 @media (max-width: 480px) {
-  /* Ocultar el label de idioma, dejar solo el ícono */
   .header .cta-btn span {
     display: none;
   }
 
-  /* Dropdown de usuario ocupa casi todo el ancho */
   .nav-user-dropdown {
     min-width: calc(100vw - 20px) !important;
     right: 10px !important;
   }
 
-  /* Dropdown de idioma más compacto */
   .dropdown-menu.dropdown-menu-end {
     min-width: 120px !important;
   }
 
-  /* Botón de login más compacto */
   .header .cta-btn {
     padding: 8px 14px;
     font-size: 13px;
     margin-left: 10px;
   }
 
-  /* Iniciales un poco más pequeñas */
   .nav-user-initials {
     width: 28px;
     height: 28px;
@@ -328,7 +398,9 @@
   }
 }
 
-/* ── Tablet (481px – 768px) ── */
+/* ══════════════════════════════════════════
+   Tablet mediana (481px–768px)
+══════════════════════════════════════════ */
 @media (min-width: 481px) and (max-width: 768px) {
   .nav-user-dropdown {
     min-width: 220px !important;
@@ -340,7 +412,9 @@
   }
 }
 
-/* ── Asegurar que el gap entre botones no rompa el layout ── */
+/* ══════════════════════════════════════════
+   Pantallas muy pequeñas (≤360px)
+══════════════════════════════════════════ */
 @media (max-width: 360px) {
   .header .d-flex.gap-3 {
     gap: 0.4rem !important;
