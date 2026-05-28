@@ -141,7 +141,7 @@
                             {{ (currentPage() - 1) * pageSize + i + 1 }}
                         </td>
                         <td class="fw-semibold">{{ event.title }}</td>
-                        <td class="text-nowrap text-center">{{ getFullName(event.organizedByUser) }}</td>
+                        <td class="text-nowrap text-center">{{ event.organizedByUserName }}</td>
                         <td class="text-nowrap text-center">{{ event.createdAt | date:'d/M/yyyy' }}</td>
                         <td>{{ event.categoryName }}</td>
                         <td class="text-center">

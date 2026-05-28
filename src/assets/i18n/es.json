@@ -233,7 +233,8 @@
     "SUBTITLE": "Los eventos más relevantes de la temporada",
     "LOADING": "Cargando próximos eventos...",
     "ERROR": "Hubo un error al cargar los eventos.",
-    "EMPTY": "No hay eventos programados."
+    "EMPTY": "No hay eventos programados.",
+    "SPONSORED": "Patrocinado"
   },
   "UPCOMING_EVENTS": {
     "TITLE": "Próximos Eventos",
@@ -279,6 +280,35 @@
     "TOTAL_PRICE": "Total a pagar",
     "CONFIRM": "Confirmar Compra",
     "PROCESSING": "Procesando..."
+  },
+  "PROMOTE": {
+    "TITLE": "Destacar mi evento",
+    "SUBTITLE": "Elige el plan que mejor se adapte a tu evento.",
+    "BUTTON": "Destacar evento",
+    "CHOOSE": "Elegir",
+    "PLANS": {
+      "ONE_DAY": {
+        "LABEL": "1 Día",
+        "DESC": "Visibilidad destacada durante 24 horas."
+      },
+      "THREE_DAYS": {
+        "LABEL": "3 Días",
+        "DESC": "Tres días en los espacios destacados de la plataforma."
+      },
+      "ONE_WEEK": {
+        "LABEL": "1 Semana",
+        "DESC": "Máxima exposición durante una semana completa."
+      }
+    },
+    "QR": {
+      "SELECTED_PLAN": "Plan seleccionado:",
+      "HINT": "Escanea el QR para realizar el pago y luego confirma.",
+      "ALT": "QR de pago simulado",
+      "BACK": "Volver a planes",
+      "CONFIRM": "Ya pagué",
+      "PROCESSING": "Procesando...",
+      "ERROR": "Ocurrió un error al procesar el pago. Intenta nuevamente."
+    }
   },
   "EVENT_LIST": {
     "TITLE": "Mis Eventos",

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, effect, inject, signal } from '@angular/core';
 import { EventModel } from '../../models/event-model';
 import { EventService } from '../../services/event-service/event.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PricePipe } from '../../shared/pipes/price.pipe';
 import { TranslateModule } from '@ngx-translate/core';
@@ -19,9 +20,12 @@ import { map } from 'rxjs';
 export class EventDetails {
   private route = inject(ActivatedRoute);
   private eventService = inject(EventService);
+  private authService = inject(AuthService);
   private router = inject(Router);
 
   event = signal<EventModel | null>(null);
+
+  private currentUser = toSignal(this.authService.getCurrentUser(), { initialValue: null });
 
   private eventId = toSignal(
     this.route.paramMap.pipe(map((params) => Number(params.get('id')))),
