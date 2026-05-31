@@ -125,6 +125,7 @@
   },
   "HERO": {
     "WELCOME": "Welcome to",
+    "BRAND": "Cocha Vive",
     "SUBTITLE": "Discover the best events in Cochabamba"
   },
   "AUTH": {
@@ -160,7 +161,8 @@
     "SUBTITLE": "Explore cultural events based on your interests",
     "LOADING": "Loading categories...",
     "ERROR": "There was an error loading categories.",
-    "EMPTY": "No categories found."
+    "EMPTY": "No categories found.",
+    "VIEW_CATEGORY": "View {{name}} events"
   },
   "EVENT_CARD": {
     "TBA_LOCATION": "Location TBA"
@@ -230,14 +232,16 @@
   },
   "FEATURED_EVENTS": {
     "TITLE": "Featured Events",
-    "LOADING": "Loading upcoming events...",
+    "LOADING": "Loading featured events...",
     "ERROR": "There was an error loading events.",
-    "EMPTY": "No scheduled events."
+    "EMPTY": "No featured events at the moment.",
+    "VIEW_EVENT": "View {{title}} details"
   },
   "UPCOMING_EVENTS": {
     "TITLE": "Upcoming Events",
     "SUBTITLE": "Discover what's happening in the city",
-    "FEATURE_DISABLED": "This feature is currently disabled."
+    "FEATURE_DISABLED": "This feature is currently disabled.",
+    "LOADING": "Loading upcoming events..."
   },
   "CATEGORY_EVENTS": {
     "EVENTS_FOUND": "EVENTS FOUND"
@@ -624,32 +628,5 @@
     "REASON_MIN_ERROR": "Reason must be at least 10 characters long.",
     "CHARS_REMAINING": "characters remaining",
     "CONFIRM_BUTTON": "Yes, demote"
-  },
-  "HERO": {
-    "WELCOME": "Welcome to",
-    "BRAND": "Cocha Vive",
-    "SUBTITLE": "Discover the best events in Cochabamba"
-  },
-  "CATEGORIES": {
-    "TITLE": "Categories",
-    "SUBTITLE": "Explore cultural events based on your interests",
-    "LOADING": "Loading categories...",
-    "ERROR": "There was an error loading categories.",
-    "EMPTY": "No categories found.",
-    "VIEW_CATEGORY": "View {{name}} events"
-  },
-  "FEATURED_EVENTS": {
-    "TITLE": "Featured Events",
-    "LOADING": "Loading featured events...",
-    "ERROR": "There was an error loading events.",
-    "EMPTY": "No featured events at the moment.",
-    "VIEW_EVENT": "View {{title}} details"
-  },
-  "UPCOMING_EVENTS": {
-    "TITLE": "Upcoming Events",
-    "SUBTITLE": "Discover what's happening in the city",
-    "FEATURE_DISABLED": "This feature is currently disabled.",
-    "LOADING": "Loading upcoming events..."
   }
-  
 }

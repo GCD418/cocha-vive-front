@@ -125,6 +125,7 @@
   },
   "HERO": {
     "WELCOME": "Bem-vindo ao",
+    "BRAND": "Cocha Vive",
     "SUBTITLE": "Descubra os melhores eventos de Cochabamba"
   },
   "AUTH": {
@@ -160,7 +161,8 @@
     "SUBTITLE": "Explore eventos culturais de acordo com seus interesses",
     "LOADING": "Carregando categorias...",
     "ERROR": "Ocorreu um erro ao carregar as categorias.",
-    "EMPTY": "Nenhuma categoria disponível encontrada."
+    "EMPTY": "Nenhuma categoria disponível encontrada.",
+    "VIEW_CATEGORY": "Ver eventos de {{name}}"
   },
   "EVENT_CARD": {
     "TBA_LOCATION": "Local a confirmar"
@@ -230,14 +232,16 @@
   },
   "FEATURED_EVENTS": {
     "TITLE": "Eventos em Destaque",
-    "LOADING": "Carregando os próximos eventos...",
+    "LOADING": "Carregando eventos em destaque...",
     "ERROR": "Ocorreu um erro ao carregar os eventos.",
-    "EMPTY": "Não há eventos programados."
+    "EMPTY": "Nenhum evento em destaque no momento.",
+    "VIEW_EVENT": "Ver detalhes de {{title}}"
   },
   "UPCOMING_EVENTS": {
     "TITLE": "Próximos Eventos",
     "SUBTITLE": "Descubra o que está acontecendo na cidade",
-    "FEATURE_DISABLED": "Esta função está atualmente desabilitada."
+    "FEATURE_DISABLED": "Esta função está atualmente desabilitada.",
+    "LOADING": "Carregando próximos eventos..."
   },
   "CATEGORY_EVENTS": {
     "EVENTS_FOUND": "EVENTOS ENCONTRADOS"
@@ -627,31 +631,5 @@
     "REASON_MIN_ERROR": "O motivo deve ter pelo menos 10 caracteres.",
     "CHARS_REMAINING": "caracteres restantes",
     "CONFIRM_BUTTON": "Sim, rebaixar"
-  },
-  "HERO": {
-    "WELCOME": "Bem-vindo ao",
-    "BRAND": "Cocha Vive",
-    "SUBTITLE": "Descubra os melhores eventos de Cochabamba"
-  },
-  "CATEGORIES": {
-    "TITLE": "Categorias",
-    "SUBTITLE": "Explore eventos culturais de acordo com seus interesses",
-    "LOADING": "Carregando categorias...",
-    "ERROR": "Ocorreu um erro ao carregar as categorias.",
-    "EMPTY": "Nenhuma categoria disponível encontrada.",
-    "VIEW_CATEGORY": "Ver eventos de {{name}}"
-  },
-  "FEATURED_EVENTS": {
-    "TITLE": "Eventos em Destaque",
-    "LOADING": "Carregando eventos em destaque...",
-    "ERROR": "Ocorreu um erro ao carregar os eventos.",
-    "EMPTY": "Nenhum evento em destaque no momento.",
-    "VIEW_EVENT": "Ver detalhes de {{title}}"
-  },
-  "UPCOMING_EVENTS": {
-    "TITLE": "Próximos Eventos",
-    "SUBTITLE": "Descubra o que está acontecendo na cidade",
-    "FEATURE_DISABLED": "Esta função está atualmente desabilitada.",
-    "LOADING": "Carregando próximos eventos..."
   }
 }
