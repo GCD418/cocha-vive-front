@@ -232,8 +232,8 @@
   },
   "FEATURED_EVENTS": {
     "TITLE": "Eventos em Destaque",
-    "SUBTITLE": "Os eventos mais relevantes da temporada",
-    "LOADING": "Carregando eventos em destaque...",
+    "LOADING": "Carregando os próximos eventos...",
+    "SPONSORED": "Patrocinado",
     "ERROR": "Ocorreu um erro ao carregar os eventos.",
     "EMPTY": "Nenhum evento em destaque no momento.",
     "VIEW_EVENT": "Ver detalhes de {{title}}"

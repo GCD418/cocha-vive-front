@@ -35,17 +35,17 @@
               <img
                 [src]="event.photoLinks && event.photoLinks.length > 0 ? event.photoLinks[0] : 'assets/img/no-image.jpg'"
                 class="img-fluid event-img"
-                [alt]="event.title">
+                [alt]="('FEATURED_EVENTS.VIEW_EVENT' | translate).replace('{{title}}', event.title)">
 
               <div class="member-info">
                 <div class="member-info-content w-100">
 
                   <div class="text-center">
-                    <span class="badge category-badge mb-2">{{ event.title }}</span>
+                    <span class="badge category-badge mb-2">{{ event.category.name }}</span>
                     <h4>
                       <a [routerLink]="['/evento', event.id]"
                          class="text-white"
-                         [attr.aria-label]="event.title + ' - ' + ('FEATURED_EVENTS.SEE_EVENT' | translate)">
+                         [attr.aria-label]="('FEATURED_EVENTS.VIEW_EVENT' | translate).replace('{{title}}', event.title)">
                         {{ event.title }}
                       </a>
                     </h4>

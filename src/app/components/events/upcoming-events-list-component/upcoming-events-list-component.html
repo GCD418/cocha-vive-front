@@ -4,7 +4,6 @@
       <h2 id="upcoming-title">{{ 'UPCOMING_EVENTS.TITLE' | translate }}</h2>
       <p>{{ 'UPCOMING_EVENTS.SUBTITLE' | translate }}</p>
     </div>
-
     @if (featureService.isEnabled(AppFeatures.VIEW_UPCOMING_EVENTS)) {
       <div class="row g-4">
         @for (eventItem of events(); track eventItem.id) {

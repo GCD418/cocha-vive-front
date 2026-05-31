@@ -1,208 +1,217 @@
 <div class="explore-layout">
 
-    <aside class="explore-sidebar light-background border-end">
-        <div class="p-4">
+  <aside class="explore-sidebar light-background border-end" aria-label="Filtros de búsqueda">
+    <div class="p-4">
 
-        <h5 class="fw-bold mb-1" style="color: var(--heading-color);">
-            <i class="bi bi-funnel me-2" style="color: var(--accent-color);"></i>{{ 'EXPLORE.SIDEBAR.TITLE' | translate }}
-        </h5>
-        <p class="mb-3" style="font-size: 0.82rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">
-            {{ 'EXPLORE.SIDEBAR.SUBTITLE' | translate }}
-        </p>
+      <h5 class="fw-bold mb-1" style="color: var(--heading-color);">
+        <i class="bi bi-funnel me-2" style="color: var(--accent-color);" aria-hidden="true"></i>{{ 'EXPLORE.SIDEBAR.TITLE' | translate }}
+      </h5>
+      <p class="mb-3" style="font-size: 0.82rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">
+        {{ 'EXPLORE.SIDEBAR.SUBTITLE' | translate }}
+      </p>
 
-        <label class="form-label fw-semibold" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: color-mix(in srgb, var(--default-color), transparent 40%);">
-            {{ 'EXPLORE.SIDEBAR.SEARCH_LABEL' | translate }}
-        </label>
-        <div class="input-group mb-3">
-            <span class="input-group-text" style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%);">
-            <i class="bi bi-search" style="color: color-mix(in srgb, var(--default-color), transparent 50%);"></i>
-            </span>
-            <input
-                type="text"
-                class="form-control"
-                [placeholder]="'EXPLORE.SIDEBAR.SEARCH_PLACEHOLDER' | translate"
-                [ngModel]="searchQuery()"
-                (ngModelChange)="searchQuery.set($event); onFilterChange()"
-                style="border-color: color-mix(in srgb, var(--default-color), transparent 75%); background-color: var(--surface-color); color: var(--default-color);"
-            />
-            @if (searchQuery()) {
-            <button class="btn btn-outline-secondary" type="button" (click)="clearFilters()" [title]="'EXPLORE.SIDEBAR.CLEAR_TOOLTIP' | translate">
-                <i class="bi bi-x-lg"></i>
-            </button>
-            }
+      <label class="form-label fw-semibold" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: color-mix(in srgb, var(--default-color), transparent 40%);">
+        {{ 'EXPLORE.SIDEBAR.SEARCH_LABEL' | translate }}
+      </label>
+      <div class="input-group mb-3">
+        <span class="input-group-text" style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%);">
+          <i class="bi bi-search" style="color: color-mix(in srgb, var(--default-color), transparent 50%);" aria-hidden="true"></i>
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          [placeholder]="'EXPLORE.SIDEBAR.SEARCH_PLACEHOLDER' | translate"
+          [ngModel]="searchQuery()"
+          (ngModelChange)="searchQuery.set($event); onFilterChange()"
+          [attr.aria-label]="'EXPLORE.SIDEBAR.SEARCH_PLACEHOLDER' | translate"
+          style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);"
+        />
+        @if (searchQuery()) {
+          <button class="btn btn-outline-secondary" type="button" (click)="clearFilters()" [attr.aria-label]="'Limpiar búsqueda'">
+            <i class="bi bi-x-lg" aria-hidden="true"></i>
+          </button>
+        }
+      </div>
+
+      @if (!loading() && !errorLoading()) {
+        <div class="p-3 mb-3" style="background-color: color-mix(in srgb, var(--accent-color), transparent 92%); border-left: 3px solid var(--accent-color); border-radius: 4px;" role="status" aria-live="polite">
+          <span class="fw-bold" style="font-size: 1.4rem; color: var(--accent-color);">{{ filteredEvents().length }}</span>
+          <span class="ms-2" style="font-size: 0.85rem; color: color-mix(in srgb, var(--default-color), transparent 30%);">
+            {{ filteredEvents().length === 1 ? ('EXPLORE.SIDEBAR.EVENT_FOUND_SINGULAR' | translate) : ('EXPLORE.SIDEBAR.EVENT_FOUND_PLURAL' | translate) }}
+          </span>
         </div>
 
-        @if (!loading() && !errorLoading()) {
-            <div class="p-3 mb-3" style="background-color: color-mix(in srgb, var(--accent-color), transparent 92%); border-left: 3px solid var(--accent-color); border-radius: 4px;">
-            <span class="fw-bold" style="font-size: 1.4rem; color: var(--accent-color);">{{ filteredEvents().length }}</span>
-            <span class="ms-2" style="font-size: 0.85rem; color: color-mix(in srgb, var(--default-color), transparent 30%);">
-                {{ filteredEvents().length === 1 ? ('EXPLORE.SIDEBAR.EVENT_FOUND_SINGULAR' | translate) : ('EXPLORE.SIDEBAR.EVENT_FOUND_PLURAL' | translate) }}
-            </span>
-            </div>
+        @if (searchQuery()) {
+          <div class="d-flex align-items-center gap-2 mb-3 px-3 py-2"
+            style="background-color: var(--surface-color); border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%); border-radius: 50px; font-size: 0.82rem;">
+            <i class="bi bi-tag-fill" style="color: var(--accent-color);" aria-hidden="true"></i>
+            <span class="text-truncate fw-semibold" style="color: var(--default-color);">{{ searchQuery() }}</span>
+            <button class="btn p-0 ms-auto" style="font-size: 0.75rem; color: color-mix(in srgb, var(--default-color), transparent 40%);" (click)="clearFilters()" [attr.aria-label]="'Eliminar filtro de búsqueda'">
+              <i class="bi bi-x" aria-hidden="true"></i>
+            </button>
+          </div>
+        }
+      }
 
-            @if (searchQuery()) {
-            <div class="d-flex align-items-center gap-2 mb-3 px-3 py-2"
-                style="background-color: var(--surface-color); border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%); border-radius: 50px; font-size: 0.82rem;">
-                <i class="bi bi-tag-fill" style="color: var(--accent-color);"></i>
-                <span class="text-truncate fw-semibold" style="color: var(--default-color);">{{ searchQuery() }}</span>
-                <button class="btn p-0 ms-auto" style="font-size: 0.75rem; color: color-mix(in srgb, var(--default-color), transparent 40%);" (click)="clearFilters()">
-                <i class="bi bi-x"></i>
+      <hr style="border-color: color-mix(in srgb, var(--default-color), transparent 85%);">
+
+      <p style="font-size: 0.8rem; color: color-mix(in srgb, var(--default-color), transparent 50%);">
+        <i class="bi bi-lightbulb me-1" style="color: var(--accent-color);" aria-hidden="true"></i>
+        {{ 'EXPLORE.SIDEBAR.SEARCH_HINT' | translate }}
+      </p>
+
+      <label class="form-label fw-semibold mt-4" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: color-mix(in srgb, var(--default-color), transparent 40%);">
+        {{ 'EXPLORE.SIDEBAR.CATEGORY_LABEL' | translate }}
+      </label>
+      <select class="form-select mb-3"
+        [ngModel]="selectedCategoryId()"
+        (ngModelChange)="selectedCategoryId.set($event); onFilterChange()"
+        [attr.aria-label]="'EXPLORE.SIDEBAR.CATEGORY_LABEL' | translate"
+        style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);">
+        <option [ngValue]="null">{{ 'EXPLORE.SIDEBAR.CATEGORY_ALL' | translate }}</option>
+        @for (category of categories(); track category.id) {
+          <option [ngValue]="category.id">{{ category.name }}</option>
+        }
+      </select>
+
+      <label class="form-label fw-semibold mt-2" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: color-mix(in srgb, var(--default-color), transparent 40%);">
+        {{ 'EXPLORE.SIDEBAR.TYPE_LABEL' | translate }}
+      </label>
+      <select class="form-select mb-3"
+        [ngModel]="eventType()"
+        (ngModelChange)="eventType.set($event); onTypeChange()"
+        [attr.aria-label]="'EXPLORE.SIDEBAR.TYPE_LABEL' | translate"
+        style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);">
+        <option value="ALL">{{ 'EXPLORE.SIDEBAR.TYPE_ALL' | translate }}</option>
+        <option value="FREE">{{ 'EXPLORE.SIDEBAR.TYPE_FREE' | translate }}</option>
+        <option value="PAID">{{ 'EXPLORE.SIDEBAR.TYPE_PAID' | translate }}</option>
+      </select>
+
+      <label class="form-label fw-semibold" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: color-mix(in srgb, var(--default-color), transparent 40%);">
+        {{ 'EXPLORE.SIDEBAR.PRICE_LABEL' | translate }}
+      </label>
+      <div class="row g-2 mb-3">
+        <div class="col-6">
+          <input type="number"
+            class="form-control"
+            [placeholder]="'EXPLORE.SIDEBAR.PRICE_MIN' | translate"
+            min="0"
+            [ngModel]="minPrice()"
+            (ngModelChange)="minPrice.set($event); onPriceChange()"
+            [attr.disabled]="eventType() === 'FREE' ? true : null"
+            [attr.aria-label]="'EXPLORE.SIDEBAR.PRICE_MIN' | translate"
+            style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
+        </div>
+        <div class="col-6">
+          <input type="number"
+            class="form-control"
+            [placeholder]="'EXPLORE.SIDEBAR.PRICE_MAX' | translate"
+            min="0"
+            [ngModel]="maxPrice()"
+            (ngModelChange)="maxPrice.set($event); onPriceChange()"
+            [attr.disabled]="eventType() === 'FREE' ? true : null"
+            [attr.aria-label]="'EXPLORE.SIDEBAR.PRICE_MAX' | translate"
+            style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
+        </div>
+      </div>
+
+      <label class="form-label fw-semibold" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: color-mix(in srgb, var(--default-color), transparent 40%);">
+        {{ 'EXPLORE.SIDEBAR.DATES_LABEL' | translate }}
+      </label>
+      <div class="mb-2">
+        <label style="font-size: 0.75rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EXPLORE.SIDEBAR.DATE_FROM' | translate }}</label>
+        <input type="date" class="form-control"
+          [ngModel]="startDate()"
+          (ngModelChange)="startDate.set($event); onFilterChange()"
+          [attr.aria-label]="'EXPLORE.SIDEBAR.DATE_FROM' | translate"
+          style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
+      </div>
+      <div class="mb-4">
+        <label style="font-size: 0.75rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EXPLORE.SIDEBAR.DATE_TO' | translate }}</label>
+        <input type="date" class="form-control"
+          [ngModel]="endDate()"
+          (ngModelChange)="endDate.set($event); onFilterChange()"
+          [attr.aria-label]="'EXPLORE.SIDEBAR.DATE_TO' | translate"
+          style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
+      </div>
+
+      <button class="btn btn-outline-secondary w-100" (click)="clearFilters()" [attr.aria-label]="'Eliminar todos los filtros'">
+        <i class="bi bi-trash me-2" aria-hidden="true"></i>{{ 'EXPLORE.SIDEBAR.CLEAR_FILTERS' | translate }}
+      </button>
+
+    </div>
+  </aside>
+
+  <main class="explore-main">
+
+    <div class="section-title mb-3" style="text-align: center; padding-bottom: 20px;">
+      <h2>{{ 'EXPLORE.MAIN.TITLE' | translate }}</h2>
+      <p>{{ 'EXPLORE.MAIN.SUBTITLE' | translate }}</p>
+    </div>
+
+    @if (loading()) {
+      <div class="text-center py-5">
+        <div class="spinner-border" style="color: var(--accent-color);" role="status">
+          <span class="visually-hidden">{{ 'EXPLORE.MAIN.LOADING' | translate }}</span>
+        </div>
+        <p class="mt-3" style="color: color-mix(in srgb, var(--default-color), transparent 40%);" aria-live="polite">{{ 'EXPLORE.MAIN.LOADING_EVENTS' | translate }}</p>
+      </div>
+    }
+
+    @if (errorLoading()) {
+      <div class="text-center py-5" role="alert">
+        <i class="bi bi-wifi-off" style="font-size: 2.5rem; color: color-mix(in srgb, var(--default-color), transparent 60%);" aria-hidden="true"></i>
+        <p class="mt-3 fw-semibold">{{ 'EXPLORE.MAIN.ERROR_TITLE' | translate }}</p>
+        <p style="font-size: 0.88rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EXPLORE.MAIN.ERROR_DESC' | translate }}</p>
+      </div>
+    }
+
+    @if (!loading() && !errorLoading()) {
+
+      @if (paginatedEvents().length > 0) {
+        <div class="row g-4" role="list" aria-label="Lista de eventos">
+          @for (event of paginatedEvents(); track event.id) {
+            <div class="col-12 col-md-6 col-xl-4 d-flex" role="listitem">
+              <app-event-card-component [event]="event" class="w-100"></app-event-card-component>
+            </div>
+          }
+        </div>
+
+        @if (totalPages() > 1) {
+          <nav class="d-flex justify-content-center mt-5" [attr.aria-label]="'EXPLORE.MAIN.PAGINATION_LABEL' | translate">
+            <ul class="pagination">
+              <li class="page-item" [class.disabled]="currentPage() === 1">
+                <button class="page-link" (click)="goToPage(currentPage() - 1)" [attr.aria-label]="'EXPLORE.MAIN.PREV' | translate">
+                  <i class="bi bi-chevron-left" aria-hidden="true"></i>
                 </button>
-            </div>
-            }
-        }
-
-        <hr style="border-color: color-mix(in srgb, var(--default-color), transparent 85%);">
-
-        <p style="font-size: 0.8rem; color: color-mix(in srgb, var(--default-color), transparent 50%);">
-            <i class="bi bi-lightbulb me-1" style="color: var(--accent-color);"></i>
-            {{ 'EXPLORE.SIDEBAR.SEARCH_HINT' | translate }}
-        </p>
-
-        <label class="form-label fw-semibold mt-4" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: color-mix(in srgb, var(--default-color), transparent 40%);">
-            {{ 'EXPLORE.SIDEBAR.CATEGORY_LABEL' | translate }}
-        </label>
-        <select class="form-select mb-3"
-                [ngModel]="selectedCategoryId()"
-                (ngModelChange)="selectedCategoryId.set($event); onFilterChange()"
-                style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);">
-            <option [ngValue]="null">{{ 'EXPLORE.SIDEBAR.CATEGORY_ALL' | translate }}</option>
-            @for (category of categories(); track category.id) {
-                <option [ngValue]="category.id">{{ category.name }}</option>
-            }
-        </select>
-
-        <label class="form-label fw-semibold mt-2" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: color-mix(in srgb, var(--default-color), transparent 40%);">
-            {{ 'EXPLORE.SIDEBAR.TYPE_LABEL' | translate }}
-        </label>
-        <select class="form-select mb-3"
-                [ngModel]="eventType()"
-                (ngModelChange)="eventType.set($event); onTypeChange()"
-                style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);">
-            <option value="ALL">{{ 'EXPLORE.SIDEBAR.TYPE_ALL' | translate }}</option>
-            <option value="FREE">{{ 'EXPLORE.SIDEBAR.TYPE_FREE' | translate }}</option>
-            <option value="PAID">{{ 'EXPLORE.SIDEBAR.TYPE_PAID' | translate }}</option>
-        </select>
-
-        <label class="form-label fw-semibold" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: color-mix(in srgb, var(--default-color), transparent 40%);">
-            {{ 'EXPLORE.SIDEBAR.PRICE_LABEL' | translate }}
-        </label>
-        <div class="row g-2 mb-3">
-            <div class="col-6">
-                <input type="number"
-                       class="form-control"
-                       [placeholder]="'EXPLORE.SIDEBAR.PRICE_MIN' | translate"
-                       min="0"
-                       [ngModel]="minPrice()"
-                       (ngModelChange)="minPrice.set($event); onPriceChange()"
-                        [attr.disabled]="eventType() === 'FREE' ? true : null"
-                        style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
-            </div>
-            <div class="col-6">
-                <input type="number"
-                       class="form-control"
-                       [placeholder]="'EXPLORE.SIDEBAR.PRICE_MAX' | translate"
-                       min="0"
-                       [ngModel]="maxPrice()"
-                       (ngModelChange)="maxPrice.set($event); onPriceChange()"
-                        [attr.disabled]="eventType() === 'FREE' ? true : null"
-                        style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
-            </div>
-        </div>
-
-        <label class="form-label fw-semibold" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: color-mix(in srgb, var(--default-color), transparent 40%);">
-            {{ 'EXPLORE.SIDEBAR.DATES_LABEL' | translate }}
-        </label>
-        <div class="mb-2">
-            <label style="font-size: 0.75rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EXPLORE.SIDEBAR.DATE_FROM' | translate }}</label>
-            <input type="date" class="form-control"
-                   [ngModel]="startDate()"
-                   (ngModelChange)="startDate.set($event); onFilterChange()"
-                   style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
-        </div>
-        <div class="mb-4">
-            <label style="font-size: 0.75rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EXPLORE.SIDEBAR.DATE_TO' | translate }}</label>
-            <input type="date" class="form-control"
-                   [ngModel]="endDate()"
-                   (ngModelChange)="endDate.set($event); onFilterChange()"
-                   style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
-        </div>
-
-        <button class="btn btn-outline-secondary w-100" (click)="clearFilters()">
-            <i class="bi bi-trash me-2"></i>{{ 'EXPLORE.SIDEBAR.CLEAR_FILTERS' | translate }}
-        </button>
-
-        </div>
-    </aside>
-
-    <main class="explore-main">
-
-        <div class="section-title mb-3" style="text-align: center; padding-bottom: 20px;">
-            <h2>{{ 'EXPLORE.MAIN.TITLE' | translate }}</h2>
-            <p>{{ 'EXPLORE.MAIN.SUBTITLE' | translate }}</p>
-        </div>
-
-        @if (loading()) {
-        <div class="text-center py-5">
-            <div class="spinner-border" style="color: var(--accent-color);" role="status">
-            <span class="visually-hidden">{{ 'EXPLORE.MAIN.LOADING' | translate }}</span>
-            </div>
-            <p class="mt-3" style="color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EXPLORE.MAIN.LOADING_EVENTS' | translate }}</p>
-        </div>
-        }
-
-        @if (errorLoading()) {
-        <div class="text-center py-5">
-            <i class="bi bi-wifi-off" style="font-size: 2.5rem; color: color-mix(in srgb, var(--default-color), transparent 60%);"></i>
-            <p class="mt-3 fw-semibold">{{ 'EXPLORE.MAIN.ERROR_TITLE' | translate }}</p>
-            <p style="font-size: 0.88rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EXPLORE.MAIN.ERROR_DESC' | translate }}</p>
-        </div>
-        }
-
-        @if (!loading() && !errorLoading()) {
-
-        @if (paginatedEvents().length > 0) {
-            <div class="row g-4">
-            @for (event of paginatedEvents(); track event.id) {
-                <div class="col-12 col-md-6 col-xl-4 d-flex">
-                <app-event-card-component [event]="event" class="w-100"></app-event-card-component>
-                </div>
-            }
-            </div>
-
-            @if (totalPages() > 1) {
-            <nav class="d-flex justify-content-center mt-5" [attr.aria-label]="'EXPLORE.MAIN.PAGINATION_LABEL' | translate">
-                <ul class="pagination">
-                <li class="page-item" [class.disabled]="currentPage() === 1">
-                    <button class="page-link" (click)="goToPage(currentPage() - 1)" [attr.aria-label]="'EXPLORE.MAIN.PREV' | translate">
-                    <i class="bi bi-chevron-left"></i>
-                    </button>
+              </li>
+              @for (page of pageNumbers(); track page) {
+                <li class="page-item" [class.active]="page === currentPage()">
+                  <button class="page-link" (click)="goToPage(page)" [attr.aria-label]="'Ir a página ' + page">
+                    {{ page }}
+                  </button>
                 </li>
-                @for (page of pageNumbers(); track page) {
-                    <li class="page-item" [class.active]="page === currentPage()">
-                    <button class="page-link" (click)="goToPage(page)">{{ page }}</button>
-                    </li>
-                }
-                <li class="page-item" [class.disabled]="currentPage() === totalPages()">
-                    <button class="page-link" (click)="goToPage(currentPage() + 1)" [attr.aria-label]="'EXPLORE.MAIN.NEXT' | translate">
-                    <i class="bi bi-chevron-right"></i>
-                    </button>
-                </li>
-                </ul>
-            </nav>
-            }
-
-        } @else {
-            <div class="text-center py-5">
-            <i class="bi bi-search" style="font-size: 2.5rem; color: color-mix(in srgb, var(--default-color), transparent 65%);"></i>
-            <p class="mt-3 fw-semibold">{{ 'EXPLORE.MAIN.EMPTY_TITLE' | translate }}</p>
-            <p style="font-size: 0.88rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EXPLORE.MAIN.EMPTY_DESC' | translate }}</p>
-            <button class="btn btn-outline-secondary mt-2" (click)="clearFilters()">
-                <i class="bi bi-arrow-counterclockwise me-1"></i> {{ 'EXPLORE.MAIN.VIEW_ALL' | translate }}
-            </button>
-            </div>
+              }
+              <li class="page-item" [class.disabled]="currentPage() === totalPages()">
+                <button class="page-link" (click)="goToPage(currentPage() + 1)" [attr.aria-label]="'EXPLORE.MAIN.NEXT' | translate">
+                  <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                </button>
+              </li>
+            </ul>
+          </nav>
         }
 
-        }
-    </main>
+      } @else {
+        <div class="text-center py-5" role="status" aria-live="polite">
+          <i class="bi bi-search" style="font-size: 2.5rem; color: color-mix(in srgb, var(--default-color), transparent 65%);" aria-hidden="true"></i>
+          <p class="mt-3 fw-semibold">{{ 'EXPLORE.MAIN.EMPTY_TITLE' | translate }}</p>
+          <p style="font-size: 0.88rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EXPLORE.MAIN.EMPTY_DESC' | translate }}</p>
+          <button class="btn btn-outline-secondary mt-2" (click)="clearFilters()" [attr.aria-label]="'Ver todos los eventos'">
+            <i class="bi bi-arrow-counterclockwise me-1" aria-hidden="true"></i> {{ 'EXPLORE.MAIN.VIEW_ALL' | translate }}
+          </button>
+        </div>
+      }
+
+    }
+  </main>
 </div>
