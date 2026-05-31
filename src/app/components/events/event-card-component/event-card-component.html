@@ -1,14 +1,12 @@
 <div class="card h-100 border-0 shadow-sm event-card"
      [routerLink]="['/event-details', event.id]"
-     style="cursor: pointer;"
-     tabindex="0"
-     [attr.aria-label]="'Ver detalles del evento: ' + event.title">
+     style="cursor: pointer;">
 
   <div class="position-relative image-wrapper">
     <img
       [src]="event.photoLinks && event.photoLinks.length > 0 ? event.photoLinks[0] : 'assets/img/event-placeholder.jpg'"
       class="card-img-top"
-      [alt]="'Imagen del evento: ' + event.title">
+      [alt]="event.title">
 
     <span class="badge rounded-pill category-badge position-absolute top-0 start-0 m-3">
       {{ event.categoryName }}
@@ -24,7 +22,7 @@
 
     <ul class="list-unstyled event-details mb-0">
       <li class="mb-2 d-flex align-items-center">
-        <i class="bi bi-calendar3 event-icon me-2" aria-hidden="true"></i>
+        <i class="bi bi-calendar3 event-icon me-2"></i>
         <span>
           {{ event.dateStart | date:'dd MMM' }}
           @if (event.dateEnd && (event.dateEnd | date:'ddMMyy') !== (event.dateStart | date:'ddMMyy')) {
@@ -36,12 +34,12 @@
       </li>
 
       <li class="mb-2 d-flex align-items-center">
-        <i class="bi bi-clock event-icon me-2" aria-hidden="true"></i>
+        <i class="bi bi-clock event-icon me-2"></i>
         <span>{{ event.dateStart | date:'HH:mm' }}</span>
       </li>
 
       <li class="d-flex align-items-center">
-        <i class="bi bi-geo-alt event-icon me-2" aria-hidden="true"></i>
+        <i class="bi bi-geo-alt event-icon me-2"></i>
         <span class="text-truncate" [title]="event.shortPlaceDescription">
           {{ event.shortPlaceDescription || ('EVENT_CARD.TBA_LOCATION' | translate) }}
         </span>
