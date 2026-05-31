@@ -4,19 +4,18 @@
       <h2 id="upcoming-title">{{ 'UPCOMING_EVENTS.TITLE' | translate }}</h2>
       <p>{{ 'UPCOMING_EVENTS.SUBTITLE' | translate }}</p>
     </div>
-
     @if (featureService.isEnabled(AppFeatures.VIEW_UPCOMING_EVENTS)) {
-
-      @if (events().length === 0 && !loading()) {
-        <div class="text-center py-4" role="status">
-          <p>{{ 'FEATURED_EVENTS.EMPTY' | translate }}</p>
-        </div>
-      }
-
       <div class="row g-4">
         @for (eventItem of events(); track eventItem.id) {
           <div class="col-12 col-md-6 col-lg-4">
             <app-event-card-component [event]="eventItem"></app-event-card-component>
+          </div>
+        } @empty {
+          <div class="col-12">
+            <div class="empty-state text-center" role="status">
+              <i class="bi bi-calendar-x empty-state-icon" aria-hidden="true"></i>
+              <p class="empty-state-text mb-0">{{ 'UPCOMING_EVENTS.EMPTY' | translate }}</p>
+            </div>
           </div>
         }
       </div>
