@@ -232,6 +232,7 @@
   },
   "FEATURED_EVENTS": {
     "TITLE": "Featured Events",
+    "SUBTITLE":"The most relevant events of the season",
     "LOADING": "Loading featured events...",
     "ERROR": "There was an error loading events.",
     "EMPTY": "No featured events at the moment.",

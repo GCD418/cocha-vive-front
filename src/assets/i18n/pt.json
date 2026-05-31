@@ -232,6 +232,7 @@
   },
   "FEATURED_EVENTS": {
     "TITLE": "Eventos em Destaque",
+    "SUBTITLE": "Os eventos mais relevantes da temporada",
     "LOADING": "Carregando eventos em destaque...",
     "ERROR": "Ocorreu um erro ao carregar os eventos.",
     "EMPTY": "Nenhum evento em destaque no momento.",
