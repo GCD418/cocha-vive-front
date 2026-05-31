@@ -4,7 +4,7 @@
 
       <div class="modal-header" style="background-color: #0e1b4d;">
         <h5 class="modal-title text-white">
-          <i class="bi bi-geo-alt-fill me-2" style="color: #f82249;"></i>
+          <i class="bi bi-geo-alt-fill me-2" style="color: var(--cv-accent);"></i>
           {{'EVENT_MAP_MODAL.LABELS.SELECT_LOCATION' | translate}}
         </h5>
         <button type="button" class="btn-close btn-close-white"
@@ -34,7 +34,7 @@
         } @else {
           <div class="d-flex justify-content-center align-items-center"
                style="height: 450px;">
-            <div class="spinner-border" style="color: #f82249;" role="status">
+            <div class="spinner-border" style="color: var(--cv-accent);" role="status">
               <span class="visually-hidden">{{ 'EVENT_MAP_MODAL.LABELS.CHARGING_MAP' | translate }}</span>
             </div>
           </div>
@@ -51,7 +51,7 @@
           <button type="button" class="btn btn-secondary"
                   data-bs-dismiss="modal">{{ 'EVENT_MAP_MODAL.LABELS.CANCEL' | translate }}</button>
           <button type="button" class="btn text-white"
-                  style="background-color: #f82249; border-color: #f82249;"
+                  style="background-color: var(--cv-accent); border-color: var(--cv-accent);"
                   data-bs-dismiss="modal"
                   (click)="confirmLocation()">
             <i class="bi bi-check-lg me-1"></i> {{ 'EVENT_MAP_MODAL.LABELS.CONFIRM' | translate }}
