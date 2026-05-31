@@ -7,13 +7,14 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PricePipe } from '../../shared/pipes/price.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { EventMapModalComponent } from '../../components/events/event-map-modal/event-map-modal';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 
 
 @Component({
   selector: 'app-event-details',
-  imports: [CommonModule, PricePipe, TranslateModule, EventMapModalComponent, RouterModule],
+  imports: [CommonModule, PricePipe, TranslateModule, EventMapModalComponent, RouterModule, LoadingSpinnerComponent],
   templateUrl: './event-details.html',
   styleUrl: './event-details.css',
 })

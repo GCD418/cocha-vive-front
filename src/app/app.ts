@@ -5,10 +5,11 @@ import { FooterComponent } from './layout/footer/footer';
 import { EventList } from './pages/event-list/event-list';
 import { EventDetails } from './pages/event-details/event-details';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { SkipLinkComponent } from './shared/skip-link/skip-link';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterModule, Navbar, FooterComponent, TranslateModule],
+  imports: [RouterOutlet, RouterModule, Navbar, FooterComponent, TranslateModule, SkipLinkComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

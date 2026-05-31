@@ -1,21 +1,21 @@
-<div class="modal-overlay" (click)="onCancel()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
+<div class="modal-overlay" (click)="onCancel()" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title" aria-describedby="confirm-modal-body">
+  <div class="modal-content" (click)="$event.stopPropagation()" appFocusTrap>
 
-    <button type="button" class="close-btn" aria-label="Close" (click)="onCancel()">&times;</button>
+    <button type="button" class="close-btn" [attr.aria-label]="'a11y.closeModal' | translate" (click)="onCancel()">&times;</button>
 
-    <div class="modal-body">
+    <div class="modal-body" id="confirm-modal-body">
       <i class="bi bi-exclamation-triangle confirm-icon" aria-hidden="true"></i>
       <div class="modal-text">
-        <h2>{{ title }}</h2>
+        <h2 id="confirm-modal-title">{{ title }}</h2>
         <p>{{ message }}</p>
       </div>
     </div>
 
     <div class="modal-actions">
-      <button class="btn-cancel-action" (click)="onCancel()">
+      <button class="cv-btn-secondary" (click)="onCancel()">
         <i class="bi bi-x-circle me-1"></i> {{ 'CONFIRM_MODAL.CANCEL' | translate }}
       </button>
-      <button class="btn-confirm-action" (click)="onConfirm()" [disabled]="loading">
+      <button class="cv-btn-primary" (click)="onConfirm()" [disabled]="loading">
         <i class="bi bi-check-circle me-1"></i>
         {{ loading ? ('CONFIRM_MODAL.PROCESSING' | translate) : confirmText }}
       </button>

@@ -51,17 +51,12 @@
 
 @if (loading) {
   <div class="card border-0 shadow-sm">
-    <div class="card-body text-center py-5">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <div class="mt-2 text-muted">{{ 'PUBLISHER_REQUESTS.LOADING' | translate }}</div>
+    <div class="card-body">
+      <app-loading-spinner [message]="'PUBLISHER_REQUESTS.LOADING' | translate"></app-loading-spinner>
     </div>
   </div>
 } @else if (errorMessageKey) {
-  <div class="alert alert-danger" role="alert">
-    {{ errorMessageKey | translate }}
-  </div>
+  <app-error-banner [message]="errorMessageKey | translate" [showRetry]="false"></app-error-banner>
 } @else {
   <div class="card border-0 shadow-sm">
     <div class="card-body p-0">

@@ -8,10 +8,12 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { TicketResponseDTO } from '../../../models/ticket.model';
 import { TicketService } from '../../../services/ticket-service/ticket.service';
 import { PricePipe } from '../../../shared/pipes/price.pipe';
+import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner';
+import { ErrorBannerComponent } from '../../../shared/error-banner/error-banner';
 
 @Component({
   selector: 'app-ticket-details-page',
-  imports: [CommonModule, RouterLink, TranslateModule, PricePipe, QRCodeComponent],
+  imports: [CommonModule, RouterLink, TranslateModule, PricePipe, QRCodeComponent, LoadingSpinnerComponent, ErrorBannerComponent],
   templateUrl: './ticket-details.html',
   styleUrl: './ticket-details.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

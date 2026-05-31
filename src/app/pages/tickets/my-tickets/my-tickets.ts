@@ -1,22 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { TicketResponseDTO } from '../../../models/ticket.model';
 import { TicketService } from '../../../services/ticket-service/ticket.service';
 import { PricePipe } from '../../../shared/pipes/price.pipe';
+import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner';
+import { EmptyStateComponent } from '../../../shared/empty-state/empty-state';
+import { ErrorBannerComponent } from '../../../shared/error-banner/error-banner';
 
 type TicketStatus = 'ACTIVE' | 'USED' | 'EXPIRED';
 
 @Component({
   selector: 'app-my-tickets-page',
-  imports: [CommonModule, RouterLink, TranslateModule, PricePipe],
+  imports: [CommonModule, RouterLink, TranslateModule, PricePipe, LoadingSpinnerComponent, EmptyStateComponent, ErrorBannerComponent],
   templateUrl: './my-tickets.html',
   styleUrl: './my-tickets.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MyTicketsPageComponent {
   private readonly ticketService = inject(TicketService);
+  private readonly router = inject(Router);
 
   readonly tickets = signal<TicketResponseDTO[]>([]);
   readonly loading = signal(false);
@@ -49,6 +53,10 @@ export class MyTicketsPageComponent {
 
   refresh(): void {
     this.loadTickets();
+  }
+
+  navigateToExplore(): void {
+    this.router.navigate(['/explore-events']);
   }
 
   private loadTickets(): void {

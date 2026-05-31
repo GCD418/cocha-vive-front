@@ -1,9 +1,10 @@
-<div class="modal fade" id="eventMapModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="eventMapModal" tabindex="-1" aria-hidden="true"
+     role="dialog" aria-modal="true" aria-labelledby="event-map-modal-title" aria-describedby="event-map-modal-body">
   <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
+    <div class="modal-content" appFocusTrap>
 
       <div class="modal-header" style="background-color: #0e1b4d;">
-        <h5 class="modal-title text-white">
+        <h5 class="modal-title text-white" id="event-map-modal-title">
           <i class="bi bi-geo-alt-fill me-2" style="color: #f82249;"></i>
           {{ locationName || ('EVENT_MAP_MODAL.LABELS.LOCATION' | translate) }}
         </h5>
@@ -12,7 +13,7 @@
         </button>
       </div>
 
-      <div class="modal-body p-0">
+      <div class="modal-body p-0" id="event-map-modal-body">
         @if (apiLoaded() && hasCoordinates()) {
           <google-map
             [center]="center()"
@@ -24,9 +25,7 @@
         } @else if (!apiLoaded()) {
           <div class="d-flex justify-content-center align-items-center"
                 style="height: 450px;">
-            <div class="spinner-border" style="color: #f82249;" role="status">
-              <span class="visually-hidden">{{ 'EVENT_MAP_MODAL.LABELS.CHARGING_MAP' | translate }}</span>
-            </div>
+            <app-loading-spinner [message]="'EVENT_MAP_MODAL.LABELS.CHARGING_MAP' | translate"></app-loading-spinner>
           </div>
         } @else {
           <div class="d-flex justify-content-center align-items-center"
@@ -37,7 +36,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary"
+        <button type="button" class="cv-btn-secondary"
                 data-bs-dismiss="modal">{{'EVENT_MAP_MODAL.LABELS.CLOSE' | translate}}</button>
       </div>
 

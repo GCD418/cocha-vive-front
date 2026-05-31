@@ -1,7 +1,7 @@
-<div class="auth-modal-overlay" (click)="close.emit()">
-  <div class="auth-modal-card" (click)="$event.stopPropagation()">
+<div class="auth-modal-overlay" (click)="close.emit()" role="dialog" aria-modal="true" aria-labelledby="email-reg-modal-title">
+  <div class="auth-modal-card" (click)="$event.stopPropagation()" appFocusTrap>
 
-    <button class="auth-modal-close" (click)="close.emit()" aria-label="Cerrar">&times;</button>
+    <button class="auth-modal-close" (click)="close.emit()" [attr.aria-label]="'a11y.closeModal' | translate">&times;</button>
 
     @if (facebookName || facebookPhotoUrl) {
       <div class="d-flex flex-column align-items-center gap-2 mb-3">
@@ -19,7 +19,7 @@
     }
 
     <div class="text-center mb-3">
-      <h2 class="mb-1">{{ 'AUTH.EMAIL_MODAL_TITLE' | translate }}</h2>
+      <h2 id="email-reg-modal-title" class="mb-1">{{ 'AUTH.EMAIL_MODAL_TITLE' | translate }}</h2>
       <p class="text-muted small mb-0">{{ 'AUTH.EMAIL_MODAL_SUBTITLE' | translate }}</p>
     </div>
 
