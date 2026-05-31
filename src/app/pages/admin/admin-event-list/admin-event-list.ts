@@ -5,7 +5,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { EventService } from '../../../services/event-service/event.service';
 import { EventModel } from '../../../models/event-model';
-import { UserDTO } from '../../../models/event-model';
 
 @Component({
   selector: 'app-admin-event-list',
@@ -32,7 +31,7 @@ export class AdminEventListComponent implements OnInit{
   showToast = signal(false);
 
   readonly availableCategories = computed(() =>
-    [...new Set(this.events().map((event) => event.category?.name).filter(Boolean))] as string[]
+    [...new Set(this.events().map((event) => event.categoryName).filter(Boolean))] as string[]
   );
 
   readonly filteredEvents = computed(() => {
@@ -45,7 +44,7 @@ export class AdminEventListComponent implements OnInit{
 
     return this.events().filter((event) => {
       if (searchText) {
-        const fullName = this.getFullName(event.organizedByUser).toLowerCase();
+        const fullName = (event.organizedByUserName ?? '').toLowerCase();
         const matchesSearch =
           event.title.toLowerCase().includes(searchText) ||
           fullName.includes(searchText);
@@ -74,7 +73,7 @@ export class AdminEventListComponent implements OnInit{
         return false;
       }
 
-      if (filterCategory && event.category?.name !== filterCategory) {
+      if (filterCategory && event.categoryName !== filterCategory) {
         return false;
       }
 
@@ -198,10 +197,5 @@ export class AdminEventListComponent implements OnInit{
     return Math.min(a, b);
   }
   
-  getFullName(user: UserDTO): string {
-    return [user.names, user.firstLastName, user.secondLastName]
-      .filter(Boolean)
-      .join(' ');
-  }
   
 }

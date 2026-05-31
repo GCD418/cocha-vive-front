@@ -7,51 +7,66 @@
 
     <nav id="navmenu" class="navmenu">
         <ul>
-            <li>
-                <a routerLink="/" fragment="hero" (click)="closeMobileMenu()">{{ 'NAV.START' | translate }}</a>
+            <li class="sidebar-logo-item d-xl-none">
+                <img src="assets/img/logo.png" alt="Logo">
             </li>
             <li>
-            <a routerLink="explore-events" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'NAV.EXPLORE' | translate }}</a>
+              <a routerLink="/" fragment="hero" (click)="closeMobileMenu()">
+                <i class="bi bi-house-door nav-icon"></i>
+                <span>{{ 'NAV.START' | translate }}</span>
+              </a>
+            </li>
+            <li>
+              <a routerLink="explore-events" routerLinkActive="active" (click)="closeMobileMenu()">
+                <i class="bi bi-compass nav-icon"></i>
+                <span>{{ 'NAV.EXPLORE' | translate }}</span>
+              </a>
             </li>
             @if (currentUser()?.role === 'ROLE_USER') {
               <li>
                 <a routerLink="/my-tickets" routerLinkActive="active" (click)="closeMobileMenu()">
-                  {{ 'NAV.MY_TICKETS' | translate }}
+                  <i class="bi bi-ticket-perforated nav-icon"></i>
+                  <span>{{ 'NAV.MY_TICKETS' | translate }}</span>
                 </a>
               </li>
             }
             @if (canSeeAdminEventsLink()) {
               <li>
                 <a routerLink="/admin/events" routerLinkActive="active" (click)="closeMobileMenu()">
-                  {{ 'NAV.ADMIN_EVENTS' | translate }}
+                  <i class="bi bi-calendar-event nav-icon"></i>
+                  <span>{{ 'NAV.ADMIN_EVENTS' | translate }}</span>
                 </a>
               </li>
             }
             @if (authService.actualRole() === 'ROLE_PUBLISHER') {
               <li>
                 <a routerLink="/publisher/my-events" routerLinkActive="active" (click)="closeMobileMenu()">
-                  {{ 'NAV.MY_EVENTS' | translate }}
+                  <i class="bi bi-megaphone nav-icon"></i>
+                  <span>{{ 'NAV.MY_EVENTS' | translate }}</span>
                 </a>
               </li>
             }
             @if (canSeePublisherRequestLink()) {
               <li>
                 <a routerLink="/publisher-apply-form" routerLinkActive="active" (click)="closeMobileMenu()">
-                  {{ 'NAV.PUBLISHER_REQUEST' | translate }}
+                  <i class="bi bi-file-earmark-text nav-icon"></i>
+                  <span>{{ 'NAV.PUBLISHER_REQUEST' | translate }}</span>
                 </a>
               </li>
             }
             @if (canSeePublisherRequestsAdminLink()) {
               <li>
-                <a routerLink="/admin/publisher-requests">
-                  {{ 'NAV.ADMIN_PUBLISHER_REQUESTS' | translate }}
+                <a routerLink="/admin/publisher-requests" routerLinkActive="active" (click)="closeMobileMenu()">
+                  <i class="bi bi-inbox nav-icon"></i>
+                  <span>{{ 'NAV.ADMIN_PUBLISHER_REQUESTS' | translate }}</span>
                 </a>
               </li>
             }
             @if (canSeeRoleManagementLink()) {
               <li>
                 <a routerLink="/superadmin/admin-management" routerLinkActive="active" (click)="closeMobileMenu()">
-                  {{ 'NAV.ROLE_MANAGEMENT' | translate }}
+                  <i class="bi bi-shield-lock nav-icon"></i>
+                  <span>{{ 'NAV.ROLE_MANAGEMENT' | translate }}</span>
                 </a>
               </li>
             }
