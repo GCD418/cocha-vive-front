@@ -125,6 +125,7 @@
   },
   "HERO": {
     "WELCOME": "Bem-vindo ao",
+    "BRAND": "Cocha Vive",
     "SUBTITLE": "Descubra os melhores eventos de Cochabamba"
   },
   "AUTH": {
@@ -160,7 +161,8 @@
     "SUBTITLE": "Explore eventos culturais de acordo com seus interesses",
     "LOADING": "Carregando categorias...",
     "ERROR": "Ocorreu um erro ao carregar as categorias.",
-    "EMPTY": "Nenhuma categoria disponível encontrada."
+    "EMPTY": "Nenhuma categoria disponível encontrada.",
+    "VIEW_CATEGORY": "Ver eventos de {{name}}"
   },
   "EVENT_CARD": {
     "TBA_LOCATION": "Local a confirmar"
@@ -233,12 +235,14 @@
     "LOADING": "Carregando os próximos eventos...",
     "SPONSORED": "Patrocinado",
     "ERROR": "Ocorreu um erro ao carregar os eventos.",
-    "EMPTY": "Não há eventos programados."
+    "EMPTY": "Nenhum evento em destaque no momento.",
+    "VIEW_EVENT": "Ver detalhes de {{title}}"
   },
   "UPCOMING_EVENTS": {
     "TITLE": "Próximos Eventos",
     "SUBTITLE": "Descubra o que está acontecendo na cidade",
-    "FEATURE_DISABLED": "Esta função está atualmente desabilitada."
+    "FEATURE_DISABLED": "Esta função está atualmente desabilitada.",
+    "LOADING": "Carregando próximos eventos..."
   },
   "CATEGORY_EVENTS": {
     "EVENTS_FOUND": "EVENTOS ENCONTRADOS"
@@ -278,6 +282,35 @@
     "TOTAL_PRICE": "Total a pagar",
     "CONFIRM": "Confirmar Compra",
     "PROCESSING": "Processando..."
+  },
+  "PROMOTE": {
+    "TITLE": "Destacar meu evento",
+    "SUBTITLE": "Escolha o plano que melhor se adapta ao seu evento.",
+    "BUTTON": "Destacar evento",
+    "CHOOSE": "Escolher",
+    "PLANS": {
+      "ONE_DAY": {
+        "LABEL": "1 Dia",
+        "DESC": "Visibilidade em destaque por 24 horas."
+      },
+      "THREE_DAYS": {
+        "LABEL": "3 Dias",
+        "DESC": "Três dias nos espaços em destaque da plataforma."
+      },
+      "ONE_WEEK": {
+        "LABEL": "1 Semana",
+        "DESC": "Máxima exposição por uma semana completa."
+      }
+    },
+    "QR": {
+      "SELECTED_PLAN": "Plano selecionado:",
+      "HINT": "Escaneie o QR para efetuar o pagamento e depois confirme.",
+      "ALT": "QR de pagamento simulado",
+      "BACK": "Voltar aos planos",
+      "CONFIRM": "Já paguei",
+      "PROCESSING": "Processando...",
+      "ERROR": "Ocorreu um erro ao processar o pagamento. Tente novamente."
+    }
   },
   "EVENT_LIST": {
     "TITLE": "Meus Eventos",

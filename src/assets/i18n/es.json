@@ -124,6 +124,7 @@
   },
   "HERO": {
     "WELCOME": "Bienvenido a",
+    "BRAND": "Cocha Vive",
     "SUBTITLE": "Descubre los mejores eventos de Cochabamba"
   },
   "AUTH": {
@@ -160,7 +161,8 @@
     "SUBTITLE": "Explora eventos culturales según tus intereses",
     "LOADING": "Cargando categorías...",
     "ERROR": "Hubo un error al cargar las categorías.",
-    "EMPTY": "No se encontraron categorías disponibles."
+    "EMPTY": "No se encontraron categorías disponibles.",
+    "VIEW_CATEGORY": "Ver eventos de {{name}}"
   },
   "EVENT_CARD": {
     "TBA_LOCATION": "Lugar por confirmar"
@@ -233,12 +235,15 @@
     "LOADING": "Cargando próximos eventos...",
     "SPONSORED": "Patrocinado",
     "ERROR": "Hubo un error al cargar los eventos.",
-    "EMPTY": "No hay eventos programados."
+    "EMPTY": "No hay eventos destacados en este momento.",
+    "VIEW_EVENT": "Ver detalles de {{title}}"
   },
   "UPCOMING_EVENTS": {
     "TITLE": "Próximos Eventos",
     "SUBTITLE": "Descubre lo que está pasando en la ciudad",
-    "FEATURE_DISABLED": "Esta función está actualmente deshabilitada."
+    "FEATURE_DISABLED": "Esta función está actualmente deshabilitada.",
+    "LOADING": "Cargando próximos eventos...",
+    "EMPTY": "No hay próximos eventos programados."
   },
   "CATEGORY_EVENTS": {
     "EVENTS_FOUND": "EVENTOS ENCONTRADOS"
@@ -278,6 +283,35 @@
     "TOTAL_PRICE": "Total a pagar",
     "CONFIRM": "Confirmar Compra",
     "PROCESSING": "Procesando..."
+  },
+  "PROMOTE": {
+    "TITLE": "Destacar mi evento",
+    "SUBTITLE": "Elige el plan que mejor se adapte a tu evento.",
+    "BUTTON": "Destacar evento",
+    "CHOOSE": "Elegir",
+    "PLANS": {
+      "ONE_DAY": {
+        "LABEL": "1 Día",
+        "DESC": "Visibilidad destacada durante 24 horas."
+      },
+      "THREE_DAYS": {
+        "LABEL": "3 Días",
+        "DESC": "Tres días en los espacios destacados de la plataforma."
+      },
+      "ONE_WEEK": {
+        "LABEL": "1 Semana",
+        "DESC": "Máxima exposición durante una semana completa."
+      }
+    },
+    "QR": {
+      "SELECTED_PLAN": "Plan seleccionado:",
+      "HINT": "Escanea el QR para realizar el pago y luego confirma.",
+      "ALT": "QR de pago simulado",
+      "BACK": "Volver a planes",
+      "CONFIRM": "Ya pagué",
+      "PROCESSING": "Procesando...",
+      "ERROR": "Ocurrió un error al procesar el pago. Intenta nuevamente."
+    }
   },
   "EVENT_LIST": {
     "TITLE": "Mis Eventos",

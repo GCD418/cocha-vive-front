@@ -125,6 +125,7 @@
   },
   "HERO": {
     "WELCOME": "Welcome to",
+    "BRAND": "Cocha Vive",
     "SUBTITLE": "Discover the best events in Cochabamba"
   },
   "AUTH": {
@@ -160,7 +161,8 @@
     "SUBTITLE": "Explore cultural events based on your interests",
     "LOADING": "Loading categories...",
     "ERROR": "There was an error loading categories.",
-    "EMPTY": "No categories found."
+    "EMPTY": "No categories found.",
+    "VIEW_CATEGORY": "View {{name}} events"
   },
   "EVENT_CARD": {
     "TBA_LOCATION": "Location TBA"
@@ -233,12 +235,14 @@
     "LOADING": "Loading upcoming events...",
     "SPONSORED": "Sponsored",
     "ERROR": "There was an error loading events.",
-    "EMPTY": "No scheduled events."
+    "EMPTY": "No featured events at the moment.",
+    "VIEW_EVENT": "View {{title}} details"
   },
   "UPCOMING_EVENTS": {
     "TITLE": "Upcoming Events",
     "SUBTITLE": "Discover what's happening in the city",
-    "FEATURE_DISABLED": "This feature is currently disabled."
+    "FEATURE_DISABLED": "This feature is currently disabled.",
+    "LOADING": "Loading upcoming events..."
   },
   "CATEGORY_EVENTS": {
     "EVENTS_FOUND": "EVENTS FOUND"
@@ -278,6 +282,35 @@
     "TOTAL_PRICE": "Total to pay",
     "CONFIRM": "Confirm Purchase",
     "PROCESSING": "Processing..."
+  },
+  "PROMOTE": {
+    "TITLE": "Promote my event",
+    "SUBTITLE": "Choose the plan that best fits your event.",
+    "BUTTON": "Promote event",
+    "CHOOSE": "Choose",
+    "PLANS": {
+      "ONE_DAY": {
+        "LABEL": "1 Day",
+        "DESC": "Featured visibility for 24 hours."
+      },
+      "THREE_DAYS": {
+        "LABEL": "3 Days",
+        "DESC": "Three days in the platform's featured spots."
+      },
+      "ONE_WEEK": {
+        "LABEL": "1 Week",
+        "DESC": "Maximum exposure for a full week."
+      }
+    },
+    "QR": {
+      "SELECTED_PLAN": "Selected plan:",
+      "HINT": "Scan the QR to make payment, then confirm.",
+      "ALT": "Simulated payment QR",
+      "BACK": "Back to plans",
+      "CONFIRM": "I already paid",
+      "PROCESSING": "Processing...",
+      "ERROR": "An error occurred while processing the payment. Please try again."
+    }
   },
   "EVENT_LIST": {
     "TITLE": "My Events",

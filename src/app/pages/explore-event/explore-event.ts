@@ -84,7 +84,7 @@ export class ExploreEvent implements OnInit {
         }
       }
 
-      if (selectedCategoryId !== null && event.category?.id !== selectedCategoryId) {
+      if (selectedCategoryId !== null && event.categoryId !== selectedCategoryId) {
         return false;
       }
 
