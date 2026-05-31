@@ -231,6 +231,7 @@
   "FEATURED_EVENTS": {
     "TITLE": "Eventos Destacados",
     "LOADING": "Cargando próximos eventos...",
+    "SPONSORED": "Patrocinado",
     "ERROR": "Hubo un error al cargar los eventos.",
     "EMPTY": "No hay eventos programados."
   },

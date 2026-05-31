@@ -231,6 +231,7 @@
   "FEATURED_EVENTS": {
     "TITLE": "Featured Events",
     "LOADING": "Loading upcoming events...",
+    "SPONSORED": "Sponsored",
     "ERROR": "There was an error loading events.",
     "EMPTY": "No scheduled events."
   },
