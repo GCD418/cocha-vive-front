@@ -1,18 +1,19 @@
-<div class="card h-100 border-0 shadow-sm event-card"
+<div class="card h-100 border-0 shadow-sm cv-card"
      [routerLink]="['/event-details', event.id]"
-     style="cursor: pointer;">
+     style="cursor: pointer;"
+     [attr.aria-label]="('event.viewDetails' | translate) + ': ' + event.title">
 
-  <div class="position-relative image-wrapper">
+  <div class="position-relative cv-card__image-wrapper">
     <img
       [src]="event.photoLinks && event.photoLinks.length > 0 ? event.photoLinks[0] : 'assets/img/event-placeholder.jpg'"
       class="card-img-top"
       [alt]="event.title">
 
-    <span class="badge rounded-pill category-badge position-absolute top-0 start-0 m-3">
+    <span class="badge rounded-pill cv-card__badge cv-card__badge--category">
       {{ event.categoryName }}
     </span>
 
-    <span class="badge rounded-pill price-badge position-absolute top-0 end-0 m-3">
+    <span class="badge rounded-pill cv-card__badge cv-card__badge--price">
       {{event.cost | price}}
     </span>
   </div>

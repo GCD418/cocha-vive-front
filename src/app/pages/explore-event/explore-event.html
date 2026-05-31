@@ -21,12 +21,13 @@
                 type="text"
                 class="form-control"
                 [placeholder]="'EXPLORE.SIDEBAR.SEARCH_PLACEHOLDER' | translate"
+                [attr.aria-label]="'EXPLORE.SIDEBAR.SEARCH_LABEL' | translate"
                 [ngModel]="searchQuery()"
                 (ngModelChange)="searchQuery.set($event); onFilterChange()"
                 style="border-color: color-mix(in srgb, var(--default-color), transparent 75%); background-color: var(--surface-color); color: var(--default-color);"
             />
             @if (searchQuery()) {
-            <button class="btn btn-outline-secondary" type="button" (click)="clearFilters()" [title]="'EXPLORE.SIDEBAR.CLEAR_TOOLTIP' | translate">
+            <button class="btn btn-outline-secondary" type="button" (click)="clearFilters()" [title]="'EXPLORE.SIDEBAR.CLEAR_TOOLTIP' | translate" aria-label="Clear search">
                 <i class="bi bi-x-lg"></i>
             </button>
             }
@@ -63,6 +64,7 @@
             {{ 'EXPLORE.SIDEBAR.CATEGORY_LABEL' | translate }}
         </label>
         <select class="form-select mb-3"
+                [attr.aria-label]="'EXPLORE.SIDEBAR.CATEGORY_LABEL' | translate"
                 [ngModel]="selectedCategoryId()"
                 (ngModelChange)="selectedCategoryId.set($event); onFilterChange()"
                 style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);">
@@ -76,6 +78,7 @@
             {{ 'EXPLORE.SIDEBAR.TYPE_LABEL' | translate }}
         </label>
         <select class="form-select mb-3"
+                [attr.aria-label]="'EXPLORE.SIDEBAR.TYPE_LABEL' | translate"
                 [ngModel]="eventType()"
                 (ngModelChange)="eventType.set($event); onTypeChange()"
                 style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);">
@@ -92,6 +95,7 @@
                 <input type="number"
                        class="form-control"
                        [placeholder]="'EXPLORE.SIDEBAR.PRICE_MIN' | translate"
+                       [attr.aria-label]="'EXPLORE.SIDEBAR.PRICE_MIN' | translate"
                        min="0"
                        [ngModel]="minPrice()"
                        (ngModelChange)="minPrice.set($event); onPriceChange()"
@@ -102,6 +106,7 @@
                 <input type="number"
                        class="form-control"
                        [placeholder]="'EXPLORE.SIDEBAR.PRICE_MAX' | translate"
+                       [attr.aria-label]="'EXPLORE.SIDEBAR.PRICE_MAX' | translate"
                        min="0"
                        [ngModel]="maxPrice()"
                        (ngModelChange)="maxPrice.set($event); onPriceChange()"
@@ -116,6 +121,7 @@
         <div class="mb-2">
             <label style="font-size: 0.75rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EXPLORE.SIDEBAR.DATE_FROM' | translate }}</label>
             <input type="date" class="form-control"
+                   [attr.aria-label]="'EXPLORE.SIDEBAR.DATE_FROM' | translate"
                    [ngModel]="startDate()"
                    (ngModelChange)="startDate.set($event); onFilterChange()"
                    style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
@@ -123,12 +129,13 @@
         <div class="mb-4">
             <label style="font-size: 0.75rem; color: color-mix(in srgb, var(--default-color), transparent 40%);">{{ 'EXPLORE.SIDEBAR.DATE_TO' | translate }}</label>
             <input type="date" class="form-control"
+                   [attr.aria-label]="'EXPLORE.SIDEBAR.DATE_TO' | translate"
                    [ngModel]="endDate()"
                    (ngModelChange)="endDate.set($event); onFilterChange()"
                    style="background-color: var(--surface-color); border-color: color-mix(in srgb, var(--default-color), transparent 75%); color: var(--default-color);" />
         </div>
 
-        <button class="btn btn-outline-secondary w-100" (click)="clearFilters()">
+        <button class="btn btn-outline-secondary w-100" (click)="clearFilters()" [attr.aria-label]="'EXPLORE.SIDEBAR.CLEAR_FILTERS' | translate">
             <i class="bi bi-trash me-2"></i>{{ 'EXPLORE.SIDEBAR.CLEAR_FILTERS' | translate }}
         </button>
 

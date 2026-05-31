@@ -12,7 +12,7 @@
 
   --cv-heading: #0e1b4d;
   --cv-text: #2f3138;
-  --cv-text-muted: color-mix(in srgb, var(--cv-text), transparent 30%);
+  --cv-text-muted: color-mix(in srgb, var(--cv-text), transparent 30%);  /* improved from 40% for WCAG AA contrast */
   --cv-text-subtle: color-mix(in srgb, var(--cv-text), transparent 50%);
 
   --cv-surface: #ffffff;

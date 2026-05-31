@@ -56,6 +56,7 @@
             type="text"
             class="form-control border-start-0"
             placeholder="{{ 'EVENT_LIST.PLACEHOLDERS.SEARCH' | translate }}"
+            [attr.aria-label]="'EVENT_LIST.SEARCH' | translate"
             [ngModel]="searchText()"
             (ngModelChange)="searchText.set($event); onFilterChange()">
         </div>
@@ -69,6 +70,7 @@
 
       <div class="card border-0 shadow-sm">
         <div class="card-body p-0">
+          <div class="table-responsive">
           <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
               <tr class="text-center">
@@ -81,6 +83,7 @@
                             [class.text-primary]="filterDateFrom() || filterDateTo()"
                             data-bs-toggle="dropdown"
                             data-bs-auto-close="outside"
+                            [attr.aria-label]="'EVENT_LIST.FILTERS.DATE_LABEL' | translate"
                             aria-expanded="false">
                       {{ 'EVENT_LIST.TABLE.HEADERS.DATE' | translate }}
                     </button>
@@ -101,6 +104,7 @@
                             [class.text-primary]="filterCategory()"
                             data-bs-toggle="dropdown"
                             data-bs-auto-close="true"
+                            [attr.aria-label]="'EVENT_LIST.FILTERS.CATEGORY_LABEL' | translate"
                             aria-expanded="false">
                       {{ 'EVENT_LIST.TABLE.HEADERS.CATEGORY' | translate }}
                     </button>
@@ -131,6 +135,7 @@
                             [class.text-primary]="filterType()"
                             data-bs-toggle="dropdown"
                             data-bs-auto-close="true"
+                            [attr.aria-label]="'EVENT_LIST.FILTERS.TYPE_LABEL' | translate"
                             aria-expanded="false">
                       {{ 'EVENT_LIST.TABLE.HEADERS.TYPE' | translate }}
                     </button>
@@ -166,6 +171,7 @@
                             [class.text-primary]="filterStatus()"
                             data-bs-toggle="dropdown"
                             data-bs-auto-close="true"
+                            [attr.aria-label]="'EVENT_LIST.FILTERS.STATUS_LABEL' | translate"
                             aria-expanded="false">
                       {{ 'EVENT_LIST.TABLE.HEADERS.STATUS' | translate }}
                     </button>
@@ -238,17 +244,17 @@
                     <div class="d-flex gap-3 justify-content-center">
                       <button (click)="eventDetails(event.id)"
                               class="btn btn-link p-0 text-body-tertiary link-dark"
-                              [title]="'EVENT_LIST.TABLE.ACTIONS.VIEW' | translate">
+                              [attr.aria-label]="'EVENT_LIST.TABLE.ACTIONS.VIEW' | translate">
                         <i class="bi bi-eye fs-5"></i>
                       </button>
                       <button (click)="openEditModal(event)"
                               class="btn btn-link p-0 text-body-tertiary link-dark"
-                              [title]="'EVENT_LIST.TABLE.ACTIONS.EDIT' | translate">
+                              [attr.aria-label]="'EVENT_LIST.TABLE.ACTIONS.EDIT' | translate">
                         <i class="bi bi-pencil fs-5"></i>
                       </button>
                       <button (click)="openCancelModal(event.id)"
                               class="btn btn-link p-0 text-body-tertiary link-dark"
-                              [title]="'EVENT_LIST.TABLE.ACTIONS.CANCEL' | translate">
+                              [attr.aria-label]="'EVENT_LIST.TABLE.ACTIONS.CANCEL' | translate">
                         <i class="bi bi-trash fs-5"></i>
                       </button>
                       <button (click)="openPromoteModal(event.id)"
@@ -257,7 +263,7 @@
                               [class.text-muted]="event.eventStatus !== 'APPROVED'"
                               [disabled]="event.eventStatus !== 'APPROVED'"
                               [style.pointer-events]="event.eventStatus !== 'APPROVED' ? 'none' : 'auto'"
-                              [title]="'PROMOTE.BUTTON' | translate">
+                              [attr.aria-label]="'PROMOTE.BUTTON' | translate">
                         <i class="bi bi-stars fs-5"></i>
                       </button>
                     </div>
@@ -272,6 +278,7 @@
               }
             </tbody>
           </table>
+          </div>
 
           <div class="d-flex justify-content-between align-items-center mt-3 px-2 pb-3">
             <small class="text-muted">
@@ -282,7 +289,7 @@
             <nav>
               <ul class="pagination pagination-sm mb-0">
                 <li class="page-item" [class.disabled]="currentPage() === 1">
-                  <button class="page-link" (click)="goToPage(currentPage() - 1)">
+                  <button class="page-link" (click)="goToPage(currentPage() - 1)" [attr.aria-label]="'EVENT_LIST.PAGINATION.PREV' | translate">
                     <i class="bi bi-chevron-left"></i>
                   </button>
                 </li>
@@ -292,7 +299,7 @@
                   </li>
                 }
                 <li class="page-item" [class.disabled]="currentPage() === totalPages()">
-                  <button class="page-link" (click)="goToPage(currentPage() + 1)">
+                  <button class="page-link" (click)="goToPage(currentPage() + 1)" [attr.aria-label]="'EVENT_LIST.PAGINATION.NEXT' | translate">
                     <i class="bi bi-chevron-right"></i>
                   </button>
                 </li>

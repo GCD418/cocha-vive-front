@@ -25,7 +25,9 @@
 
     <form (ngSubmit)="onSubmit()">
       <div class="mb-2">
+        <label for="email-input" class="visually-hidden">{{ 'AUTH.EMAIL_PLACEHOLDER' | translate }}</label>
         <input
+          id="email-input"
           type="email"
           class="email-input"
           [placeholder]="'AUTH.EMAIL_PLACEHOLDER' | translate"

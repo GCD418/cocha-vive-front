@@ -38,12 +38,14 @@
                 <span class="text-muted d-flex align-items-center">{{ 'BUY_TICKET.QUANTITY' | translate }}</span>
                 <div class="d-flex align-items-center">
                   <button class="btn btn-outline-secondary btn-sm rounded-circle"
-                    style="width: 32px; height: 32px; padding: 0;" (click)="decrement()" [disabled]="quantity() <= 1">
+                    style="width: 32px; height: 32px; padding: 0;" (click)="decrement()" [disabled]="quantity() <= 1"
+                    aria-label="Decrease quantity">
                     <i class="bi bi-dash"></i>
                   </button>
                   <span class="mx-3 fw-bold fs-5" style="min-width: 24px; text-align: center;">{{ quantity() }}</span>
                   <button class="btn btn-outline-secondary btn-sm rounded-circle"
-                    style="width: 32px; height: 32px; padding: 0;" (click)="increment()" [disabled]="quantity() >= 20">
+                    style="width: 32px; height: 32px; padding: 0;" (click)="increment()" [disabled]="quantity() >= 20"
+                    aria-label="Increase quantity">
                     <i class="bi bi-plus"></i>
                   </button>
                 </div>
