@@ -14,7 +14,6 @@ import { AppFeatures } from '../../../models/app-features';
 })
 export class UpcomingEventsListComponent implements OnInit {
   events = signal<EventModel[]>([]);
-  loading = signal(true);
   public featureService = inject(FeatureToggleService);
   public readonly AppFeatures = AppFeatures;
 
@@ -27,7 +26,6 @@ export class UpcomingEventsListComponent implements OnInit {
   private getEvents() {
     this.eventService.getUpcomingEvents().subscribe(data => {
       this.events.set(data);
-      this.loading.set(false);
     });
   }
 }

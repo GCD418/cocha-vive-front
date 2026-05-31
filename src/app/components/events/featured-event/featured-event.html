@@ -1,87 +1,76 @@
-<section id="featured-events" class="speakers section py-5" aria-labelledby="featured-title">
+<section id="upcoming-events" class="speakers section py-5">
 
   <div class="container section-title">
-    <h2 id="featured-title">{{ 'FEATURED_EVENTS.TITLE' | translate }}<br></h2>
+    <h2>{{ 'FEATURED_EVENTS.TITLE' | translate }}<br></h2>
     <p>{{ 'FEATURED_EVENTS.SUBTITLE' | translate }}</p>
   </div>
 
-  @if (featureService.isEnabled(AppFeatures.VIEW_FEATURED_EVENTS)) {
-  <div class="container">
 
+  @if (featureService.isEnabled(AppFeatures.VIEW_FEATURED_EVENTS)) {
+
+  <div class="container">
+    
     @if (loading()) {
-      <div class="text-center" role="status" aria-live="polite">
+      <div class="text-center">
         <p>⏳ {{ 'FEATURED_EVENTS.LOADING' | translate }}</p>
       </div>
     }
 
     @if (errorLoading()) {
-      <div class="text-center text-danger" role="alert" aria-live="assertive">
+      <div class="text-center text-danger">
         <p>❌ {{ 'FEATURED_EVENTS.ERROR' | translate }}</p>
       </div>
     }
-
+    
     @if (!loading() && !errorLoading()) {
+      
       <div class="row gy-4">
-
+        
         @for (event of topEvents(); track event.id; let i = $index) {
           <div class="col-lg-4 col-md-6">
             <div class="member h-100 position-relative">
-
               <span class="sponsored-banner">
-                <i class="bi bi-megaphone-fill me-1" aria-hidden="true"></i>
-                {{ 'FEATURED_EVENTS.SPONSORED' | translate }}
+                <i class="bi bi-megaphone-fill me-1"></i>{{ 'FEATURED_EVENTS.SPONSORED' | translate }}
               </span>
-
-              <img
-                [src]="event.photoLinks && event.photoLinks.length > 0 ? event.photoLinks[0] : 'assets/img/no-image.jpg'"
-                class="img-fluid event-img"
-                [alt]="event.title">
-
+              <img [src]="event.photoLinks && event.photoLinks.length > 0 ? event.photoLinks[0] : 'assets/img/no-image.jpg'" 
+                   class="img-fluid event-img" 
+                   [alt]="event.title">
+              
               <div class="member-info">
                 <div class="member-info-content w-100">
-
+                  
                   <div class="text-center">
-                    <span class="badge category-badge mb-2">{{ event.title }}</span>
-                    <h4>
-                      <a [routerLink]="['/evento', event.id]"
-                         class="text-white"
-                         [attr.aria-label]="event.title + ' - ' + ('FEATURED_EVENTS.SEE_EVENT' | translate)">
-                        {{ event.title }}
-                      </a>
-                    </h4>
+                    <span class="badge category-badge mb-2">{{ event.categoryName }}</span>
+                    <h4><a [routerLink]="['/evento', event.id]" class="text-white">{{ event.title }}</a></h4>
                   </div>
-
-                  <span class="short-desc d-block text-white-50 mb-3 text-start">
-                    {{ event.shortDescription }}
-                  </span>
-
+                  
+                  <span class="short-desc d-block text-white-50 mb-3 text-start">{{ event.shortDescription }}</span>
+                  
                   <div class="event-meta d-flex flex-column align-items-center text-center gap-2 border-top border-secondary pt-3">
+                    
                     <div class="cost">
-                      <span class="badge bg-primary fw-bold px-3 py-2">
-                        {{ event.cost | price }}
-                      </span>
+                      <span class="badge bg-primary fw-bold px-3 py-2">{{ event.cost | price }}</span>
                     </div>
+
                     <div class="dates text-light mt-1" style="font-size: 0.85rem;">
-                      <i class="bi bi-calendar-event me-1" aria-hidden="true"></i>
-                      <span class="visually-hidden">{{ 'FEATURED_EVENTS.DATE_RANGE' | translate }}</span>
+                      <i class="bi bi-calendar-event me-1"></i> 
                       {{ event.dateStart | date:'dd/MM/yyyy' }} - {{ event.dateEnd | date:'dd/MM/yyyy' }}
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
           </div>
-
         } @empty {
-          <div class="empty-state text-center" role="status">
-            <i class="bi bi-calendar-x empty-state-icon" aria-hidden="true"></i>
+          <div class="empty-state text-center">
+            <i class="bi bi-calendar-x empty-state-icon"></i>
             <p class="empty-state-text mb-0">{{ 'FEATURED_EVENTS.EMPTY' | translate }}</p>
           </div>
         }
 
       </div>
     }
+
   </div>
   }
   @else {

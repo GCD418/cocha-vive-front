@@ -125,7 +125,6 @@
   },
   "HERO": {
     "WELCOME": "Bem-vindo ao",
-    "BRAND": "Cocha Vive",
     "SUBTITLE": "Descubra os melhores eventos de Cochabamba"
   },
   "AUTH": {
@@ -161,8 +160,7 @@
     "SUBTITLE": "Explore eventos culturais de acordo com seus interesses",
     "LOADING": "Carregando categorias...",
     "ERROR": "Ocorreu um erro ao carregar as categorias.",
-    "EMPTY": "Nenhuma categoria disponível encontrada.",
-    "VIEW_CATEGORY": "Ver eventos de {{name}}"
+    "EMPTY": "Nenhuma categoria disponível encontrada."
   },
   "EVENT_CARD": {
     "TBA_LOCATION": "Local a confirmar"
@@ -233,16 +231,16 @@
   "FEATURED_EVENTS": {
     "TITLE": "Eventos em Destaque",
     "SUBTITLE": "Os eventos mais relevantes da temporada",
-    "LOADING": "Carregando eventos em destaque...",
+    "LOADING": "Carregando os próximos eventos...",
     "ERROR": "Ocorreu um erro ao carregar os eventos.",
-    "EMPTY": "Nenhum evento em destaque no momento.",
-    "VIEW_EVENT": "Ver detalhes de {{title}}"
+    "EMPTY": "Não há eventos programados.",
+    "SPONSORED": "Patrocinado"
   },
   "UPCOMING_EVENTS": {
     "TITLE": "Próximos Eventos",
     "SUBTITLE": "Descubra o que está acontecendo na cidade",
-    "FEATURE_DISABLED": "Esta função está atualmente desabilitada.",
-    "LOADING": "Carregando próximos eventos..."
+    "EMPTY": "Não há eventos próximos por enquanto",
+    "FEATURE_DISABLED": "Esta função está atualmente desabilitada."
   },
   "CATEGORY_EVENTS": {
     "EVENTS_FOUND": "EVENTOS ENCONTRADOS"
