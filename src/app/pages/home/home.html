@@ -1,13 +1,15 @@
-<app-hero></app-hero>
+<main id="main-content" class="home-page">
+  <app-hero></app-hero>
 
-<div class="home-section home-section--light">
-  <app-categories-card></app-categories-card>
-</div>
+  <section id="categories-section" class="home-section home-section--light" aria-labelledby="categories-title">
+    <app-categories-card></app-categories-card>
+  </section>
 
-<div class="home-section home-section--tinted">
-  <app-featured-event></app-featured-event>
-</div>
+  <section id="featured-events-section" class="home-section home-section--tinted" aria-labelledby="featured-title">
+    <app-featured-event></app-featured-event>
+  </section>
 
-<div class="home-section home-section--light">
-  <app-upcoming-events-list-component></app-upcoming-events-list-component>
-</div>
+  <section id="upcoming-events-section" class="home-section home-section--light" aria-labelledby="upcoming-title">
+    <app-upcoming-events-list-component></app-upcoming-events-list-component>
+  </section>
+</main>

@@ -1,18 +1,18 @@
-<section id="categories" class="schedule section py-5">
+<section id="categories" class="schedule section py-5" aria-labelledby="categories-title">
 
   <div class="container section-title">
-    <h2>{{ 'CATEGORIES.TITLE' | translate }}</h2>
+    <h2 id="categories-title">{{ 'CATEGORIES.TITLE' | translate }}</h2>
     <p>{{ 'CATEGORIES.SUBTITLE' | translate }}</p>
   </div>
 
   @if (loading()) {
-    <div class="container text-center">
+    <div class="container text-center" role="status" aria-live="polite">
       <p style="color: black;">⏳ {{ 'CATEGORIES.LOADING' | translate }}</p>
     </div>
   }
 
   @if (errorLoading()) {
-    <div class="container text-center text-danger">
+    <div class="container text-center text-danger" role="alert">
       <p>❌ {{ 'CATEGORIES.ERROR' | translate }}</p>
     </div>
   }
@@ -28,7 +28,9 @@
 
               <div class="d-flex justify-content-center mb-3">
                 @if (category.identifyingIcon) {
-                  <img [src]="category.identifyingIcon" [alt]="category.name" class="category-icon">
+                  <img [src]="category.identifyingIcon" 
+                       [alt]="'Icono de la categoría ' + category.name"
+                       class="category-icon">
                 }
               </div>
 
@@ -37,7 +39,11 @@
               <div class="mt-auto">
                 <ul class="nav nav-tabs border-0 justify-content-center">
                   <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/category-events', category.name]">{{ category.name }}</a>
+                    <a class="nav-link" 
+                       [routerLink]="['/category-events', category.name]"
+                       [attr.aria-label]="('CATEGORIES.VIEW_CATEGORY' | translate).replace('{{name}}', category.name)">
+                      {{ category.name }}
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -46,7 +52,7 @@
 
           </div>
         } @empty {
-          <div class="container text-center text-warning">
+          <div class="container text-center text-warning" role="status">
             <p>⚠️ {{ 'CATEGORIES.EMPTY' | translate }}</p>
           </div>
         }
