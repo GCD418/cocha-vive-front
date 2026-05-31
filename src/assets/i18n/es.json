@@ -657,5 +657,36 @@
     "REASON_MIN_ERROR": "El motivo debe tener al menos 10 caracteres.",
     "CHARS_REMAINING": "caracteres restantes",
     "CONFIRM_BUTTON": "Sí, degradar"
+  },
+  "loading": {
+    "default": "Cargando...",
+    "events": "Cargando eventos...",
+    "categories": "Cargando categorías...",
+    "searching": "Buscando..."
+  },
+  "empty": {
+    "events": {
+      "title": "Sin eventos aún",
+      "description": "¡Sé el primero en crear un evento!",
+      "cta": "Crear Evento"
+    },
+    "categories": {
+      "title": "No hay categorías disponibles",
+      "description": "Vuelve pronto para ver nuevas categorías."
+    },
+    "search": {
+      "title": "Sin resultados",
+      "description": "Intenta ajustar los filtros de búsqueda.",
+      "cta": "Limpiar Filtros"
+    }
+  },
+  "error": {
+    "default": "Algo salió mal. Intenta nuevamente.",
+    "retry": "Reintentar",
+    "dismiss": "Descartar error"
+  },
+  "a11y": {
+    "skipToContent": "Saltar al contenido principal",
+    "closeModal": "Cerrar modal"
   }
 }

@@ -1,0 +1,18 @@
+.cv-skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--cv-space-sm) var(--cv-space-lg);
+  background: var(--cv-accent);
+  color: var(--cv-contrast);
+  border-radius: var(--cv-radius-sm);
+  z-index: 10000;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top var(--cv-transition-fast);
+}
+
+.cv-skip-link:focus {
+  top: var(--cv-space-sm);
+}

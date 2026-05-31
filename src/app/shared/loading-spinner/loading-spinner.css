@@ -1,0 +1,7 @@
+.cv-spinner {
+  padding: var(--cv-space-2xl) 0;
+}
+
+.cv-spinner__message {
+  font-size: var(--cv-text-sm);
+}
