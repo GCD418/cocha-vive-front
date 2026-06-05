@@ -80,3 +80,5 @@ tmp/
 yarn-error.log
 *.zip
 .atl/
+impeccable/
+openspec/
