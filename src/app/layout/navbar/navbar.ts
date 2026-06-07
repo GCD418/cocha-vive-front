@@ -58,13 +58,11 @@ export class Navbar implements OnInit {
   isLoggedIn = computed(() => this.authService.isAuthenticated());
 
   canSeePublisherRequestLink = computed(() => {
-    const isFeatureEnabled = this.featureToggleService.isEnabled(AppFeatures.MANAGE_PUBLISHER_REQUESTS);
-    return isFeatureEnabled && this.userHasRole('ROLE_USER');
+    return this.userHasRole('ROLE_USER');
   });
 
   canSeePublisherRequestsAdminLink = computed(() => {
-    const isFeatureEnabled = this.featureToggleService.isEnabled(AppFeatures.MANAGE_PUBLISHER_REQUESTS);
-    return isFeatureEnabled && (this.userHasRole('ROLE_ADMIN'));
+    return this.userHasRole('ROLE_ADMIN');
   });
 
   canSeeAdminEventsLink = computed(() => {
