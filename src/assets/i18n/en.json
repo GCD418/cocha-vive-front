@@ -111,17 +111,23 @@
     }
   },
   "FOOTER": {
-    "KICKER": "Contact",
-    "TITLE": "Tell us your comment or question",
-    "SUBTITLE": "Write your message and your mail app will open so you can send it directly to gforce4182@gmail.com.",
+    "BRAND_DESC": "Cochabamba's events platform. Discover, explore and experience the best of your city.",
     "EMAIL_LABEL": "Contact email",
-    "FORM": {
-      "LABEL": "Comment or question",
-      "PLACEHOLDER": "Write your comment or question here...",
-      "HELP": "When you send it, your email client will open with the message ready.",
-      "BUTTON": "Send by email"
-    },
-    "PRIVACY_POLICY_LINK": "Privacy Policy"
+    "CLICK_TO_COPY": "Click to copy",
+    "COPIED": "Copied!",
+    "MADE_IN": "Made with ♥ in Bolivia",
+    "NAV": {
+      "PLATFORM_TITLE": "Platform",
+      "EXPLORE": "Explore events",
+      "HOW": "How it works",
+      "CATEGORIES": "Categories",
+      "ABOUT": "About us",
+      "LEGAL_TITLE": "Legal",
+      "PRIVACY": "Privacy policy",
+      "TERMS": "Terms and conditions",
+      "COOKIES": "Cookie policy",
+      "CONTACT_TITLE": "Contact"
+    }
   },
   "HERO": {
     "WELCOME": "Welcome to",
