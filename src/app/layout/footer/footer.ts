@@ -17,9 +17,13 @@ export class FooterComponent {
   protected readonly copied = signal(false);
 
   copyEmail(): void {
-    navigator.clipboard.writeText(this.contactEmail).then(() => {
-      this.copied.set(true);
-      setTimeout(() => this.copied.set(false), 2000);
-    });
-  }
+    navigator.clipboard.writeText(this.contactEmail)
+      .then(() => {
+        this.copied.set(true);
+        setTimeout(() => this.copied.set(false), 2000);
+      })
+      .catch(() => {
+        window.location.href = `mailto:${this.contactEmail}`;
+      });
+    }
 }

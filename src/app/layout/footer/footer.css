@@ -172,6 +172,24 @@
   font-size: 0.78rem;
 }
 
+.copy-feedback {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.copy-label {
+  font-size: 0.78rem;
+  color: var(--accent-color);
+  white-space: nowrap;
+}
+
+.bi-check-lg {
+  color: var(--accent-color);
+}
+
 @media (max-width: 991.98px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;

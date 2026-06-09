@@ -33,15 +33,22 @@
       <!-- Col 4: Contacto -->
       <div class="footer-col">
         <h6 class="footer-col-title">{{ 'FOOTER.NAV.CONTACT_TITLE' | translate }}</h6>
-          <button class="footer-info-pill" (click)="copyEmail()">
-            <i class="bi bi-envelope"></i>
-            <span>{{ contactEmail }}</span>
-            <i class="bi copy-icon" [class.bi-copy]="!copied()" [class.bi-check-lg]="copied()"></i>
-          </button>
+        <button class="footer-info-pill" (click)="copyEmail()">
+          <i class="bi bi-envelope"></i>
+          <span>{{ contactEmail }}</span>
+          <div class="copy-feedback">
+            @if (copied()) {
+              <span class="copy-label">{{ 'FOOTER.COPIED' | translate }}</span>
+              <i class="bi bi-check-lg"></i>
+            } @else {
+              <i class="bi bi-copy"></i>
+            }
+          </div>
+        </button>
 
-        <div class="footer-info-pill static mt-2">
+      <div class="footer-info-pill static mt-2">
           <i class="bi bi-geo-alt"></i>
-          <span>Cochabamba, Bolivia</span>
+          <span>{{ 'FOOTER.LOCATION' | translate }}</span>
         </div>
       </div>
 
@@ -54,8 +61,6 @@
         {{ 'FOOTER.MADE_IN' | translate }}
       </p>
       <div class="footer-bottom-links">
-        <a routerLink="/sitemap">Sitemap</a>
-        <span class="separator" aria-hidden="true">&middot;</span>
         <span class="footer-version">v{{ appVersion }}</span>
       </div>
     </div>

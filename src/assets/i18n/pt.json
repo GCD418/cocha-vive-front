@@ -116,16 +116,12 @@
     "CLICK_TO_COPY": "Clique para copiar",
     "COPIED": "Copiado!",
     "MADE_IN": "Feito com ♥ na Bolívia",
+    "LOCATION": "Cochabamba, Bolívia",
     "NAV": {
       "PLATFORM_TITLE": "Plataforma",
       "EXPLORE": "Explorar eventos",
-      "HOW": "Como funciona",
-      "CATEGORIES": "Categorias",
-      "ABOUT": "Sobre nós",
       "LEGAL_TITLE": "Legal",
       "PRIVACY": "Política de privacidade",
-      "TERMS": "Termos e condições",
-      "COOKIES": "Política de cookies",
       "CONTACT_TITLE": "Contato"
     }
   },
