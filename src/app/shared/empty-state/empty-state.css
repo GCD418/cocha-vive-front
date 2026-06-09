@@ -1,0 +1,15 @@
+.cv-empty-state__icon {
+  font-size: 2.75rem;
+  color: color-mix(in srgb, var(--cv-heading), transparent 65%);
+}
+
+.cv-empty-state__title {
+  font-size: var(--cv-text-xl);
+}
+
+.cv-empty-state__description {
+  font-size: var(--cv-text-base);
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}

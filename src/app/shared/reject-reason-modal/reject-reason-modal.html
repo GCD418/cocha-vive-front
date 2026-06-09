@@ -1,11 +1,11 @@
-<div class="modal-overlay" (click)="onCancel()">
-  <div class="modal-content" (click)="$event.stopPropagation()">
+<div class="modal-overlay" (click)="onCancel()" role="dialog" aria-modal="true" aria-labelledby="reject-modal-title" aria-describedby="reject-modal-body">
+  <div class="modal-content" (click)="$event.stopPropagation()" appFocusTrap>
 
-    <button class="close-btn" (click)="onCancel()">&times;</button>
+    <button class="close-btn" (click)="onCancel()" [attr.aria-label]="'a11y.closeModal' | translate">&times;</button>
 
-    <div class="modal-header">
+    <div class="modal-header" id="reject-modal-body">
       <i class="bi bi-x-circle confirm-icon text-danger d-block mb-1" style="font-size: 1.8rem; margin-right: 0.4rem;"></i>
-      <h2>{{ title }}</h2>
+      <h2 id="reject-modal-title">{{ title }}</h2>
     </div>
 
     <label class="form-label fw-semibold" for="rejectionReasonInput">
@@ -37,14 +37,14 @@
 
     <div class="modal-actions">
       <button
-        class="btn-cancel-action"
+        class="cv-btn-secondary"
         [disabled]="loading"
         (click)="onCancel()">
         <i class="bi bi-x-circle me-1"></i>
         {{ 'CONFIRM_MODAL.CANCEL' | translate }}
       </button>
       <button
-        class="btn-confirm-action"
+        class="cv-btn-primary"
         [disabled]="!isValid || loading"
         (click)="onConfirm()">
         <i class="bi bi-check-circle me-1"></i>

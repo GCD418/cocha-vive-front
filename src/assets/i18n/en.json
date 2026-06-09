@@ -658,5 +658,36 @@
     "REASON_MIN_ERROR": "Reason must be at least 10 characters long.",
     "CHARS_REMAINING": "characters remaining",
     "CONFIRM_BUTTON": "Yes, demote"
+  },
+  "loading": {
+    "default": "Loading...",
+    "events": "Loading events...",
+    "categories": "Loading categories...",
+    "searching": "Searching..."
+  },
+  "empty": {
+    "events": {
+      "title": "No events yet",
+      "description": "Be the first to create an event!",
+      "cta": "Create Event"
+    },
+    "categories": {
+      "title": "No categories available",
+      "description": "Check back soon for new categories."
+    },
+    "search": {
+      "title": "No results found",
+      "description": "Try adjusting your search filters.",
+      "cta": "Clear Filters"
+    }
+  },
+  "error": {
+    "default": "Something went wrong. Please try again.",
+    "retry": "Retry",
+    "dismiss": "Dismiss error"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "closeModal": "Close modal"
   }
 }

@@ -5,11 +5,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
 import { PublisherRequest } from '../../models/publisher-request.model';
 import { PublisherRequestService } from '../../services/publisher-request-service/publisher-request.service';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner';
+import { ErrorBannerComponent } from '../../shared/error-banner/error-banner';
 
 @Component({
   selector: 'app-my-publisher-request-page',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, LoadingSpinnerComponent, ErrorBannerComponent],
   templateUrl: './my-publisher-request.html',
   styleUrl: './my-publisher-request.css',
 })

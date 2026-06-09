@@ -5,7 +5,7 @@
   [attr.aria-labelledby]="'publisher-demotion-modal-title'"
   (keydown.escape)="onCancel()">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content" appFocusTrap>
 
       <div class="modal-header">
         <h5 class="modal-title" id="publisher-demotion-modal-title">
@@ -62,14 +62,14 @@
       <div class="modal-footer">
         <button
           type="button"
-          class="btn btn-secondary"
+          class="cv-btn-secondary"
           [disabled]="loading"
           (click)="onCancel()">
           {{ 'CONFIRM_MODAL.CANCEL' | translate }}
         </button>
         <button
           type="button"
-          class="btn btn-danger d-flex align-items-center gap-2"
+          class="cv-btn-primary d-flex align-items-center gap-2"
           [disabled]="loading"
           (click)="onConfirm()"
           [attr.aria-label]="'PUBLISHER_DEMOTION_MODAL.CONFIRM_BUTTON' | translate">
