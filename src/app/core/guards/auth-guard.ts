@@ -27,6 +27,8 @@ function normalizeRoles(rawRoles: unknown): string[] {
     .filter((role): role is string => Boolean(role));
 }
 
+const TEMPORARILY_BLOCKED_PREFIXES = ['/my-tickets', '/buy-ticket'];
+
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
@@ -55,6 +57,16 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   if (!requiresOnboarding && state.url === '/onboarding') {
     return router.createUrlTree(['/home']);
+  }
+
+  const isBlocked = TEMPORARILY_BLOCKED_PREFIXES.some((prefix) =>
+    state.url.startsWith(prefix)
+  );
+
+  if (isBlocked) {
+    return router.createUrlTree(['/forbidden'], {
+      queryParams: { from: state.url },
+    });
   }
 
   if (!userRoles.includes('ROLE_PUBLISHER') && state.url.startsWith('/events/create')) {
