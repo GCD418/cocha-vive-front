@@ -1,0 +1,15 @@
+<div class="cv-error-banner alert alert-danger d-flex align-items-start gap-2 mb-0"
+     [class.alert-dismissible]="dismissible"
+     role="alert">
+  <i class="bi bi-exclamation-triangle-fill flex-shrink-0 mt-1" aria-hidden="true"></i>
+  <div class="flex-grow-1">{{ message }}</div>
+  @if (showRetry) {
+    <button class="btn btn-outline-danger btn-sm" type="button" (click)="retry.emit()">
+      {{ 'error.retry' | translate }}
+    </button>
+  }
+  @if (dismissible) {
+    <button type="button" class="btn-close" (click)="dismissed.emit()"
+            [attr.aria-label]="'error.dismiss' | translate"></button>
+  }
+</div>

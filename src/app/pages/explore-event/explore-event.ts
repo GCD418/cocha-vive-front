@@ -7,11 +7,14 @@ import { EventModel } from '../../models/event-model';
 import { Category } from '../../models/category.model';
 import { EventCardComponent } from '../../components/events/event-card-component/event-card-component';
 import { TranslateModule } from '@ngx-translate/core';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner';
+import { EmptyStateComponent } from '../../shared/empty-state/empty-state';
+import { ErrorBannerComponent } from '../../shared/error-banner/error-banner';
 
 @Component({
   selector: 'app-explore-event',
   standalone: true,
-  imports: [CommonModule, FormsModule, EventCardComponent, TranslateModule],
+  imports: [CommonModule, FormsModule, EventCardComponent, TranslateModule, LoadingSpinnerComponent, EmptyStateComponent, ErrorBannerComponent],
   templateUrl: './explore-event.html',
   styleUrl: './explore-event.css',
 })

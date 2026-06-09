@@ -2,10 +2,11 @@ import { Component, EventEmitter, Input, Output, signal  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { FocusTrapDirective } from '../focus-trap.directive';
 
 @Component({
   selector: 'app-reject-reason-modal',
-  imports: [CommonModule, FormsModule, TranslateModule],
+  imports: [CommonModule, FormsModule, TranslateModule, FocusTrapDirective],
   templateUrl: './reject-reason-modal.html',
   styleUrl: './reject-reason-modal.css',
 })

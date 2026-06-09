@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { FocusTrapDirective } from '../focus-trap.directive';
 
 @Component({
   selector: 'app-confirm-modal',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [CommonModule, TranslateModule, FocusTrapDirective],
   templateUrl: './confirmModal-Component.html',
   styleUrl: './confirmModal-Component.css'
 })

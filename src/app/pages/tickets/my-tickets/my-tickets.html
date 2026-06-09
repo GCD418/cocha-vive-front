@@ -79,23 +79,9 @@
     </div>
 
     @if (loading()) {
-      <div class="d-flex justify-content-center align-items-center py-5">
-        <div class="spinner-border" style="color: var(--accent-color);" role="status">
-          <span class="visually-hidden">{{ 'TICKETS.LIST.LOADING' | translate }}</span>
-        </div>
-      </div>
+      <app-loading-spinner [message]="'TICKETS.LIST.LOADING' | translate"></app-loading-spinner>
     } @else if (error()) {
-      <div class="alert alert-danger border-0 shadow-sm" role="alert">
-        <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
-          <div>
-            <div class="fw-semibold">{{ 'TICKETS.LIST.ERROR.TITLE' | translate }}</div>
-            <div class="small">{{ 'TICKETS.LIST.ERROR.SUBTITLE' | translate }}</div>
-          </div>
-          <button class="btn btn-sm btn-outline-light" type="button" (click)="refresh()">
-            {{ 'TICKETS.LIST.ERROR.RETRY' | translate }}
-          </button>
-        </div>
-      </div>
+      <app-error-banner [message]="'TICKETS.LIST.ERROR.TITLE' | translate" [showRetry]="true" (retry)="refresh()"></app-error-banner>
     } @else {
       <div class="row g-3">
         @for (ticket of filteredTickets(); track ticket.id) {
@@ -143,16 +129,13 @@
           </div>
         } @empty {
           <div class="col-12">
-            <div class="card border-0 shadow-sm">
-              <div class="card-body py-5 text-center">
-                <div class="empty-icon mb-3">
-                  <i class="bi bi-ticket"></i>
-                </div>
-                <h5 class="fw-bold mb-2">{{ 'TICKETS.LIST.EMPTY.TITLE' | translate }}</h5>
-                <p class="text-muted mb-4">{{ 'TICKETS.LIST.EMPTY.SUBTITLE' | translate }}</p>
-                <a class="cta-btn" routerLink="/explore-events">{{ 'TICKETS.LIST.EMPTY.CTA' | translate }}</a>
-              </div>
-            </div>
+            <app-empty-state
+              [icon]="'bi-ticket'"
+              [title]="'TICKETS.LIST.EMPTY.TITLE' | translate"
+              [description]="'TICKETS.LIST.EMPTY.SUBTITLE' | translate"
+              [ctaLabel]="'TICKETS.LIST.EMPTY.CTA' | translate"
+              (ctaClick)="navigateToExplore()">
+            </app-empty-state>
           </div>
         }
       </div>

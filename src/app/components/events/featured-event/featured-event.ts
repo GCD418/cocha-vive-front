@@ -8,11 +8,12 @@ import { PricePipe } from '../../../shared/pipes/price.pipe';
 import { TranslateModule } from '@ngx-translate/core';
 import { FeatureToggleService } from '../../../services/feature-toggle/feature-toggle.service';
 import { AppFeatures } from '../../../models/app-features';
+import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner';
 
 @Component({
   selector: 'app-featured-event',
   standalone: true,
-  imports: [RouterLink, DatePipe, PricePipe, TranslateModule],
+  imports: [RouterLink, DatePipe, PricePipe, TranslateModule, LoadingSpinnerComponent],
   templateUrl: './featured-event.html',
   styleUrl: './featured-event.css'
 })

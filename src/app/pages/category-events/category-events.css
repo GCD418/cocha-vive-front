@@ -41,14 +41,14 @@
 
 .count-container {
   background: #fff5f6;
-  border-left: 4px solid #f82249;
+  border-left: 4px solid var(--cv-accent);
   padding: 12px 20px;
   margin-bottom: 35px;
   border-radius: 4px;
 }
 
 .events-badge {
-  color: #f82249;
+  color: var(--cv-accent);
   font-weight: 700;
   font-size: 0.9rem;
   text-transform: uppercase;
