@@ -6,15 +6,11 @@
   </div>
 
   @if (loading()) {
-    <div class="container text-center">
-      <p style="color: black;">⏳ {{ 'CATEGORIES.LOADING' | translate }}</p>
-    </div>
+    <app-loading-spinner [message]="'loading.categories' | translate"></app-loading-spinner>
   }
 
   @if (errorLoading()) {
-    <div class="container text-center text-danger">
-      <p>❌ {{ 'CATEGORIES.ERROR' | translate }}</p>
-    </div>
+    <app-error-banner [message]="'error.default' | translate" [showRetry]="true" (retry)="loadCategories()"></app-error-banner>
   }
 
   @if (!loading() && !errorLoading()) {
@@ -24,7 +20,7 @@
         @for (category of categories(); track category.id) {
           <div class="col-lg-4 col-md-6 mb-4 d-flex align-items-stretch">
 
-            <div class="card custom-card w-100 text-center border-0 shadow-sm p-4">
+            <div class="card cv-card w-100 text-center border-0 p-4">
 
               <div class="d-flex justify-content-center mb-3">
                 @if (category.identifyingIcon) {
@@ -37,7 +33,7 @@
               <div class="mt-auto">
                 <ul class="nav nav-tabs border-0 justify-content-center">
                   <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/category-events', category.name]">{{ category.name }}</a>
+                    <a class="nav-link" [routerLink]="['/category-events', category.name]" [attr.aria-label]="('category.explore' | translate) + ': ' + category.name">{{ category.name }}</a>
                   </li>
                 </ul>
               </div>
@@ -46,9 +42,7 @@
 
           </div>
         } @empty {
-          <div class="container text-center text-warning">
-            <p>⚠️ {{ 'CATEGORIES.EMPTY' | translate }}</p>
-          </div>
+          <app-empty-state [icon]="'bi-grid'" [title]="'empty.categories.title' | translate" [description]="'empty.categories.description' | translate"></app-empty-state>
         }
 
       </div>

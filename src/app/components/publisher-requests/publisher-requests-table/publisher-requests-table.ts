@@ -2,10 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule, DatePipe, NgClass } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { PublisherRequest, PublisherRequestFilterMode } from '../../../models/publisher-request.model';
+import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner';
+import { ErrorBannerComponent } from '../../../shared/error-banner/error-banner';
 
 @Component({
   selector: 'app-publisher-requests-table',
-  imports: [CommonModule, DatePipe, NgClass, TranslateModule],
+  imports: [CommonModule, DatePipe, NgClass, TranslateModule, LoadingSpinnerComponent, ErrorBannerComponent],
   templateUrl: './publisher-requests-table.html',
   styleUrl: './publisher-requests-table.css',
 })

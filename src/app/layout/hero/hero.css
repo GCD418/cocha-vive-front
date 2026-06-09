@@ -1,5 +1,11 @@
 .hero {
   text-align: center;
+  animation: cv-hero-pulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes cv-hero-pulse {
+  from { background-position: center center; }
+  to   { background-position: center 55%; }
 }
 
 .hero .btn {

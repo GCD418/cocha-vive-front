@@ -8,9 +8,7 @@
       </div>
 
       @if (errorMessageKey()) {
-        <div class="alert alert-danger" role="alert">
-          {{ errorMessageKey() | translate }}
-        </div>
+        <app-error-banner [message]="errorMessageKey() | translate" [showRetry]="false"></app-error-banner>
       }
 
       <div class="card border-0 shadow-sm">

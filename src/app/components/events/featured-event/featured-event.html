@@ -11,9 +11,7 @@
   <div class="container">
     
     @if (loading()) {
-      <div class="text-center">
-        <p>⏳ {{ 'FEATURED_EVENTS.LOADING' | translate }}</p>
-      </div>
+      <app-loading-spinner [message]="'loading.featuredEvents' | translate"></app-loading-spinner>
     }
 
     @if (errorLoading()) {

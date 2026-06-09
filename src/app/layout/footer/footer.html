@@ -26,10 +26,11 @@
         <div class="footer-card card border-0 shadow-lg">
           <div class="card-body p-4 p-md-5">
             <form (ngSubmit)="sendEmail()">
-              <label class="form-label fw-semibold mb-2">
+              <label class="form-label fw-semibold mb-2" for="contact-comment">
                 {{ 'FOOTER.FORM.LABEL' | translate }}
               </label>
               <textarea
+                id="contact-comment"
                 class="form-control footer-textarea"
                 [ngModel]="comment()"
                 (ngModelChange)="comment.set($event)"

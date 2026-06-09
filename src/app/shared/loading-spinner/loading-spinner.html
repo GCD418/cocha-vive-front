@@ -1,0 +1,14 @@
+<div class="cv-spinner d-flex flex-column align-items-center justify-content-center"
+     [class.cv-spinner--fullpage]="fullPage"
+     [class.min-vh-100]="fullPage"
+     role="status"
+     aria-live="polite">
+  <div class="spinner-border"
+       [class.spinner-border-sm]="size === 'sm'"
+       [style.color]="'var(--cv-accent)'">
+    <span class="visually-hidden">{{ message || ('loading.default' | translate) }}</span>
+  </div>
+  @if (message) {
+    <p class="cv-spinner__message mt-2" [style.color]="'var(--cv-text-muted)'">{{ message }}</p>
+  }
+</div>

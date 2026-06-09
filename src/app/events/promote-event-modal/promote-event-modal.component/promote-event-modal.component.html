@@ -1,17 +1,18 @@
-<div class="modal fade" id="promoteEventModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="promoteEventModal" tabindex="-1" aria-hidden="true"
+     role="dialog" aria-modal="true" aria-labelledby="promote-event-modal-title" aria-describedby="promote-event-modal-body">
   <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
+    <div class="modal-content" appFocusTrap>
 
       <div class="modal-header" style="background-color: #0e1b4d;">
-        <h5 class="modal-title text-white">
-          <i class="bi bi-stars me-2" style="color: #f82249;"></i>
+        <h5 class="modal-title text-white" id="promote-event-modal-title">
+          <i class="bi bi-stars me-2" style="color: var(--cv-accent);"></i>
           {{ 'PROMOTE.TITLE' | translate }}
         </h5>
         <button type="button" class="btn-close btn-close-white"
                 data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <div class="modal-body p-4">
+      <div class="modal-body p-4" id="promote-event-modal-body">
 
         @if (step() === 'plan') {
           <p class="text-muted text-center mb-4">{{ 'PROMOTE.SUBTITLE' | translate }}</p>

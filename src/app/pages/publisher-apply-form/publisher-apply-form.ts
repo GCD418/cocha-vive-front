@@ -6,11 +6,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
 import { PublisherRequestCreatePayload } from '../../models/publisher-request.model';
 import { PublisherRequestService } from '../../services/publisher-request-service/publisher-request.service';
+import { ErrorBannerComponent } from '../../shared/error-banner/error-banner';
 
 @Component({
   selector: 'app-publisher-apply-form-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule],
+  imports: [CommonModule, FormsModule, TranslateModule, ErrorBannerComponent],
   templateUrl: './publisher-apply-form.html',
   styleUrl: './publisher-apply-form.css',
 })
