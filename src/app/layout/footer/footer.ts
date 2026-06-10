@@ -1,34 +1,29 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule, RouterLink],
+  imports: [CommonModule, TranslateModule, RouterLink],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })
 export class FooterComponent {
   protected readonly contactEmail = 'gforce4182@gmail.com';
-  protected readonly comment = signal('');
+  protected readonly appVersion = '1.0.0';
+  protected readonly currentYear = new Date().getFullYear();
+  protected readonly copied = signal(false);
 
-  protected readonly hasComment = computed(() => this.comment().trim().length > 0);
-
-  sendEmail(): void {
-    const message = this.comment().trim();
-
-    if (!message) {
-      return;
+  copyEmail(): void {
+    navigator.clipboard.writeText(this.contactEmail)
+      .then(() => {
+        this.copied.set(true);
+        setTimeout(() => this.copied.set(false), 2000);
+      })
+      .catch(() => {
+        window.location.href = `mailto:${this.contactEmail}`;
+      });
     }
-
-    const subject = encodeURIComponent('Consulta desde Cocha Vive');
-    const body = encodeURIComponent(
-      `Hola,\n\nEscribo porque tengo el siguiente comentario o duda:\n\n${message}\n\nGracias.`
-    );
-
-    window.location.href = `mailto:${this.contactEmail}?subject=${subject}&body=${body}`;
-  }
 }

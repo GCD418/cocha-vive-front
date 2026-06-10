@@ -110,17 +110,19 @@
     }
   },
   "FOOTER": {
-    "KICKER": "Contacto",
-    "TITLE": "Cuéntanos tu comentario o duda",
-    "SUBTITLE": "Escribe tu mensaje y se abrirá tu aplicación de correo para enviarlo directamente a gforce4182@gmail.com.",
+    "BRAND_DESC": "La plataforma de eventos de Cochabamba. Descubre, explora y vive lo mejor de tu ciudad.",
     "EMAIL_LABEL": "Correo de contacto",
-    "FORM": {
-      "LABEL": "Comentario o duda",
-      "PLACEHOLDER": "Escribe aquí tu comentario o duda...",
-      "HELP": "Al enviar, se abrirá tu correo con el mensaje listo para mandar.",
-      "BUTTON": "Enviar por correo"
-    },
-    "PRIVACY_POLICY_LINK": "Política de Privacidad"
+    "CLICK_TO_COPY": "Clic para copiar",
+    "COPIED": "¡Copiado!",
+    "MADE_IN": "Hecho con ♥ en Bolivia",
+    "LOCATION": "Cochabamba, Bolivia",
+    "NAV": {
+      "PLATFORM_TITLE": "Plataforma",
+      "EXPLORE": "Explorar eventos",
+      "LEGAL_TITLE": "Legal",
+      "PRIVACY": "Política de privacidad",
+      "CONTACT_TITLE": "Contacto"
+    }
   },
   "HERO": {
     "WELCOME": "Bienvenido a",
