@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { CanActivateFn, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { authGuard } from './auth-guard';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -7,8 +8,8 @@ describe('authGuard', () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>
     TestBed.runInInjectionContext(() => authGuard(...guardParameters));
 
-  let routerSpy: jasmine.SpyObj<Router>;
-  let authServiceSpy: jasmine.SpyObj<AuthService>;
+  let routerMock: any;
+  let authServiceMock: any;
 
   const mockRoute = {} as ActivatedRouteSnapshot;
 
@@ -17,30 +18,27 @@ describe('authGuard', () => {
   }
 
   beforeEach(() => {
-    routerSpy = jasmine.createSpyObj('Router', ['createUrlTree']);
-    authServiceSpy = jasmine.createSpyObj('AuthService', [
-      'isLoggedIn',
-      'getDecodedPayload',
-      'getToken',
-      'logout',
-    ]);
+    routerMock = {
+      createUrlTree: vi.fn().mockImplementation((commands: string[], extras?: any) => ({
+        commands,
+        extras,
+      })),
+    };
 
-    authServiceSpy.isLoggedIn.and.returnValue(true);
-    authServiceSpy.getToken.and.returnValue('mock-token');
-    authServiceSpy.getDecodedPayload.and.returnValue({
-      requiresOnboarding: false,
-      roles: [{ authority: 'ROLE_USER' }],
-    });
-
-    routerSpy.createUrlTree.and.callFake((commands: string[], extras?: any) => ({
-      commands,
-      extras,
-    } as any));
+    authServiceMock = {
+      isLoggedIn: vi.fn().mockReturnValue(true),
+      getToken: vi.fn().mockReturnValue('mock-token'),
+      getDecodedPayload: vi.fn().mockReturnValue({
+        requiresOnboarding: false,
+        roles: [{ authority: 'ROLE_USER' }],
+      }),
+      logout: vi.fn(),
+    };
 
     TestBed.configureTestingModule({
       providers: [
-        { provide: Router, useValue: routerSpy },
-        { provide: AuthService, useValue: authServiceSpy },
+        { provide: Router, useValue: routerMock },
+        { provide: AuthService, useValue: authServiceMock },
       ],
     });
   });
@@ -49,16 +47,20 @@ describe('authGuard', () => {
     expect(executeGuard).toBeTruthy();
   });
 
+  // ─── Unauthenticated ─────────────────────────────────────────────────────────
+
   it('should redirect to /home with login params when user is not logged in', () => {
-    authServiceSpy.isLoggedIn.and.returnValue(false);
+    authServiceMock.isLoggedIn.mockReturnValue(false);
 
     executeGuard(mockRoute, mockState('/my-tickets'));
 
-    expect(routerSpy.createUrlTree).toHaveBeenCalledWith(
+    expect(routerMock.createUrlTree).toHaveBeenCalledWith(
       ['/home'],
       { queryParams: { login: 1, returnUrl: '/my-tickets' } }
     );
   });
+
+  // ─── Blocked routes ──────────────────────────────────────────────────────────
 
   const blockedRoutes = [
     '/my-tickets',
@@ -75,7 +77,7 @@ describe('authGuard', () => {
     it(`should redirect to /forbidden for blocked route: ${url}`, () => {
       executeGuard(mockRoute, mockState(url));
 
-      expect(routerSpy.createUrlTree).toHaveBeenCalledWith(
+      expect(routerMock.createUrlTree).toHaveBeenCalledWith(
         ['/forbidden'],
         { queryParams: { from: url } }
       );
@@ -83,58 +85,65 @@ describe('authGuard', () => {
   });
 
   it('should block ticket routes for ROLE_PUBLISHER as well', () => {
-    authServiceSpy.getDecodedPayload.and.returnValue({
+    authServiceMock.getDecodedPayload.mockReturnValue({
       requiresOnboarding: false,
       roles: [{ authority: 'ROLE_PUBLISHER' }],
     });
 
     executeGuard(mockRoute, mockState('/buy-ticket/event-1'));
 
-    expect(routerSpy.createUrlTree).toHaveBeenCalledWith(
+    expect(routerMock.createUrlTree).toHaveBeenCalledWith(
       ['/forbidden'],
       { queryParams: { from: '/buy-ticket/event-1' } }
     );
   });
+
+  // ─── Allowed routes ──────────────────────────────────────────────────────────
 
   const allowedRoutes = ['/home', '/events', '/forbidden', '/profile'];
 
   allowedRoutes.forEach((url) => {
     it(`should allow access to unrelated route: ${url}`, () => {
       const result = executeGuard(mockRoute, mockState(url));
-      expect(result).toBeTrue();
+
+      expect(result).toBe(true);
     });
   });
 
+  // ─── Onboarding ──────────────────────────────────────────────────────────────
+
   it('should redirect to /onboarding when requiresOnboarding is true', () => {
-    authServiceSpy.getDecodedPayload.and.returnValue({
+    authServiceMock.getDecodedPayload.mockReturnValue({
       requiresOnboarding: true,
       roles: [],
     });
 
     executeGuard(mockRoute, mockState('/home'));
 
-    expect(routerSpy.createUrlTree).toHaveBeenCalledWith(['/onboarding']);
+    expect(routerMock.createUrlTree).toHaveBeenCalledWith(['/onboarding']);
   });
 
   it('should redirect to /home when onboarding complete and url is /onboarding', () => {
     executeGuard(mockRoute, mockState('/onboarding'));
 
-    expect(routerSpy.createUrlTree).toHaveBeenCalledWith(['/home']);
+    expect(routerMock.createUrlTree).toHaveBeenCalledWith(['/home']);
   });
+
+  // ─── Role-based authorization ─────────────────────────────────────────────────
 
   it('should redirect to /forbidden when user lacks a required role', () => {
     const routeWithRole = { data: { roles: ['ROLE_ADMIN'] } } as unknown as ActivatedRouteSnapshot;
 
     executeGuard(routeWithRole, mockState('/admin'));
 
-    expect(routerSpy.createUrlTree).toHaveBeenCalledWith(
+    expect(routerMock.createUrlTree).toHaveBeenCalledWith(
       ['/forbidden'],
       { queryParams: { from: '/admin' } }
     );
   });
 
   it('should allow access when user has the required role', () => {
-    authServiceSpy.getDecodedPayload.and.returnValue({
+    authServiceMock.getDecodedPayload.mockReturnValue({
       requiresOnboarding: false,
       roles: [{ authority: 'ROLE_ADMIN' }],
     });
@@ -142,19 +151,21 @@ describe('authGuard', () => {
 
     const result = executeGuard(routeWithRole, mockState('/admin'));
 
-    expect(result).toBeTrue();
+    expect(result).toBe(true);
   });
 
+  // ─── Token / payload edge cases ───────────────────────────────────────────────
+
   it('should logout and redirect to /home when decoded payload is null', () => {
-    authServiceSpy.getDecodedPayload.and.returnValue(null);
+    authServiceMock.getDecodedPayload.mockReturnValue(null);
 
     executeGuard(mockRoute, mockState('/home'));
 
-    expect(authServiceSpy.logout).toHaveBeenCalled();
-    expect(routerSpy.createUrlTree).toHaveBeenCalledWith(
+    expect(authServiceMock.logout).toHaveBeenCalled();
+    expect(routerMock.createUrlTree).toHaveBeenCalledWith(
       ['/home'],
       { queryParams: { login: 1, returnUrl: '/home' } }
     );
   });
 
-}); 
+});
