@@ -60,7 +60,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
 
   const isBlocked = TEMPORARILY_BLOCKED_PREFIXES.some((prefix) =>
-    state.url.startsWith(prefix)
+    state.url.toLowerCase().startsWith(prefix.toLowerCase())
   );
 
   if (isBlocked) {
