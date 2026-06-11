@@ -12,25 +12,7 @@
 
       <div class="google-btn-wrapper">
         <asl-google-signin-button type="standard" size="large"></asl-google-signin-button>
-      </div>
-
-      @if (featureService.isEnabled(AppFeatures.FACEBOOK_LOGIN)){
-
-        <div class="auth-divider">
-          <span>{{ 'AUTH.OR' | translate }}</span>
-        </div>
-
-        <button
-          class="btn-facebook"
-          (click)="loginWithFacebook()"
-          [disabled]="isLoading()">
-          <i class="bi bi-facebook"></i>
-          {{ isLoading() ? ('AUTH.FACEBOOK_CONNECTING' | translate) : ('AUTH.FACEBOOK_BUTTON' | translate) }}
-        </button>
-
-      }
-
-      
+      </div>      
 
     </div>
 

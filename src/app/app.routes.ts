@@ -14,7 +14,6 @@ import { AppFeatures } from './models/app-features';
 import { PublisherRequestsPageComponent } from './pages/publisher-requests/publisher-requests';
 import { PublisherRequestDetailsPageComponent } from './pages/publisher-request-details/publisher-request-details';
 import { SuperadminRoleManagementComponent } from './pages/admin/superadmin-role-management/superadmin-role-management';
-import { FacebookVerifyEmail } from './pages/facebook-verify-email/facebook-verify-email';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -60,12 +59,6 @@ export const routes: Routes = [
             .then(m => m.MyPublisherRequestPageComponent),
         canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
         data: { roles: ['ROLE_USER'] },
-    },
-    {
-    path: 'facebook/verify-email',
-    loadComponent: () =>
-        import('./pages/facebook-verify-email/facebook-verify-email')
-        .then(m => m.FacebookVerifyEmail)
     },
     {
     path: 'privacy-policy',
