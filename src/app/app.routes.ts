@@ -25,13 +25,13 @@ export const routes: Routes = [
     {
         path: 'admin/publisher-requests',
         component: PublisherRequestsPageComponent,
-        canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
+        canActivate: [authGuard],
         data: { roles: ['ROLE_ADMIN'] },
     },
     {
         path: 'admin/publisher-requests/:id',
         component: PublisherRequestDetailsPageComponent,
-        canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
+        canActivate: [authGuard],
         data: { roles: ['ROLE_ADMIN'] },
     },
     {
@@ -49,7 +49,7 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./pages/publisher-apply-form/publisher-apply-form')
             .then(m => m.PublisherApplyFormPageComponent),
-        canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
+        canActivate: [authGuard],
         data: { roles: ['ROLE_USER'] },
     },
     {
@@ -57,7 +57,7 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./pages/my-publisher-request/my-publisher-request')
             .then(m => m.MyPublisherRequestPageComponent),
-        canActivate: [authGuard, requireFeature(AppFeatures.MANAGE_PUBLISHER_REQUESTS)],
+        canActivate: [authGuard],
         data: { roles: ['ROLE_USER'] },
     },
     {
