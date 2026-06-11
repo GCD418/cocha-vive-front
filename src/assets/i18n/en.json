@@ -111,17 +111,19 @@
     }
   },
   "FOOTER": {
-    "KICKER": "Contact",
-    "TITLE": "Tell us your comment or question",
-    "SUBTITLE": "Write your message and your mail app will open so you can send it directly to gforce4182@gmail.com.",
+    "BRAND_DESC": "Cochabamba's events platform. Discover, explore and experience the best of your city.",
     "EMAIL_LABEL": "Contact email",
-    "FORM": {
-      "LABEL": "Comment or question",
-      "PLACEHOLDER": "Write your comment or question here...",
-      "HELP": "When you send it, your email client will open with the message ready.",
-      "BUTTON": "Send by email"
-    },
-    "PRIVACY_POLICY_LINK": "Privacy Policy"
+    "CLICK_TO_COPY": "Click to copy",
+    "COPIED": "Copied!",
+    "MADE_IN": "Made with ♥ in Bolivia",
+    "LOCATION": "Cochabamba, Bolivia",
+    "NAV": {
+      "PLATFORM_TITLE": "Platform",
+      "EXPLORE": "Explore events",
+      "LEGAL_TITLE": "Legal",
+      "PRIVACY": "Privacy policy",
+      "CONTACT_TITLE": "Contact"
+    }
   },
   "HERO": {
     "WELCOME": "Welcome to",
@@ -635,5 +637,36 @@
     "REASON_MIN_ERROR": "Reason must be at least 10 characters long.",
     "CHARS_REMAINING": "characters remaining",
     "CONFIRM_BUTTON": "Yes, demote"
+  },
+  "loading": {
+    "default": "Loading...",
+    "events": "Loading events...",
+    "categories": "Loading categories...",
+    "searching": "Searching..."
+  },
+  "empty": {
+    "events": {
+      "title": "No events yet",
+      "description": "Be the first to create an event!",
+      "cta": "Create Event"
+    },
+    "categories": {
+      "title": "No categories available",
+      "description": "Check back soon for new categories."
+    },
+    "search": {
+      "title": "No results found",
+      "description": "Try adjusting your search filters.",
+      "cta": "Clear Filters"
+    }
+  },
+  "error": {
+    "default": "Something went wrong. Please try again.",
+    "retry": "Retry",
+    "dismiss": "Dismiss error"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "closeModal": "Close modal"
   }
 }

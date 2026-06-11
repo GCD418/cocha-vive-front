@@ -7,10 +7,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FeatureToggleService } from '../../../services/feature-toggle/feature-toggle.service';
 import { AppFeatures } from '../../../models/app-features';
+import { FocusTrapDirective } from '../../../shared/focus-trap.directive';
 
 @Component({
   selector: 'app-login-modal',
-  imports: [GoogleSigninButtonModule, TranslateModule, CommonModule],
+  imports: [GoogleSigninButtonModule, TranslateModule, CommonModule, FocusTrapDirective],
   templateUrl: './login-modal.html',
   styleUrls: ['./login-modal.css']
 })

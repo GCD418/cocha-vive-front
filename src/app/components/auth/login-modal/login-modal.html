@@ -1,10 +1,10 @@
-<div class="auth-modal-overlay" (click)="close()">
-  <div class="auth-modal-card" (click)="$event.stopPropagation()">
+<div class="auth-modal-overlay" (click)="close()" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
+  <div class="auth-modal-card" (click)="$event.stopPropagation()" appFocusTrap>
 
-    <button class="auth-modal-close" (click)="close()" aria-label="Cerrar">&times;</button>
+    <button class="auth-modal-close" (click)="close()" [attr.aria-label]="'a11y.closeModal' | translate">&times;</button>
 
     <div class="text-center mb-4">
-      <h2 class="mb-1">{{ 'AUTH.MODAL_TITLE' | translate }}</h2>
+      <h2 id="login-modal-title" class="mb-1">{{ 'AUTH.MODAL_TITLE' | translate }}</h2>
       <p class="text-muted small mb-0">{{ 'AUTH.MODAL_WELCOME' | translate }}</p>
     </div>
 

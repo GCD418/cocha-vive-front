@@ -9,10 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { PricePipe } from '../../../shared/pipes/price.pipe';
+import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner';
 
 @Component({
   selector: 'app-buy-ticket',
-  imports: [CommonModule, TranslateModule, FormsModule, PricePipe],
+  imports: [CommonModule, TranslateModule, FormsModule, PricePipe, LoadingSpinnerComponent],
   templateUrl: './buy-ticket.html',
   styleUrl: './buy-ticket.css'
 })

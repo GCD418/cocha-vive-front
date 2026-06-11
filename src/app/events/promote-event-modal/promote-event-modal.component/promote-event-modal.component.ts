@@ -7,12 +7,13 @@ import {
   PROMOTION_PLANS,
   PromotionPlanOption,
 } from '../../../models/promotion-event.model';
+import { FocusTrapDirective } from '../../../shared/focus-trap.directive';
 
 declare const bootstrap: any;
 
 @Component({
   selector: 'app-promote-event-modal',
-  imports: [CommonModule, TranslateModule, QRCodeComponent],
+  imports: [CommonModule, TranslateModule, QRCodeComponent, FocusTrapDirective],
   templateUrl: './promote-event-modal.component.html',
   styleUrl: './promote-event-modal.component.css',
 })

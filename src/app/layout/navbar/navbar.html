@@ -75,6 +75,7 @@
         <i class="mobile-nav-toggle d-xl-none bi"
             [class.bi-list]="!mobileMenuOpen()"
             [class.bi-x]="mobileMenuOpen()"
+            [attr.aria-label]="mobileMenuOpen() ? ('NAV.CLOSE_MENU' | translate) : ('NAV.OPEN_MENU' | translate)"
             (click)="toggleMobileMenu()">
         </i>
     </nav>
@@ -84,6 +85,8 @@
         <button
           class="cta-btn border-0 d-flex align-items-center gap-2 dropdown-toggle"
           type="button"
+          [attr.aria-label]="'NAV.LANGUAGES.TITLE' | translate"
+          [attr.aria-expanded]="langDropdownOpen()"
           (click)="toggleLangDropdown($event)">
           <i class="bi bi-globe"></i>
           <span>{{ currentLangLabel }}</span>
@@ -184,6 +187,8 @@
             <button
               class="btn btn-link nav-user-btn d-flex align-items-center gap-2 dropdown-toggle text-decoration-none"
               type="button"
+              [attr.aria-label]="'NAV.USER_MENU' | translate"
+              [attr.aria-expanded]="userDropdownOpen()"
               (click)="toggleUserDropdown($event)">
               <span class="nav-user-initials">{{ initials() }}</span>
               <span class="d-none d-md-inline text-white fw-bold">{{ displayName() }}</span>
@@ -225,7 +230,7 @@
             </ul>
           </div>
         } @else {
-          <button class="cta-btn border-0" (click)="openLoginModal()">
+          <button class="cta-btn border-0" (click)="openLoginModal()" [attr.aria-label]="'NAV.LOGIN' | translate">
             {{ 'NAV.LOGIN' | translate }}
           </button>
         }
@@ -252,6 +257,7 @@
         <button
           type="button"
           class="btn-close btn-close-white me-2 m-auto"
+          aria-label="Close notification"
           (click)="showSuccessToast.set(false)">
         </button>
       </div>

@@ -5,20 +5,9 @@
     </button>
 
     @if (loading()) {
-      <div class="d-flex justify-content-center align-items-center py-5">
-        <div class="spinner-border" style="color: var(--accent-color);" role="status">
-          <span class="visually-hidden">{{ 'TICKETS.DETAILS.LOADING' | translate }}</span>
-        </div>
-      </div>
+      <app-loading-spinner [message]="'TICKETS.DETAILS.LOADING' | translate"></app-loading-spinner>
     } @else if (error()) {
-      <div class="card border-0 shadow-sm">
-        <div class="card-body py-5 text-center">
-          <div class="empty-icon mb-3"><i class="bi bi-exclamation-triangle"></i></div>
-          <h5 class="fw-bold mb-2">{{ 'TICKETS.DETAILS.NOT_FOUND.TITLE' | translate }}</h5>
-          <p class="text-muted mb-4">{{ 'TICKETS.DETAILS.NOT_FOUND.SUBTITLE' | translate }}</p>
-          <a class="cta-btn" routerLink="/my-tickets">{{ 'TICKETS.DETAILS.NOT_FOUND.CTA' | translate }}</a>
-        </div>
-      </div>
+      <app-error-banner [message]="'TICKETS.DETAILS.NOT_FOUND.TITLE' | translate" [showRetry]="true" (retry)="goBack()"></app-error-banner>
     } @else if (ticket()) {
       <div class="row g-4">
         <div class="col-lg-7">

@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { environment } from '../../../../environments/environment';
 import { TranslateModule } from '@ngx-translate/core';
+import { LoadingSpinnerComponent } from '../../../shared/loading-spinner/loading-spinner';
+import { FocusTrapDirective } from '../../../shared/focus-trap.directive';
 
 @Component({
   selector: 'app-event-map-modal',
   standalone: true,
-  imports: [CommonModule, GoogleMapsModule, TranslateModule],
+  imports: [CommonModule, GoogleMapsModule, TranslateModule, LoadingSpinnerComponent, FocusTrapDirective],
   templateUrl: './event-map-modal.html',
   styleUrl: './event-map-modal.css',
 })

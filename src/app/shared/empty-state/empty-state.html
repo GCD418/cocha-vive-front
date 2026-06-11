@@ -1,0 +1,12 @@
+<div class="cv-empty-state text-center py-5">
+  <i class="bi {{ icon }} cv-empty-state__icon d-block" aria-hidden="true"></i>
+  <h3 class="cv-empty-state__title mt-3 fw-bold">{{ title }}</h3>
+  @if (description) {
+    <p class="cv-empty-state__description mt-2" [style.color]="'var(--cv-text-muted)'">{{ description }}</p>
+  }
+  @if (ctaLabel) {
+    <button class="cv-btn-primary mt-3" type="button" (click)="ctaClick.emit()">
+      {{ ctaLabel }}
+    </button>
+  }
+</div>
