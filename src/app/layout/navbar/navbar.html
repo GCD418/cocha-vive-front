@@ -22,14 +22,7 @@
                 <span>{{ 'NAV.EXPLORE' | translate }}</span>
               </a>
             </li>
-            @if (currentUser()?.role === 'ROLE_USER') {
-              <li>
-                <a routerLink="/my-tickets" routerLinkActive="active" (click)="closeMobileMenu()">
-                  <i class="bi bi-ticket-perforated nav-icon"></i>
-                  <span>{{ 'NAV.MY_TICKETS' | translate }}</span>
-                </a>
-              </li>
-            }
+
             @if (canSeeAdminEventsLink()) {
               <li>
                 <a routerLink="/admin/events" routerLinkActive="active" (click)="closeMobileMenu()">
