@@ -597,8 +597,16 @@
     },
     "IMAGES": {
       "LABEL": "Evidence images",
-      "HINT": "Upload images that support your request (max. 10).",
-      "SELECT": "Select images"
+      "HINT": "Upload images or photos that support your request (max. 10).",
+      "SELECT": "Select images",
+      "TOOLTIP_TITLE": "Image specifications",
+      "TOOLTIP_FORMATS": "Accepted formats: JPG, PNG, WEBP",
+      "TOOLTIP_SIZE": "Maximum size per image: 5 MB",
+      "TOOLTIP_MAX": "Maximum 10 images",
+      "TOOLTIP_NOTE": "PDF, GIF, BMP and other formats are not accepted.",
+      "ERROR_TYPE": "One or more files have an unsupported format. Only JPG, PNG and WEBP are accepted.",
+      "ERROR_SIZE": "One or more images exceed the 5 MB per file limit.",
+      "ERROR_MAX_COUNT": "You can attach a maximum of 10 images."
     },
     "SUBMIT": "Submit Request",
     "SUCCESS": "Your request has been submitted successfully. You will be notified when it is reviewed.",
