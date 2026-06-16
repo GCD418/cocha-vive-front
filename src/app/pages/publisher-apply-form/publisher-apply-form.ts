@@ -42,6 +42,8 @@ export class PublisherApplyFormPageComponent implements AfterViewInit {
         const popover = new (window as any).bootstrap.Popover(el, {
           trigger: 'manual',
           html: true,
+          placement: 'right',
+          fallbackPlacements: ['bottom', 'top', 'left'],
         });
 
         el.addEventListener('click', () => {
