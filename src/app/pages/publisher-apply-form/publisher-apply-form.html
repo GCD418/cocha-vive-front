@@ -43,15 +43,36 @@
           </div>
 
           <div class="mb-4">
-            <label class="form-label fw-semibold">
+            <label class="form-label fw-semibold d-flex align-items-center gap-2">
               {{ 'PUBLISHER_REQUEST_FORM.IMAGES.LABEL' | translate }}
+              <span
+                tabindex="0"
+                role="button"
+                class="badge rounded-pill bg-secondary d-inline-flex align-items-center justify-content-center info-badge"
+                style="width:18px; height:18px; font-size:11px; cursor:pointer;"
+                data-bs-toggle="popover"
+                data-bs-placement="right"
+                [attr.title]="'PUBLISHER_REQUEST_FORM.IMAGES.TOOLTIP_TITLE' | translate"
+                [attr.data-bs-title]="'PUBLISHER_REQUEST_FORM.IMAGES.TOOLTIP_TITLE' | translate"
+                [attr.data-bs-content]="imageTooltipContent()"
+              >i</span>
             </label>
             <div class="text-muted small mb-2">{{ 'PUBLISHER_REQUEST_FORM.IMAGES.HINT' | translate }}</div>
+
+            @if (imageValidationErrors().length > 0) {
+              <ul class="list-unstyled mb-2">
+                @for (key of imageValidationErrors(); track key) {
+                  <li class="text-danger small">
+                    <i class="bi bi-exclamation-circle me-1"></i>{{ key | translate }}
+                  </li>
+                }
+              </ul>
+            }
 
             <input
               type="file"
               class="form-control"
-              accept="image/*"
+              accept="image/jpeg,image/png,image/webp"
               multiple
               (change)="onImagesSelected($event)"
             >

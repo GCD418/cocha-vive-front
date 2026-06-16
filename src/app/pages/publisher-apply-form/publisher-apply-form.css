@@ -76,3 +76,9 @@
     height: 0.9rem;
   }
 }
+
+.info-badge:hover {
+  background-color: #685f5a !important;
+  transform: scale(1.15);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}

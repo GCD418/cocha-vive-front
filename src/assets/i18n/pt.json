@@ -601,7 +601,15 @@
     "IMAGES": {
       "LABEL": "Imagens de evidência",
       "HINT": "Envie imagens que comprovem sua solicitação (máx. 10).",
-      "SELECT": "Selecionar imagens"
+      "SELECT": "Selecionar imagens",
+      "TOOLTIP_TITLE": "Especificações de imagem",
+      "TOOLTIP_FORMATS": "Formatos aceitos: JPG, PNG, WEBP",
+      "TOOLTIP_SIZE": "Tamanho máximo por imagem: 5 MB",
+      "TOOLTIP_MAX": "Máximo de 10 imagens",
+      "TOOLTIP_NOTE": "Arquivos PDF, GIF, BMP e outros formatos não são aceitos.",
+      "ERROR_TYPE": "Um ou mais arquivos têm um formato não permitido. Apenas JPG, PNG e WEBP são aceitos.",
+      "ERROR_SIZE": "Uma ou mais imagens excedem o limite de 5 MB por arquivo.",
+      "ERROR_MAX_COUNT": "Você pode anexar no máximo 10 imagens."
     },
     "SUBMIT": "Enviar Solicitação",
     "SUCCESS": "Sua solicitação foi enviada com sucesso. Notificaremos você assim que for analisada.",
