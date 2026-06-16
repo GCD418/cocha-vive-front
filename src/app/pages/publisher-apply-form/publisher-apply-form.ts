@@ -33,9 +33,18 @@ export class PublisherApplyFormPageComponent {
     const input = event.target as HTMLInputElement;
     if (!input.files) return;
 
-    const files = Array.from(input.files);
-    this.selectedImages.set(files);
-    this.previewUrls.set(files.map(file => URL.createObjectURL(file)));
+    const newFiles = Array.from(input.files);
+    const current = this.selectedImages();
+    const remaining = 10 - current.length;
+    const toAdd = newFiles.slice(0, remaining);
+
+    this.selectedImages.set([...current, ...toAdd]);
+    this.previewUrls.set([
+      ...this.previewUrls(),
+      ...toAdd.map(file => URL.createObjectURL(file)),
+    ]);
+
+    input.value = '';
   }
 
   removeImage(index: number): void {
