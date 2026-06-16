@@ -1,9 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { PublisherRequestCreatePayload } from '../../models/publisher-request.model';
 import { PublisherRequestService } from '../../services/publisher-request-service/publisher-request.service';
 import { ErrorBannerComponent } from '../../shared/error-banner/error-banner';
@@ -15,7 +15,7 @@ import { ErrorBannerComponent } from '../../shared/error-banner/error-banner';
   templateUrl: './publisher-apply-form.html',
   styleUrl: './publisher-apply-form.css',
 })
-export class PublisherApplyFormPageComponent {
+export class PublisherApplyFormPageComponent implements AfterViewInit {
   requestReason = signal('');
   legalEntityName = signal('');
   selectedImages = signal<File[]>([]);
@@ -33,7 +33,43 @@ export class PublisherApplyFormPageComponent {
   constructor(
     private publisherRequestService: PublisherRequestService,
     private router: Router,
+    private translate: TranslateService,
   ) {}
+
+  ngAfterViewInit(): void {
+    const triggers = document.querySelectorAll('[data-bs-toggle="popover"]');
+    triggers.forEach(el => {
+        const popover = new (window as any).bootstrap.Popover(el, {
+          trigger: 'manual',
+          html: true,
+        });
+
+        el.addEventListener('click', () => {
+          popover.toggle();
+        });
+
+        document.addEventListener('click', (event) => {
+          const target = event.target as Node;
+          const popoverEl = document.querySelector('.popover');
+          if (!el.contains(target) && (!popoverEl || !popoverEl.contains(target))) {
+            popover.hide();
+          }
+        });
+      });
+  }
+
+  imageTooltipContent(): string {
+    const formats = this.translate.instant('PUBLISHER_REQUEST_FORM.IMAGES.TOOLTIP_FORMATS');
+    const size    = this.translate.instant('PUBLISHER_REQUEST_FORM.IMAGES.TOOLTIP_SIZE');
+    const max     = this.translate.instant('PUBLISHER_REQUEST_FORM.IMAGES.TOOLTIP_MAX');
+    const note    = this.translate.instant('PUBLISHER_REQUEST_FORM.IMAGES.TOOLTIP_NOTE');
+    return `<ul class="mb-0 ps-3 small">
+      <li>${formats}</li>
+      <li>${size}</li>
+      <li>${max}</li>
+      <li>${note}</li>
+    </ul>`;
+  }
 
   onImagesSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -44,7 +80,7 @@ export class PublisherApplyFormPageComponent {
     const valid: File[] = [];
 
     for (const file of newFiles) {
-      if (!this.ALLOWED_TYPES.includes(file.type)) {
+      if (!file.type || !this.ALLOWED_TYPES.includes(file.type) ) {
         errors.push('PUBLISHER_REQUEST_FORM.IMAGES.ERROR_TYPE');
         continue;
       }
