@@ -24,6 +24,12 @@ export class PublisherApplyFormPageComponent {
   submitting = signal(false);
   errorMessageKey = signal<string | null>(null);
 
+  private readonly ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+  private readonly MAX_FILE_SIZE_MB = 5;
+  private readonly MAX_IMAGES = 10;
+
+  imageValidationErrors = signal<string[]>([]);
+
   constructor(
     private publisherRequestService: PublisherRequestService,
     private router: Router,
@@ -34,10 +40,30 @@ export class PublisherApplyFormPageComponent {
     if (!input.files) return;
 
     const newFiles = Array.from(input.files);
-    const current = this.selectedImages();
-    const remaining = 10 - current.length;
-    const toAdd = newFiles.slice(0, remaining);
+    const errors: string[] = [];
+    const valid: File[] = [];
 
+    for (const file of newFiles) {
+      if (!this.ALLOWED_TYPES.includes(file.type)) {
+        errors.push('PUBLISHER_REQUEST_FORM.IMAGES.ERROR_TYPE');
+        continue;
+      }
+      if (file.size > this.MAX_FILE_SIZE_MB * 1024 * 1024) {
+        errors.push('PUBLISHER_REQUEST_FORM.IMAGES.ERROR_SIZE');
+        continue;
+      }
+      valid.push(file);
+    }
+
+    const current = this.selectedImages();
+    const remaining = this.MAX_IMAGES - current.length;
+
+    if (valid.length > remaining) {
+      errors.push('PUBLISHER_REQUEST_FORM.IMAGES.ERROR_MAX_COUNT');
+    }
+    const toAdd = valid.slice(0, remaining);
+
+    this.imageValidationErrors.set([...new Set(errors)]);
     this.selectedImages.set([...current, ...toAdd]);
     this.previewUrls.set([
       ...this.previewUrls(),
