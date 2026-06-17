@@ -6,7 +6,6 @@ import { of } from 'rxjs';
 import { HomeComponent } from './home';
 import { EventService } from '../../services/event-service/event.service';
 import { CategoryService } from '../../services/category-services/category.service';
-import { FeatureToggleService } from '../../services/feature-toggle/feature-toggle.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -22,10 +21,6 @@ describe('HomeComponent', () => {
     getCategories: () => of([]),
   };
 
-  const featureToggleServiceMock = {
-    isEnabled: () => true,
-  };
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HomeComponent, TranslateModule.forRoot()],
@@ -33,7 +28,6 @@ describe('HomeComponent', () => {
         provideRouter([]),
         { provide: EventService, useValue: eventServiceMock },
         { provide: CategoryService, useValue: categoryServiceMock },
-        { provide: FeatureToggleService, useValue: featureToggleServiceMock },
       ],
     });
 
