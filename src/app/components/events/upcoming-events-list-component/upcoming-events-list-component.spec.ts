@@ -5,7 +5,6 @@ import { of } from 'rxjs';
 
 import { UpcomingEventsListComponent } from './upcoming-events-list-component';
 import { EventService } from '../../../services/event-service/event.service';
-import { FeatureToggleService } from '../../../services/feature-toggle/feature-toggle.service';
 
 describe('UpcomingEventsListComponent', () => {
   let component: UpcomingEventsListComponent;
@@ -15,9 +14,6 @@ describe('UpcomingEventsListComponent', () => {
     getUpcomingEvents: () => of([]),
   };
 
-  const featureToggleServiceMock = {
-    isEnabled: () => true,
-  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -25,7 +21,6 @@ describe('UpcomingEventsListComponent', () => {
       providers: [
         provideRouter([]),
         { provide: EventService, useValue: eventServiceMock },
-        { provide: FeatureToggleService, useValue: featureToggleServiceMock },
         {
           provide: ActivatedRoute,
           useValue: {
