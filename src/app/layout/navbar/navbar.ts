@@ -4,8 +4,6 @@ import { ActivatedRoute, RouterLink, RouterLinkActive, Router } from '@angular/r
 import { AuthService, CurrentUser } from '../../services/auth/auth.service';
 import { LoginModalComponent } from '../../components/auth/login-modal/login-modal';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { FeatureToggleService } from '../../services/feature-toggle/feature-toggle.service';
-import { AppFeatures } from '../../models/app-features';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { NotificationService } from '../../services/notification-service/notification.service';
@@ -37,7 +35,6 @@ export class Navbar implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private translate = inject(TranslateService);
-  private featureToggleService = inject(FeatureToggleService);
   private notificationService = inject(NotificationService);
 
   private loginQueryParam = toSignal(

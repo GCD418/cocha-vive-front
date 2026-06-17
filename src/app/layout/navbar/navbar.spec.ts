@@ -6,14 +6,11 @@ import { vi } from 'vitest';
 import { Navbar } from './navbar';
 import { AuthService } from '../../services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
-import { FeatureToggleService } from '../../services/feature-toggle/feature-toggle.service';
-import { AppFeatures } from '../../models/app-features';
 
 describe('Navbar', () => {
   let component: Navbar;
   let fixture: ComponentFixture<Navbar>;
   let authServiceMock: any;
-  let featureToggleServiceMock: any;
 
   const routerMock = {
     navigate: vi.fn()
@@ -36,10 +33,6 @@ describe('Navbar', () => {
       actualRole: vi.fn().mockReturnValue('ROLE_USER')
     };
 
-    featureToggleServiceMock = {
-      isEnabled: vi.fn().mockReturnValue(true)
-    };
-
     await TestBed.configureTestingModule({
       imports: [Navbar],
       providers: [
@@ -51,8 +44,7 @@ describe('Navbar', () => {
             queryParamMap: of(convertToParamMap({ login: null }))
           }
         },
-        { provide: TranslateService, useValue: translateServiceMock },
-        { provide: FeatureToggleService, useValue: featureToggleServiceMock }
+        { provide: TranslateService, useValue: translateServiceMock }
       ]
     }).compileComponents();
 
@@ -106,11 +98,9 @@ describe('Navbar', () => {
     expect(component.initials()).toBe('JG');
   });
 
-  it('should compute publisher request visibility based on feature flag and user role', () => {
-    featureToggleServiceMock.isEnabled.mockReturnValue(true);
+  it('should compute publisher request visibility based on user role', () => {
     authServiceMock.getDecodedPayload.mockReturnValue({ roles: ['ROLE_USER'] });
 
     expect(component.canSeePublisherRequestLink()).toBeTruthy();
-    //expect(featureToggleServiceMock.isEnabled).toHaveBeenCalledWith(AppFeatures.MANAGE_PUBLISHER_REQUESTS);
   });
 });
