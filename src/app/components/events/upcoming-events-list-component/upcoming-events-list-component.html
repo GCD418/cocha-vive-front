@@ -5,8 +5,6 @@
       <p>{{ 'UPCOMING_EVENTS.SUBTITLE' | translate }}</p>
     </div>
 
-    @if (featureService.isEnabled(AppFeatures.VIEW_UPCOMING_EVENTS)) {
-
     <div class="row g-4">
 
       @for (eventItem of events(); track eventItem.id) {
@@ -22,16 +20,7 @@
           </div>
         }
       
-
     </div>
-    }
-
-    @else {
-    <div class="alert alert-info text-center" role="alert">
-      {{ 'UPCOMING_EVENTS.FEATURE_DISABLED' | translate }}
-    </div>
-    }
-
 
   </div>
 </section>
